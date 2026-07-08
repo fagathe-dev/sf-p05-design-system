@@ -1,0 +1,39 @@
+{# templates/docs/_breadcrumb.html.twig #}
+
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb mb-0">
+      
+    {# NIVEAU 1 : Index de la doc (Si on n'a ni type, ni composant) #}
+  {% if type is not defined %}
+    <li class="breadcrumb-item active" aria-current="page">
+      <i class="ri-book-2-line align-middle"></i> Documentation
+    </li>
+  {% else %}
+    {# Lien de retour vers l'index #}
+    <li class="breadcrumb-item">
+      <a href="{{ path('component_docs_index') }}">
+        <i class="ri-book-2-line align-middle"></i> Docs
+      </a>
+    </li>
+    
+    {# NIVEAU 2 & 3 #}
+    {% if component_title is defined %}
+      {# On est sur la page d'un composant, la catégorie devient un lien #}
+      <li class="breadcrumb-item">
+        <a href="{{ path('component_docs_category', {type: type}) }}" class="text-capitalize">
+          {{ type }}
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ component_title }}
+      </li>
+    {% else %}
+      {# On est sur la page catégorie, c'est l'élément actif #}
+      <li class="breadcrumb-item active text-capitalize" aria-current="page">
+        {{ type }}
+      </li>
+    {% endif %}
+        
+  {% endif %}
+  </ol>
+</nav>

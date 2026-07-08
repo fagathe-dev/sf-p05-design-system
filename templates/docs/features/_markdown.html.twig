@@ -1,0 +1,56 @@
+<div class="component-demo">
+  <h3>📝 Parser Markdown</h3>
+  <p class="text-muted mb-4">
+    Convertisseur Markdown vers HTML synchrone, basé sur <code>marked</code> avec une extension personnalisée pour le surlignage (<code>==texte==</code>).
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12">
+      <div class="box box-secondary mb-0">
+        <h5 class="mb-4">Démo interactive (Live Preview)</h5>
+        
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Saisie Markdown</label>
+            <textarea id="demo-md-input" class="form-control font-monospace text-sm" rows="8">
+# Hello World
+
+Ceci est un paragraphe avec du **texte en gras** et de l'*italique*.
+
+## Surlignage (Highlight custom)
+Notre librairie supporte le ==surlignage de texte== très facilement.
+
+- Liste item 1
+- Liste item 2
+            </textarea>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Aperçu HTML</label>
+            <div id="demo-md-preview" class="p-3 bg-surface-bg border rounded h-100 overflow-auto" style="min-height: 200px;">
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+import { convertMarkdownToHtml } from 'core-ts';
+
+// 1. Conversion classique
+const html = convertMarkdownToHtml('# Titre \n **gras**');
+
+// 2. Avec l'extension de surlignage
+const htmlHighlight = convertMarkdownToHtml('Texte ==surligné==');
+// Résultat : Texte <mark>surligné</mark>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'typescript',
+      'title': 'Utilisation du Parser Markdown'
+    } %}
+  </div>
+</div>
+

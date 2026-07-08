@@ -1,0 +1,69 @@
+<div class="component-demo">
+  <h3>📝 Champs de saisie (Inputs)</h3>
+  <p class="text-muted mb-4">
+    Composants de base pour la saisie de texte, mots de passe, emails et zones de texte long. 
+    Design "Soft UI" avec des bordures douces et une surbrillance au focus.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary mb-0">
+        <h5 class="mb-4">Inputs Classiques</h5>
+        
+        <div class="mb-3">
+          <label for="demoEmail" class="form-label">Adresse Email</label>
+          <input type="email" class="form-control" id="demoEmail" placeholder="nom@exemple.com">
+        </div>
+        
+        <div class="mb-3">
+          <label for="demoPassword" class="form-label">Mot de passe</label>
+          <input type="password" class="form-control" id="demoPassword" value="azerty12345">
+        </div>
+
+        <div class="mb-3">
+          <label for="demoDisabled" class="form-label">Champ désactivé</label>
+          <input type="text" class="form-control" id="demoDisabled" placeholder="Non modifiable" disabled>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary mb-0">
+        <h5 class="mb-4">Tailles & Textarea</h5>
+        
+        <div class="mb-3">
+          <input type="text" class="form-control form-control-sm" placeholder="Petit input (.form-control-sm)">
+        </div>
+        
+        <div class="mb-3">
+          <input type="text" class="form-control form-control-lg" placeholder="Grand input (.form-control-lg)">
+        </div>
+
+        <div class="mb-3">
+          <label for="demoTextarea" class="form-label">Message (Textarea)</label>
+          <textarea class="form-control" id="demoTextarea" rows="3" placeholder="Votre message..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<div class="mb-3">
+  <label for="email" class="form-label">Email</label>
+  <input type="email" class="form-control" id="email" placeholder="nom@exemple.com">
+</div>
+
+<div class="mb-3">
+  <label for="message" class="form-label">Message</label>
+  <textarea class="form-control" id="message" rows="3"></textarea>
+</div>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Inputs'
+    } %}
+  </div>
+</div>

@@ -1,0 +1,297 @@
+<div class="layout-app">
+  <!-- En-tête -->
+  <header class="app-header">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">Mon Super Blog</a>
+        <!-- ... reste de la navbar ... -->
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contenu -->
+  <main class="app-main">
+    <div class="container">
+      <!-- Le contenu de la page : Titres, articles, etc. -->
+    </div>
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="app-footer footer footer-secondary">
+    <div class="container">
+      <!-- ... le contenu du footer ... -->
+    </div>
+  </footer>
+</div>
+
+<div class="layout-dashboard">
+  <!-- Overlay mobile -->
+  <div class="dashboard-overlay"></div>
+
+  <!-- Sidebar -->
+  <aside class="dashboard-sidebar">
+    <header class="sidebar-header">
+      <h4>Mon Blog</h4>
+    </header>
+    <nav class="sidebar-body">
+      <div class="sidebar-group-title">Menu</div>
+      <a href="#" class="sidebar-link active"><i class="ri-dashboard-line"></i> Dashboard</a>
+      <a href="#" class="sidebar-link"><i class="ri-article-line"></i> Articles</a>
+      <a href="#" class="sidebar-link"><i class="ri-folder-line"></i> Catégories</a>
+    </nav>
+    <footer class="sidebar-footer">
+      <a href="#" class="sidebar-link"><i class="ri-logout-box-line"></i> Logout</a>
+    </footer>
+  </aside>
+
+  <!-- Contenu Principal -->
+  <div class="dashboard-main">
+    <header class="dashboard-header">
+      <button class="btn btn-icon d-lg-none"><i class="ri-menu-line"></i></button>
+      <div class="header-search">
+         <!-- Ton input search ici -->
+      </div>
+      <div class="header-actions">
+         <div class="avatar avatar-sm"><img src="..." alt=""></div>
+      </div>
+    </header>
+    <main class="dashboard-content">
+      <!-- C'est ici que tu utiliseras tes .card et tes grilles (ex: grid grid-cols-3 gap-4) -->
+    </main>
+  </div>
+</div>
+
+<div class="layout-auth">
+  <main class="auth-card">
+    <header class="auth-header">
+      <div class="auth-tabs">
+        <a href="#" class="auth-tab active"><i class="ri-login-box-line"></i> Login</a>
+        <a href="#" class="auth-tab"><i class="ri-user-add-line"></i> Sign Up</a>
+      </div>
+    </header>
+
+    <div class="auth-body">
+      <form>
+        <!-- Tes form-groups ici -->
+        <button class="btn btn-solid-tertiary w-100 btn-lg mt-4">Log In</button>
+      </form>
+
+      <div class="auth-divider"><span>Or</span></div>
+
+      <div class="d-flex flex-column gap-3">
+        <button class="btn btn-outline-tertiary w-100">
+          <i class="ri-google-fill"></i> Continue with Google
+        </button>
+      </div>
+    </div>
+
+    <footer class="auth-footer">
+      Don't have an account yet? <a href="#">Sign up</a>
+    </footer>
+  </main>
+</div>
+
+<div class="d-flex align-items-center gap-3">
+  
+  <!-- Icône Notification -->
+  <a href="#" class="navbar-notification">
+    <i class="ri-notification-3-line"></i>
+    <span class="notification-badge">3</span>
+  </a>
+
+  <!-- Wrapper standard Dropdown -->
+  <div class="dropdown">
+    <!-- Déclencheur -->
+    <button class="navbar-user-trigger dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown">
+      <div class="avatar avatar-sm">
+        <img src="avatar.jpg" alt="Anna Adame">
+      </div>
+      <div class="user-info">
+        <span class="user-name">Anna Adame</span>
+        <span class="user-role">Founder</span>
+      </div>
+      <i class="ri-arrow-down-s-line user-chevron"></i>
+    </button>
+
+    <!-- Menu -->
+    <div class="dropdown-menu auth-dropdown-menu dropdown-menu-end">
+      <div class="dropdown-header">Welcome Anna!</div>
+      
+      <a href="#" class="dropdown-item">
+        <i class="ri-user-line"></i> Profile
+      </a>
+      <a href="#" class="dropdown-item">
+        <i class="ri-message-3-line"></i> Messages
+      </a>
+      
+      <div class="dropdown-divider"></div>
+      
+      <div class="dropdown-item">
+        <i class="ri-wallet-3-line"></i> Balance
+        <span class="item-value">$5971.67</span>
+      </div>
+      
+      <a href="#" class="dropdown-item">
+        <i class="ri-settings-4-line"></i> Settings
+        <span class="badge badge-soft-success ms-auto">New</span>
+      </a>
+      
+      <div class="dropdown-divider"></div>
+      
+      <a href="#" class="dropdown-item">
+        <i class="ri-logout-box-r-line"></i> Logout
+      </a>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="box box-warning">
+  <h4 class="box-title"><i class="ri-alert-line"></i> Zone de danger</h4>
+  <p>Si vous supprimez cette catégorie, les articles associés perdront leur référencement.</p>
+</div>
+
+
+<!-- Hero Sans Image (Fond Primary @ 20%) -->
+<section class="hero mb-5">
+  <div class="hero-content">
+    <h1 class="hero-title">Développez plus vite.</h1>
+    <p>Une architecture Vanilla sans compromis.</p>
+  </div>
+</section>
+
+<!-- Hero Avec Image -->
+<section class="hero hero-has-bg" style="background-image: url('chemin/vers/image.jpg');">
+  <div class="hero-content">
+    <h1 class="hero-title">Inspirer la créativité</h1>
+    <button class="btn btn-white btn-lg mt-3">Découvrir</button>
+  </div>
+</section>
+
+<div class="jumbotron jumbotron-primary">
+  <h1 class="jumbotron-title">Bienvenue sur Base</h1>
+  <p class="jumbotron-lead">Le second cerveau pensé pour les développeurs pragmatiques.</p>
+  <hr class="my-4">
+  <button class="btn btn-solid-primary btn-lg">Commencer maintenant</button>
+</div>
+
+<div class="d-flex align-items-center gap-3">
+  
+  <!-- Icône Notification -->
+  <a href="#" class="navbar-notification">
+    <i class="ri-notification-3-line"></i>
+    <span class="notification-badge">3</span>
+  </a>
+
+  <!-- Wrapper standard Dropdown -->
+  <div class="dropdown">
+    <!-- Déclencheur -->
+    <button class="navbar-user-trigger dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown">
+      <div class="avatar avatar-sm">
+        <img src="avatar.jpg" alt="Anna Adame">
+      </div>
+      <div class="user-info">
+        <span class="user-name">Anna Adame</span>
+        <span class="user-role">Founder</span>
+      </div>
+      <i class="ri-arrow-down-s-line user-chevron"></i>
+    </button>
+
+    <!-- Menu -->
+    <div class="dropdown-menu auth-dropdown-menu dropdown-menu-end">
+      <div class="dropdown-header">Welcome Anna!</div>
+      
+      <a href="#" class="dropdown-item">
+        <i class="ri-user-line"></i> Profile
+      </a>
+      <a href="#" class="dropdown-item">
+        <i class="ri-message-3-line"></i> Messages
+      </a>
+      
+      <div class="dropdown-divider"></div>
+      
+      <div class="dropdown-item">
+        <i class="ri-wallet-3-line"></i> Balance
+        <span class="item-value">$5971.67</span>
+      </div>
+      
+      <a href="#" class="dropdown-item">
+        <i class="ri-settings-4-line"></i> Settings
+        <span class="badge badge-soft-success ms-auto">New</span>
+      </a>
+      
+      <div class="dropdown-divider"></div>
+      
+      <a href="#" class="dropdown-item">
+        <i class="ri-logout-box-r-line"></i> Logout
+      </a>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Première ligne (Email) -->
+<div class="form-floating-flushed mb-4">
+  <input type="email" class="form-control" id="floatEmail" placeholder="name@example.com">
+  <label for="floatEmail">Email address</label>
+</div>
+
+<!-- Ligne partagée (Grille + Flushed) -->
+<div class="grid grid-cols-2 gap-4">
+  <div class="form-floating-flushed mb-4">
+    <input type="text" class="form-control" id="firstName" placeholder="First Name">
+    <label for="firstName">First name</label>
+  </div>
+  <div class="form-floating-flushed mb-4">
+    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+    <label for="lastName">Last name</label>
+  </div>
+</div>
+
+<div class="mb-4">
+  <label class="form-label">Upload file</label>
+  <input type="file" class="form-control">
+</div>
+
+<!-- Checkbox complexe avec description -->
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkComment" checked>
+  <label class="form-check-label" for="checkComment">
+    Comments
+    <span class="text-muted">Get notified when someones posts a comment on a posting.</span>
+  </label>
+</div>
+
+<!-- Radio button -->
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="options" id="radioEverything" checked>
+  <label class="form-check-label" for="radioEverything">Everything</label>
+</div>
+
+<!-- Toggle Switch -->
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="switchChecked" checked>
+  <label class="form-check-label" for="switchChecked">Checked toggle</label>
+</div>
+
+<div class="mb-4">
+  <label for="username" class="form-label">Username</label>
+  <input type="text" id="username" class="form-control" placeholder="workcation.com/janesmith">
+</div>
+
+<!-- Input Valid (Success) -->
+<div class="mb-4">
+  <label class="form-label">Your name</label>
+  <input type="text" class="form-control is-valid" value="Success input">
+  <div class="valid-feedback">Well done! Some success message.</div>
+</div>
+
+
+<!-- Input Invalid (Error) -->
+<div class="mb-4">
+  <label class="form-label">Your name</label>
+  <input type="text" class="form-control is-invalid" value="Error input">
+  <div class="invalid-feedback">Oh, snapp! Some error message.</div>
+</div>

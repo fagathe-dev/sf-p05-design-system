@@ -1,0 +1,239 @@
+// ================================================================
+// BACKGROUND COLOR UTILITIES
+// Classes utilitaires pour les couleurs d'arrière-plan
+// ================================================================
+
+// Couleurs primaires
+.bg-primary {
+  background-color: var(--ds-primary) !important;
+}
+
+.bg-primary-dark {
+  background-color: var(--ds-primary-dark) !important;
+}
+
+.bg-secondary {
+  background-color: var(--ds-secondary) !important;
+}
+
+.bg-success {
+  background-color: var(--ds-success) !important;
+}
+
+.bg-danger {
+  background-color: var(--ds-danger) !important;
+}
+
+.bg-warning {
+  background-color: var(--ds-warning) !important;
+}
+
+.bg-info {
+  background-color: var(--ds-info) !important;
+}
+
+.bg-light {
+  background-color: var(--ds-light) !important;
+}
+
+.bg-dark {
+  background-color: var(--ds-dark) !important;
+}
+
+// Couleurs étendues
+.bg-blue {
+  background-color: var(--ds-blue) !important;
+}
+
+.bg-indigo {
+  background-color: var(--ds-indigo) !important;
+}
+
+.bg-purple {
+  background-color: var(--ds-purple) !important;
+}
+
+.bg-pink {
+  background-color: var(--ds-pink) !important;
+}
+
+.bg-red {
+  background-color: var(--ds-red) !important;
+}
+
+.bg-orange {
+  background-color: var(--ds-orange) !important;
+}
+
+.bg-yellow {
+  background-color: var(--ds-yellow) !important;
+}
+
+.bg-green {
+  background-color: var(--ds-green) !important;
+}
+
+.bg-teal {
+  background-color: var(--ds-teal) !important;
+}
+
+.bg-cyan {
+  background-color: var(--ds-cyan) !important;
+}
+
+// Couleurs neutres
+.bg-white {
+  background-color: var(--ds-white) !important;
+}
+
+.bg-black {
+  background-color: var(--ds-black) !important;
+}
+
+// Échelle de gris
+.bg-gray {
+  background-color: var(--ds-gray) !important;
+}
+
+.bg-gray-50 {
+  background-color: var(--ds-gray-50) !important;
+}
+
+.bg-gray-100 {
+  background-color: var(--ds-gray-100) !important;
+}
+
+.bg-gray-200 {
+  background-color: var(--ds-gray-200) !important;
+}
+
+.bg-gray-300 {
+  background-color: var(--ds-gray-300) !important;
+}
+
+.bg-gray-400 {
+  background-color: var(--ds-gray-400) !important;
+}
+
+.bg-gray-500 {
+  background-color: var(--ds-gray-500) !important;
+}
+
+.bg-gray-600 {
+  background-color: var(--ds-gray-600) !important;
+}
+
+.bg-gray-700 {
+  background-color: var(--ds-gray-700) !important;
+}
+
+.bg-gray-800 {
+  background-color: var(--ds-gray-800) !important;
+}
+
+.bg-gray-900 {
+  background-color: var(--ds-gray-900) !important;
+}
+
+// Background transparent
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+// Gradients utilitaires
+.bg-gradient {
+  background-image: var(--ds-gradient) !important;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--ds-primary), var(--ds-primary-dark)) !important;
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, var(--ds-secondary), var(--ds-gray-600)) !important;
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, var(--ds-success), var(--ds-green)) !important;
+}
+
+.bg-gradient-danger {
+  background: linear-gradient(135deg, var(--ds-danger), var(--ds-red)) !important;
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, var(--ds-warning), var(--ds-orange)) !important;
+}
+
+.bg-gradient-info {
+  background: linear-gradient(135deg, var(--ds-info), var(--ds-cyan)) !important;
+}
+
+// Background avec opacité
+.bg-primary-subtle {
+  background-color: rgba(var(--ds-primary-rgb), 0.1) !important;
+}
+
+.bg-secondary-subtle {
+  background-color: rgba(var(--ds-secondary-rgb), 0.1) !important;
+}
+
+.bg-success-subtle {
+  background-color: rgba(var(--ds-success-rgb), 0.1) !important;
+}
+
+.bg-danger-subtle {
+  background-color: rgba(var(--ds-danger-rgb), 0.1) !important;
+}
+
+.bg-warning-subtle {
+  background-color: rgba(var(--ds-warning-rgb), 0.1) !important;
+}
+
+.bg-info-subtle {
+  background-color: rgba(var(--ds-info-rgb), 0.1) !important;
+}
+
+.bg-light-subtle {
+  background-color: rgba(var(--ds-light-rgb), 0.1) !important;
+}
+
+.bg-dark-subtle {
+  background-color: rgba(var(--ds-dark-rgb), 0.1) !important;
+}
+
+// ================================================================
+// UTILITIES FOR BOX-SHADOW
+// Classes utilitaires pour les ombres portées
+
+.shadow-sm {
+  box-shadow: var(--ds-box-shadow-sm);
+}
+
+.shadow {
+  box-shadow: var(--ds-box-shadow);
+}
+
+.shadow-md {
+  box-shadow: var(--ds-box-shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--ds-box-shadow-lg);
+}
+
+.shadow-inset {
+  box-shadow: var(--ds-box-shadow-inset);
+}
+
+.shadow-inset-hover {
+  box-shadow: var(--ds-box-shadow-inset-hover);
+}
+
+.shadow-elevated {
+  box-shadow: var(--ds-box-shadow-elevated);
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}

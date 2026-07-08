@@ -1,0 +1,90 @@
+@use '../variables' as *;
+
+// ================================================================
+// SPACING UTILITIES - Bootstrap compatible
+// ================================================================
+
+$spacing-scale: (
+  0: var(--ds-spacing-0),
+  0_5: var(--ds-spacing-0_5),
+  1: var(--ds-spacing-1),
+  1_5: var(--ds-spacing-1_5),
+  2: var(--ds-spacing-2),
+  2_5: var(--ds-spacing-2_5),
+  3: var(--ds-spacing-3),
+  3_5: var(--ds-spacing-3_5),
+  4: var(--ds-spacing-4),
+  5: var(--ds-spacing-5),
+  6: var(--ds-spacing-6),
+  7: var(--ds-spacing-7),
+  8: var(--ds-spacing-8),
+  9: var(--ds-spacing-9),
+  10: var(--ds-spacing-10),
+);
+
+$margin-properties: (
+  '': margin,
+  t: margin-block-start,
+  b: margin-block-end,
+  s: margin-inline-start,
+  e: margin-inline-end,
+  x: margin-inline,
+  y: margin-block,
+);
+
+$padding-properties: (
+  '': padding,
+  t: padding-block-start,
+  b: padding-block-end,
+  s: padding-inline-start,
+  e: padding-inline-end,
+  x: padding-inline,
+  y: padding-block,
+);
+
+@mixin generate-spacing-utils(
+  $prefix,
+  $property-map,
+  $breakpoint: null,
+  $allow-auto: false
+) {
+  @each $direction-suffix, $property-name in $property-map {
+    @each $scale, $value in $spacing-scale {
+      // Correction de la dépréciation SCSS[cite: 42]
+      $class-suffix: '';
+      @if $breakpoint == null {
+        $class-suffix: '#{$scale}';
+      } @else {
+        $class-suffix: '#{$breakpoint}-#{$scale}';
+      }
+
+      .#{$prefix}#{$direction-suffix}-#{$class-suffix} {
+        #{$property-name}: $value !important;
+      }
+    }
+
+    @if $allow-auto {
+      // Correction de la dépréciation SCSS pour le mode auto[cite: 42]
+      $auto-suffix: '';
+      @if $breakpoint == null {
+        $auto-suffix: 'auto';
+      } @else {
+        $auto-suffix: '#{$breakpoint}-auto';
+      }
+
+      .#{$prefix}#{$direction-suffix}-#{$auto-suffix} {
+        #{$property-name}: auto !important;
+      }
+    }
+  }
+}
+
+@include generate-spacing-utils(m, $margin-properties, null, true);
+@include generate-spacing-utils(p, $padding-properties);
+
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    @include generate-spacing-utils(m, $margin-properties, $breakpoint, true);
+    @include generate-spacing-utils(p, $padding-properties, $breakpoint);
+  }
+}

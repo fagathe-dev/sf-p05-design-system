@@ -1,0 +1,73 @@
+<div class="component-demo">
+  <h3>◉ Avatar & Stack</h3>
+  <p class="text-muted mb-4">
+    Composants pour représenter des utilisateurs ou des entités. Supporte les images (avec recadrage automatique) et le texte, ainsi que l'empilement (Stack).
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Tailles & Fallbacks</h5>
+        
+        <div class="d-flex align-items-center gap-4 mb-4">
+          <div class="avatar avatar-sm">
+            <img src="https://i.pravatar.cc/100?img=1" alt="Avatar SM">
+          </div>
+          <div class="avatar">
+            <img src="https://i.pravatar.cc/100?img=2" alt="Avatar MD">
+          </div>
+          <div class="avatar avatar-lg">
+            <img src="https://i.pravatar.cc/100?img=3" alt="Avatar LG">
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-4">
+          <div class="avatar bg-primary-subtle text-primary-dark">
+            JD
+          </div>
+          <div class="avatar bg-warning-subtle text-warning-dark">
+            <i class="ri-star-smile-line"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Avatar Stack (Chevauchement)</h5>
+        <p class="small text-muted mb-4">L'effet de chevauchement se fait nativement via des marges négatives. Les avatars se soulèvent au survol.</p>
+
+        <div class="avatar-stack mb-4">
+          <div class="avatar"><img src="https://i.pravatar.cc/100?img=4" alt="User"></div>
+          <div class="avatar"><img src="https://i.pravatar.cc/100?img=5" alt="User"></div>
+          <div class="avatar"><img src="https://i.pravatar.cc/100?img=6" alt="User"></div>
+          <div class="avatar bg-secondary-subtle text-secondary-dark">+3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<div class="avatar avatar-lg">
+  <img src="avatar.jpg" alt="Jane Doe">
+</div>
+
+<div class="avatar bg-primary-subtle text-primary-dark">
+  JD
+</div>
+
+<div class="avatar-stack">
+  <div class="avatar"><img src="user1.jpg" alt="User 1"></div>
+  <div class="avatar"><img src="user2.jpg" alt="User 2"></div>
+  <div class="avatar bg-surface-hover text-muted">+5</div>
+</div>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Avatars'
+    } %}
+  </div>
+</div>

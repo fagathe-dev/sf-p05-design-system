@@ -1,5 +1,11 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        app_name: '%env(APP_NAME)%'
+        logo_path: '%env(LOGO_PATH)%'
+        logo_png_path: '%env(LOGO_PNG_PATH)%'
+        favicon_path: '%env(FAVICON_PATH)%'
+
 
 when@test:
     twig:

@@ -1,0 +1,38 @@
+<div class="component-demo">
+  <h3>🍞 Fil d'Ariane (Breadcrumb)</h3>
+  <p class="text-muted mb-4">
+    Composant de navigation indiquant la position actuelle de l'utilisateur dans l'arborescence du site.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-8">
+      <div class="box box-secondary h-100 mb-0">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#"><i class="ri-home-4-line"></i> Accueil</a></li>
+            <li class="breadcrumb-item"><a href="#">Paramètres</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sécurité</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="#">Catégorie</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Page actuelle</li>
+  </ol>
+</nav>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Breadcrumb'
+    } %}
+  </div>
+</div>

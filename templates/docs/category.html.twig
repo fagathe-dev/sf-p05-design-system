@@ -1,0 +1,45 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="py-4">
+  <header class="mb-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{{ path('component_docs_index') }}"><i class="ri-book-2-line"></i> Docs</a>
+        </li>
+        <li class="breadcrumb-item active text-capitalize" aria-current="page">{{ type }}</li>
+      </ol>
+    </nav>
+    
+    <div class="d-flex align-items-center gap-3 mt-3">
+      <h1 class="h2 mb-0 fw-bold text-capitalize">{{ type }}</h1>
+      <span class="badge bg-primary-subtle text-primary-dark rounded-pill">{{ components|length }} items</span>
+    </div>
+    <p class="text-muted mt-2">Parcourez les composants de cette catégorie.</p>
+  </header>
+
+  <div class="row gap-3">
+    {% for component in components %}
+      <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <a href="{{ component.url }}" class="text-decoration-none">
+          <div class="card h-100 form-selectable-label border-0">
+            <div class="card-body">
+              <h5 class="card-title text-body mb-2">{{ component.title }}</h5>
+              <p class="card-text text-muted small mb-0">
+                <code>_{{ component.name }}.html.twig</code>
+              </p>
+              </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+  <script type="module" src="{{ asset('js/pages/demo-ui.js') }}"></script>
+{% endblock %}

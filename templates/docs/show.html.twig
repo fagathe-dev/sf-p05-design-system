@@ -1,0 +1,60 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="py-4">
+    <header class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+        <h1 class="h2 mb-0 fw-bold">{{ component_title }}</h1>
+        
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('component_docs_index') }}"><i class="ri-book-2-line"></i> Docs</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('component_docs_category', {type: type}) }}" class="text-capitalize">{{ type }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ component_title }}</li>
+            </ol>
+        </nav>
+    </header>
+
+    {% if error %}
+        <div class="alert alert-solid-danger mb-4" role="alert">
+            <i class="ri-error-warning-line alert-icon"></i>
+            <div class="alert-content">
+                <strong>Composant introuvable</strong><br>
+                Le fichier <code>templates/docs/{{ type }}/_{{ component_name }}.html.twig</code> n'existe pas.
+            </div>
+        </div>
+        
+        <div class="box box-secondary mt-4">
+            <h5 class="box-title">Créer ce composant</h5>
+            <p class="mb-2">Créez le fichier <code>templates/docs/{{ type }}/_{{ component_name }}.html.twig</code>.</p>
+        </div>
+    {% else %}
+        
+        {# Intégration du composant visuel #}
+        <div class="component-demo-container my-4">
+            {% include component_template %}
+        </div>
+
+        {# Affichage du chemin source en bas de page #}
+        <div class="box box-secondary mt-5">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="ri-folder-info-line text-muted fs-5"></i>
+                <h6 class="mb-0">Fichier source</h6>
+            </div>
+            <code class="text-secondary-dark bg-secondary-subtle px-3 py-2 rounded-lg d-inline-block">
+                templates/{{ component_template }}
+            </code>
+        </div>
+        
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="module" src="{{ asset('js/pages/demo-ui.js') }}"></script>
+{% endblock %}

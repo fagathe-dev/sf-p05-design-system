@@ -1,0 +1,190 @@
+/* ===================================================================
+   Éditeur Markdown (MdEditor)
+   =================================================================== */
+
+.md-editor {
+  position: relative;
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  border-radius: var(--ds-border-radius);
+  background: var(--ds-surface-primary);
+  overflow: hidden;
+}
+
+/* Barre d'outils */
+.md-editor-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--ds-spacing-2);
+  background: var(--ds-surface-secondary);
+  border-bottom: var(--ds-border-width) solid var(--ds-border-color);
+}
+
+/* Onglets */
+.md-editor-tabs {
+  display: flex;
+  gap: var(--ds-spacing-1);
+}
+
+.md-tab-btn {
+  padding: var(--ds-spacing-1) var(--ds-spacing-3);
+  background: transparent;
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-border-radius-sm);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-sm);
+  font-weight: var(--ds-font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.md-tab-btn:hover {
+  background: var(--ds-surface-hover);
+  color: var(--ds-text-primary);
+}
+
+.md-tab-btn.active {
+  background: var(--ds-primary-500);
+  color: var(--ds-primary-contrast);
+  border-color: var(--ds-primary-500);
+}
+
+/* Boutons de formatage */
+.md-editor-format-buttons {
+  display: flex;
+  gap: var(--ds-spacing-1);
+}
+
+.md-format-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  border-radius: var(--ds-border-radius-sm);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.md-format-btn:hover {
+  background: var(--ds-surface-hover);
+  border-color: var(--ds-border-color-hover);
+  color: var(--ds-text-primary);
+}
+
+.md-format-btn:active {
+  background: var(--ds-surface-active);
+  border-color: var(--ds-primary-500);
+}
+
+/* Zone de texte */
+.md-editor textarea {
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  resize: vertical;
+  font-family: var(--ds-font-family-mono);
+  font-size: var(--ds-font-size-sm);
+  line-height: 1.5;
+  padding: var(--ds-spacing-3);
+}
+
+.md-editor textarea:focus {
+  box-shadow: none !important;
+}
+
+/* Zone de prévisualisation */
+.md-editor-preview {
+  padding: var(--ds-spacing-3);
+  min-height: 120px;
+  background: var(--ds-surface-primary);
+  color: var(--ds-text-primary);
+  line-height: 1.6;
+}
+
+.md-editor-preview h1 {
+  font-size: var(--ds-font-size-2xl);
+  font-weight: var(--ds-font-weight-bold);
+  margin: 0 0 var(--ds-spacing-3) 0;
+  color: var(--ds-text-primary);
+}
+
+.md-editor-preview h2 {
+  font-size: var(--ds-font-size-xl);
+  font-weight: var(--ds-font-weight-semibold);
+  margin: var(--ds-spacing-4) 0 var(--ds-spacing-2) 0;
+  color: var(--ds-text-primary);
+}
+
+.md-editor-preview h3 {
+  font-size: var(--ds-font-size-lg);
+  font-weight: var(--ds-font-weight-semibold);
+  margin: var(--ds-spacing-3) 0 var(--ds-spacing-2) 0;
+  color: var(--ds-text-primary);
+}
+
+.md-editor-preview p {
+  margin: 0 0 var(--ds-spacing-2) 0;
+}
+
+.md-editor-preview strong {
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-text-primary);
+}
+
+.md-editor-preview u {
+  text-decoration: underline;
+  text-decoration-color: var(--ds-primary-500);
+  text-underline-offset: 2px;
+}
+
+.md-editor-preview .text-muted {
+  color: var(--ds-text-secondary) !important;
+  font-style: italic;
+}
+
+/* États spéciaux */
+.md-editor:focus-within {
+  border-color: var(--ds-primary-500);
+  box-shadow: 0 0 0 3px var(--ds-primary-100);
+}
+
+/* Version compacte */
+.md-editor.md-editor--compact .md-editor-toolbar {
+  padding: var(--ds-spacing-1) var(--ds-spacing-2);
+}
+
+.md-editor.md-editor--compact .md-tab-btn {
+  padding: calc(var(--ds-spacing-1) / 2) var(--ds-spacing-2);
+  font-size: var(--ds-font-size-xs);
+}
+
+.md-editor.md-editor--compact .md-format-btn {
+  width: 28px;
+  height: 28px;
+  font-size: var(--ds-font-size-xs);
+}
+
+.md-editor.md-editor--compact textarea,
+.md-editor.md-editor--compact .md-editor-preview {
+  padding: var(--ds-spacing-2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .md-editor-toolbar {
+    flex-direction: column;
+    gap: var(--ds-spacing-2);
+    align-items: stretch;
+  }
+
+  .md-editor-tabs,
+  .md-editor-format-buttons {
+    justify-content: center;
+  }
+}

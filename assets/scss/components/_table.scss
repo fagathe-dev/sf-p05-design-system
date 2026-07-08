@@ -1,0 +1,121 @@
+// ================================================================
+// COMPOSANT : TABLE (Tableaux)
+// ================================================================
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: var(--ds-body-color);
+  vertical-align: top;
+  border-color: var(--ds-border-color);
+  border-collapse: collapse;
+
+  // Cellules
+  > :not(caption) > * > * {
+    padding: 1rem 1.25rem; // Espacement généreux (Soft UI)
+    background-color: transparent;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: inherit;
+  }
+
+  // En-tête
+  > thead {
+    vertical-align: bottom;
+  }
+
+  // Corps
+  > tbody {
+    vertical-align: inherit;
+  }
+
+  // Utilitaire d'alignement vertical (très utilisé dans les tableaux)
+  &.align-middle {
+    > :not(caption) > * > * {
+      vertical-align: middle;
+    }
+  }
+}
+
+// ----------------------------------------------------------------
+// VARIANTES DE DESIGN
+// ----------------------------------------------------------------
+
+// En-tête ou ligne claire (table-light)
+.table-light {
+  --ds-table-bg: var(--ds-surface-hover);
+  --ds-table-color: var(--ds-heading-color);
+  --ds-table-border-color: var(--ds-border-color);
+
+  > * > * {
+    background-color: var(--ds-table-bg);
+    color: var(--ds-table-color);
+    border-color: var(--ds-table-border-color);
+  }
+
+  // Typographie spécifique pour les <th> en mode light
+  th {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ds-text-muted);
+  }
+}
+
+// Lignes au survol (table-hover)
+.table-hover {
+  > tbody > tr {
+    transition: background-color 0.2s ease;
+
+    &:hover > * {
+      background-color: var(--ds-surface-hover);
+      color: var(--ds-heading-color);
+    }
+  }
+}
+
+// Lignes zébrées (table-striped)
+.table-striped {
+  > tbody > tr:nth-of-type(odd) > * {
+    // Utilisation de la variable RGB générée précédemment pour une opacité très légère
+    background-color: rgba(var(--ds-slate-500-rgb), 0.03);
+  }
+}
+
+// ----------------------------------------------------------------
+// GESTION DES BORDURES
+// ----------------------------------------------------------------
+
+// Tableau entièrement bordé
+.table-bordered {
+  border: 1px solid var(--ds-border-color);
+
+  > :not(caption) > * {
+    border-width: 1px 0;
+
+    > * {
+      border-width: 0 1px;
+      border-color: var(--ds-border-color);
+    }
+  }
+}
+
+// Tableau sans aucune bordure
+.table-borderless {
+  > :not(caption) > * > * {
+    border-bottom-width: 0;
+  }
+}
+
+// ----------------------------------------------------------------
+// RESPONSIVE (Scroll horizontal)
+// ----------------------------------------------------------------
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; // Pour la fluidité sur iOS
+
+  // Prévient la coupure des ombres internes si la table est dans une carte
+  padding-bottom: 1px;
+}

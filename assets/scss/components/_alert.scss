@@ -1,0 +1,68 @@
+// ================================================================
+// COMPOSANT : ALERT
+// ================================================================
+
+.alert {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--ds-border-radius-lg);
+  border: none; // Borderless design
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: var(--ds-shadow-sm);
+
+  .alert-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem; // Alignement visuel avec le texte
+  }
+
+  .alert-content {
+    flex: 1;
+  }
+
+  // Variantes de base
+  @each $theme in success, danger, warning, info {
+    &.alert-soft-#{$theme} {
+      background-color: var(--ds-#{$theme}-subtle);
+      color: var(--ds-#{$theme}-dark);
+    }
+
+    &.alert-solid-#{$theme} {
+      background-color: var(--ds-#{$theme});
+      color: var(--ds-white);
+    }
+  }
+
+  // Comportement Dismissible (Bouton Fermer)
+  &.alert-dismissible {
+    padding-right: 3rem; // Place pour le bouton
+
+    .btn-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      display: inline-flex;
+      background: transparent;
+      border: none;
+      color: inherit;
+      font-size: 1.25rem;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:focus-visible {
+        outline: 2px solid currentColor;
+        border-radius: 0.25rem;
+      }
+    }
+  }
+}

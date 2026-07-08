@@ -1,0 +1,62 @@
+<div class="component-demo">
+  <h3>🔢 Pagination</h3>
+  <p class="text-muted mb-4">
+    Navigation entre les pages d'une liste ou d'un tableau. Style "Soft" sans bordures, avec gestion des états actifs et inactifs.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12">
+      <div class="box box-secondary mb-0">
+        
+        <h5 class="mb-3">Standard</h5>
+        <nav aria-label="Navigation des pages">
+          <ul class="pagination mb-4 justify-content-start">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="ri-arrow-left-s-line"></i></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#"><i class="ri-arrow-right-s-line"></i></a>
+            </li>
+          </ul>
+        </nav>
+
+        <h5 class="mb-3">Variantes de taille</h5>
+        <nav aria-label="Petite pagination">
+          <ul class="pagination pagination-sm mb-3 justify-content-start">
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="#">Précédent</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active" aria-current="page">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">Suivant</a>
+    </li>
+  </ul>
+</nav>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Pagination'
+    } %}
+  </div>
+</div>

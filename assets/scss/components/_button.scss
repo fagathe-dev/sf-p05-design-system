@@ -1,0 +1,137 @@
+// ================================================================
+// COMPOSANT : BUTTON
+// ================================================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  border-radius: var(--ds-border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  user-select: none;
+
+  &:is(a):hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  // Accessibilité native
+  &:focus-visible {
+    outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring-color);
+    outline-offset: var(--ds-focus-ring-offset);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Tailles
+  &.btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  &.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+  }
+
+  // Formes
+  &.btn-pill {
+    border-radius: var(--ds-border-radius-pill);
+  }
+
+  &.btn-icon {
+    padding: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    &.btn-sm {
+      width: 2rem;
+      height: 2rem;
+      padding: 0.25rem;
+    }
+    &.btn-lg {
+      width: 3rem;
+      height: 3rem;
+      padding: 0.75rem;
+    }
+
+    // Assurer le centrage parfait de la police d'icône
+    i,
+    [class^='mdi-'],
+    [class^='bx-'],
+    [class^='ri-'],
+    [class^='la-'] {
+      font-size: 1.25em;
+      margin: 0;
+    }
+  }
+}
+
+// Génération des 3 thèmes autorisés
+@each $theme in primary, secondary, tertiary {
+  // Variante : Solid (Défaut)
+  .btn-#{$theme},
+  .btn-solid-#{$theme} {
+    background-color: var(--ds-#{$theme});
+    color: var(--ds-white);
+
+    &:hover,
+    &:is(a):hover {
+      background-color: var(--ds-#{$theme}-hover);
+      box-shadow: var(--ds-shadow-sm);
+      color: var(--ds-white);
+    }
+  }
+
+  // Variante : Soft
+  .btn-soft-#{$theme} {
+    background-color: var(--ds-#{$theme}-subtle);
+    color: var(--ds-#{$theme}-dark);
+
+    &:hover,
+    &:is(a):hover {
+      background-color: var(--ds-#{$theme});
+      color: var(--ds-white);
+      color: var(--ds-white);
+    }
+  }
+
+  // Variante : Outline
+  .btn-outline-#{$theme} {
+    background-color: transparent;
+    border-color: var(--ds-#{$theme});
+    color: var(--ds-#{$theme}-dark);
+
+    &:hover,
+    &:is(a):hover {
+      background-color: var(--ds-#{$theme});
+      color: var(--ds-white);
+      color: var(--ds-white);
+    }
+  }
+
+  // Variante : Ghost
+  .btn-ghost-#{$theme} {
+    background-color: transparent;
+    color: var(--ds-#{$theme}-dark);
+
+    &:hover,
+    &:is(a):hover {
+      background-color: var(--ds-#{$theme}-subtle);
+      color: var(--ds-#{$theme}-dark);
+    }
+  }
+}

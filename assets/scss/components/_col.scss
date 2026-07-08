@@ -1,0 +1,259 @@
+@use 'sass:map';
+@use '../variables' as *;
+
+// ================================================================
+// COL COMPONENT - Bootstrap Grid System
+// ================================================================
+
+.col {
+  flex: 1 0 0%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+// Base column classes
+.col-auto {
+  flex: 0 0 auto;
+  width: auto;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+// Fixed width columns (1-12)
+.col-1 {
+  flex: 0 0 auto;
+  width: 8.33333333%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-2 {
+  flex: 0 0 auto;
+  width: 16.66666667%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-3 {
+  flex: 0 0 auto;
+  width: 25%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-4 {
+  flex: 0 0 auto;
+  width: 33.33333333%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-5 {
+  flex: 0 0 auto;
+  width: 41.66666667%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-7 {
+  flex: 0 0 auto;
+  width: 58.33333333%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.33333333%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+.col-12 {
+  flex: 0 0 auto;
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+// Offset classes
+.offset-1 {
+  margin-left: 8.33333333%;
+}
+.offset-2 {
+  margin-left: 16.66666667%;
+}
+.offset-3 {
+  margin-left: 25%;
+}
+.offset-4 {
+  margin-left: 33.33333333%;
+}
+.offset-5 {
+  margin-left: 41.66666667%;
+}
+.offset-6 {
+  margin-left: 50%;
+}
+.offset-7 {
+  margin-left: 58.33333333%;
+}
+.offset-8 {
+  margin-left: 66.66666667%;
+}
+.offset-9 {
+  margin-left: 75%;
+}
+.offset-10 {
+  margin-left: 83.33333333%;
+}
+.offset-11 {
+  margin-left: 91.66666667%;
+}
+
+// Responsive columns for each breakpoint
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    .col-#{$breakpoint} {
+      flex: 1 0 0%;
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+    }
+
+    .col-#{$breakpoint}-auto {
+      flex: 0 0 auto;
+      width: auto;
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+    }
+
+    .col-#{$breakpoint}-1 {
+      flex: 0 0 auto;
+      width: 8.33333333%;
+    }
+    .col-#{$breakpoint}-2 {
+      flex: 0 0 auto;
+      width: 16.66666667%;
+    }
+    .col-#{$breakpoint}-3 {
+      flex: 0 0 auto;
+      width: 25%;
+    }
+    .col-#{$breakpoint}-4 {
+      flex: 0 0 auto;
+      width: 33.33333333%;
+    }
+    .col-#{$breakpoint}-5 {
+      flex: 0 0 auto;
+      width: 41.66666667%;
+    }
+    .col-#{$breakpoint}-6 {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+    .col-#{$breakpoint}-7 {
+      flex: 0 0 auto;
+      width: 58.33333333%;
+    }
+    .col-#{$breakpoint}-8 {
+      flex: 0 0 auto;
+      width: 66.66666667%;
+    }
+    .col-#{$breakpoint}-9 {
+      flex: 0 0 auto;
+      width: 75%;
+    }
+    .col-#{$breakpoint}-10 {
+      flex: 0 0 auto;
+      width: 83.33333333%;
+    }
+    .col-#{$breakpoint}-11 {
+      flex: 0 0 auto;
+      width: 91.66666667%;
+    }
+    .col-#{$breakpoint}-12 {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+
+    .offset-#{$breakpoint}-0 {
+      margin-left: 0;
+    }
+    .offset-#{$breakpoint}-1 {
+      margin-left: 8.33333333%;
+    }
+    .offset-#{$breakpoint}-2 {
+      margin-left: 16.66666667%;
+    }
+    .offset-#{$breakpoint}-3 {
+      margin-left: 25%;
+    }
+    .offset-#{$breakpoint}-4 {
+      margin-left: 33.33333333%;
+    }
+    .offset-#{$breakpoint}-5 {
+      margin-left: 41.66666667%;
+    }
+    .offset-#{$breakpoint}-6 {
+      margin-left: 50%;
+    }
+    .offset-#{$breakpoint}-7 {
+      margin-left: 58.33333333%;
+    }
+    .offset-#{$breakpoint}-8 {
+      margin-left: 66.66666667%;
+    }
+    .offset-#{$breakpoint}-9 {
+      margin-left: 75%;
+    }
+    .offset-#{$breakpoint}-10 {
+      margin-left: 83.33333333%;
+    }
+    .offset-#{$breakpoint}-11 {
+      margin-left: 91.66666667%;
+    }
+
+    // Order classes
+    .order-#{$breakpoint}-first {
+      order: -1;
+    }
+    .order-#{$breakpoint}-0 {
+      order: 0;
+    }
+    .order-#{$breakpoint}-1 {
+      order: 1;
+    }
+    .order-#{$breakpoint}-2 {
+      order: 2;
+    }
+    .order-#{$breakpoint}-3 {
+      order: 3;
+    }
+    .order-#{$breakpoint}-4 {
+      order: 4;
+    }
+    .order-#{$breakpoint}-5 {
+      order: 5;
+    }
+    .order-#{$breakpoint}-last {
+      order: 6;
+    }
+  }
+}

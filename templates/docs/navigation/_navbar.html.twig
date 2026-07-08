@@ -1,0 +1,90 @@
+<div class="component-demo">
+  <h3>🧭 Barre de navigation (Navbar)</h3>
+  <p class="text-muted mb-4">
+    En-tête principal de l'application. Responsive par défaut, inclut le menu, le bouton mobile et les actions utilisateur (Notifications, Dropdown Profil).
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12">
+      <div class="box box-secondary mb-0 p-0 overflow-hidden">
+        
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="#">
+            <i class="ri-box-3-fill text-primary"></i> UI Kit
+          </a>
+          
+          <button class="navbar-toggler" type="button" data-ds-toggle="collapse" data-ds-target="#navbarDemoContent" aria-expanded="false">
+            <i class="ri-menu-line"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarDemoContent">
+            <ul class="navbar-nav">
+              <li><a class="nav-link active" href="#">Dashboard</a></li>
+              <li><a class="nav-link" href="#">Projets</a></li>
+              <li><a class="nav-link" href="#">Équipe</a></li>
+            </ul>
+
+            <div class="navbar-actions">
+              <a href="#" class="navbar-notification">
+                <i class="ri-notification-3-line"></i>
+                <span class="notification-badge">3</span>
+              </a>
+
+              <div class="dropdown">
+                <button class="navbar-user-trigger" type="button" data-ds-toggle="dropdown" aria-expanded="false">
+                  <div class="avatar avatar-sm"><img src="https://i.pravatar.cc/100?img=11" alt="User"></div>
+                  <div class="user-info">
+                    <span class="user-name">Jane Doe</span>
+                    <span class="user-role">Admin</span>
+                  </div>
+                  <i class="ri-arrow-down-s-line user-chevron"></i>
+                </button>
+                
+                <div class="dropdown-menu auth-dropdown-menu dropdown-menu-end">
+                  <div class="dropdown-header">Mon Compte</div>
+                  <a class="dropdown-item" href="#"><i class="ri-user-line"></i> Profil</a>
+                  <a class="dropdown-item" href="#"><i class="ri-settings-4-line"></i> Paramètres</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-danger" href="#"><i class="ri-logout-box-r-line"></i> Déconnexion</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#">Mon App</a>
+  
+  <button class="navbar-toggler" data-ds-toggle="collapse" data-ds-target="#navContent">
+    <i class="ri-menu-line"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navContent">
+    <ul class="navbar-nav">
+      <li><a class="nav-link" href="#">Lien 1</a></li>
+    </ul>
+
+    <div class="navbar-actions">
+      <div class="dropdown">
+        <button class="navbar-user-trigger" data-ds-toggle="dropdown">
+          <div class="avatar avatar-sm">...</div>
+        </button>
+        <div class="dropdown-menu">...</div>
+      </div>
+    </div>
+  </div>
+</nav>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Navbar'
+    } %}
+  </div>
+</div>

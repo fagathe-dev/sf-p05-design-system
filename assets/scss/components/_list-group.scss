@@ -1,0 +1,80 @@
+// ================================================================
+// COMPOSANT : LIST GROUP
+// ================================================================
+
+.list-group {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-bottom: 1rem;
+  background-color: var(--ds-surface-bg);
+  border-radius: var(--ds-border-radius-xl); // Arrondi global
+  box-shadow: var(--ds-shadow); // Ombre globale
+  list-style: none;
+  overflow: hidden; // Garde les items à l'intérieur de l'arrondi
+
+  .list-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    color: var(--ds-body-color);
+    background-color: transparent;
+    border: none; // Borderless
+    border-bottom: 1px solid var(--ds-border-color); // Séparateur discret
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    // Gestion de l'interactivité (Liens & Boutons)
+    &:is(a, button) {
+      cursor: pointer;
+      text-decoration: none;
+      width: 100%;
+      text-align: left;
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--ds-surface-hover);
+        color: var(--ds-heading-color);
+        outline: none;
+      }
+    }
+
+    // État actif
+    &.active {
+      background-color: var(--ds-primary-subtle);
+      color: var(--ds-primary-dark);
+      font-weight: 500;
+    }
+  }
+
+  // Variante affleurante (ex: dans un widget latéral)
+  &.list-group-flush {
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+  }
+
+  // Variante numérotée
+  &.list-group-numbered {
+    counter-reset: list-counter;
+
+    .list-group-item {
+      counter-increment: list-counter;
+
+      &::before {
+        content: counter(list-counter) '.';
+        font-weight: 600;
+        color: var(--ds-text-muted);
+        flex-shrink: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<div class="component-demo" id="ui-docs-alert-demo">
+  <h3>⚠️ Alertes</h3>
+  <p class="text-muted mb-4">
+    Messages contextuels pour les retours utilisateurs. Le design est "borderless" (sans bordure) 
+    avec une légère ombre portée (Soft UI).
+  </p>
+
+  <div class="mb-4">
+    <button id="btn-alert-test" class="btn btn-primary">
+      <i class="ri-add-line"></i> Créer une alerte dynamique
+    </button>
+  </div>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Alertes "Soft" (Subtiles)</h5>
+        <div class="alert alert-soft-success mb-3" role="alert">
+          <i class="ri-checkbox-circle-fill alert-icon"></i>
+          <div class="alert-content"><strong>Succès :</strong> Vos modifications ont été sauvegardées.</div>
+        </div>
+        <div class="alert alert-soft-warning mb-3" role="alert">
+          <i class="ri-alert-fill alert-icon"></i>
+          <div class="alert-content"><strong>Attention :</strong> Votre abonnement expire dans 3 jours.</div>
+        </div>
+        <div class="alert alert-soft-danger mb-3" role="alert">
+          <i class="ri-error-warning-fill alert-icon"></i>
+          <div class="alert-content"><strong>Erreur :</strong> Impossible de joindre le serveur.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Alertes "Solid" & Dismissible</h5>
+        <div class="alert alert-solid-primary mb-4" role="alert">
+          <i class="ri-star-fill alert-icon text-white"></i>
+          <div class="alert-content">Bienvenue sur la nouvelle version !</div>
+        </div>
+        <div class="alert alert-soft-danger alert-dismissible mb-0" role="alert">
+          <i class="ri-shield-keyhole-fill alert-icon"></i>
+          <div class="alert-content"><strong>Action requise !</strong><br><small>Veuillez configurer la 2FA.</small></div>
+          <button type="button" class="btn-close" data-ds-dismiss="alert" aria-label="Fermer"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+import { Alert } from '@components/Alert';
+new Alert('Message', 'success');
+
+<div class="alert alert-soft-success" role="alert">
+  <i class="ri-checkbox-circle-fill alert-icon"></i>
+  <div class="alert-content">Action réussie !</div>
+</div>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'typescript',
+      'title': 'Usage Alert'
+    } %}
+  </div>
+</div>

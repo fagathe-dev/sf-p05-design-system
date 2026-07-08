@@ -1,0 +1,55 @@
+<div class="component-demo">
+  <h3>🔲 Conteneurs (Containers)</h3>
+  <p class="text-muted mb-4">
+    Le conteneur est l'élément fondamental de la grille. Il encadre, centre et aligne votre contenu. 
+    Notre système utilise des conteneurs réactifs qui s'adaptent aux points de rupture (breakpoints).
+  </p>
+
+  <div class="row g-4">
+    <div class="col-12">
+      <h5>1. Conteneur standard (<code>.container</code>)</h5>
+      <p class="small text-muted mb-2">Centre le contenu et ajuste sa largeur maximale (max-width) à chaque breakpoint.</p>
+      
+      <div class="p-3 bg-slate-100 rounded mb-4 border border-dashed">
+        <div class="container bg-primary-subtle text-primary-dark p-3 rounded text-center fw-medium">
+          .container
+        </div>
+      </div>
+
+      <h5>2. Conteneur fluide (<code>.container-fluid</code>)</h5>
+      <p class="small text-muted mb-2">Occupe toujours 100% de la largeur disponible, quel que soit l'écran.</p>
+      
+      <div class="p-3 bg-slate-100 rounded mb-4 border border-dashed">
+        <div class="container-fluid bg-secondary-subtle text-secondary-dark p-3 rounded text-center fw-medium">
+          .container-fluid
+        </div>
+      </div>
+
+      <h5>3. Conteneurs responsifs (ex: <code>.container-md</code>)</h5>
+      <p class="small text-muted mb-2">Se comporte comme <code>.container-fluid</code> (100%) jusqu'à ce que le breakpoint spécifié soit atteint.</p>
+      
+      <div class="p-3 bg-slate-100 rounded mb-4 border border-dashed">
+        <div class="container-md bg-info-subtle text-info-dark p-3 rounded text-center fw-medium mb-2">
+          .container-md (100% sur mobile, max-width à partir de 768px)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+      <h5>Code d'exemple</h5>
+      {% set codeExample = '<div class="container">
+  </div>
+
+<div class="container-fluid">
+  </div>
+
+<div class="container-lg">
+  </div>' %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Containers'
+    } %}
+  </div>
+</div>

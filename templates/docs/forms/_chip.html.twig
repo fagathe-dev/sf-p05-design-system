@@ -1,0 +1,55 @@
+<div class="component-demo">
+  <h3>🏷️ Composant Chip</h3>
+  <p class="text-muted mb-4">
+    Petits éléments interactifs parfaits pour afficher des filtres, des tags, ou des statuts. 
+    Ils supportent les icônes et les variantes de formes (Pill).
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary mb-0">
+        <h5 class="mb-4">Thèmes standards</h5>
+        
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <div class="chip chip-primary">
+            <i class="ri-code-line"></i> TypeScript
+          </div>
+          <div class="chip chip-secondary">
+            <i class="ri-brush-line"></i> SCSS
+          </div>
+          <div class="chip chip-tertiary">
+            <i class="ri-box-3-line"></i> Symfony
+          </div>
+        </div>
+
+        <h5 class="mb-4">Forme Pilule (Pill)</h5>
+        <div class="d-flex flex-wrap gap-2">
+          <div class="chip chip-primary chip-pill">
+            Design System
+          </div>
+          <div class="chip chip-secondary chip-pill">
+            <i class="ri-close-line"></i> Retirer le filtre
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<span class="chip chip-primary">
+  <i class="ri-star-line"></i> Nouveau
+</span>
+
+<span class="chip chip-secondary chip-pill">
+  Option 1
+</span>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Chips'
+    } %}
+  </div>
+</div>

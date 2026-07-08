@@ -1,0 +1,74 @@
+<div class="component-demo">
+  <h3>☑️ Sélections Multiples & Uniques</h3>
+  <p class="text-muted mb-4">
+    Composants personnalisés en pur CSS/SVG pour les cases à cocher, boutons radio et menus déroulants natifs.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-4">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Checkboxes</h5>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="check1" checked>
+          <label class="form-check-label" for="check1">Option cochée</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="check2">
+          <label class="form-check-label" for="check2">Option vide</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="check3" disabled>
+          <label class="form-check-label" for="check3">Option désactivée</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Radios</h5>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="radios" id="radio1" checked>
+          <label class="form-check-label" for="radio1">Choix 1</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="radios" id="radio2">
+          <label class="form-check-label" for="radio2">Choix 2</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Select Menu</h5>
+        
+        <select class="form-select mb-3" aria-label="Default select example">
+          <option selected>Sélectionnez une option</option>
+          <option value="1">Option Un</option>
+          <option value="2">Option Deux</option>
+          <option value="3">Option Trois</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkbox1">
+  <label class="form-check-label" for="checkbox1">Texte de l'option</label>
+</div>
+
+<select class="form-select">
+  <option value="1">Choix 1</option>
+</select>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Choices'
+    } %}
+  </div>
+</div>

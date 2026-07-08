@@ -1,0 +1,55 @@
+<div class="component-demo">
+  <h3>🖼️ Galerie (Masonry Grid)</h3>
+  <p class="text-muted mb-4">
+    Une grille de galerie fluide de style "Masonry", construite uniquement en CSS grâce à la propriété <code>column-count</code>. 
+    Les images sont disposées verticalement sans espace vide horizontal.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12">
+      <div class="box box-secondary mb-0">
+        
+        <div class="gallery">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=500&q=80" alt="Gallery">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&q=80" alt="Gallery">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80" alt="Gallery">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80" alt="Gallery">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&q=80" alt="Gallery">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<div class="gallery">
+  <div class="gallery-item">
+    <img src="image1.jpg" alt="Description">
+  </div>
+  <div class="gallery-item">
+    <img src="image2.jpg" alt="Description">
+  </div>
+  <div class="gallery-item">
+    <img src="image3.jpg" alt="Description">
+  </div>
+</div>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Gallery'
+    } %}
+  </div>
+</div>

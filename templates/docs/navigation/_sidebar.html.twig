@@ -1,0 +1,109 @@
+<div class="component-demo">
+  <h3>🗄️ Menu Latéral (Sidebar)</h3>
+  <p class="text-muted mb-4">
+    Panneau de navigation latéral fixe. Il gère un état ouvert/fermé (`.show`) sur mobile, et peut être figé en permanence sur Desktop avec `.sidebar-expand-*`.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 text-center py-5 box box-secondary mb-0">
+      
+      <p class="mb-4">Le menu latéral (Sidebar) est un élément structurel fixe (<code>position: fixed</code>). Pour ne pas casser l'affichage de cette page de documentation, utilisez le bouton ci-dessous pour tester son apparition.</p>
+      
+      <button class="btn btn-primary" data-ds-toggle="sidebar" data-ds-target="#demoSidebar">
+        <i class="ri-layout-left-line"></i> Ouvrir la Sidebar de démo
+      </button>
+
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<div class="dashboard-overlay" data-ds-dismiss="sidebar" data-ds-target="#mySidebar"></div>
+
+<aside class="sidebar sidebar-expand-lg" id="mySidebar">
+  
+  <div class="sidebar-header">
+    <a href="#" class="sidebar-brand fw-bold fs-5">
+      <i class="ri-box-3-fill text-primary"></i> App Name
+    </a>
+  </div>
+
+  <div class="sidebar-content">
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link active">
+        <i class="ri-dashboard-line"></i>
+        <span>Dashboard</span>
+      </a>
+    </div>
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="ri-user-settings-line"></i>
+        <span>Utilisateurs</span>
+        <span class="badge bg-primary-subtle text-primary-dark rounded-pill sidebar-badge">Nouveau</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    </div>
+
+</aside>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Sidebar'
+    } %}
+  </div>
+</div>
+
+{# --- LA SIDEBAR CACHÉE POUR LA DÉMO CI-DESSUS --- #}
+
+<div class="dashboard-overlay" data-ds-dismiss="sidebar" data-ds-target="#demoSidebar" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1030; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;"></div>
+
+<aside class="sidebar" id="demoSidebar" style="z-index: 1040;">
+  <div class="sidebar-header">
+    <a href="#" class="sidebar-brand fw-bold fs-5">
+      <i class="ri-box-3-fill text-primary"></i> UI Kit
+    </a>
+  </div>
+
+  <div class="sidebar-content">
+    <p class="text-muted small fw-bold px-3 mb-2 mt-3">Général</p>
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link active">
+        <i class="ri-dashboard-line"></i>
+        <span>Vue d'ensemble</span>
+      </a>
+    </div>
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="ri-bar-chart-box-line"></i>
+        <span>Analyses</span>
+      </a>
+    </div>
+
+    <p class="text-muted small fw-bold px-3 mb-2 mt-4">Système</p>
+    <div class="sidebar-item">
+      <a href="#" class="sidebar-link">
+        <i class="ri-settings-4-line"></i>
+        <span>Paramètres</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="btn btn-ghost-danger w-100" data-ds-dismiss="sidebar" data-ds-target="#demoSidebar">
+      Fermer la démo
+    </button>
+  </div>
+</aside>
+
+{# Petit fix inline rapide pour faire fonctionner l'overlay de démo sans toucher au CSS global #}
+<style>
+  .dashboard-overlay.is-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+</style>

@@ -1,0 +1,96 @@
+<div class="component-demo">
+  <h3>🔘 Toggle & Selectable Cards</h3>
+  <p class="text-muted mb-4">
+    Des éléments de sélection enrichis visuellement pour améliorer l'expérience utilisateur sur les longs formulaires.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-5">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Toggle Switches</h5>
+        
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="switch1" checked>
+          <label class="form-check-label" for="switch1">Notifications push</label>
+        </div>
+        
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="switch2">
+          <label class="form-check-label" for="switch2">Mode sombre (désactivé)</label>
+        </div>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="switch3" disabled>
+          <label class="form-check-label" for="switch3">Option indisponible</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-7">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">Selectable Cards / Items</h5>
+        
+        <div class="form-selectable-card">
+          
+          <input type="radio" name="plan" id="plan-basic" class="form-selectable-input" checked>
+          <label class="form-selectable-label" for="plan-basic">
+            <div class="d-flex align-items-center gap-3">
+              <div class="avatar avatar-sm bg-primary-subtle text-primary-dark">
+                <i class="ri-rocket-line fs-5"></i>
+              </div>
+              <div>
+                <span class="fw-bold d-block text-body">Plan Basic</span>
+                <span class="text-muted small">Idéal pour démarrer</span>
+              </div>
+            </div>
+            <i class="ri-check-line icon-check"></i>
+          </label>
+
+          <input type="radio" name="plan" id="plan-pro" class="form-selectable-input">
+          <label class="form-selectable-label" for="plan-pro">
+            <div class="d-flex align-items-center gap-3">
+              <div class="avatar avatar-sm bg-warning-subtle text-warning-dark">
+                <i class="ri-vip-crown-line fs-5"></i>
+              </div>
+              <div>
+                <span class="fw-bold d-block text-body">Plan Pro</span>
+                <span class="text-muted small">Pour les équipes avancées</span>
+              </div>
+            </div>
+            <i class="ri-check-line icon-check"></i>
+          </label>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="toggle1">
+  <label class="form-check-label" for="toggle1">Activer l'option</label>
+</div>
+
+<div class="form-selectable-card">
+  <input type="radio" name="options" id="opt1" class="form-selectable-input" checked>
+  <label class="form-selectable-label" for="opt1">
+    <span>Option 1</span>
+    <i class="ri-check-line icon-check"></i>
+  </label>
+  
+  <input type="radio" name="options" id="opt2" class="form-selectable-input">
+  <label class="form-selectable-label" for="opt2">
+    <span>Option 2</span>
+    <i class="ri-check-line icon-check"></i>
+  </label>
+</div>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Custom Choices'
+    } %}
+  </div>
+</div>

@@ -1,0 +1,164 @@
+// Dans _navbar_auth_toggler.scss
+.navbar-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border: none;
+  background: transparent;
+  border-radius: var(--ds-border-radius-lg);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%; // Prend la largeur sur mobile
+
+  @media (min-width: 992px) {
+    width: auto; // S'adapte au contenu sur desktop
+    padding: 0.25rem;
+    border-radius: var(--ds-border-radius-pill);
+  }
+
+  .user-info {
+    display: flex; // Toujours visible !
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+    // ... suite inchangée ...
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+
+    @media (min-width: 992px) {
+      display: flex; // Visible uniquement sur Desktop
+    }
+
+    .user-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ds-heading-color);
+    }
+
+    .user-role {
+      font-size: 0.75rem;
+      color: var(--ds-text-muted);
+    }
+  }
+
+  // Le chevron optionnel
+  .user-chevron {
+    font-size: 1.25rem;
+    color: var(--ds-text-muted);
+    margin-left: 0.25rem;
+    transition: transform 0.2s ease;
+  }
+
+  &[aria-expanded='true'] .user-chevron {
+    transform: rotate(180deg);
+  }
+}
+
+// Le menu déroulant spécifique à l'authentification
+.auth-dropdown-menu {
+  width: 240px;
+  padding: 0.5rem;
+  border-radius: var(--ds-border-radius-xl);
+  box-shadow: var(--ds-shadow-lg); // Belle ombre douce
+  border: none;
+  background-color: var(--ds-surface-bg);
+
+  // Ajout de la petite flèche (caret) pointant vers l'avatar
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 1.5rem;
+    width: 12px;
+    height: 12px;
+    background-color: var(--ds-surface-bg);
+    transform: rotate(45deg);
+    border-radius: 2px;
+  }
+
+  .dropdown-header {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--ds-text-muted);
+    font-weight: 500;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    border-radius: var(--ds-border-radius-lg);
+    color: var(--ds-body-color);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+
+    i {
+      font-size: 1.25rem;
+      color: var(--ds-text-muted);
+      transition: color 0.2s ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--ds-surface-hover);
+      color: var(--ds-heading-color);
+
+      i {
+        color: var(--ds-primary);
+      } // L'icône prend la teinte primaire au survol
+    }
+
+    // Élément spécifique (Ex: Balance)
+    .item-value {
+      margin-left: auto;
+      font-weight: 700;
+      color: var(--ds-heading-color);
+    }
+  }
+
+  .dropdown-divider {
+    margin: 0.5rem 0;
+    border-top: 1px solid var(--ds-border-color);
+  }
+}
+
+// Composant Cloche de Notification (souvent à côté de l'avatar)
+.navbar-notification {
+  position: relative;
+  display: inline-flex;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: var(--ds-text-muted);
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--ds-surface-hover);
+    color: var(--ds-heading-color);
+  }
+
+  i {
+    font-size: 1.25rem;
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background-color: var(--ds-danger);
+    color: var(--ds-white);
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 50%;
+    border: 2px solid var(--ds-surface-bg); // Coupe la cloche
+  }
+}

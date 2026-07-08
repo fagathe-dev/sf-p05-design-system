@@ -1,0 +1,57 @@
+<div class="component-demo">
+  <h3>📑 Onglets & Pilules (Navs)</h3>
+  <p class="text-muted mb-4">
+    Composants de navigation internes pour diviser le contenu. Supportent les designs en onglets (Tabs), en pilules (Pills) ou verticaux.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12">
+      <div class="box box-secondary mb-0">
+        <h5 class="mb-4">1. Tabs (Onglets sans bordure)</h5>
+        <ul class="nav nav-tabs mb-4">
+          <li><a class="nav-link active" href="#">Aperçu</a></li>
+          <li><a class="nav-link" href="#">Code source</a></li>
+          <li><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Désactivé</a></li>
+        </ul>
+
+        <h5 class="mb-4">2. Pills (Style Apple)</h5>
+        <ul class="nav nav-pills mb-4">
+          <li><a class="nav-link active" href="#">Tout</a></li>
+          <li><a class="nav-link" href="#">Messages</a></li>
+          <li><a class="nav-link" href="#">Mentions</a></li>
+        </ul>
+
+        <h5 class="mb-4">3. Vertical (Menu latéral)</h5>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <ul class="nav nav-pills nav-vertical">
+              <li><a class="nav-link active" href="#"><i class="ri-user-line"></i> Profil</a></li>
+              <li><a class="nav-link" href="#"><i class="ri-shield-keyhole-line"></i> Sécurité</a></li>
+              <li><a class="nav-link" href="#"><i class="ri-notification-3-line"></i> Notifications</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<ul class="nav nav-tabs">
+  <li><a class="nav-link active" href="#">Général</a></li>
+  <li><a class="nav-link" href="#">Avancé</a></li>
+</ul>
+
+<ul class="nav nav-pills">
+  <li><a class="nav-link active" href="#">Filtre 1</a></li>
+  <li><a class="nav-link" href="#">Filtre 2</a></li>
+</ul>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Navs'
+    } %}
+  </div>
+</div>

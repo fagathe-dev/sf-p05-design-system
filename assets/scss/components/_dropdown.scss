@@ -1,0 +1,105 @@
+// ================================================================
+// COMPOSANT : DROPDOWN
+// ================================================================
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-toggle {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    &:is(button) {
+      outline: 0;
+      border: none;
+    }
+
+    // Injection du chevron SVG autonome
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 1.25em;
+      height: 1.25em;
+      background-color: currentColor;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z'/%3E%3C/svg%3E");
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z'/%3E%3C/svg%3E");
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      transition: transform 0.2s ease;
+    }
+
+    // Animation du chevron si le dropdown est ouvert (via attribut aria)
+    &[aria-expanded="true"]::after {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: auto;
+    bottom: auto;
+    background-color: var(--ds-surface-bg);
+    box-shadow: var(--ds-shadow-lg); // Belle ombre pour le faire flotter
+    border: none; // Borderless
+    border-radius: var(--ds-border-radius-lg);
+    display: none;
+    min-width: 12rem;
+    z-index: 1000;
+    opacity: 0;
+    padding: 0.5rem;
+    margin: 0;
+    list-style: none;
+    transition: max-height 0.2s ease, opacity 0.2s ease;
+
+    &.show {
+      display: block;
+      height: auto;
+      max-height: 400px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      opacity: 1;
+    }
+
+    &.dropdown-menu-end {
+      left: auto;
+      right: 0;
+    }
+
+    .dropdown-item {
+      padding: 0.5rem 1rem;
+      color: var(--ds-body-color);
+      text-decoration: none;
+      display: block;
+      border-radius: var(--ds-border-radius-sm);
+      font-weight: 500;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover, &:focus-visible {
+        background-color: var(--ds-surface-hover);
+        color: var(--ds-heading-color);
+        outline: none;
+      }
+      
+      &.active {
+        background-color: var(--ds-primary-subtle);
+        color: var(--ds-primary-dark);
+      }
+    }
+
+    .dropdown-divider {
+      height: 0;
+      margin: 0.5rem 0;
+      overflow: hidden;
+      border-top: 1px solid var(--ds-border-color);
+    }
+  }
+}

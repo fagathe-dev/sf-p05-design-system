@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="layout-auth">
+  {# Optionnel: une navbar très allégée pour revenir à l'accueil #}
+  <div class="position-absolute top-0 start-0 w-100 p-4">
+    <a href="{{ path('app_home_index') }}" class="btn btn-ghost-secondary btn-sm">
+      <i class="ri-arrow-left-line"></i> Retour au site
+    </a>
+  </div>
+
+  <main class="auth-card">
+    <header class="auth-header">
+      {% block auth_header %}{% endblock %}
+    </header>
+
+    <div class="auth-body">
+      {% include 'fragments/_flash_messages.html.twig' %}
+      
+      {% block content %}{% endblock %}
+    </div>
+    
+    <footer class="auth-footer">
+      {% block auth_footer %}{% endblock %}
+    </footer>
+  </main>
+</div>
+{% endblock %}

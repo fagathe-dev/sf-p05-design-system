@@ -1,0 +1,90 @@
+<div class="component-demo">
+  <h3>📊 Tableaux (Tables)</h3>
+  <p class="text-muted mb-4">
+    Styles épurés pour les données tabulaires. Supportent le survol, les bordures allégées et le défilement responsive.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12">
+      <div class="box box-secondary mb-0">
+        
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Utilisateur</th>
+                <th scope="col">Rôle</th>
+                <th scope="col">Statut</th>
+                <th scope="col" class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="avatar avatar-sm bg-primary-subtle text-primary-dark">JD</div>
+                    <div>
+                      <h6 class="mb-0 text-body">John Doe</h6>
+                      <small class="text-muted">john@example.com</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Administrateur</td>
+                <td><span class="chip chip-success chip-pill">Actif</span></td>
+                <td class="text-end">
+                  <button class="btn btn-sm btn-ghost-secondary"><i class="ri-edit-line"></i></button>
+                  <button class="btn btn-sm btn-ghost-danger"><i class="ri-delete-bin-line"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="avatar avatar-sm bg-secondary-subtle text-secondary-dark">SM</div>
+                    <div>
+                      <h6 class="mb-0 text-body">Sophie Martin</h6>
+                      <small class="text-muted">sophie@example.com</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Éditeur</td>
+                <td><span class="chip chip-warning chip-pill">En pause</span></td>
+                <td class="text-end">
+                  <button class="btn btn-sm btn-ghost-secondary"><i class="ri-edit-line"></i></button>
+                  <button class="btn btn-sm btn-ghost-danger"><i class="ri-delete-bin-line"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<div class="table-responsive">
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Tableaux'
+    } %}
+  </div>
+</div>

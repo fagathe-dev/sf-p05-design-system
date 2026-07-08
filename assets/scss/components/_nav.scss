@@ -1,0 +1,78 @@
+// ================================================================
+// COMPOSANT : NAV (Onglets, Pilules, Verticaux)
+// ================================================================
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  gap: 0.5rem; // Espacement naturel
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--ds-text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: var(--ds-border-radius-lg); // Arrondi moderne
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+
+    &:hover,
+    &:focus {
+      color: var(--ds-heading-color);
+      background-color: var(--ds-surface-hover);
+    }
+
+    &.active {
+      color: var(--ds-primary-dark);
+      background-color: var(--ds-primary-subtle);
+    }
+
+    &.disabled {
+      color: var(--ds-text-muted);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
+// Onglets (Tabs sans bordure)
+.nav-tabs {
+  border-bottom: none;
+  gap: 0.25rem;
+
+  .nav-link {
+    &.active {
+      background-color: var(--ds-surface-bg);
+      color: var(--ds-heading-color);
+      box-shadow: var(--ds-shadow-sm); // L'ombre remplace la bordure
+    }
+  }
+}
+
+// Pilules (Pills type Apple)
+.nav-pills {
+  .nav-link {
+    border-radius: var(--ds-border-radius-pill);
+    &.active {
+      background-color: var(--ds-primary);
+      color: var(--ds-white);
+      box-shadow: var(--ds-shadow-sm);
+    }
+  }
+}
+
+// Navigation Verticale
+.nav-vertical {
+  flex-direction: column;
+  .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

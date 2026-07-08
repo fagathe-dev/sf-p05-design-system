@@ -1,0 +1,17 @@
+// ================================================================
+// FIGURE COMPONENT - Bootstrap compatible
+// ================================================================
+
+.figure {
+  display: inline-block;
+}
+
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.figure-caption {
+  font-size: 0.875em;
+  color: var(--ds-secondary-color);
+}

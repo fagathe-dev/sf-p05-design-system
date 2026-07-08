@@ -1,0 +1,39 @@
+<div class="component-demo" id="ui-docs-toast-demo">
+  <h3>🍞 Notifications (Toasts)</h3>
+  <p class="text-muted mb-4">
+    Notifications non-bloquantes destinées à apparaître dans <code>#toast-container</code>.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+      <div class="box box-secondary mb-0">
+        <h5 class="mb-4">Test dynamique</h5>
+        <button id="btn-toast-test" class="btn btn-primary mb-4">
+          <i class="ri-add-line"></i> Créer un toast dynamique
+        </button>
+        
+        <h5 class="mb-4">Aperçu statique</h5>
+        <div class="toast toast-success show mb-3" style="position: static; transform: none; opacity: 1; width: 100%;" role="alert">
+          <i class="ri-checkbox-circle-fill toast-icon"></i>
+          <div class="toast-body">Fichier téléchargé avec succès.</div>
+          <button type="button" class="btn-close" data-ds-dismiss="toast" aria-label="Fermer"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+import { Toast } from '@components/Toast';
+new Toast('Opération effectuée.', 'success');
+
+<div id="toast-container"></div>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'typescript',
+      'title': 'Usage Toast'
+    } %}
+  </div>
+</div>

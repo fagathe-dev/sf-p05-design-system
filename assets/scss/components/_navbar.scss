@@ -1,0 +1,151 @@
+@use '../variables' as *;
+
+// ================================================================
+// COMPOSANT : NAVBAR
+// ================================================================
+
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: var(--ds-surface-bg);
+  box-shadow: var(--ds-shadow-sm);
+  border: none;
+
+  .container,
+  .container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  // --- BRAND ---
+  .navbar-brand,
+  a[href].navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ds-heading-color);
+    text-decoration: none;
+    gap: 0.5rem;
+    z-index: 10; // Reste cliquable même menu ouvert
+
+    &:hover {
+      text-decoration: none;
+      color: var(--ds-heading-color);
+    }
+  }
+
+  // --- BOUTON MOBILE (Hamburger) ---
+  .navbar-toggler {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--ds-border-radius-sm);
+    color: var(--ds-heading-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--ds-surface-hover);
+      outline: none;
+    }
+  }
+
+  // --- CONTENEUR COLLAPSIBLE ---
+  .navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+    // Les propriétés height et overflow sont gérées par les classes .collapse et .collapsing de _collapse.scss
+  }
+
+  // --- LIENS DE NAVIGATION ---
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 1rem 0 0 0; // Espace en mode mobile
+    margin: 0;
+    gap: 0.5rem;
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem; // Plus de zone de clic sur mobile
+      color: var(--ds-text-muted);
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: var(--ds-border-radius);
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: var(--ds-heading-color);
+        background-color: var(--ds-surface-hover);
+      }
+
+      &.active {
+        color: var(--ds-primary-dark);
+        background-color: var(--ds-primary-subtle);
+      }
+    }
+  }
+
+  // --- ACTIONS (Boutons, Avatar) ---
+  .navbar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--ds-border-color); // Séparateur sur mobile
+  }
+
+  // --- RESPONSIVE (Desktop) ---
+  @each $breakpoint, $value in $breakpoints {
+    @media (min-width: #{$value}) {
+      &.navbar-expand-#{$breakpoint} {
+        flex-wrap: nowrap;
+
+        .navbar-toggler {
+          display: none; // Cache le hamburger
+        }
+
+        .navbar-collapse {
+          display: flex !important;
+          flex-basis: auto;
+          height: auto !important; // Écrase le JS du collapse
+          overflow: visible; // Permet aux dropdowns de déborder
+        }
+
+        .navbar-nav {
+          flex-direction: row;
+          padding-top: 0;
+
+          .nav-link {
+            padding: 0.5rem 1rem; // Retour à un padding desktop
+          }
+        }
+
+        .navbar-actions {
+          flex-direction: row;
+          align-items: center;
+          padding-top: 0;
+          margin-top: 0;
+          border-top: none;
+          margin-left: auto; // Pousse les actions tout à droite
+        }
+      }
+    }
+  }
+}

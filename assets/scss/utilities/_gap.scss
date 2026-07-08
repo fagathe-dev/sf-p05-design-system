@@ -1,0 +1,54 @@
+@use '../variables' as *;
+
+// Gap Utilities
+// Génère les classes utilitaires pour gap, row-gap et column-gap
+
+$gap-scale: (
+  0: var(--ds-spacing-0),
+  0_5: var(--ds-spacing-0_5),
+  1: var(--ds-spacing-1),
+  1_5: var(--ds-spacing-1_5),
+  2: var(--ds-spacing-2),
+  2_5: var(--ds-spacing-2_5),
+  3: var(--ds-spacing-3),
+  3_5: var(--ds-spacing-3_5),
+  4: var(--ds-spacing-4),
+  5: var(--ds-spacing-5),
+  6: var(--ds-spacing-6),
+  7: var(--ds-spacing-7),
+  8: var(--ds-spacing-8),
+  9: var(--ds-spacing-9),
+  10: var(--ds-spacing-10),
+);
+
+$gap-properties: (
+  gap: gap,
+  row-gap: row-gap,
+  column-gap: column-gap,
+);
+
+@mixin generate-gap-utils($breakpoint: null) {
+  @each $class-prefix, $property-name in $gap-properties {
+    @each $scale, $value in $gap-scale {
+      // Correction de la dépréciation SCSS[cite: 41]
+      $class-suffix: '';
+      @if $breakpoint == null {
+        $class-suffix: '#{$scale}';
+      } @else {
+        $class-suffix: '#{$breakpoint}-#{$scale}';
+      }
+
+      .#{$class-prefix}-#{$class-suffix} {
+        #{$property-name}: $value !important;
+      }
+    }
+  }
+}
+
+@include generate-gap-utils();
+
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    @include generate-gap-utils($breakpoint);
+  }
+}

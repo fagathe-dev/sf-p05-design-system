@@ -1,0 +1,18 @@
+// Collapse component
+.collapse {
+  transition: height 0.35s ease;
+  overflow: hidden;
+  height: 0;
+
+  &.show {
+    height: auto;
+  }
+
+  &.collapsing {
+    display: block; // Force la visibilité pour calculer le scrollHeight
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+  }
+}

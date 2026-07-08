@@ -1,0 +1,41 @@
+// ================================================================
+// COMPOSANT : BOX
+// ================================================================
+
+.box {
+  padding: 1.5rem;
+  border-radius: var(--ds-border-radius-xl);
+  background-color: var(--ds-surface-bg);
+  box-shadow: var(--ds-shadow);
+  margin-bottom: 1.5rem;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+
+  .box-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  // Thèmes étendus
+  $box-themes: primary, secondary, tertiary, info, success, warning, danger;
+
+  @each $theme in $box-themes {
+    &.box-#{$theme} {
+      background-color: var(--ds-#{$theme}-subtle);
+      color: var(--ds-#{$theme}-dark);
+      box-shadow: none; // Retrait de l'ombre sur les boxes teintées pour un aspect plus "flat"
+
+      .box-title {
+        color: var(--ds-#{$theme}-dark);
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

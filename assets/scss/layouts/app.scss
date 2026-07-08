@@ -1,0 +1,41 @@
+// ================================================================
+// LAYOUT : APP (Front-office public)
+// ================================================================
+
+.layout-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--ds-body-bg);
+
+  // La navbar (S'appuie sur le composant _navbar.scss)
+  .app-header {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+
+    // On retire l'arrondi du composant natif pour qu'il colle aux bords
+    .navbar {
+      border-radius: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  // Le cœur de la page
+  .app-main {
+    flex: 1 0 auto; // Pousse le footer vers le bas si le contenu est court
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    // Espace de respiration standard
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  // Le footer (S'appuie sur le composant _footer.scss)
+  .app-footer {
+    flex-shrink: 0;
+  }
+}

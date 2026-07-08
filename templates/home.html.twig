@@ -1,0 +1,67 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<div class="py-5">
+    {# Section Hero de bienvenue #}
+    <section class="hero mb-5">
+        <div class="hero-content">
+            <h1 class="hero-title display-3">Bienvenue sur {{ app_name }}</h1>
+            <p class="lead text-muted">
+                Votre nouvelle interface basée sur un système de composants Vanilla robuste et modulaire.
+            </p>
+            <div class="d-flex gap-3 justify-content-center mt-4">
+                <a href="{{ path('component_docs_index') }}" class="btn btn-solid-primary btn-lg">
+                    <i class="ri-book-2-line"></i> Accéder à la Documentation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {# Section d'introduction #}
+    <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="box box-secondary h-100">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="avatar bg-primary-subtle text-primary-dark">
+                        <i class="ri-cpu-line fs-4"></i>
+                    </div>
+                    <h4 class="box-title mb-0">Architecture Vanilla</h4>
+                </div>
+                <p class="text-muted">
+                    Zéro dépendance lourde, performance maximale et contrôle total sur le rendu CSS et les interactions JS.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="box box-secondary h-100">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="avatar bg-success-subtle text-success-dark">
+                        <i class="ri-palette-line fs-4"></i>
+                    </div>
+                    <h4 class="box-title mb-0">Design System</h4>
+                </div>
+                <p class="text-muted">
+                    Une bibliothèque de composants cohérente (Soft UI) pour garantir une expérience utilisateur fluide.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="box box-secondary h-100">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="avatar bg-info-subtle text-info-dark">
+                        <i class="ri-layout-grid-line fs-4"></i>
+                    </div>
+                    <h4 class="box-title mb-0">Documentation</h4>
+                </div>
+                <p class="text-muted">
+                    Chaque composant est documenté avec exemples interactifs et copier-coller du code source.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

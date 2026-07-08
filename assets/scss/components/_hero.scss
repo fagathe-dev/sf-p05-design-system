@@ -1,0 +1,49 @@
+// ================================================================
+// COMPOSANT : HERO
+// ================================================================
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh; // Prend la moitié de l'écran par défaut
+  padding: 4rem 2rem;
+  border-radius: var(--ds-border-radius-2xl);
+  overflow: hidden;
+  text-align: center;
+
+  // Fond par défaut : Primary avec 20% d'opacité
+  background-color: color-mix(in srgb, var(--ds-primary) 20%, transparent);
+  color: var(--ds-primary-dark);
+
+  // Variante avec Image
+  &.hero-has-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--ds-white);
+
+    // Overlay sombre pour rendre le texte lisible sur n'importe quelle photo
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(15, 23, 43, 0.6); // Teinte slate sombre
+      z-index: 1;
+    }
+
+    // Le contenu passe au premier plan
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+}

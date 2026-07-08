@@ -1,0 +1,100 @@
+<div class="component-demo">
+  <h3>📝 FormManager</h3>
+  <p class="text-muted mb-4">
+    Classe utilitaire pour gérer l'extraction de données, le remplissage, la validation et la réinitialisation de vos formulaires HTML.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-7">
+      <div class="box box-secondary mb-0">
+        <h5 class="mb-4">Formulaire de démonstration</h5>
+        
+        <form id="demo-form-manager">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="fm-name" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="fm-name" name="name" placeholder="John Doe">
+            </div>
+            
+            <div class="col-md-6">
+              <label for="fm-email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="fm-email" name="email" placeholder="john@example.com">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">Rôle (Radio)</label>
+              <div class="d-flex gap-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="role" id="role-user" value="user" checked>
+                  <label class="form-check-label" for="role-user">Utilisateur</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="role" id="role-admin" value="admin">
+                  <label class="form-check-label" for="role-admin">Administrateur</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label mb-2">Technologies (Checkboxes)</label>
+              <div class="form-selectable-card flex-row gap-3">
+                <div class="form-selectable-item flex-grow-1">
+                  <input type="checkbox" name="tags" id="tag-ts" value="typescript" class="form-selectable-input">
+                  <label class="form-selectable-label" for="tag-ts">TypeScript <i class="ri-check-line icon-check"></i></label>
+                </div>
+                <div class="form-selectable-item flex-grow-1">
+                  <input type="checkbox" name="tags" id="tag-php" value="php" class="form-selectable-input">
+                  <label class="form-selectable-label" for="tag-php">PHP <i class="ri-check-line icon-check"></i></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <hr class="my-4">
+        
+        <div class="d-flex flex-wrap gap-2">
+          <button id="fm-btn-fill" class="btn btn-sm btn-info text-white"><i class="ri-magic-line"></i> Remplir auto</button>
+          <button id="fm-btn-get" class="btn btn-sm btn-primary"><i class="ri-download-cloud-2-line"></i> Extraire Data</button>
+          <button id="fm-btn-validate" class="btn btn-sm btn-warning"><i class="ri-error-warning-line"></i> Simuler Erreurs</button>
+          <button id="fm-btn-reset" class="btn btn-sm btn-outline-secondary"><i class="ri-refresh-line"></i> Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-5">
+      <div class="box box-primary h-100 mb-0">
+        <h5 class="mb-3 text-primary-dark">Données extraites (JSON)</h5>
+        <pre class="bg-slate-900 text-slate-200 p-3 rounded font-monospace text-sm mb-0 h-100" id="fm-output-json">// Cliquez sur "Extraire Data"
+// pour voir le résultat ici.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+import { FormManager } from 'core-ts';
+
+const form = document.getElementById('my-form');
+const manager = new FormManager({ form });
+
+// Extraire
+const data = manager.getData();
+
+// Remplir
+manager.fillData({ name: 'Jane', role: 'admin', tags: ['php'] });
+
+// Valider (Affiche is-invalid et messages)
+manager.validateData({ email: 'Cet email est invalide.' });
+
+// Reset
+manager.reset();
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'typescript',
+      'title': 'API FormManager'
+    } %}
+  </div>
+</div>

@@ -1,0 +1,79 @@
+// ================================================================
+// COMPOSANT : CARD
+// ================================================================
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ds-surface-bg);
+  border: none; // Aucune bordure externe
+  border-radius: var(--ds-border-radius-xl);
+  box-shadow: var(--ds-shadow);
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  // Variante : Elevated (Box-shadow plus prononcé au survol)
+  &.card-elevated {
+    cursor: pointer;
+    &:hover {
+      box-shadow: var(--ds-shadow-lg);
+      transform: translateY(-4px);
+    }
+  }
+
+  // Structure interne (Aucune bordure de séparation)
+  .card-header {
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    flex: 1;
+  }
+
+  .card-footer {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  // Typographie standard de la carte
+  .card-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ds-heading-color);
+  }
+
+  .card-text {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--ds-body-color);
+  }
+
+  // Gestion des images
+  .card-img,
+  .card-img-top {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+// Thèmes spécifiques limités (primary, secondary, tertiary)
+@each $theme in primary, secondary, tertiary {
+  .card-#{$theme} {
+    background-color: var(--ds-#{$theme}-subtle);
+    color: var(--ds-#{$theme}-dark);
+
+    // Titres et textes s'adaptent à la teinte du thème
+    .card-title,
+    .card-text {
+      color: var(--ds-#{$theme}-dark);
+    }
+
+    // Le texte discret prend la teinte de base
+    .text-muted {
+      color: var(--ds-#{$theme}) !important;
+    }
+  }
+}

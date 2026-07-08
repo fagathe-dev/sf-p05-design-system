@@ -1,0 +1,55 @@
+// ================================================================
+// COMPOSANT : JUMBOTRON
+// ================================================================
+
+.jumbotron {
+  padding: 4rem 2rem;
+  margin-bottom: 2rem;
+  background-color: var(--ds-surface-bg);
+  border-radius: var(--ds-border-radius-2xl);
+  box-shadow: var(--ds-shadow);
+
+  @media (min-width: 768px) {
+    padding: 6rem 4rem;
+  }
+
+  // Variante bord à bord (désactive l'arrondi)
+  &.jumbotron-fluid {
+    border-radius: 0;
+    box-shadow: none;
+    // Astuce pour s'étirer sur toute la largeur même dans un container
+    margin-inline: calc(50% - 50vw);
+    width: 100vw;
+  }
+
+  .jumbotron-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .jumbotron-lead {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Thèmes (Primary, Secondary, Tertiary)
+@each $theme in primary, secondary, tertiary {
+  .jumbotron-#{$theme} {
+    background-color: var(--ds-#{$theme}-subtle);
+    color: var(--ds-#{$theme}-dark);
+
+    .jumbotron-title,
+    .jumbotron-lead {
+      color: var(--ds-#{$theme}-dark);
+    }
+
+    // Assure la lisibilité des textes secondaires
+    p:not(.jumbotron-lead) {
+      opacity: 0.85;
+    }
+  }
+}

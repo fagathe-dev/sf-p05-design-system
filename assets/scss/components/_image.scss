@@ -1,0 +1,23 @@
+// ================================================================
+// COMPOSANT : IMAGE
+// ================================================================
+
+img {
+  vertical-align: middle;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+// Adaptation du thumbnail : Borderless + Shadow
+.img-thumbnail {
+  padding: 0.25rem;
+  background-color: var(--ds-surface-bg);
+  border: none;
+  border-radius: var(--ds-border-radius-lg);
+  box-shadow: var(--ds-shadow-sm);
+  max-width: 100%;
+  height: auto;
+}

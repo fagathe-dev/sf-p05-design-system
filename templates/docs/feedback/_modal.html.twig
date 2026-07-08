@@ -1,0 +1,90 @@
+<div class="component-demo">
+  <h3>🪟 Modales (Dialog natif)</h3>
+  <p class="text-muted mb-4">
+    Exploite l'élément HTML natif <code>&lt;dialog&gt;</code>. Sécurisé, accessible et performant. 
+    Les modales peuvent être bloquantes (Modal) ou non-bloquantes (Dialog).
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12">
+      <div class="box box-secondary mb-0 text-center py-5">
+        <h5 class="mb-4">Tester l'interaction</h5>
+        
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <button type="button" class="btn btn-primary" data-ds-toggle="modal" data-ds-target="#demoModal">
+            <i class="ri-window-line"></i> Ouvrir Modal (Bloquant)
+          </button>
+
+          <button type="button" class="btn btn-outline-secondary" data-ds-toggle="dialog" data-ds-target="#demoDialog">
+            <i class="ri-message-3-line"></i> Ouvrir Dialog (Non bloquant)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+<button type="button" class="btn btn-primary" data-ds-toggle="modal" data-ds-target="#myModal">
+  Ouvrir Modale
+</button>
+
+<dialog id="myModal" class="modal">
+  <div class="modal-header">
+    <h3 class="modal-title">Titre de la modale</h3>
+    <button type="button" class="btn-close" data-ds-dismiss="modal" aria-label="Fermer"></button>
+  </div>
+  
+  <div class="modal-body">
+    <p>Contenu de votre modale ici. Elle se ferme au clic sur la croix, le bouton annuler, la touche Échap, ou en cliquant sur le fond (backdrop).</p>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-ghost-secondary" data-ds-dismiss="modal">Annuler</button>
+    <button type="button" class="btn btn-primary">Confirmer l'action</button>
+  </div>
+</dialog>
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'html',
+      'title': 'Structure HTML Dialog Natif'
+    } %}
+  </div>
+</div>
+
+{# --- LES BALISES DIALOG CACHÉES POUR LA DÉMO CI-DESSUS --- #}
+
+<dialog id="demoModal" class="modal">
+  <div class="modal-header">
+    <h3 class="modal-title">Supprimer l'utilisateur ?</h3>
+    <button type="button" class="btn-close" data-ds-dismiss="modal" aria-label="Fermer"></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Vous êtes sur le point de supprimer cet utilisateur de la base de données. 
+      Cette action est <strong>irréversible</strong>.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-ghost-secondary" data-ds-dismiss="modal">Annuler</button>
+    <button type="button" class="btn btn-danger" data-ds-dismiss="modal">Oui, supprimer</button>
+  </div>
+</dialog>
+
+<dialog id="demoDialog" class="dialog">
+  <div class="modal-header">
+    <h3 class="modal-title">Palette flottante</h3>
+    <button type="button" class="btn-close" data-ds-dismiss="dialog" aria-label="Fermer"></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Ce dialogue a été ouvert avec <code>dialog.show()</code> (via <code>data-ds-toggle="dialog"</code>). 
+      Il n'a pas de fond grisé et vous pouvez toujours interagir avec la page en arrière-plan !
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-ds-dismiss="dialog">Compris</button>
+  </div>
+</dialog>

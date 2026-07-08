@@ -1,0 +1,61 @@
+<div class="component-demo">
+  <h3>📋 API Presse-papier (Clipboard)</h3>
+  <p class="text-muted mb-4">
+    Utilitaires pour copier du texte dans le presse-papier avec gestion de fallback pour les anciens navigateurs et feedback visuel natif sur les boutons.
+  </p>
+
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">1. Initialisation automatique (HTML)</h5>
+        <p class="small text-muted">Utilisez l'attribut <code>data-copy-target="id"</code> pour lier un bouton à un élément, sans écrire de JS.</p>
+        
+        <div class="p-3 bg-surface-hover border rounded mb-3" id="demo-copy-text">
+          Ce texte peut être copié facilement grâce à l'API Clipboard de la librairie core-ts.
+        </div>
+        
+        <button class="btn btn-primary btn-sm" data-copy-target="demo-copy-text">
+          <i class="ri-clipboard-line"></i> Copier le texte
+        </button>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="box box-secondary h-100 mb-0">
+        <h5 class="mb-4">2. Copie programmatique avec Feedback</h5>
+        <p class="small text-muted">Utilisez <code>copyWithButtonFeedback()</code> pour déclencher une copie en JS et animer le bouton (succès/erreur).</p>
+        
+        <div class="input-group mb-3">
+          <input type="text" id="demo-copy-input" class="form-control" value="API_KEY_987654321">
+          <button class="btn btn-secondary" id="demo-btn-feedback" type="button">
+            <i class="ri-file-copy-line"></i> Copier l'API Key
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h5>Code d'exemple</h5>
+    {% set codeExample %}
+import { copyWithButtonFeedback, initClipboardHandlers } from 'core-ts';
+
+// 1. Initialise tous les attributs [data-copy-target]
+initClipboardHandlers();
+
+// 2. Copie manuelle avec retour visuel (changement de couleur/icône)
+const btn = document.getElementById('my-btn');
+btn.addEventListener('click', async () => {
+  await copyWithButtonFeedback(btn, 'Texte à copier', {
+    successMessage: 'Copié !',
+    feedbackDuration: 2000
+  });
+});
+    {% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': codeExample,
+      'language': 'typescript',
+      'title': 'Utilisation de l\'API Clipboard'
+    } %}
+  </div>
+</div>
