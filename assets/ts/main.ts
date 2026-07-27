@@ -12,7 +12,7 @@ import { handleDismiss, handleEscapeKey } from './interactions/events/dismiss';
 // Import de ta librairie
 import { initClipboardHandlers, convertMarkdownToHtml } from 'core-ts';
 
-export const initUI = (): void => {
+const initUI = (): void => {
   // 1. Interactions globales du DOM (Bascule, Fermeture, etc.)
   document.addEventListener('click', (event: MouseEvent) => {
     const target = event.target as Element;
