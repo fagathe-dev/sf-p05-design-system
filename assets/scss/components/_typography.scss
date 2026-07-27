@@ -96,9 +96,11 @@ h6,
 // Inline text elements
 .mark,
 mark {
-  padding: 0.1875em;
-  background-color: var(--ds-highlight-bg);
-  color: var(--ds-highlight-color);
+  padding: 0.2em .5rem;
+  line-height: 1.5;
+  background-color: var(--ds-primary-700);
+  color: var(--ds-white);
+  border-radius: var(--ds-border-radius-sm);
 }
 
 .small,

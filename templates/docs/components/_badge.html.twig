@@ -1,7 +1,17 @@
+{% set colors = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
+
 <div class="component-demo">
-  <h3>🏷️ Badges</h3>
+  <h3>🏷️ Badges solid</h3>
   <div class="d-flex gap-2">
-    <span class="badge badge-primary">Primary</span>
-    <span class="badge badge-solid-success badge-pill">Success Pill</span>
+    {% for color in colors %}
+      <span class="badge badge-solid-{{ color }}">{{ color|capitalize }}</span>
+    {% endfor %}
+  </div>
+
+  <h3>🏷️ Badges normaux</h3>
+  <div class="d-flex gap-2">
+    {% for color in colors %}
+      <span class="badge badge-{{ color }}">{{ color|capitalize }}</span>
+    {% endfor %}
   </div>
 </div>

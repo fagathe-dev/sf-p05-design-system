@@ -1,9 +1,38 @@
+{% set card = ['primary', 'secondary', 'tertiary'] %}
+
+
 <div class="component-demo">
-  <h3>🃏 Carte</h3>
-  <div class="card card-elevated" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Titre carte</h5>
-      <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
+  <h3>🃏 Cards</h3>
+  <div class="d-flex gap-2 my-2_5">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Card simple</h5>
+        <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
+      </div>
     </div>
+    <div class="card card-elevated" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Card élevée</h5>
+        <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ asset('images/auth-cover.png') }}" alt="Image de la carte">
+      <div class="card-body">
+        <h5 class="card-title">Card avec une image</h5>
+        <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
+      </div>
+    </div>
+  </div>
+  <h3>🃏 Cards avec thème</h3>
+  <div class="d-flex gap-2">
+    {% for theme in card %}
+      <div class="card card-{{ theme }}" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Card simple</h5>
+          <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </div>

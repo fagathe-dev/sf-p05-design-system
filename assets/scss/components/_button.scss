@@ -14,6 +14,7 @@
   line-height: 1.2;
   border: 1px solid transparent;
   border-radius: var(--ds-border-radius);
+  // ... propriétés de base ...
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
@@ -22,6 +23,11 @@
   &:is(a):hover {
     text-decoration: none;
     color: inherit;
+  }
+
+  // CORRECTION : Appliquer le hover sur .btn de manière globale
+  &:hover {
+    cursor: pointer !important;
   }
 
   // Accessibilité native
@@ -106,6 +112,7 @@
       background-color: var(--ds-#{$theme});
       color: var(--ds-white);
       color: var(--ds-white);
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.09);
     }
   }
 
@@ -132,6 +139,7 @@
     &:is(a):hover {
       background-color: var(--ds-#{$theme}-subtle);
       color: var(--ds-#{$theme}-dark);
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.09);
     }
   }
 }

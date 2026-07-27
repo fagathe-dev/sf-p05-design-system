@@ -55,6 +55,7 @@
   .card-img,
   .card-img-top {
     width: 100%;
+    height: auto;
     object-fit: cover;
   }
 }
@@ -64,6 +65,7 @@
   .card-#{$theme} {
     background-color: var(--ds-#{$theme}-subtle);
     color: var(--ds-#{$theme}-dark);
+    box-shadow: none;
 
     // Titres et textes s'adaptent à la teinte du thème
     .card-title,
