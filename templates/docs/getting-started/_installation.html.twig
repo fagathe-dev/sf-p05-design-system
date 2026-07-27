@@ -1,0 +1,110 @@
+<div class="component-demo">
+  <h3>🚀 Getting Started</h3>
+  <p class="text-muted mb-4">
+    Découvrez comment intégrer facilement le Design System dans vos projets via nos liens CDN.
+  </p>
+
+  {# --- SECTION 1 : CDN LINKS --- #}
+  <div class="row g-4 mb-5">
+    {# CDN CSS #}
+    <div class="col-12 col-lg-4">
+      <div class="box box-secondary h-100 mb-0 d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="mb-2"><i class="ri-css3-line text-primary"></i> 1. UI Kit CSS</h5>
+          <p class="small text-muted">Contient l'ensemble des composants, thèmes, variables CSS et utilitaires.</p>
+          <code class="d-block p-2 bg-surface-hover border rounded text-break mb-3" id="cdn-css-text">
+            &lt;link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/css/ds-ui-kit.css"&gt;
+          </code>
+        </div>
+        <button class="btn btn-primary btn-sm w-100" data-copy-target="cdn-css-text">
+          <i class="ri-clipboard-line"></i> Copier le CSS CDN
+        </button>
+      </div>
+    </div>
+
+    {# CDN ICONS #}
+    <div class="col-12 col-lg-4">
+      <div class="box box-secondary h-100 mb-0 d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="mb-2"><i class="ri-remixicon-line text-primary"></i> 2. Icônes</h5>
+          <p class="small text-muted">Charge la bibliothèque d'icônes requise pour les composants du Design System.</p>
+          <code class="d-block p-2 bg-surface-hover border rounded text-break mb-3" id="cdn-icons-text">
+            &lt;link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/assets/ds-icons.css"&gt;
+          </code>
+        </div>
+        <button class="btn btn-primary btn-sm w-100" data-copy-target="cdn-icons-text">
+          <i class="ri-clipboard-line"></i> Copier les Icônes CDN
+        </button>
+      </div>
+    </div>
+
+    {# CDN JS #}
+    <div class="col-12 col-lg-4">
+      <div class="box box-secondary h-100 mb-0 d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="mb-2"><i class="ri-javascript-line text-primary"></i> 3. JavaScript</h5>
+          <p class="small text-muted">Inclus la logique d'interaction (dropdowns, modales, toasts, etc.).</p>
+          <code class="d-block p-2 bg-surface-hover border rounded text-break mb-3" id="cdn-js-text">
+            &lt;script src="{{ app.request.schemeAndHttpHost }}/js/main.js" defer&gt;&lt;/script&gt;
+          </code>
+        </div>
+        <button class="btn btn-primary btn-sm w-100" data-copy-target="cdn-js-text">
+          <i class="ri-clipboard-line"></i> Copier le JS CDN
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {# --- SECTION 2 : STARTER TEMPLATE --- #}
+  <div class="mt-5">
+    <h5 class="mb-3">📄 Template Starter HTML</h5>
+    <p class="text-muted mb-3">
+      Copiez-collez ce squelette HTML basique dans un fichier <code>index.html</code> pour démarrer immédiatement votre projet avec le Design System préconfiguré.
+    </p>
+
+    {% set starterCode %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base UI Starter</title>
+
+  <!-- 1. Bibliothèque d'icônes -->
+  <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/assets/ds-icons.css">
+
+  <!-- 2. Styles du Design System -->
+  <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/css/ds-ui-kit.css">
+
+  <!-- 3. Scripts JavaScript du Design System -->
+  <script src="{{ app.request.schemeAndHttpHost }}/js/main.js" defer></script>
+</head>
+<body class="p-4">
+
+  <main class="container">
+    <div class="box box-primary text-center my-5">
+      <h1 class="display-5 fw-bold mb-3">Hello, Design System! 🚀</h1>
+      <p class="lead mb-4">Votre environnement est correctement configuré et prêt à l'emploi.</p>
+      
+      <div class="d-flex justify-content-center gap-2">
+        <button class="btn btn-primary">
+          <i class="ri-check-line"></i> Bouton Principal
+        </button>
+        <button class="btn btn-outline-primary">
+          En savoir plus
+        </button>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
+    {% endset %}
+
+    {% include 'fragments/components/_code-block.html.twig' with {
+      'code': starterCode,
+      'language': 'html',
+      'title': 'index.html - Starter Kit'
+    } %}
+  </div>
+</div>
