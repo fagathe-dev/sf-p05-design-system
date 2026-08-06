@@ -27,7 +27,8 @@
 
   // Variantes de base
   @each $theme in success, danger, warning, info {
-    &.alert-soft-#{$theme} {
+    &.alert-soft-#{$theme},
+    &.alert-#{$theme} {
       background-color: var(--ds-#{$theme}-subtle);
       color: var(--ds-#{$theme}-dark);
     }

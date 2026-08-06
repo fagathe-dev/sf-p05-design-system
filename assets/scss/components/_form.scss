@@ -8,7 +8,7 @@
 
 .form-label {
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.33rem;
   font-weight: 500;
   font-size: 0.95rem;
   color: var(--ds-heading-color);
@@ -18,7 +18,7 @@
 .form-select {
   display: block;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 400;
@@ -60,7 +60,7 @@ textarea.form-control {
 
 .form-control-sm,
 .form-select-sm {
-  padding: 0.5rem 0.75rem;
+  padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border-radius: var(--ds-border-radius-sm);
 }
