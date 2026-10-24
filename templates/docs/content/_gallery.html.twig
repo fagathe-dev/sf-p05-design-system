@@ -1,55 +1,80 @@
+{# Docs : Gallery — source : assets/scss/content/_gallery.scss #}
+{% set photos = [
+  'photo-1513360371669-4adf3dd7dff8',
+  'photo-1522071820081-009f0129c71c',
+  'photo-1507525428034-b723cf961d3e',
+  'photo-1498050108023-c5249f4df085',
+  'photo-1461749280684-dccba630e2f6',
+  'photo-1517694712202-14dd9538aa97',
+] %}
+
 <div class="component-demo">
-  <h3>🖼️ Galerie (Masonry Grid)</h3>
-  <p class="text-muted mb-4">
-    Une grille de galerie fluide de style "Masonry", construite uniquement en CSS grâce à la propriété <code>column-count</code>. 
-    Les images sont disposées verticalement sans espace vide horizontal.
+  <p class="docs-lead">
+    Mosaïque d'images de hauteurs variables (masonry), en CSS uniquement avec des colonnes CSS :
+    1 colonne, puis 2 (sm), 3 (md) et 4 (xl).
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12">
-      <div class="box box-secondary mb-0">
-        
-        <div class="gallery">
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=500&q=80" alt="Gallery">
-          </div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&q=80" alt="Gallery">
-          </div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80" alt="Gallery">
-          </div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80" alt="Gallery">
-          </div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&q=80" alt="Gallery">
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>Les images remplissent la colonne et gardent leur ratio ; aucun item n'est coupé entre deux colonnes.</p>
+{% set code %}
 <div class="gallery">
+{% for photo in photos %}
   <div class="gallery-item">
-    <img src="image1.jpg" alt="Description">
+    <img src="https://images.unsplash.com/{{ photo }}?w=500&q=80" alt="Photo {{ loop.index }}" loading="lazy">
   </div>
-  <div class="gallery-item">
-    <img src="image2.jpg" alt="Description">
-  </div>
-  <div class="gallery-item">
-    <img src="image3.jpg" alt="Description">
-  </div>
+{% endfor %}
 </div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Gallery'
-    } %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="legendes">
+    <h3>Avec légendes</h3>
+    <p>Un item peut contenir une <code>&lt;figure&gt;</code> complète.</p>
+{% set code %}
+<div class="gallery">
+{% for photo in photos|slice(0, 3) %}
+  <div class="gallery-item">
+    <figure class="figure">
+      <img src="https://images.unsplash.com/{{ photo }}?w=500&q=80" class="figure-img" alt="Photo {{ loop.index }}" loading="lazy">
+      <figcaption class="figure-caption">Légende {{ loop.index }}</figcaption>
+    </figure>
   </div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    <p>Pour forcer un nombre de colonnes, combinez avec les utilitaires <code>.columns-*</code>.</p>
+{% set code %}
+<div class="gallery columns-md-2" style="--gallery-gap: var(--ds-space-2);">
+{% for photo in photos|slice(0, 4) %}
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/{{ photo }}?w=500&q=80" alt="Photo {{ loop.index }}" loading="lazy">
+  </div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--gallery-gap', '<code>--ds-space-4</code>', 'Espace entre colonnes et entre items'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.gallery', 'Conteneur en colonnes CSS'],
+        ['.gallery-item', 'Item insécable'],
+      ],
+    } only %}
+  </section>
 </div>

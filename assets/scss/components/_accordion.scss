@@ -1,71 +1,91 @@
-// ================================================================
-// COMPOSANT : ACCORDION
-// ================================================================
+// ==========================================================================
+// Component: Accordion (components/_accordion.scss)
+// --------------------------------------------------------------------------
+// L'ouverture est pilotée en JS (data-ds-toggle="accordion") : le bouton
+// reçoit aria-expanded, le panneau .accordion-collapse reçoit .show.
+// ==========================================================================
+
+@use '../abstracts' as *;
 
 .accordion {
+  // 1. Component Tokens
+  --accordion-bg: var(--ds-surface-container);
+  --accordion-color: var(--ds-color-on-surface);
+  --accordion-divider-color: var(--ds-color-outline-variant);
+  --accordion-px: var(--ds-space-6);
+  --accordion-py: var(--ds-space-5);
+
+  // 2. Box Model
   display: flex;
   flex-direction: column;
-  background-color: var(--ds-surface-bg);
-  border-radius: var(--ds-border-radius-xl); // Arrondi très marqué
-  box-shadow: var(--ds-shadow);
-  overflow: hidden; // Garde les enfants à l'intérieur de l'arrondi
+  overflow: hidden; // Garde les enfants dans l'arrondi
+  border-radius: var(--ds-radius-lg);
 
-  .accordion-item {
-    border-bottom: 1px solid var(--ds-border-color);
+  // 3. Couleurs
+  background-color: var(--accordion-bg);
+  color: var(--accordion-color);
+}
 
-    &:last-child {
-      border-bottom: none;
-    }
+.accordion-item + .accordion-item {
+  border-block-start: var(--ds-border-width) solid var(--accordion-divider-color);
+}
+
+.accordion-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  inline-size: 100%;
+  padding-block: var(--accordion-py);
+  padding-inline: var(--accordion-px);
+  border: none;
+  background-color: transparent;
+  color: var(--accordion-color);
+  text-align: start;
+  @include type(title, md);
+  cursor: pointer;
+  transition: effects(background-color);
+
+  &:hover {
+    background-color: state-layer(transparent, var(--accordion-color));
   }
 
-  .accordion-button {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
-    background-color: transparent;
-    border: none;
-    color: var(--ds-heading-color);
-    font-size: 1.1rem;
-    font-weight: 500;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: var(--ds-surface-hover);
-    }
-
-    &:focus-visible {
-      outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring-color);
-      outline-offset: -2px; // Focus à l'intérieur pour ne pas casser l'arrondi parent
-    }
-
-    // Gestion de l'icône de la police (ex: ri-arrow-down-s-line)
-    .accordion-icon {
-      font-size: 1.25rem;
-      color: var(--ds-text-muted);
-      transition: transform 0.3s ease;
-    }
-
-    // Rotation de l'icône quand ouvert
-    &[aria-expanded='true'] .accordion-icon {
-      transform: rotate(180deg);
-    }
+  &:active {
+    background-color: state-layer(transparent, var(--accordion-color), 'pressed');
   }
 
-  .accordion-collapse {
-    display: none; // Masqué par défaut (à gérer via JS)
+  // Focus à l'intérieur pour ne pas être rogné par l'arrondi du parent
+  &:focus-visible {
+    @include focus-ring(calc(var(--ds-focus-ring-width) * -1));
+  }
+}
 
-    &.show {
-      display: block;
-    }
+.accordion-icon {
+  flex-shrink: 0;
+  color: var(--ds-color-on-surface-variant);
+  font-size: var(--ds-icon-size-md);
+  transition: spatial(transform);
+
+  .accordion-button[aria-expanded='true'] & {
+    transform: rotate(180deg);
   }
 
-  .accordion-body {
-    padding: 0 1.5rem 1.25rem;
-    color: var(--ds-body-color);
-    line-height: 1.6;
+  @include reduced-motion {
+    transition: none;
   }
+}
+
+.accordion-collapse {
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
+
+.accordion-body {
+  padding-block: 0 var(--accordion-py);
+  padding-inline: var(--accordion-px);
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, lg);
 }

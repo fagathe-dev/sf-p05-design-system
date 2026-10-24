@@ -1,26 +1,17 @@
-@use './flex-utilities' as *;
-@use './mixins' as *;
-@use './utilities' as *;
-@use './variables' as *;
+// ==========================================================================
+// DS UI Kit — point d'entrée (compilé vers public/css/ds-ui-kit.css)
+// --------------------------------------------------------------------------
+// abstracts/   outils sans sortie CSS (primitives, fonctions, mixins)
+// foundation/  polices, System Tokens, reset, typographie
+// puis les composants par domaine (mêmes catégories que templates/docs/),
+// et les utilitaires en dernier.
+// ==========================================================================
 
-@use './components/index.scss' as *;
-@use './layouts/index.scss' as *;
-
-// Import des polices Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wdth,wght@62.5..100,300&family=Quicksand:wght@300..700&family=Roboto&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&display=swap');
-
-*,
-::after,
-::before {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--ds-font-sans);
-  font-size: 1em;
-  line-height: 1.5;
-  color: var(--ds-body-color, #212529);
-  background-color: var(--ds-body-bg, #ffffff);
-  margin: 0;
-  padding: 0;
-}
+@use 'foundation';
+@use 'layout';
+@use 'components';
+@use 'content';
+@use 'forms';
+@use 'navigation';
+@use 'feedback';
+@use 'utilities';

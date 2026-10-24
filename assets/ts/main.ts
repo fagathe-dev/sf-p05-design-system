@@ -8,6 +8,9 @@ import {
   closeAllDropdowns,
 } from './interactions/events/toggle';
 import { handleDismiss, handleEscapeKey } from './interactions/events/dismiss';
+import { initSegmentedControls } from './interactions/components/segmented-control';
+import { initMarkdownEditors } from './interactions/components/md-editor';
+import { initThemeSwitches } from './interactions/components/theme-switch';
 
 // Import de ta librairie
 import { initClipboardHandlers, convertMarkdownToHtml } from 'core-ts';
@@ -55,6 +58,12 @@ const initUI = (): void => {
     const rawContent = el.textContent || '';
     el.innerHTML = convertMarkdownToHtml(rawContent);
   });
+
+  // 4. Composants interactifs : SegmentedControl puis ceux qui écoutent son
+  // événement ds:change (sélecteurs de thème, éditeurs Markdown)
+  initSegmentedControls();
+  initThemeSwitches();
+  initMarkdownEditors();
 };
 
 document.addEventListener('DOMContentLoaded', initUI);

@@ -1,51 +1,144 @@
+{# Docs : Typography — source : assets/scss/foundation/_typography.scss #}
+{% set type_roles = {
+  display: 'Moments éditoriaux, chiffres phares',
+  headline: 'Titres de pages et de grandes sections',
+  title: 'Titres de cartes, modales, sous-sections',
+  body: 'Paragraphes et contenus longs',
+  label: 'Boutons, onglets, badges, labels',
+} %}
+
 <div class="component-demo">
-  <h3>Aa Typographie</h3>
-  <p class="text-muted mb-4">
-    Hiérarchie des titres, textes de mise en avant et éléments textuels inline. Le système utilise les polices définies dans <code>--ds-font-sans</code>.
+  <p class="docs-lead">
+    L'échelle typographique M3 Expressive : cinq rôles (display, headline, title, body, label)
+    en trois tailles. Les titres HTML et les classes de texte s'appuient dessus.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary mb-0">
-        <h5 class="mb-4 text-primary">Headings (Titres)</h5>
-        
-        <h1>h1. Titre de niveau 1</h1>
-        <h2>h2. Titre de niveau 2</h2>
-        <h3>h3. Titre de niveau 3</h3>
-        <h4>h4. Titre de niveau 4</h4>
-        <h5>h5. Titre de niveau 5</h5>
-        <h6>h6. Titre de niveau 6</h6>
-      </div>
-    </div>
+  <section class="docs-section" id="titres">
+    <h3>Titres</h3>
+    <p>Les balises <code>h1</code> à <code>h6</code> suivent l'échelle : display sm, headline lg/md/sm, title lg/md.</p>
+{% set code %}
+<h1>h1. Titre de niveau 1</h1>
+<h2>h2. Titre de niveau 2</h2>
+<h3>h3. Titre de niveau 3</h3>
+<h4>h4. Titre de niveau 4</h4>
+<h5>h5. Titre de niveau 5</h5>
+<h6>h6. Titre de niveau 6</h6>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
 
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4 text-primary">Display (Titres géants)</h5>
-        <p class="text-muted small">Titres allégés (font-weight: 300) pour un fort impact visuel.</p>
-        
-        <h1 class="display-4">Display 4</h1>
-        <h1 class="display-5">Display 5</h1>
-        <h1 class="display-6">Display 6</h1>
-      </div>
-    </div>
+    <h4>Classes de titre</h4>
+    <p><code>.h1</code> à <code>.h6</code> appliquent le style d'un titre sans changer la structure du document.</p>
+{% set code %}
+<p class="h3">Paragraphe au style h3</p>
+<span class="h5">Texte au style h5</span>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-    <div class="col-12">
-      <div class="box box-secondary mb-0">
-        <h5 class="mb-4 text-primary">Éléments Inline & Blocs</h5>
-        
-        <p class="lead mb-4">
-          Ceci est un paragraphe <code>.lead</code>. Il est conçu pour se démarquer, généralement utilisé comme introduction sous un titre principal.
-        </p>
+  <section class="docs-section" id="display">
+    <h3>Display</h3>
+    <p>Titres fluides (<code>clamp()</code>) pour les bannières : <code>.display-1</code> à <code>.display-6</code>, par paires sur les tailles lg, md et sm.</p>
+{% set code %}
+<p class="display-1">Display 1</p>
+<p class="display-3">Display 3</p>
+<p class="display-5">Display 5</p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-        <p>Vous pouvez utiliser la balise <mark>mark</mark> pour surligner un texte important.</p>
-        <p><small>La classe <code>.small</code> réduit la taille du texte à 87.5%.</small></p>
-        <p>L'acronyme <abbr title="HyperText Markup Language" class="initialism">HTML</abbr> possède un style spécifique.</p>
+  <section class="docs-section" id="roles">
+    <h3>Rôles typographiques</h3>
+    <p>
+      Chaque rôle existe en <code>lg</code>, <code>md</code> et <code>sm</code> via <code>.text-{rôle}-{taille}</code>
+      (taille, graisse, interlignage et approche). Dans le SCSS, utilisez le mixin <code>@include type(rôle, taille)</code>.
+    </p>
+{% set code %}
+{% for role, usage in type_roles %}
+{% for size in ['lg', 'md', 'sm'] %}
+<p class="text-{{ role }}-{{ size }}">{{ role|capitalize }} {{ size }} — {{ usage }}</p>
+{% endfor %}
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-        <blockquote class="blockquote mt-4 border-start border-3 border-primary ps-3">
-          <p class="mb-2">Le design n'est pas seulement ce à quoi cela ressemble et ce que l'on ressent. Le design, c'est comment ça marche.</p>
-          <footer class="blockquote-footer mt-0 text-muted">Steve Jobs dans <cite title="Source Title">The New York Times</cite></footer>
-        </blockquote>
-      </div>
-    </div>
-  </div>
+  <section class="docs-section" id="chapo">
+    <h3>Chapô</h3>
+{% set code %}
+<p class="lead">Un paragraphe d'introduction, plus grand que le texte courant, en graisse régulière.</p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="inline">
+    <h3>Éléments de texte</h3>
+{% set code %}
+<p>Vous pouvez <mark>surligner</mark> un passage.</p>
+<p><del>Ce texte est supprimé.</del> <ins>Celui-ci est ajouté.</ins></p>
+<p><s>Ce texte n'est plus exact.</s> <u>Ce texte est souligné.</u></p>
+<p><small>Ce texte est en petits caractères.</small></p>
+<p><strong>Gras</strong> et <em>italique</em>.</p>
+<p><abbr title="HyperText Markup Language" class="initialism">HTML</abbr> en petites capitales.</p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="citations">
+    <h3>Citations</h3>
+    <p><code>.blockquote</code> est limitée à la largeur de lecture ; la source va dans <code>.blockquote-footer</code>.</p>
+{% set code %}
+<figure>
+  <blockquote class="blockquote">
+    <p>Le design n'est pas seulement ce à quoi cela ressemble. Le design, c'est comment ça marche.</p>
+  </blockquote>
+  <figcaption class="blockquote-footer">Steve Jobs, <cite>The New York Times</cite></figcaption>
+</figure>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="listes">
+    <h3>Listes</h3>
+    <p><code>.list-unstyled</code> retire les puces ; <code>.list-inline</code> met les items en ligne.</p>
+{% set code %}
+<ul class="list-unstyled">
+  <li>Sans puce</li>
+  <li>Sans retrait</li>
+</ul>
+<ul class="list-inline">
+  <li class="list-inline-item">Accueil</li>
+  <li class="list-inline-item">Produits</li>
+  <li class="list-inline-item">Contact</li>
+</ul>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+
+    <h4>Liste de définitions horizontale</h4>
+    <p>À partir du breakpoint <code>sm</code>, <code>.dl-horizontal</code> aligne les termes à gauche de leur définition.</p>
+{% set code %}
+<dl class="dl-horizontal">
+  <dt>Token</dt>
+  <dd>Valeur nommée réutilisée par les composants.</dd>
+  <dt>Composant</dt>
+  <dd>Élément d'interface réutilisable.</dd>
+</dl>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.h1 … .h6', 'Style de titre'],
+        ['.display-1 … .display-6', 'Titres Display (lg, md, sm)'],
+        ['.text-{rôle}-{taille}', 'Rôle typographique complet (display, headline, title, body, label × lg, md, sm)'],
+        ['.lead', 'Chapô'],
+        ['.mark, .small, .initialism', 'Surligné, petit texte, petites capitales'],
+        ['.blockquote, .blockquote-footer', 'Citation et source'],
+        ['.list-unstyled, .list-inline, .list-inline-item', 'Listes sans puces ou en ligne'],
+        ['.dl-horizontal', 'Liste de définitions en deux colonnes'],
+      ],
+    } only %}
+  </section>
 </div>

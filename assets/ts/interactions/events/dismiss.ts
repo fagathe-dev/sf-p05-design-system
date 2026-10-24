@@ -1,4 +1,5 @@
 import { closeDialog } from '@/interactions/components/modal';
+import { closeAllDropdowns } from '@/interactions/events/toggle';
 import { $ } from 'core-ts';
 
 export const handleDismiss = (trigger: HTMLElement): void => {
@@ -36,6 +37,16 @@ export const handleDismiss = (trigger: HTMLElement): void => {
 
 export const handleEscapeKey = (event: KeyboardEvent): void => {
   if (event.key !== 'Escape') return;
+
+  // Menu déroulant ouvert : on le ferme et on rend le focus à son déclencheur
+  const openDropdown = document.querySelector<HTMLElement>(
+    '[data-ds-toggle="dropdown"][aria-expanded="true"]',
+  );
+  if (openDropdown) {
+    closeAllDropdowns();
+    openDropdown.focus();
+  }
+
   (
     $<HTMLDialogElement>('dialog[open]', true) as NodeListOf<HTMLDialogElement>
   ).forEach((d) => closeDialog(d));

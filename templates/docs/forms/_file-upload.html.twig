@@ -1,37 +1,97 @@
+{# Docs : File Upload — sources : assets/scss/forms/_form-control.scss, _previewer.scss #}
+
 <div class="component-demo">
-  <h3>📁 Upload de Fichiers</h3>
-  <p class="text-muted mb-4">
-    Un champ d'upload stylisé nativement via CSS, utilisant le pseudo-élément <code>::file-selector-button</code>.
+  <p class="docs-lead">
+    Champ d'envoi de fichiers stylé avec <code>::file-selector-button</code>, et vignettes d'aperçu
+    des fichiers sélectionnés.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary mb-0">
-        <div class="mb-3">
-          <label for="formFile" class="form-label">Sélectionner un document</label>
-          <input class="form-control" type="file" id="formFile">
-        </div>
-        
-        <div class="mb-0">
-          <label for="formFileDisabled" class="form-label">Upload désactivé</label>
-          <input class="form-control" type="file" id="formFileDisabled" disabled>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<div class="mb-3">
-  <label for="formFile" class="form-label">Upload image</label>
-  <input class="form-control" type="file" id="formFile" accept="image/*">
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+{% set code %}
+<div>
+  <label for="file-single" class="form-label">Document</label>
+  <input type="file" class="form-control" id="file-single">
 </div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML File Upload'
-    } %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="variantes">
+    <h3>Plusieurs fichiers, types acceptés, désactivé</h3>
+{% set code %}
+<div>
+  <label for="file-multiple" class="form-label">Photos (plusieurs)</label>
+  <input type="file" class="form-control" id="file-multiple" accept="image/*" multiple>
+</div>
+<div>
+  <label for="file-pdf" class="form-label">Contrat (PDF uniquement)</label>
+  <input type="file" class="form-control" id="file-pdf" accept="application/pdf">
+</div>
+<div>
+  <label for="file-disabled" class="form-label">Envoi désactivé</label>
+  <input type="file" class="form-control" id="file-disabled" disabled>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="apercu">
+    <h3>Vignettes d'aperçu</h3>
+    <p>
+      <code>.file-previewer</code> aligne des vignettes de 100px : image recadrée ou icône, nom du fichier en
+      surimpression et bouton de suppression visible au survol, au focus et sur écran tactile. Le balisage est
+      à générer par votre code JavaScript.
+    </p>
+{% set code %}
+<div class="file-previewer">
+  <div class="file-previewer-item">
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=200&q=80" class="file-previewer-image" alt="bureau.jpg">
+    <span class="file-previewer-info">bureau.jpg</span>
+    <button type="button" class="file-previewer-remove" aria-label="Retirer bureau.jpg">&times;</button>
   </div>
+  <div class="file-previewer-item">
+    <i class="ri-file-pdf-2-line file-previewer-icon"></i>
+    <span class="file-previewer-info">contrat.pdf</span>
+    <button type="button" class="file-previewer-remove" aria-label="Retirer contrat.pdf">&times;</button>
+  </div>
+  <div class="file-previewer-item">
+    <i class="ri-file-excel-2-line file-previewer-icon"></i>
+    <span class="file-previewer-info">budget.xlsx</span>
+    <button type="button" class="file-previewer-remove" aria-label="Retirer budget.xlsx">&times;</button>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+
+    <h4>Grand format</h4>
+    <p><code>.file-previewer-item-lg</code> occupe toute la largeur pour un PDF ou une vidéo, avec un en-tête et une iframe.</p>
+{% set code %}
+<div class="file-previewer">
+  <div class="file-previewer-item file-previewer-item-lg" style="block-size: 16rem;">
+    <div class="file-previewer-header">
+      <span><i class="ri-file-pdf-2-line"></i> guide.pdf</span>
+      <button type="button" class="btn btn-ghost-danger btn-sm">Retirer</button>
+    </div>
+    <iframe class="file-previewer-iframe" title="Aperçu de guide.pdf" srcdoc="&lt;p style='font-family: sans-serif; padding: 1rem'&gt;Aperçu du document&lt;/p&gt;"></iframe>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['input[type=file].form-control', 'Champ fichier avec bouton intégré'],
+        ['.file-previewer', 'Rangée de vignettes'],
+        ['.file-previewer-item', 'Vignette 100px'],
+        ['.file-previewer-image, .file-previewer-icon', 'Contenu : image recadrée ou icône'],
+        ['.file-previewer-info', 'Nom du fichier en surimpression'],
+        ['.file-previewer-remove', 'Bouton de suppression'],
+        ['.file-previewer-item-lg, .file-previewer-header, .file-previewer-iframe', 'Grand format (PDF, vidéo)'],
+      ],
+    } only %}
+  </section>
 </div>

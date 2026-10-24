@@ -1,11 +1,74 @@
-{% set boxes = ['primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'danger'] %}
+{# Docs : Box — source : assets/scss/components/_box.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
 
 <div class="component-demo">
-  <h3>📦 Box</h3>
-  {% for box in boxes %}
-  <div class="box box-{{ box }}">
-    <h4 class="box-title">{{ box|capitalize }}</h4>
-    <p>Une box avec une teinte subtile pour mettre en avant du contenu.</p>
+  <p class="docs-lead">
+    Panneau de contenu détaché de la page par sa surface, sans ombre ni bordure. Son padding
+    passe de 24 à 32px à partir du breakpoint <code>md</code>.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+{% set code %}
+<div class="box">
+  <h5 class="box-title">Résumé du compte</h5>
+  <p>Votre abonnement Pro est actif jusqu'au 12 mars.</p>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="themes">
+    <h3>Thèmes</h3>
+    <p><code>.box-{rôle}</code> passe sur le conteneur du rôle, pour un encart d'information ou d'avertissement.</p>
+{% set code %}
+{% for role in roles %}
+<div class="box box-{{ role }}">
+  <h5 class="box-title">{{ role|capitalize }}</h5>
+  <p>Un encart teinté pour mettre en avant un contenu.</p>
+</div>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="contenu">
+    <h3>Contenu riche</h3>
+    <p>Le dernier enfant perd sa marge basse : la box reste équilibrée quel que soit son contenu.</p>
+{% set code %}
+<div class="box box-info">
+  <h5 class="box-title"><i class="ri-information-line"></i> Nouvelle version disponible</h5>
+  <p>La version 2.0 apporte le thème sombre et de nouveaux composants.</p>
+  <div class="d-flex gap-2">
+    <button type="button" class="btn btn-info btn-sm">Mettre à jour</button>
+    <button type="button" class="btn btn-ghost-info btn-sm">Plus tard</button>
   </div>
-  {% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--box-bg', '<code>--ds-surface-container</code>', 'Fond'],
+        ['--box-color', '<code>--ds-color-on-surface</code>', 'Texte'],
+        ['--box-title-color', '<code>--ds-color-on-surface</code>', 'Titre'],
+        ['--box-padding', '<code>--ds-space-6</code> (<code>--ds-space-8</code> dès md)', 'Padding'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.box', 'Panneau de contenu'],
+        ['.box-title', 'Titre de la box'],
+        ['.box-{rôle}', 'Box teintée (primary … danger)'],
+      ],
+    } only %}
+  </section>
 </div>

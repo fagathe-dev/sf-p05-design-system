@@ -1,0 +1,67 @@
+{# Docs : Starter packs — pages complètes dans templates/docs/getting-started/starters/ #}
+{% set host = app.request.schemeAndHttpHost %}
+{% set starters = [
+  {
+    id: 'blog-hero',
+    title: 'Blog / app avec hero',
+    description: 'Navbar responsive (liens, menu du compte avec avatar et sélecteur de thème), bannière hero, grille d\'articles, pagination et footer.',
+    template: 'docs/getting-started/starters/_blog.html.twig',
+    options: { hero: true },
+    height: '40rem',
+  },
+  {
+    id: 'blog',
+    title: 'Blog / app sans hero',
+    description: 'Même structure, avec un en-tête de page (fil d\'Ariane, titre, chapô) à la place du hero.',
+    template: 'docs/getting-started/starters/_blog.html.twig',
+    options: { hero: false },
+    height: '40rem',
+  },
+  {
+    id: 'auth',
+    title: 'Authentification',
+    description: 'Carte centrée avec onglets Connexion / Inscription, formulaire, séparateur, connexion tierce et pied de carte.',
+    template: 'docs/getting-started/starters/_auth.html.twig',
+    options: {},
+    height: '42rem',
+  },
+  {
+    id: 'dashboard',
+    title: 'Dashboard',
+    description: 'Sidebar avec sections, sous-menus et badge (tiroir sous lg), topbar avec recherche, notifications et menu du compte, indicateurs et tableau.',
+    template: 'docs/getting-started/starters/_dashboard.html.twig',
+    options: {},
+    height: '44rem',
+  },
+] %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Des pages complètes, prêtes à copier : chacune charge le CSS, les icônes et le JavaScript du design system
+    depuis ce site, applique le thème mémorisé avant le premier rendu et n'utilise que des composants documentés.
+  </p>
+
+  <section class="docs-section" id="utilisation">
+    <h3>Utilisation</h3>
+    <ul>
+      <li>Copiez le code d'un starter dans un fichier <code>.html</code> (ou un template Twig) et remplacez les contenus d'exemple.</li>
+      <li>Les ressources pointent vers <code>{{ host }}</code> : adaptez ces URLs si vous hébergez les fichiers vous-même.</li>
+      <li>Les aperçus sont interactifs : menus, sous-menus, sélecteur de thème et navbar mobile fonctionnent.</li>
+    </ul>
+  </section>
+
+  {% for starter in starters %}
+    <section class="docs-section" id="{{ starter.id }}">
+      <h3>{{ starter.title }}</h3>
+      <p>{{ starter.description }}</p>
+      {% set code %}{% include starter.template with starter.options|merge({ host: host }) only %}{% endset %}
+      {% set preview %}<iframe class="docs-iframe" style="block-size: {{ starter.height }};" title="Aperçu : {{ starter.title }}" loading="lazy" srcdoc="{{ code|e('html_attr') }}"></iframe>{% endset %}
+      {% include 'docs/_example.html.twig' with {
+        code: code,
+        preview: preview,
+        layout: 'flush',
+        title: starter.id ~ '.html',
+      } only %}
+    </section>
+  {% endfor %}
+</div>

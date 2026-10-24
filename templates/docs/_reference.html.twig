@@ -1,0 +1,29 @@
+{#
+  Tableau de référence de la documentation (classes, Component Tokens…).
+
+  Paramètres :
+  - rows    : lignes, chacune [nom affiché en <code>, cellule 2, cellule 3…]
+              (les cellules suivantes acceptent du HTML : <code>, <strong>)
+  - headers : en-têtes de colonnes (défaut : ['Classe', 'Description'])
+#}
+<div class="table-responsive docs-reference">
+  <table class="table align-middle">
+    <thead class="table-light">
+      <tr>
+        {% for header in headers|default(['Classe', 'Description']) %}
+          <th scope="col">{{ header }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+        <tr>
+          <td><code>{{ row[0] }}</code></td>
+          {% for cell in row|slice(1) %}
+            <td>{{ cell|raw }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

@@ -1,39 +1,51 @@
-// ================================================================
-// COMPOSANT : BADGE
-// ================================================================
+// ==========================================================================
+// Component: Badge (components/_badge.scss)
+// --------------------------------------------------------------------------
+// Variantes : regular (conteneur, .badge-{rôle}, .badge-regular-{rôle},
+// .badge-soft-{rôle}) et solid (.badge-solid-{rôle}).
+// ==========================================================================
+
+@use '../abstracts' as *;
 
 .badge {
+  // 1. Component Tokens
+  --badge-bg: var(--ds-color-secondary-container);
+  --badge-color: var(--ds-color-on-secondary-container);
+  --badge-radius: var(--ds-radius-full);
+
+  // 2. Box Model
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
+  gap: var(--ds-space-1);
+  padding-block: var(--ds-space-1);
+  padding-inline: var(--ds-space-2);
+  border-radius: var(--badge-radius);
+
+  // 3. Typographie & Couleurs
+  background-color: var(--badge-bg);
+  color: var(--badge-color);
+  @include type(label, md);
   line-height: 1;
   white-space: nowrap;
-  border-radius: 0.375rem; // Léger arrondi par défaut
-
-  // Variante : Pill
-  &.badge-pill {
-    border-radius: var(--ds-border-radius-pill);
-  }
 }
 
-// Thèmes complets
-$badge-themes: primary, secondary, tertiary, success, warning, info, danger;
+// Les badges sont en pilule par défaut : classe conservée pour compatibilité
+.badge-pill {
+  --badge-radius: var(--ds-radius-full);
+}
 
-@each $theme in $badge-themes {
-  // Variante : Regular (Défaut) -> bg subtle, color primary
-  .badge-#{$theme},
-  .badge-regular-#{$theme} {
-    background-color: var(--ds-#{$theme}-subtle);
-    color: var(--ds-#{$theme}-dark); // Dark pour le contraste lisibilité
+// Variantes (surcharge uniquement des Component Tokens)
+@each $role, $token in $roles {
+  .badge-#{$role},
+  .badge-regular-#{$role},
+  .badge-soft-#{$role} {
+    --badge-bg: #{role-color($role, 'container')};
+    --badge-color: #{role-color($role, 'on-container')};
   }
 
-  // Variante : Solid -> bg primary, color white
-  .badge-solid-#{$theme} {
-    background-color: var(--ds-#{$theme});
-    color: var(--ds-white);
+  .badge-solid-#{$role} {
+    --badge-bg: #{role-color($role)};
+    --badge-color: #{role-color($role, 'on')};
   }
 }

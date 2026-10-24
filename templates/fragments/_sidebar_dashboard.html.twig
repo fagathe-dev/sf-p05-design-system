@@ -2,10 +2,22 @@
   <header class="sidebar-header">
     <a class="sidebar-brand" href="{{ path('app_home_index') }}">Base Admin</a>
   </header>
-  <nav class="sidebar-body">
-    <div class="sidebar-group-title">Menu principal</div>
-    <a href="#" class="sidebar-link active"><i class="ri-dashboard-line"></i> Dashboard</a>
-    <a href="#" class="sidebar-link"><i class="ri-article-line"></i> Articles</a>
-    <a href="#" class="sidebar-link"><i class="ri-folder-line"></i> Catégories</a>
+  <nav class="sidebar-body" aria-label="Navigation principale">
+    <div class="sidebar-section" role="group" aria-labelledby="sidebar-section-main">
+      <span class="sidebar-section-title" id="sidebar-section-main">Menu principal</span>
+      <a href="#" class="sidebar-link active" aria-current="page"><i class="ri-dashboard-line"></i> Dashboard</a>
+      <div class="sidebar-item">
+        <button type="button" class="sidebar-link" data-ds-toggle="collapse" data-ds-target="#sidebar-menu-articles" aria-expanded="false" aria-controls="sidebar-menu-articles">
+          <i class="ri-article-line"></i> Articles
+          <i class="ri-arrow-down-s-line sidebar-chevron"></i>
+        </button>
+        <div class="sidebar-submenu collapse" id="sidebar-menu-articles">
+          <a href="#" class="sidebar-sublink">Tous les articles</a>
+          <a href="#" class="sidebar-sublink">Nouvel article</a>
+          <a href="#" class="sidebar-sublink">Brouillons</a>
+        </div>
+      </div>
+      <a href="#" class="sidebar-link"><i class="ri-folder-line"></i> Catégories</a>
+    </div>
   </nav>
 </aside>

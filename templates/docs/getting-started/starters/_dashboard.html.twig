@@ -1,0 +1,148 @@
+{# Starter dashboard. Paramètre : host #}
+{% set stats = [
+  { label: 'Visiteurs', value: '12 480', trend: '+8 %', icon: 'ri-user-line', role: 'primary' },
+  { label: 'Articles publiés', value: '134', trend: '+3', icon: 'ri-article-line', role: 'info' },
+  { label: 'Commentaires', value: '892', trend: '+12 %', icon: 'ri-chat-3-line', role: 'success' },
+  { label: 'Signalements', value: '4', trend: '-2', icon: 'ri-flag-line', role: 'warning' },
+] %}
+{% set posts = [
+  { title: 'Construire un design system durable', author: 'Jane Doe', status: 'Publié', role: 'success' },
+  { title: 'Les tokens CSS en pratique', author: 'Bruno Petit', status: 'Brouillon', role: 'secondary' },
+  { title: 'Contrastes : la règle des 4.5:1', author: 'Chloé Durand', status: 'En relecture', role: 'warning' },
+] %}
+{% include 'docs/getting-started/starters/_head.html.twig' with { host: host, title: 'Dashboard — Base UI' } only %}
+<body>
+  <div class="layout-dashboard">
+    <div class="dashboard-overlay" data-ds-dismiss="sidebar"></div>
+
+    <aside class="dashboard-sidebar" aria-label="Navigation principale">
+      <header class="sidebar-header">
+        <a class="sidebar-brand fw-bold fs-5" href="#"><i class="ri-box-3-fill text-primary"></i> Base Admin</a>
+      </header>
+      <nav class="sidebar-body">
+        <div class="sidebar-section" role="group" aria-labelledby="menu-general">
+          <span class="sidebar-section-title" id="menu-general">Général</span>
+          <a href="#" class="sidebar-link active" aria-current="page"><i class="ri-dashboard-line"></i> Tableau de bord</a>
+          <a href="#" class="sidebar-link"><i class="ri-bar-chart-box-line"></i> Analyses</a>
+        </div>
+        <div class="sidebar-section" role="group" aria-labelledby="menu-content">
+          <span class="sidebar-section-title" id="menu-content">Contenu</span>
+          <div class="sidebar-item">
+            <button type="button" class="sidebar-link" data-ds-toggle="collapse" data-ds-target="#menu-articles" aria-expanded="false" aria-controls="menu-articles">
+              <i class="ri-article-line"></i> Articles
+              <i class="ri-arrow-down-s-line sidebar-chevron"></i>
+            </button>
+            <div class="sidebar-submenu collapse" id="menu-articles">
+              <a href="#" class="sidebar-sublink">Tous les articles</a>
+              <a href="#" class="sidebar-sublink">Nouvel article</a>
+              <a href="#" class="sidebar-sublink">Catégories</a>
+            </div>
+          </div>
+          <div class="sidebar-item">
+            <button type="button" class="sidebar-link" data-ds-toggle="collapse" data-ds-target="#menu-media" aria-expanded="false" aria-controls="menu-media">
+              <i class="ri-image-line"></i> Médias
+              <i class="ri-arrow-down-s-line sidebar-chevron"></i>
+            </button>
+            <div class="sidebar-submenu collapse" id="menu-media">
+              <a href="#" class="sidebar-sublink">Bibliothèque</a>
+              <a href="#" class="sidebar-sublink">Importer</a>
+            </div>
+          </div>
+          <a href="#" class="sidebar-link"><i class="ri-chat-3-line"></i> Commentaires <span class="badge badge-solid-primary sidebar-badge">12</span></a>
+        </div>
+        <div class="sidebar-section" role="group" aria-labelledby="menu-admin">
+          <span class="sidebar-section-title" id="menu-admin">Administration</span>
+          <a href="#" class="sidebar-link"><i class="ri-team-line"></i> Utilisateurs</a>
+          <a href="#" class="sidebar-link"><i class="ri-settings-4-line"></i> Paramètres</a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link"><i class="ri-question-line"></i> Aide</a>
+      </div>
+    </aside>
+
+    <div class="dashboard-main">
+      <header class="dashboard-header">
+        <button type="button" class="btn btn-icon btn-ghost-secondary d-lg-none" data-ds-toggle="sidebar" aria-label="Ouvrir le menu">
+          <i class="ri-menu-line"></i>
+        </button>
+        <div class="header-search">
+          <input type="search" class="form-control form-control-sm" placeholder="Rechercher…" aria-label="Rechercher">
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <a href="#" class="navbar-notification" aria-label="Notifications (3 non lues)">
+            <i class="ri-notification-3-line"></i>
+            <span class="notification-badge">3</span>
+          </a>
+          {% include 'docs/getting-started/starters/_account-menu.html.twig' with { prefix: 'dashboard' } only %}
+        </div>
+      </header>
+
+      <main class="dashboard-content d-flex flex-column gap-8">
+        <div class="d-flex flex-wrap align-items-end justify-content-between gap-4">
+          <div>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tableau de bord</li>
+              </ol>
+            </nav>
+            <h1 class="h3 mb-0">Tableau de bord</h1>
+          </div>
+          <button type="button" class="btn btn-primary"><i class="ri-add-line"></i> Nouvel article</button>
+        </div>
+
+        <div class="row g-4">
+{% for stat in stats %}
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card h-100">
+              <div class="card-body d-flex align-items-center gap-4">
+                <span class="avatar avatar-lg bg-{{ stat.role }}-subtle text-{{ stat.role }}-dark"><i class="{{ stat.icon }}"></i></span>
+                <div>
+                  <p class="text-muted small mb-1">{{ stat.label }}</p>
+                  <p class="h4 mb-0">{{ stat.value }} <span class="badge badge-{{ stat.role }}">{{ stat.trend }}</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+{% endfor %}
+        </div>
+
+        <div class="card">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h2 class="card-title mb-0">Articles récents</h2>
+            <a href="#" class="btn btn-ghost-primary btn-sm">Tout voir</a>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Auteur</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col" class="text-end">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+{% for post in posts %}
+                  <tr>
+                    <td class="fw-semibold">{{ post.title }}</td>
+                    <td>{{ post.author }}</td>
+                    <td><span class="badge badge-{{ post.role }}">{{ post.status }}</span></td>
+                    <td class="text-end">
+                      <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" aria-label="Modifier"><i class="ri-edit-line"></i></button>
+                      <button type="button" class="btn btn-icon btn-sm btn-ghost-danger" aria-label="Supprimer"><i class="ri-delete-bin-line"></i></button>
+                    </td>
+                  </tr>
+{% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

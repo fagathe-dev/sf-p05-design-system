@@ -1,90 +1,203 @@
+{# Docs : Navbar — sources : assets/scss/navigation/_navbar.scss, _navbar-user.scss #}
+{% set avatar = 'https://i.pravatar.cc/100?img=11' %}
+
 <div class="component-demo">
-  <h3>🧭 Barre de navigation (Navbar)</h3>
-  <p class="text-muted mb-4">
-    En-tête principal de l'application. Responsive par défaut, inclut le menu, le bouton mobile et les actions utilisateur (Notifications, Dropdown Profil).
+  <p class="docs-lead">
+    Barre de navigation responsive : liens en colonne dans un panneau repliable sur mobile, en ligne à
+    partir du breakpoint choisi. Elle accueille la marque, les liens, des actions et le menu du compte.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12">
-      <div class="box box-secondary mb-0 p-0 overflow-hidden">
-        
-        <nav class="navbar navbar-expand-lg">
-          <a class="navbar-brand" href="#">
-            <i class="ri-box-3-fill text-primary"></i> UI Kit
-          </a>
-          
-          <button class="navbar-toggler" type="button" data-ds-toggle="collapse" data-ds-target="#navbarDemoContent" aria-expanded="false">
-            <i class="ri-menu-line"></i>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarDemoContent">
-            <ul class="navbar-nav">
-              <li><a class="nav-link active" href="#">Dashboard</a></li>
-              <li><a class="nav-link" href="#">Projets</a></li>
-              <li><a class="nav-link" href="#">Équipe</a></li>
-            </ul>
-
-            <div class="navbar-actions">
-              <a href="#" class="navbar-notification">
-                <i class="ri-notification-3-line"></i>
-                <span class="notification-badge">3</span>
-              </a>
-
-              <div class="dropdown">
-                <button class="navbar-user-trigger" type="button" data-ds-toggle="dropdown" aria-expanded="false">
-                  <div class="avatar avatar-sm"><img src="https://i.pravatar.cc/100?img=11" alt="User"></div>
-                  <div class="user-info">
-                    <span class="user-name">Jane Doe</span>
-                    <span class="user-role">Admin</span>
-                  </div>
-                  <i class="ri-arrow-down-s-line user-chevron"></i>
-                </button>
-                
-                <div class="dropdown-menu auth-dropdown-menu dropdown-menu-end">
-                  <div class="dropdown-header">Mon Compte</div>
-                  <a class="dropdown-item" href="#"><i class="ri-user-line"></i> Profil</a>
-                  <a class="dropdown-item" href="#"><i class="ri-settings-4-line"></i> Paramètres</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item text-danger" href="#"><i class="ri-logout-box-r-line"></i> Déconnexion</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-        </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="#">Mon App</a>
-  
-  <button class="navbar-toggler" data-ds-toggle="collapse" data-ds-target="#navContent">
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>
+      Le bouton hamburger porte <code>data-ds-toggle="collapse"</code> et cible le <code>.navbar-collapse</code>.
+      Réduisez la fenêtre pour voir la version mobile.
+    </p>
+{% set code %}
+<nav class="navbar navbar-expand-lg rounded-lg">
+  <a class="navbar-brand" href="#"><i class="ri-box-3-fill text-primary"></i> Base</a>
+  <button class="navbar-toggler" type="button" data-ds-toggle="collapse" data-ds-target="#navbar-example" aria-expanded="false" aria-controls="navbar-example" aria-label="Ouvrir le menu">
     <i class="ri-menu-line"></i>
   </button>
-
-  <div class="collapse navbar-collapse" id="navContent">
+  <div class="collapse navbar-collapse" id="navbar-example">
     <ul class="navbar-nav">
-      <li><a class="nav-link" href="#">Lien 1</a></li>
+      <li><a class="nav-link active" href="#" aria-current="page">Accueil</a></li>
+      <li><a class="nav-link" href="#">Produits</a></li>
+      <li><a class="nav-link" href="#">Tarifs</a></li>
     </ul>
-
     <div class="navbar-actions">
-      <div class="dropdown">
-        <button class="navbar-user-trigger" data-ds-toggle="dropdown">
-          <div class="avatar avatar-sm">...</div>
-        </button>
-        <div class="dropdown-menu">...</div>
+      <a href="#" class="btn btn-ghost-secondary">Connexion</a>
+      <a href="#" class="btn btn-primary">S'inscrire</a>
+    </div>
+  </div>
+</nav>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'surface' } only %}
+  </section>
+
+  <section class="docs-section" id="breakpoints">
+    <h3>Point de rupture</h3>
+    <p>
+      <code>.navbar-expand-{bp}</code> choisit la largeur à partir de laquelle la barre passe en ligne :
+      <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> ou <code>xxl</code>. Sans cette classe,
+      la barre reste toujours repliable.
+    </p>
+{% set code %}
+<nav class="navbar navbar-expand-xxl rounded-lg">
+  <a class="navbar-brand" href="#">Toujours repliable sous 1400px</a>
+  <button class="navbar-toggler" type="button" data-ds-toggle="collapse" data-ds-target="#navbar-xxl" aria-expanded="false" aria-controls="navbar-xxl" aria-label="Ouvrir le menu">
+    <i class="ri-menu-line"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar-xxl">
+    <ul class="navbar-nav">
+      <li><a class="nav-link active" href="#" aria-current="page">Lien actif</a></li>
+      <li><a class="nav-link" href="#">Lien</a></li>
+    </ul>
+  </div>
+</nav>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'surface' } only %}
+  </section>
+
+  <section class="docs-section" id="compte">
+    <h3>Avec le menu du compte</h3>
+    <p>
+      Le hamburger se place à gauche, la marque juste après, et <code>.navbar-end</code> garde à droite les
+      éléments toujours visibles : cloche de notification et déclencheur du menu du compte
+      (<code>.navbar-user-trigger</code>). Sur mobile, les liens s'ouvrent sous la barre ; le nom et le rôle
+      ne s'affichent qu'à partir de <code>lg</code>.
+    </p>
+{% set code %}
+<nav class="navbar navbar-expand-lg rounded-lg">
+  <button class="navbar-toggler" type="button" data-ds-toggle="collapse" data-ds-target="#navbar-account" aria-expanded="false" aria-controls="navbar-account" aria-label="Ouvrir le menu">
+    <i class="ri-menu-line"></i>
+  </button>
+  <a class="navbar-brand" href="#"><i class="ri-box-3-fill text-primary"></i> Base</a>
+  <div class="collapse navbar-collapse" id="navbar-account">
+    <ul class="navbar-nav">
+      <li><a class="nav-link active" href="#" aria-current="page">Tableau de bord</a></li>
+      <li><a class="nav-link" href="#">Projets</a></li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a href="#" class="navbar-notification" aria-label="Notifications (3 non lues)">
+      <i class="ri-notification-3-line"></i>
+      <span class="notification-badge">3</span>
+    </a>
+    <div class="dropdown">
+      <button class="navbar-user-trigger dropdown-toggle" type="button" data-ds-toggle="dropdown" aria-expanded="false" aria-label="Menu du compte">
+        <span class="avatar avatar-sm"><img src="{{ avatar }}" alt=""></span>
+        <span class="user-info">
+          <span class="user-name">Jane Doe</span>
+          <span class="user-role">Administratrice</span>
+        </span>
+      </button>
+      <div class="dropdown-menu navbar-dropdown dropdown-menu-end">
+        <div class="navbar-dropdown-header">
+          <span class="avatar avatar-sm"><img src="{{ avatar }}" alt=""></span>
+          <span class="navbar-dropdown-user">
+            <span class="navbar-dropdown-name">Jane Doe</span>
+            <span class="navbar-dropdown-meta">jane@example.com</span>
+          </span>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#"><i class="ri-user-line"></i> Profil</a>
+        <a class="dropdown-item" href="#"><i class="ri-settings-4-line"></i> Paramètres</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#"><i class="ri-logout-box-r-line"></i> Déconnexion</a>
       </div>
     </div>
   </div>
 </nav>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Navbar'
-    } %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'surface tall' } only %}
+  </section>
+
+  <section class="docs-section" id="navbar-dropdown">
+    <h3>Menu du compte complet</h3>
+    <p>
+      <code>.navbar-dropdown</code> s'ajoute à un <code>.dropdown-menu</code> : en-tête utilisateur avec une action
+      secondaire, groupes d'items séparés, badge aligné à droite et bloc de réglage. Le sélecteur de thème
+      (<code>data-ds-theme-switch</code>) est relié au service de thème (page Features › Theme). Le menu est montré
+      ouvert ci-dessous ; dans la barre, il suit le déclencheur comme dans l'exemple précédent.
+    </p>
+{% set code %}
+<div class="dropdown-menu navbar-dropdown">
+  <div class="navbar-dropdown-header">
+    <span class="avatar avatar-sm"><img src="{{ avatar }}" alt=""></span>
+    <span class="navbar-dropdown-user">
+      <span class="navbar-dropdown-name">jane-doe</span>
+      <span class="navbar-dropdown-meta">jane@example.com</span>
+    </span>
+    <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" aria-label="Changer de compte" title="Changer de compte">
+      <i class="ri-arrow-left-right-line"></i>
+    </button>
   </div>
+  <a class="dropdown-item" href="#"><i class="ri-emotion-happy-line"></i> Définir un statut</a>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="#"><i class="ri-user-line"></i> Profil</a>
+  <a class="dropdown-item" href="#"><i class="ri-folder-line"></i> Projets</a>
+  <a class="dropdown-item" href="#"><i class="ri-star-line"></i> Favoris</a>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="#"><i class="ri-settings-4-line"></i> Paramètres</a>
+  <a class="dropdown-item" href="#"><i class="ri-flask-line"></i> Fonctionnalités en avant-première</a>
+  <a class="dropdown-item" href="#"><i class="ri-vip-crown-line"></i> Passer à Pro <span class="badge badge-success ms-auto">Gratuit</span></a>
+  <div class="dropdown-divider"></div>
+  <div class="navbar-dropdown-section">
+    <span class="navbar-dropdown-label" id="docs-theme-label">Thème</span>
+    <div class="segmented-control segmented-control-sm segmented-control-full" role="radiogroup" aria-labelledby="docs-theme-label" data-ds-theme-switch>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="auto" aria-label="Automatique" title="Automatique (suit le réglage de l'appareil)"><i class="ri-computer-line"></i></button>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="light" aria-label="Clair" title="Thème clair"><i class="ri-sun-line"></i></button>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="dark" aria-label="Sombre" title="Thème sombre"><i class="ri-moon-line"></i></button>
+    </div>
+  </div>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="#"><i class="ri-logout-box-r-line"></i> Déconnexion</a>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'menu surface' } only %}
+  </section>
+
+  <section class="docs-section" id="accessibilite">
+    <h3>Accessibilité</h3>
+    <ul>
+      <li>Le hamburger et le déclencheur du menu sans texte visible portent un <code>aria-label</code>.</li>
+      <li>Le JS tient <code>aria-expanded</code> à jour ; Échap ou un clic à l'extérieur ferme le menu, et Échap rend le focus au déclencheur.</li>
+      <li>Le lien de la page courante porte <code>.active</code> et <code>aria-current="page"</code>.</li>
+    </ul>
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--navbar-bg', '<code>--ds-surface-container</code>', 'Fond'],
+        ['--navbar-color', '<code>--ds-color-on-surface</code>', 'Texte de la marque et du hamburger'],
+        ['--navbar-py, --navbar-px', '<code>--ds-space-4</code>, <code>--ds-space-6</code>', 'Padding'],
+        ['--nav-link-height', '<code>--ds-control-height-lg</code> (mobile), <code>-md</code> (desktop)', 'Hauteur des liens (sur .navbar-nav)'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.navbar', 'Barre de navigation'],
+        ['.navbar-expand-{sm|md|lg|xl|xxl}', 'En ligne à partir du breakpoint'],
+        ['.navbar-brand', 'Marque'],
+        ['.navbar-toggler', 'Bouton hamburger (masqué en ligne)'],
+        ['.navbar-collapse', 'Panneau repliable (avec .collapse)'],
+        ['.navbar-nav', 'Liste de liens (.nav-link)'],
+        ['.navbar-actions', 'Actions dans le panneau repliable, poussées à droite en ligne'],
+        ['.navbar-end', 'Zone toujours visible, à droite (menu du compte, notifications)'],
+        ['.navbar-notification, .notification-badge', 'Cloche et compteur'],
+        ['.navbar-user-trigger, .user-info, .user-name, .user-role', 'Déclencheur du menu du compte'],
+        ['.navbar-dropdown', 'Menu du compte (sur un .dropdown-menu)'],
+        ['.navbar-dropdown-header, .navbar-dropdown-user, .navbar-dropdown-name, .navbar-dropdown-meta', 'En-tête utilisateur'],
+        ['.navbar-dropdown-section, .navbar-dropdown-label', 'Bloc de réglage (sélecteur de thème…)'],
+      ],
+    } only %}
+  </section>
 </div>

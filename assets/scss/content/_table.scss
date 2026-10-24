@@ -1,0 +1,95 @@
+// ==========================================================================
+// Component: Table (content/_table.scss)
+// ==========================================================================
+
+@use '../abstracts' as *;
+
+.table {
+  // 1. Component Tokens
+  --table-color: var(--ds-color-on-surface);
+  --table-border-color: var(--ds-color-outline-variant);
+  --table-cell-py: var(--ds-space-4);
+  --table-cell-px: var(--ds-space-5);
+
+  // 2. Box Model
+  inline-size: 100%;
+  border-collapse: collapse;
+  border-color: var(--table-border-color);
+
+  // 3. Couleurs
+  color: var(--table-color);
+  vertical-align: top;
+}
+
+// Cellules
+.table > :not(caption) > * > * {
+  padding-block: var(--table-cell-py);
+  padding-inline: var(--table-cell-px);
+  border-block-end: var(--ds-border-width) solid var(--table-border-color);
+  background-color: transparent;
+}
+
+.table > thead {
+  vertical-align: bottom;
+}
+
+.table > tbody {
+  vertical-align: inherit;
+}
+
+.table.align-middle > :not(caption) > * > * {
+  vertical-align: middle;
+}
+
+// --------------------------------------------------------------------------
+// Variantes
+// --------------------------------------------------------------------------
+
+// En-tête ou ligne sur surface légèrement relevée
+.table-light > * > * {
+  background-color: var(--ds-surface-container-high);
+  color: var(--ds-color-on-surface);
+}
+
+// Petits sur-titres de colonnes
+.table-light th {
+  color: var(--ds-color-on-surface-variant);
+  text-transform: uppercase;
+  @include type(label, md);
+  letter-spacing: var(--ds-letter-spacing-caps);
+}
+
+.table-hover > tbody > tr > * {
+  transition: effects(background-color);
+}
+
+.table-hover > tbody > tr:hover > * {
+  background-color: state-layer(transparent, var(--table-color));
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: color-mix(in srgb, var(--table-color) var(--ds-state-stripe), transparent);
+}
+
+// --------------------------------------------------------------------------
+// Bordures
+// --------------------------------------------------------------------------
+.table-bordered {
+  border: var(--ds-border-width) solid var(--table-border-color);
+}
+
+.table-bordered > :not(caption) > * > * {
+  border: var(--ds-border-width) solid var(--table-border-color);
+}
+
+.table-borderless > :not(caption) > * > * {
+  border-block-end-width: 0;
+}
+
+// --------------------------------------------------------------------------
+// Défilement horizontal
+// --------------------------------------------------------------------------
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

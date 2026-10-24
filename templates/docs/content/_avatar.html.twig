@@ -1,73 +1,105 @@
+{# Docs : Avatar — source : assets/scss/content/_avatar.scss #}
+
 <div class="component-demo">
-  <h3>◉ Avatar & Stack</h3>
-  <p class="text-muted mb-4">
-    Composants pour représenter des utilisateurs ou des entités. Supporte les images (avec recadrage automatique) et le texte, ainsi que l'empilement (Stack).
+  <p class="docs-lead">
+    Représente une personne ou une entité : photo, initiales ou icône dans un cercle. Les tailles
+    suivent les hauteurs de contrôle pour s'aligner avec les boutons et les champs.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Tailles & Fallbacks</h5>
-        
-        <div class="d-flex align-items-center gap-4 mb-4">
-          <div class="avatar avatar-sm">
-            <img src="https://i.pravatar.cc/100?img=1" alt="Avatar SM">
-          </div>
-          <div class="avatar">
-            <img src="https://i.pravatar.cc/100?img=2" alt="Avatar MD">
-          </div>
-          <div class="avatar avatar-lg">
-            <img src="https://i.pravatar.cc/100?img=3" alt="Avatar LG">
-          </div>
-        </div>
+  <section class="docs-section" id="image">
+    <h3>Image</h3>
+    <p>L'image est recadrée pour remplir le cercle. Renseignez toujours le <code>alt</code>.</p>
+{% set code %}
+<div class="avatar"><img src="https://i.pravatar.cc/100?img=12" alt="Jane Doe"></div>
+<div class="avatar"><img src="https://i.pravatar.cc/100?img=32" alt="John Smith"></div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-        <div class="d-flex align-items-center gap-4">
-          <div class="avatar bg-primary-subtle text-primary-dark">
-            JD
-          </div>
-          <div class="avatar bg-warning-subtle text-warning-dark">
-            <i class="ri-star-smile-line"></i>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="docs-section" id="initiales">
+    <h3>Initiales et icône</h3>
+    <p>Sans image, l'avatar affiche du texte ou une icône sur le conteneur primaire.</p>
+{% set code %}
+<div class="avatar">JD</div>
+<div class="avatar"><i class="ri-user-line"></i></div>
+<div class="avatar bg-secondary-subtle text-secondary-dark">AB</div>
+<div class="avatar bg-success-subtle text-success-dark">OK</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Avatar Stack (Chevauchement)</h5>
-        <p class="small text-muted mb-4">L'effet de chevauchement se fait nativement via des marges négatives. Les avatars se soulèvent au survol.</p>
+  <section class="docs-section" id="tailles">
+    <h3>Tailles</h3>
+    <p>32px (<code>.avatar-sm</code>), 40px (par défaut) et 56px (<code>.avatar-lg</code>).</p>
+{% set code %}
+<div class="avatar avatar-sm"><img src="https://i.pravatar.cc/100?img=5" alt="Avatar petit"></div>
+<div class="avatar"><img src="https://i.pravatar.cc/100?img=5" alt="Avatar moyen"></div>
+<div class="avatar avatar-lg"><img src="https://i.pravatar.cc/100?img=5" alt="Avatar grand"></div>
+<div class="avatar avatar-sm">SM</div>
+<div class="avatar">MD</div>
+<div class="avatar avatar-lg">LG</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-        <div class="avatar-stack mb-4">
-          <div class="avatar"><img src="https://i.pravatar.cc/100?img=4" alt="User"></div>
-          <div class="avatar"><img src="https://i.pravatar.cc/100?img=5" alt="User"></div>
-          <div class="avatar"><img src="https://i.pravatar.cc/100?img=6" alt="User"></div>
-          <div class="avatar bg-secondary-subtle text-secondary-dark">+3</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<div class="avatar avatar-lg">
-  <img src="avatar.jpg" alt="Jane Doe">
-</div>
-
-<div class="avatar bg-primary-subtle text-primary-dark">
-  JD
-</div>
-
+  <section class="docs-section" id="pile">
+    <h3>Pile d'avatars</h3>
+    <p>
+      <code>.avatar-stack</code> fait se chevaucher les avatars. Chacun est entouré d'un anneau de la couleur
+      du fond et se soulève au survol. <code>.avatar-count</code> affiche le nombre restant.
+    </p>
+{% set code %}
 <div class="avatar-stack">
-  <div class="avatar"><img src="user1.jpg" alt="User 1"></div>
-  <div class="avatar"><img src="user2.jpg" alt="User 2"></div>
-  <div class="avatar bg-surface-hover text-muted">+5</div>
+  <div class="avatar"><img src="https://i.pravatar.cc/100?img=4" alt="Alice"></div>
+  <div class="avatar"><img src="https://i.pravatar.cc/100?img=8" alt="Bruno"></div>
+  <div class="avatar"><img src="https://i.pravatar.cc/100?img=9" alt="Chloé"></div>
+  <div class="avatar avatar-count">+5</div>
 </div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Avatars'
-    } %}
-  </div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+
+    <h4>Tailles de pile</h4>
+    <p>Le chevauchement s'adapte avec <code>.avatar-stack-sm</code> et <code>.avatar-stack-lg</code>.</p>
+{% set code %}
+<div class="avatar-stack avatar-stack-sm">
+  <div class="avatar avatar-sm">A</div>
+  <div class="avatar avatar-sm">B</div>
+  <div class="avatar avatar-sm">C</div>
+</div>
+<div class="avatar-stack avatar-stack-lg">
+  <div class="avatar avatar-lg">A</div>
+  <div class="avatar avatar-lg">B</div>
+  <div class="avatar avatar-lg">C</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--avatar-size', '<code>--ds-control-height-md</code>', 'Diamètre'],
+        ['--avatar-bg', '<code>--ds-color-primary-container</code>', 'Fond (initiales, icône)'],
+        ['--avatar-color', '<code>--ds-color-on-primary-container</code>', 'Texte'],
+        ['--avatar-font-size', '<code>--ds-text-label-lg</code>', 'Taille des initiales'],
+        ['--avatar-ring', '<code>transparent</code> (<code>--ds-surface</code> dans une pile)', 'Anneau'],
+        ['--avatar-overlap', '<code>--ds-space-3</code>', 'Chevauchement dans une pile'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.avatar', 'Avatar 40px'],
+        ['.avatar-sm, .avatar-lg', 'Tailles 32px et 56px'],
+        ['.avatar-stack', 'Pile d\'avatars qui se chevauchent'],
+        ['.avatar-stack-sm, .avatar-stack-lg', 'Chevauchement adapté à la taille'],
+        ['.avatar-count', 'Pastille « +X »'],
+      ],
+    } only %}
+  </section>
 </div>

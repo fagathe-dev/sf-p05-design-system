@@ -1,0 +1,30 @@
+{#
+  Exemple de documentation : aperçu en direct + extrait de code (façon Bootstrap).
+  Le même balisage sert aux deux, l'extrait ne peut donc pas diverger du rendu.
+
+  Paramètres :
+  - code     : balisage de l'exemple (obligatoire), rendu tel quel puis affiché
+  - preview  : rendu à afficher à la place de `code` (optionnel)
+  - layout   : mise en page de l'aperçu, valeurs séparées par des espaces :
+               stack, column, center, flush, tall, surface, contained
+  - title    : titre du bloc de code (optionnel)
+  - language : langage du bloc de code (défaut : html)
+
+  Usage :
+    {% set code %}
+    <button type="button" class="btn btn-primary">Primary</button>
+    {% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+#}
+{% set preview_classes = layout|default('')|split(' ')|filter(name => name is not empty)|map(name => 'docs-preview-' ~ name)|join(' ') %}
+{% set block_options = { code: code, language: language|default('html') } %}
+{% if title is defined %}
+  {% set block_options = block_options|merge({ title: title }) %}
+{% endif %}
+
+<div class="docs-example">
+  <div class="docs-example-preview {{ preview_classes }}">
+    {{ preview|default(code) }}
+  </div>
+  {% include 'fragments/components/_code-block.html.twig' with block_options only %}
+</div>

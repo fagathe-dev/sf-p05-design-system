@@ -1,81 +1,98 @@
-// ================================================================
-// COMPOSANT : CARD
-// ================================================================
+// ==========================================================================
+// Component: Card (components/_card.scss)
+// --------------------------------------------------------------------------
+// Carte standard sur --ds-surface-container, sans bordure ni ombre.
+// La variante .card-elevated passe en container-high au survol.
+// ==========================================================================
+
+@use '../abstracts' as *;
 
 .card {
+  // 1. Component Tokens
+  --card-bg: var(--ds-surface-container);
+  --card-color: var(--ds-color-on-surface);
+  --card-title-color: var(--ds-color-on-surface);
+  --card-radius: var(--ds-radius-lg);
+  --card-padding: var(--ds-space-6);
+
+  // 2. Box Model
   display: flex;
   flex-direction: column;
-  background-color: var(--ds-surface-bg);
-  border: none; // Aucune bordure externe
-  border-radius: var(--ds-border-radius-xl);
-  box-shadow: var(--ds-shadow);
   overflow: hidden;
+  border-radius: var(--card-radius);
+
+  // 3. Couleurs
+  background-color: var(--card-bg);
+  color: var(--card-color);
+
+  // 4. Motion
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    effects(background-color),
+    spatial(transform);
+}
 
-  // Variante : Elevated (Box-shadow plus prononcé au survol)
-  &.card-elevated {
-    cursor: pointer;
+// Carte interactive : surface plus haute et léger soulèvement au survol
+.card-elevated {
+  cursor: pointer;
+
+  &:hover {
+    --card-bg: var(--ds-surface-container-high);
+
+    transform: translateY(calc(var(--ds-space-1) * -1));
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  @include reduced-motion {
     &:hover {
-      box-shadow: var(--ds-shadow-lg);
-      transform: translateY(-4px);
+      transform: none;
     }
-  }
-
-  // Structure interne (Aucune bordure de séparation)
-  .card-header {
-    padding: 1.5rem 1.5rem 0;
-  }
-
-  .card-body {
-    padding: 1.5rem;
-    flex: 1;
-  }
-
-  .card-footer {
-    padding: 0 1.5rem 1.5rem;
-  }
-
-  // Typographie standard de la carte
-  .card-title {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--ds-heading-color);
-  }
-
-  .card-text {
-    margin: 0;
-    line-height: 1.6;
-    color: var(--ds-body-color);
-  }
-
-  // Gestion des images
-  .card-img,
-  .card-img-top {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
   }
 }
 
-// Thèmes spécifiques limités (primary, secondary, tertiary)
-@each $theme in primary, secondary, tertiary {
-  .card-#{$theme} {
-    background-color: var(--ds-#{$theme}-subtle);
-    color: var(--ds-#{$theme}-dark);
-    box-shadow: none;
+// --------------------------------------------------------------------------
+// Structure interne
+// --------------------------------------------------------------------------
+.card-header {
+  padding-block: var(--card-padding) 0;
+  padding-inline: var(--card-padding);
+}
 
-    // Titres et textes s'adaptent à la teinte du thème
-    .card-title,
-    .card-text {
-      color: var(--ds-#{$theme}-dark);
-    }
+.card-body {
+  flex: 1;
+  padding: var(--card-padding);
+}
 
-    // Le texte discret prend la teinte de base
-    .text-muted {
-      color: var(--ds-#{$theme}) !important;
-    }
+.card-footer {
+  padding-block: 0 var(--card-padding);
+  padding-inline: var(--card-padding);
+}
+
+.card-title {
+  margin-block: 0 var(--ds-space-2);
+  color: var(--card-title-color);
+  @include type(title, lg);
+}
+
+.card-text {
+  margin: 0;
+  color: inherit;
+}
+
+.card-img,
+.card-img-top {
+  inline-size: 100%;
+  block-size: auto;
+  object-fit: cover;
+}
+
+// Variantes (surcharge uniquement des Component Tokens)
+@each $role, $token in $roles {
+  .card-#{$role} {
+    --card-bg: #{role-color($role, 'container')};
+    --card-color: #{role-color($role, 'on-container')};
+    --card-title-color: #{role-color($role, 'on-container')};
   }
 }

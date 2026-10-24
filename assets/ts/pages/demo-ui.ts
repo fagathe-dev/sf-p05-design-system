@@ -4,13 +4,13 @@
 
 import {
   copyWithButtonFeedback,
-  initClipboardHandlers,
   convertMarkdownToHtml,
   FormManager,
   $,
 } from 'core-ts'; // Assure-toi que les imports correspondent à la réalité de ta librairie
 
 import { Alert, Toast } from '@components/index'; // Assure-toi que les imports correspondent à la réalité de ta librairie
+import type { AlertType, ToastType } from '@components/index';
 
 // -----------------------------------------------------------------------------
 // 1. INITIALISATION DES BOUTONS DE COPIE AUTO SUR LES BLOCS <PRE>
@@ -53,23 +53,36 @@ const initCodeBlocksCopy = (): void => {
   });
 };
 
+// Boutons de démo des alertes et toasts dynamiques :
+// - [data-demo-alert="success|info|warning|danger"] (+ data-demo-target : conteneur)
+// - [data-demo-toast="success|info|warning|error"]
 const initFeedbackDemo = (): void => {
-  // Test Alert
-  if ($('#btn-alert-test') instanceof HTMLElement) {
-    ($('#btn-alert-test') as HTMLElement)?.addEventListener('click', () => {
-      new Alert(
-        'Ceci est une alerte dynamique créée via TypeScript !',
-        'success',
-      );
+  document
+    .querySelectorAll<HTMLElement>('[data-demo-alert]')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        const { demoAlert, demoTarget } = button.dataset;
+        const root = demoTarget
+          ? document.querySelector<HTMLElement>(demoTarget)
+          : null;
+        new Alert(
+          'Ceci est une alerte dynamique créée via TypeScript !',
+          demoAlert as AlertType,
+          root ?? document.body,
+        );
+      });
     });
-  }
 
-  // Test Toast
-  if ($('#btn-toast-test') instanceof HTMLElement) {
-    ($('#btn-toast-test') as HTMLElement)?.addEventListener('click', () => {
-      new Toast('Opération effectuée avec succès.', 'success');
+  document
+    .querySelectorAll<HTMLElement>('[data-demo-toast]')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        new Toast(
+          'Opération effectuée avec succès.',
+          button.dataset.demoToast as ToastType,
+        );
+      });
     });
-  }
 };
 
 // -----------------------------------------------------------------------------
@@ -99,8 +112,8 @@ const initMarkdownDemo = (): void => {
 // 3. DÉMO : CLIPBOARD (Presse-papier)
 // -----------------------------------------------------------------------------
 const initClipboardDemo = (): void => {
-  // Initialise l'attribut auto data-copy-target présent sur la page
-  initClipboardHandlers();
+  // Les boutons [data-copy-target] sont déjà initialisés par main.ts :
+  // un second appel doublerait chaque listener (double copie, double feedback).
 
   // Démo de la copie programmatique
   const btnFeedback = document.getElementById('demo-btn-feedback');

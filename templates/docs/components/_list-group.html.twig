@@ -1,8 +1,99 @@
+{# Docs : List Group — source : assets/scss/components/_list-group.scss #}
+
 <div class="component-demo">
-  <h3>📋 Liste</h3>
-  <div class="list-group">
-    <a href="#" class="list-group-item active">Item actif</a>
-    <a href="#" class="list-group-item">Item classique</a>
-    <a href="#" class="list-group-item disabled">Item désactivé</a>
-  </div>
+  <p class="docs-lead">
+    Liste d'éléments sur une surface arrondie, séparés par un trait discret. Les items peuvent être
+    des liens ou des boutons, avec des états actif et désactivé.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+{% set code %}
+<ul class="list-group">
+  <li class="list-group-item">Tableau de bord</li>
+  <li class="list-group-item">Projets</li>
+  <li class="list-group-item">Équipe</li>
+</ul>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="interactifs">
+    <h3>Liens et boutons</h3>
+    <p>Les items <code>&lt;a&gt;</code> et <code>&lt;button&gt;</code> reçoivent un calque au survol et l'anneau de focus.</p>
+{% set code %}
+<div class="list-group">
+  <a href="#" class="list-group-item active" aria-current="true">Élément actif</a>
+  <a href="#" class="list-group-item">Lien</a>
+  <button type="button" class="list-group-item">Bouton</button>
+  <a class="list-group-item disabled" aria-disabled="true">Élément désactivé</a>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="icones">
+    <h3>Icônes et badges</h3>
+    <p>L'item est en flex : poussez un badge à droite avec <code>.ms-auto</code>.</p>
+{% set code %}
+<div class="list-group">
+  <a href="#" class="list-group-item"><i class="ri-inbox-line"></i> Boîte de réception <span class="badge badge-solid-primary ms-auto">12</span></a>
+  <a href="#" class="list-group-item"><i class="ri-send-plane-line"></i> Envoyés</a>
+  <a href="#" class="list-group-item"><i class="ri-spam-2-line"></i> Spam <span class="badge badge-danger ms-auto">3</span></a>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="numerotee">
+    <h3>Liste numérotée</h3>
+{% set code %}
+<ol class="list-group list-group-numbered">
+  <li class="list-group-item">Créer le compte</li>
+  <li class="list-group-item">Vérifier l'adresse email</li>
+  <li class="list-group-item">Inviter l'équipe</li>
+</ol>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="flush">
+    <h3>Affleurante</h3>
+    <p><code>.list-group-flush</code> retire le fond et l'arrondi, pour une liste intégrée à une carte ou à un panneau.</p>
+{% set code %}
+<div class="card" style="max-inline-size: 22rem;">
+  <div class="card-header"><h5 class="card-title">Notifications</h5></div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Nouveau commentaire</li>
+    <li class="list-group-item">Projet mis à jour</li>
+  </ul>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--list-group-bg', '<code>--ds-surface-container</code>', 'Fond'],
+        ['--list-group-color', '<code>--ds-color-on-surface</code>', 'Texte'],
+        ['--list-group-divider-color', '<code>--ds-color-outline-variant</code>', 'Séparateur'],
+        ['--list-group-radius', '<code>--ds-radius-lg</code>', 'Rayon'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.list-group', 'Conteneur'],
+        ['.list-group-item', 'Item ; .active et .disabled pour les états'],
+        ['.list-group-flush', 'Sans fond ni arrondi'],
+        ['.list-group-numbered', 'Numérotation automatique (sur un &lt;ol&gt;)'],
+      ],
+    } only %}
+  </section>
 </div>

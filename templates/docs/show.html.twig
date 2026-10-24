@@ -2,6 +2,11 @@
 
 {% block title %}{{ page_title }}{% endblock %}
 
+{% block stylesheets %}
+    {# Mise en page des démos (sections, exemples, tableaux de référence) #}
+    <link rel="stylesheet" href="{{ asset('css/ds-docs.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="py-4">
     <header class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">

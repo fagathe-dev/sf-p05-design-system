@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Base UI{% endblock %}</title>
 
+  {# Thème appliqué avant le premier rendu (pas de flash clair → sombre).
+     Même clé et mêmes valeurs que assets/ts/services/theme.ts #}
+  <script>
+    (function () {
+      var mode = 'auto';
+      try { mode = localStorage.getItem('ds-theme') || 'auto'; } catch (e) {}
+      var dark = mode === 'dark' || (mode !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-ui-theme', dark ? 'dark' : 'light');
+    })();
+  </script>
+
   <link rel="shortcut icon" href="{{ asset(favicon_path) }}" type="image/x-icon">
   
   {# Librairie d'icônes #}

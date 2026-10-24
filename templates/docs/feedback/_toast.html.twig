@@ -1,39 +1,106 @@
-<div class="component-demo" id="ui-docs-toast-demo">
-  <h3>🍞 Notifications (Toasts)</h3>
-  <p class="text-muted mb-4">
-    Notifications non-bloquantes destinées à apparaître dans <code>#toast-container</code>.
+{# Docs : Toast — source : assets/scss/feedback/_toast.scss, JS : components/Toast.ts #}
+{% set types = {
+  success: 'ri-checkbox-circle-fill',
+  error: 'ri-error-warning-fill',
+  info: 'ri-information-fill',
+  warning: 'ri-alert-fill',
+} %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Notifications temporaires et non bloquantes, empilées en bas à droite de l'écran. Elles entrent
+    par la droite et disparaissent seules.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-md-8 col-lg-6 mx-auto">
-      <div class="box box-secondary mb-0">
-        <h5 class="mb-4">Test dynamique</h5>
-        <button id="btn-toast-test" class="btn btn-primary mb-4">
-          <i class="ri-add-line"></i> Créer un toast dynamique
-        </button>
-        
-        <h5 class="mb-4">Aperçu statique</h5>
-        <div class="toast toast-success show mb-3" style="position: static; transform: none; opacity: 1; width: 100%;" role="alert">
-          <i class="ri-checkbox-circle-fill toast-icon"></i>
-          <div class="toast-body">Fichier téléchargé avec succès.</div>
-          <button type="button" class="btn-close" data-ds-dismiss="toast" aria-label="Fermer"></button>
-        </div>
+  <section class="docs-section" id="dynamique">
+    <h3>Toast dynamique</h3>
+    <p>
+      La classe TypeScript <code>Toast</code> crée le conteneur <code>#toast-container</code> au besoin,
+      affiche le toast puis le retire après sa durée (3 s par défaut).
+    </p>
+    <div class="docs-example">
+      <div class="docs-example-preview docs-preview-stack">
+        {% for type in types|keys %}
+          <button type="button" class="btn btn-soft-{{ type == 'error' ? 'danger' : type }} btn-sm" data-demo-toast="{{ type }}">{{ type|capitalize }}</button>
+        {% endfor %}
       </div>
     </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
+{% set code %}
 import { Toast } from '@components/Toast';
-new Toast('Opération effectuée.', 'success');
 
-<div id="toast-container"></div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'typescript',
-      'title': 'Usage Toast'
-    } %}
-  </div>
+// new Toast(message, type = 'info', durée en ms = 3000)
+new Toast('Fichier téléchargé.', 'success');
+new Toast('Connexion perdue.', 'error', 5000);
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'typescript', title: 'Toast.ts' } only %}
+  </section>
+
+  <section class="docs-section" id="types">
+    <h3>Types</h3>
+    <p>
+      Sans type, le toast utilise la surface inversée (snackbar M3). <code>.toast-{type}</code> passe sur le
+      conteneur du rôle. Un toast statique doit porter <code>.show</code> pour être visible.
+    </p>
+{% set code %}
+<div class="toast show" role="status">
+  <div class="toast-body">Brouillon enregistré.</div>
+  <button type="button" class="btn-close" data-ds-dismiss="toast" aria-label="Fermer"></button>
+</div>
+{% for type, icon in types %}
+<div class="toast toast-{{ type }} show" role="{{ type == 'error' ? 'alert' : 'status' }}">
+  <i class="{{ icon }} toast-icon"></i>
+  <div class="toast-body">Notification {{ type }}.</div>
+  <button type="button" class="btn-close" data-ds-dismiss="toast" aria-label="Fermer"></button>
+</div>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="conteneur">
+    <h3>Conteneur</h3>
+    <p>
+      Les toasts sont empilés dans <code>#toast-container</code> (fixe, en bas à droite, espacés par
+      <code>gap</code>). Vous pouvez le placer vous-même dans le layout pour maîtriser son emplacement dans le DOM.
+    </p>
+{% set code %}
+<div id="toast-container" aria-live="polite"></div>
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html' } only %}
+  </section>
+
+  <section class="docs-section" id="accessibilite">
+    <h3>Accessibilité</h3>
+    <ul>
+      <li>Utilisez <code>role="status"</code> pour une information et <code>role="alert"</code> pour une erreur.</li>
+      <li>Un toast disparaît seul : n'y placez pas d'action indispensable.</li>
+      <li>Avec <code>prefers-reduced-motion: reduce</code>, le toast apparaît en fondu, sans glissement.</li>
+    </ul>
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--toast-bg', '<code>--ds-color-inverse-surface</code>', 'Fond'],
+        ['--toast-color', '<code>--ds-color-inverse-on-surface</code>', 'Texte'],
+        ['--ds-size-toast', '<code>31.25rem</code>', 'Largeur maximale du conteneur (System Token)'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes et attributs</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['#toast-container', 'Pile de toasts fixe'],
+        ['.toast', 'Toast (masqué tant qu\'il n\'a pas .show)'],
+        ['.toast-success, .toast-error, .toast-info, .toast-warning', 'Types'],
+        ['.toast-icon, .toast-body', 'Icône et message'],
+        ['.show, .hide', 'Apparition et disparition (posées par le JS)'],
+        ['data-ds-dismiss="toast"', 'Ferme le toast parent'],
+      ],
+    } only %}
+  </section>
 </div>

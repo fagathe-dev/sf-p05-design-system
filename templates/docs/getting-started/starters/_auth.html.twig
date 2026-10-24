@@ -1,0 +1,48 @@
+{# Starter authentification. Paramètre : host #}
+{% include 'docs/getting-started/starters/_head.html.twig' with { host: host, title: 'Connexion — Base UI' } only %}
+<body>
+  <main class="layout-auth">
+    <div class="auth-card">
+      <div class="auth-header">
+        <nav class="auth-tabs" aria-label="Authentification">
+          <a href="#" class="auth-tab active" aria-current="page">Connexion</a>
+          <a href="#" class="auth-tab">Inscription</a>
+        </nav>
+      </div>
+
+      <div class="auth-body">
+        <form class="d-flex flex-column gap-4" action="#" method="post">
+          <div>
+            <h1 class="h4 mb-1">Bon retour parmi nous</h1>
+            <p class="text-muted mb-0">Connectez-vous pour continuer.</p>
+          </div>
+          <div>
+            <label for="login-email" class="form-label">Adresse email</label>
+            <input type="email" class="form-control" id="login-email" name="email" placeholder="nom@exemple.com" autocomplete="email" required>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between">
+              <label for="login-password" class="form-label">Mot de passe</label>
+              <a href="#" class="small">Mot de passe oublié ?</a>
+            </div>
+            <input type="password" class="form-control" id="login-password" name="password" autocomplete="current-password" required>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="login-remember" name="remember">
+            <label class="form-check-label" for="login-remember">Rester connecté</label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+        </form>
+
+        <div class="auth-divider"><span>ou</span></div>
+
+        <button type="button" class="btn btn-outline-secondary w-100"><i class="ri-google-fill"></i> Continuer avec Google</button>
+      </div>
+
+      <div class="auth-footer">
+        Pas encore de compte ? <a href="#">Créer un compte</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

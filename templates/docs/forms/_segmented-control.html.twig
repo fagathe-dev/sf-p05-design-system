@@ -1,0 +1,185 @@
+{# Docs : Segmented Control — source : assets/scss/forms/_segmented-control.scss, JS : interactions/components/segmented-control.ts #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Choix exclusif entre quelques options (2 à 5), toutes visibles. Le groupe est un
+    <code>radiogroup</code> de boutons <code>role="radio"</code> : il se pilote au clic et au clavier, et
+    émet un événement <code>ds:change</code> à chaque changement.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>
+      Chaque option porte sa valeur dans <code>data-value</code> et son état dans <code>aria-checked</code>.
+      Le groupe doit avoir un nom accessible (<code>aria-label</code>).
+    </p>
+{% set code %}
+<div class="segmented-control" role="radiogroup" aria-label="Affichage">
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="list">Liste</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="grid">Grille</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="map">Carte</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="icones">
+    <h3>Avec icônes</h3>
+    <p>L'icône se place avant le libellé, dans une balise <code>&lt;i&gt;</code>.</p>
+{% set code %}
+<div class="segmented-control" role="radiogroup" aria-label="Affichage">
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="list"><i class="ri-list-check"></i> Liste</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="grid"><i class="ri-layout-grid-line"></i> Grille</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="map"><i class="ri-map-pin-line"></i> Carte</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="icones-seules">
+    <h3>Icônes seules</h3>
+    <p>
+      Sans libellé visible, chaque option a besoin d'un <code>aria-label</code> ; un <code>title</code> précise
+      son comportement au survol. Exemple : le sélecteur de thème. Avec <code>data-ds-theme-switch</code>, il est
+      relié au service de thème (page Features › Theme) et change réellement le thème de la page.
+    </p>
+{% set code %}
+<div class="segmented-control" role="radiogroup" aria-label="Mode d'affichage" data-ds-theme-switch>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="auto" aria-label="Automatique" title="Automatique (suit le réglage de l'appareil)"><i class="ri-computer-line"></i></button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="light" aria-label="Clair" title="Thème clair"><i class="ri-sun-line"></i></button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="dark" aria-label="Sombre" title="Thème sombre"><i class="ri-moon-line"></i></button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="tailles">
+    <h3>Tailles</h3>
+    <p>
+      Le groupe fait 40px de haut, comme les boutons et les champs. <code>.segmented-control-sm</code> le
+      ramène à 32px, pour une barre d'outils.
+    </p>
+{% set code %}
+<div class="segmented-control segmented-control-sm" role="radiogroup" aria-label="Période (petit)">
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="day">Jour</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="week">Semaine</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="month">Mois</button>
+</div>
+<div class="segmented-control" role="radiogroup" aria-label="Période">
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="day">Jour</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="week">Semaine</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="month">Mois</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="pleine-largeur">
+    <h3>Pleine largeur</h3>
+    <p><code>.segmented-control-full</code> occupe toute la largeur du parent, avec des segments de largeur égale.</p>
+{% set code %}
+<div class="segmented-control segmented-control-full" role="radiogroup" aria-label="Facturation">
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="monthly">Mensuelle</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="yearly">Annuelle (-20 %)</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="coche">
+    <h3>Coche de sélection</h3>
+    <p>
+      <code>.segmented-control-check</code> affiche une coche sur le segment sélectionné, s'il n'a pas déjà
+      sa propre icône.
+    </p>
+{% set code %}
+<div class="segmented-control segmented-control-check" role="radiogroup" aria-label="Taille">
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="s">S</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="m">M</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="l">L</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="xl">XL</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="desactive">
+    <h3>Option désactivée</h3>
+    <p>Une option <code>disabled</code> est ignorée au clic et sautée par la navigation clavier.</p>
+{% set code %}
+<div class="segmented-control" role="radiogroup" aria-label="Livraison">
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="standard">Standard</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="express">Express</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="drone" disabled>Drone</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="javascript">
+    <h3>JavaScript</h3>
+    <p>
+      <code>main.ts</code> active tous les contrôles au chargement (<code>initSegmentedControls()</code>) ; les
+      listeners sont délégués, un contrôle ajouté ensuite fonctionne aussi. Écoutez <code>ds:change</code> pour
+      réagir à la sélection.
+    </p>
+{% set code %}
+import { getSegmentValue, selectSegment } from '@/interactions/components/segmented-control';
+
+const control = document.querySelector('#view-mode');
+
+// Réagir au choix de l'utilisateur (clic ou clavier)
+control.addEventListener('ds:change', (event) => {
+  console.log(event.detail.value); // 'list' | 'grid' | 'map'
+});
+
+getSegmentValue(control);                       // valeur sélectionnée
+selectSegment(control, 'grid');                 // sélectionne et émet ds:change
+selectSegment(control, 'map', { silent: true }); // sans émettre d'événement
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'typescript', title: 'segmented-control.ts' } only %}
+  </section>
+
+  <section class="docs-section" id="accessibilite">
+    <h3>Accessibilité</h3>
+    <ul>
+      <li>Le groupe porte <code>role="radiogroup"</code> et un <code>aria-label</code> ; chaque option, <code>role="radio"</code> et <code>aria-checked</code>.</li>
+      <li>Seule l'option sélectionnée est atteignable avec Tab ; les flèches, Début et Fin déplacent la sélection.</li>
+      <li>Une option sans libellé visible doit avoir un <code>aria-label</code>.</li>
+      <li>Au-delà de 5 options, préférez une liste déroulante.</li>
+    </ul>
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--segmented-height', '<code>--ds-control-height-md</code>', 'Hauteur totale du groupe'],
+        ['--segmented-padding', '<code>--ds-space-1</code>', 'Espace autour des segments'],
+        ['--segmented-radius', '<code>--ds-radius-lg</code>', 'Rayon du groupe (segments concentriques)'],
+        ['--segmented-bg', '<code>--ds-surface-container-low</code>', 'Fond du groupe'],
+        ['--segmented-border-color', '<code>--ds-color-outline-variant</code>', 'Bordure du groupe'],
+        ['--segmented-selected-bg', '<code>--ds-color-primary-container</code>', 'Fond du segment sélectionné'],
+        ['--segmented-selected-color', '<code>--ds-color-on-primary-container</code>', 'Texte du segment sélectionné'],
+        ['--segmented-option-px', '<code>--ds-space-3_5</code>', 'Padding horizontal des segments'],
+        ['--segmented-option-font-size', '<code>--ds-text-label-lg</code>', 'Taille du libellé'],
+        ['--segmented-option-icon-size', '<code>--ds-icon-size-md</code>', 'Taille des icônes'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes et attributs</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.segmented-control', 'Groupe (role="radiogroup")'],
+        ['.segmented-control-option', 'Segment (role="radio", data-value, aria-checked)'],
+        ['.segmented-control-sm', 'Petite taille (32px)'],
+        ['.segmented-control-full', 'Pleine largeur, segments égaux'],
+        ['.segmented-control-check', 'Coche sur le segment sélectionné'],
+        ['ds:change', 'Événement émis par le groupe (event.detail.value)'],
+      ],
+    } only %}
+  </section>
+</div>

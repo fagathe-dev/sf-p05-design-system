@@ -1,17 +1,94 @@
-{% set colors = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
+{# Docs : Badge — source : assets/scss/components/_badge.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
 
 <div class="component-demo">
-  <h3>🏷️ Badges solid</h3>
-  <div class="d-flex gap-2">
-    {% for color in colors %}
-      <span class="badge badge-solid-{{ color }}">{{ color|capitalize }}</span>
-    {% endfor %}
-  </div>
+  <p class="docs-lead">
+    Petites étiquettes en pilule pour un statut, une catégorie ou un compteur. Deux variantes
+    pour chaque rôle : regular (fond conteneur) et solid (fond plein).
+  </p>
 
-  <h3>🏷️ Badges normaux</h3>
-  <div class="d-flex gap-2">
-    {% for color in colors %}
-      <span class="badge badge-{{ color }}">{{ color|capitalize }}</span>
-    {% endfor %}
-  </div>
+  <section class="docs-section" id="regular">
+    <h3>Regular</h3>
+    <p>
+      Variante par défaut. <code>.badge-{rôle}</code>, <code>.badge-regular-{rôle}</code> et
+      <code>.badge-soft-{rôle}</code> sont équivalentes. Sans variante, le badge prend le rôle secondary.
+    </p>
+{% set code %}
+{% for role in roles %}
+<span class="badge badge-{{ role }}">{{ role|capitalize }}</span>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="solid">
+    <h3>Solid</h3>
+    <p>Fond plein du rôle, pour un statut qui doit ressortir.</p>
+{% set code %}
+{% for role in roles %}
+<span class="badge badge-solid-{{ role }}">{{ role|capitalize }}</span>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="icones">
+    <h3>Avec icône</h3>
+{% set code %}
+<span class="badge badge-success"><i class="ri-check-line"></i> Publié</span>
+<span class="badge badge-warning"><i class="ri-time-line"></i> En attente</span>
+<span class="badge badge-solid-danger"><i class="ri-error-warning-line"></i> Bloqué</span>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="titres">
+    <h3>Dans un titre</h3>
+    <p>La taille du badge est fixe : il reste lisible à côté d'un titre de n'importe quel niveau.</p>
+{% set code %}
+<h4>Projets <span class="badge badge-primary">Nouveau</span></h4>
+<h5>Factures <span class="badge badge-solid-danger">3 en retard</span></h5>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="compteur">
+    <h3>Compteur dans un bouton</h3>
+    <p>Ajoutez un texte masqué pour les lecteurs d'écran si le nombre seul n'est pas explicite.</p>
+{% set code %}
+<button type="button" class="btn btn-soft-secondary">
+  Messages <span class="badge badge-solid-primary">4</span>
+  <span class="visually-hidden">non lus</span>
+</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+{% set code %}
+<span class="badge" style="--badge-radius: var(--ds-radius-xs);">Badge technique</span>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--badge-bg', '<code>--ds-color-secondary-container</code>', 'Fond'],
+        ['--badge-color', '<code>--ds-color-on-secondary-container</code>', 'Texte'],
+        ['--badge-radius', '<code>--ds-radius-full</code>', 'Rayon (pilule)'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.badge', 'Classe de base'],
+        ['.badge-{rôle}, .badge-regular-{rôle}, .badge-soft-{rôle}', 'Fond conteneur du rôle'],
+        ['.badge-solid-{rôle}', 'Fond plein du rôle'],
+        ['.badge-pill', 'Conservée pour compatibilité (pilule par défaut)'],
+      ],
+    } only %}
+  </section>
 </div>

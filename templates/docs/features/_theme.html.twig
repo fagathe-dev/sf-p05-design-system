@@ -1,0 +1,118 @@
+{# Docs : Theme — sources : assets/ts/services/theme.ts, interactions/components/theme-switch.ts, foundation/_tokens.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Service de mode d'affichage : <code>'auto'</code> (suit l'appareil), <code>'light'</code> ou
+    <code>'dark'</code>. Le choix est mémorisé, appliqué sur <code>&lt;html data-ui-theme&gt;</code> et partagé
+    entre les sélecteurs et les onglets ouverts.
+  </p>
+
+  <section class="docs-section" id="selecteur">
+    <h3>Sélecteur de thème</h3>
+    <p>
+      Tout SegmentedControl qui porte <code>data-ds-theme-switch</code>, avec les options <code>auto</code>,
+      <code>light</code> et <code>dark</code>, est relié au service. Essayez : toute la page change de thème, et le
+      sélecteur du menu du compte se met à jour.
+    </p>
+{% set code %}
+<div class="segmented-control" role="radiogroup" aria-label="Mode d'affichage" data-ds-theme-switch>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="auto" aria-label="Automatique" title="Automatique (suit le réglage de l'appareil)"><i class="ri-computer-line"></i></button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="light" aria-label="Clair" title="Thème clair"><i class="ri-sun-line"></i></button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="dark" aria-label="Sombre" title="Thème sombre"><i class="ri-moon-line"></i></button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+
+    <h4>Avec libellés</h4>
+{% set code %}
+<div class="segmented-control segmented-control-full" role="radiogroup" aria-label="Mode d'affichage" data-ds-theme-switch>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="auto"><i class="ri-computer-line"></i> Automatique</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="light"><i class="ri-sun-line"></i> Clair</button>
+  <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="dark"><i class="ri-moon-line"></i> Sombre</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="service">
+    <h3>Service</h3>
+    <p>
+      <code>themeService</code> est une instance unique : tous les scripts de la page partagent le même état.
+      Chaque changement émet aussi l'événement <code>ds:theme-change</code> sur <code>document</code>.
+    </p>
+{% set code %}
+import { themeService } from '@/services/theme';
+
+themeService.getMode();   // 'auto' | 'light' | 'dark' — la préférence
+themeService.getTheme();  // 'light' | 'dark' — le thème affiché ('auto' résolu)
+themeService.setMode('dark');
+
+// Réagir aux changements (retourne la fonction de désabonnement)
+const unsubscribe = themeService.subscribe(({ mode, theme }) => {
+  console.log(`Préférence ${mode}, thème ${theme}`);
+});
+
+// Sans importer le service
+document.addEventListener('ds:theme-change', (event) => {
+  console.log(event.detail.theme);
+});
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'typescript', title: 'services/theme.ts' } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Méthode', 'Rôle'],
+      rows: [
+        ['getMode()', 'Préférence choisie'],
+        ['getTheme()', 'Thème affiché, avec auto résolu selon l\'appareil'],
+        ['getState()', '<code>{ mode, theme }</code>'],
+        ['setMode(mode)', 'Change, mémorise (localStorage) et applique la préférence'],
+        ['subscribe(listener)', 'Appelé à chaque changement ; retourne la fonction de désabonnement'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="fonctionnement">
+    <h3>Fonctionnement</h3>
+    <ul>
+      <li>La préférence est stockée sous la clé <code>ds-theme</code> ; une valeur absente ou invalide vaut <code>auto</code>.</li>
+      <li>En <code>auto</code>, le thème suit <code>prefers-color-scheme</code>, y compris quand le réglage de l'appareil change.</li>
+      <li>Un changement fait dans un autre onglet est appliqué immédiatement.</li>
+      <li>Les tokens du thème sombre s'appliquent sous <code>[data-ui-theme="dark"]</code>.</li>
+    </ul>
+  </section>
+
+  <section class="docs-section" id="premier-rendu">
+    <h3>Avant le premier rendu</h3>
+    <p>
+      Le JS est chargé en fin de page : pour éviter un flash du thème clair, <code>base.html.twig</code> applique le
+      thème mémorisé dès le <code>&lt;head&gt;</code>. Gardez la même clé et les mêmes valeurs que le service.
+    </p>
+{% set code %}
+<script>
+  (function () {
+    var mode = 'auto';
+    try { mode = localStorage.getItem('ds-theme') || 'auto'; } catch (e) {}
+    var dark = mode === 'dark' || (mode !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.setAttribute('data-ui-theme', dark ? 'dark' : 'light');
+  })();
+</script>
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html', title: 'base.html.twig' } only %}
+  </section>
+
+  <section class="docs-section" id="zone-sombre">
+    <h3>Zone toujours sombre</h3>
+    <p>
+      Les tokens sombres s'appliquent à tout élément qui porte <code>data-ui-theme="dark"</code> : une zone de la
+      page peut rester sombre quel que soit le thème choisi. Redonnez-lui sa couleur de texte
+      (<code>.text-body</code>) : la couleur héritée de la page est celle du thème clair.
+    </p>
+{% set code %}
+<div data-ui-theme="dark" class="p-6 rounded-lg bg-surface-container text-body">
+  <h5>Zone sombre</h5>
+  <p class="text-muted">Les composants y utilisent les tokens du thème sombre.</p>
+  <button type="button" class="btn btn-primary">Action</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+</div>

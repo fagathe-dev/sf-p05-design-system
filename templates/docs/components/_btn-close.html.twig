@@ -1,0 +1,86 @@
+{# Docs : Button Close — source : assets/scss/components/_btn-close.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Bouton de fermeture générique : une croix dessinée par masque SVG, qui prend la couleur du texte
+    de son conteneur. Sa taille suit la police du conteneur et sa zone cliquable fait au moins 44px.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>Sans texte visible, le bouton doit porter un <code>aria-label</code>.</p>
+{% set code %}
+<button type="button" class="btn-close" aria-label="Fermer"></button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="desactive">
+    <h3>Désactivé</h3>
+{% set code %}
+<button type="button" class="btn-close" aria-label="Fermer" disabled></button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="couleur">
+    <h3>Couleur héritée</h3>
+    <p>La croix suit <code>currentColor</code> : elle s'adapte sans classe dédiée à un fond plein.</p>
+{% set code %}
+<div class="d-flex align-items-center gap-3 p-3 rounded bg-primary text-white">
+  Bandeau sur fond plein
+  <button type="button" class="btn-close ms-auto" aria-label="Fermer"></button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="taille">
+    <h3>Taille</h3>
+    <p>La croix mesure 1.5em : changez la taille de police du bouton ou de son conteneur.</p>
+{% set code %}
+<button type="button" class="btn-close" aria-label="Fermer"></button>
+<button type="button" class="btn-close fs-4" aria-label="Fermer"></button>
+<button type="button" class="btn-close fs-2" aria-label="Fermer"></button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="contextes">
+    <h3>Dans les composants</h3>
+    <p>
+      Les alertes fermables, les toasts et les modales le positionnent eux-mêmes. Avec
+      <code>data-ds-dismiss</code>, le JS ferme le composant parent (<code>alert</code>, <code>toast</code>,
+      <code>modal</code>, <code>dialog</code> ou <code>sidebar</code>).
+    </p>
+{% set code %}
+<div class="alert alert-soft-info alert-dismissible" role="alert">
+  <i class="ri-information-line alert-icon"></i>
+  <div class="alert-content">Cette alerte se ferme avec la croix.</div>
+  <button type="button" class="btn-close" data-ds-dismiss="alert" aria-label="Fermer"></button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--btn-close-size', '<code>1.5em</code>', 'Taille du bouton (relative à la police)'],
+        ['--btn-close-color', '<code>inherit</code>', 'Couleur de la croix'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.btn-close', 'Bouton de fermeture'],
+        ['.disabled', 'État désactivé (équivalent de l\'attribut disabled)'],
+      ],
+    } only %}
+  </section>
+</div>

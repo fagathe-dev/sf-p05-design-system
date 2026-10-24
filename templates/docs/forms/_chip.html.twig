@@ -1,55 +1,92 @@
+{# Docs : Chip — source : assets/scss/forms/_chip.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
+
 <div class="component-demo">
-  <h3>🏷️ Composant Chip</h3>
-  <p class="text-muted mb-4">
-    Petits éléments interactifs parfaits pour afficher des filtres, des tags, ou des statuts. 
-    Ils supportent les icônes et les variantes de formes (Pill).
+  <p class="docs-lead">
+    Chips de filtre et de tag : pilules de 32px (zone cliquable de 44px) qui passent en fond plein
+    et changent de forme quand elles sont sélectionnées.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary mb-0">
-        <h5 class="mb-4">Thèmes standards</h5>
-        
-        <div class="d-flex flex-wrap gap-2 mb-4">
-          <div class="chip chip-primary">
-            <i class="ri-code-line"></i> TypeScript
-          </div>
-          <div class="chip chip-secondary">
-            <i class="ri-brush-line"></i> SCSS
-          </div>
-          <div class="chip chip-tertiary">
-            <i class="ri-box-3-line"></i> Symfony
-          </div>
-        </div>
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>Utilisez un <code>&lt;button&gt;</code> pour une chip interactive ; sans variante, elle prend le rôle primary.</p>
+{% set code %}
+<button type="button" class="chip">Design</button>
+<button type="button" class="chip">Développement</button>
+<button type="button" class="chip">Produit</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-        <h5 class="mb-4">Forme Pilule (Pill)</h5>
-        <div class="d-flex flex-wrap gap-2">
-          <div class="chip chip-primary chip-pill">
-            Design System
-          </div>
-          <div class="chip chip-secondary chip-pill">
-            <i class="ri-close-line"></i> Retirer le filtre
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <section class="docs-section" id="roles">
+    <h3>Rôles</h3>
+    <p><code>.chip-{rôle}</code> : conteneur du rôle et bordure fonctionnelle.</p>
+{% set code %}
+{% for role in roles %}
+<button type="button" class="chip chip-{{ role }}">{{ role|capitalize }}</button>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<span class="chip chip-primary">
-  <i class="ri-star-line"></i> Nouveau
-</span>
+  <section class="docs-section" id="selection">
+    <h3>Sélection</h3>
+    <p>
+      Ajoutez <code>.is-selected</code> ou <code>aria-selected="true"</code> (ou <code>aria-pressed</code> géré
+      par votre script) : la chip passe en fond plein et son rayon se resserre. La bascule de l'état est à la
+      charge de votre code.
+    </p>
+{% set code %}
+{% for role in roles %}
+<button type="button" class="chip chip-{{ role }} is-selected">{{ role|capitalize }}</button>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-<span class="chip chip-secondary chip-pill">
-  Option 1
-</span>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Chips'
-    } %}
-  </div>
+  <section class="docs-section" id="icones">
+    <h3>Avec icône</h3>
+{% set code %}
+<button type="button" class="chip chip-primary"><i class="ri-code-line"></i> TypeScript</button>
+<button type="button" class="chip chip-secondary is-selected"><i class="ri-check-line"></i> SCSS</button>
+<span class="chip chip-tertiary">Symfony <i class="ri-close-line" aria-hidden="true"></i></span>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="desactive">
+    <h3>Désactivé</h3>
+{% set code %}
+<button type="button" class="chip chip-primary" disabled>Indisponible</button>
+<span class="chip chip-secondary" aria-disabled="true">Archivé</span>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--chip-bg', '<code>--ds-color-primary-container</code>', 'Fond'],
+        ['--chip-color', '<code>--ds-color-on-primary-container</code>', 'Texte'],
+        ['--chip-selected-bg', '<code>--ds-color-primary</code>', 'Fond sélectionné'],
+        ['--chip-selected-color', '<code>--ds-color-on-primary</code>', 'Texte sélectionné'],
+        ['--chip-border-color', '<code>transparent</code> (<code>--ds-color-outline</code> avec un rôle)', 'Bordure'],
+        ['--chip-radius', '<code>--ds-radius-full</code> (<code>--ds-radius-md</code> sélectionnée)', 'Rayon'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.chip', 'Chip (rôle primary par défaut)'],
+        ['.chip-{rôle}', 'Variante de rôle'],
+        ['.is-selected, [aria-selected="true"]', 'État sélectionné'],
+        ['.chip-pill', 'Conservée pour compatibilité (pilule par défaut)'],
+      ],
+    } only %}
+  </section>
 </div>

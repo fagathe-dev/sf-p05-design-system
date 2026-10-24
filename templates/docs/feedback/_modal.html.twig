@@ -1,90 +1,161 @@
+{# Docs : Modal / Dialog — source : assets/scss/feedback/_dialog.scss, JS : interactions/components/modal.ts #}
+
 <div class="component-demo">
-  <h3>🪟 Modales (Dialog natif)</h3>
-  <p class="text-muted mb-4">
-    Exploite l'élément HTML natif <code>&lt;dialog&gt;</code>. Sécurisé, accessible et performant. 
-    Les modales peuvent être bloquantes (Modal) ou non-bloquantes (Dialog).
+  <p class="docs-lead">
+    Fenêtres construites sur l'élément natif <code>&lt;dialog&gt;</code>. Une modale bloque la page
+    (fond voilé, focus piégé) ; un dialog s'ouvre sans bloquer l'arrière-plan.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12">
-      <div class="box box-secondary mb-0 text-center py-5">
-        <h5 class="mb-4">Tester l'interaction</h5>
-        
-        <div class="d-flex flex-wrap justify-content-center gap-3">
-          <button type="button" class="btn btn-primary" data-ds-toggle="modal" data-ds-target="#demoModal">
-            <i class="ri-window-line"></i> Ouvrir Modal (Bloquant)
-          </button>
-
-          <button type="button" class="btn btn-outline-secondary" data-ds-toggle="dialog" data-ds-target="#demoDialog">
-            <i class="ri-message-3-line"></i> Ouvrir Dialog (Non bloquant)
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<button type="button" class="btn btn-primary" data-ds-toggle="modal" data-ds-target="#myModal">
-  Ouvrir Modale
+  <section class="docs-section" id="modale">
+    <h3>Modale</h3>
+    <p>
+      Le déclencheur porte <code>data-ds-toggle="modal"</code> et cible le <code>&lt;dialog&gt;</code>.
+      La modale se ferme avec <code>data-ds-dismiss="modal"</code>, la touche Échap ou un clic sur le fond
+      (classe <code>.modal</code> requise).
+    </p>
+{% set code %}
+<button type="button" class="btn btn-primary" data-ds-toggle="modal" data-ds-target="#modal-example">
+  Ouvrir la modale
 </button>
 
-<dialog id="myModal" class="modal">
+<dialog id="modal-example" class="modal" aria-labelledby="modal-example-title">
   <div class="modal-header">
-    <h3 class="modal-title">Titre de la modale</h3>
+    <h3 class="modal-title" id="modal-example-title">Supprimer l'utilisateur ?</h3>
     <button type="button" class="btn-close" data-ds-dismiss="modal" aria-label="Fermer"></button>
   </div>
-  
   <div class="modal-body">
-    <p>Contenu de votre modale ici. Elle se ferme au clic sur la croix, le bouton annuler, la touche Échap, ou en cliquant sur le fond (backdrop).</p>
+    <p>Cette action est <strong>irréversible</strong>.</p>
   </div>
-  
   <div class="modal-footer">
     <button type="button" class="btn btn-ghost-secondary" data-ds-dismiss="modal">Annuler</button>
-    <button type="button" class="btn btn-primary">Confirmer l'action</button>
+    <button type="button" class="btn btn-danger" data-ds-dismiss="modal">Supprimer</button>
   </div>
 </dialog>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Dialog Natif'
-    } %}
-  </div>
-</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-{# --- LES BALISES DIALOG CACHÉES POUR LA DÉMO CI-DESSUS --- #}
-
-<dialog id="demoModal" class="modal">
-  <div class="modal-header">
-    <h3 class="modal-title">Supprimer l'utilisateur ?</h3>
-    <button type="button" class="btn-close" data-ds-dismiss="modal" aria-label="Fermer"></button>
-  </div>
-  <div class="modal-body">
+  <section class="docs-section" id="dialog">
+    <h3>Dialog non bloquant</h3>
     <p>
-      Vous êtes sur le point de supprimer cet utilisateur de la base de données. 
-      Cette action est <strong>irréversible</strong>.
+      Avec <code>data-ds-toggle="dialog"</code>, le dialog s'ouvre avec <code>show()</code> : pas de fond voilé
+      et la page reste utilisable. Il s'insère à sa place dans le flux.
     </p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-ghost-secondary" data-ds-dismiss="modal">Annuler</button>
-    <button type="button" class="btn btn-danger" data-ds-dismiss="modal">Oui, supprimer</button>
-  </div>
-</dialog>
+{% set code %}
+<button type="button" class="btn btn-outline-secondary" data-ds-toggle="dialog" data-ds-target="#dialog-example">
+  Ouvrir le dialog
+</button>
 
-<dialog id="demoDialog" class="dialog">
+<dialog id="dialog-example" aria-labelledby="dialog-example-title">
   <div class="modal-header">
-    <h3 class="modal-title">Palette flottante</h3>
+    <h3 class="modal-title" id="dialog-example-title">Palette flottante</h3>
     <button type="button" class="btn-close" data-ds-dismiss="dialog" aria-label="Fermer"></button>
   </div>
   <div class="modal-body">
-    <p>
-      Ce dialogue a été ouvert avec <code>dialog.show()</code> (via <code>data-ds-toggle="dialog"</code>). 
-      Il n'a pas de fond grisé et vous pouvez toujours interagir avec la page en arrière-plan !
-    </p>
+    <p>Vous pouvez continuer à interagir avec la page.</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-ds-dismiss="dialog">Compris</button>
   </div>
 </dialog>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="defilement">
+    <h3>Contenu long</h3>
+    <p>Le corps défile à l'intérieur de la modale ; l'en-tête et le pied restent visibles.</p>
+{% set code %}
+<button type="button" class="btn btn-soft-primary" data-ds-toggle="modal" data-ds-target="#modal-long">
+  Conditions d'utilisation
+</button>
+
+<dialog id="modal-long" class="modal" aria-labelledby="modal-long-title" style="max-block-size: 80vh;">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-long-title">Conditions d'utilisation</h3>
+    <button type="button" class="btn-close" data-ds-dismiss="modal" aria-label="Fermer"></button>
+  </div>
+  <div class="modal-body">
+{% for i in 1..8 %}
+    <p>Article {{ i }}. Le service est fourni en l'état, sans garantie d'aucune sorte. L'utilisateur reste responsable des contenus qu'il publie.</p>
+{% endfor %}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-ds-dismiss="modal">J'accepte</button>
+  </div>
+</dialog>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="formulaire">
+    <h3>Avec un formulaire</h3>
+    <p>Un <code>&lt;form method="dialog"&gt;</code> ferme le dialog nativement à la soumission.</p>
+{% set code %}
+<button type="button" class="btn btn-primary" data-ds-toggle="modal" data-ds-target="#modal-form">
+  Renommer le projet
+</button>
+
+<dialog id="modal-form" class="modal" aria-labelledby="modal-form-title">
+  <form method="dialog">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-form-title">Renommer le projet</h3>
+      <button type="button" class="btn-close" data-ds-dismiss="modal" aria-label="Fermer"></button>
+    </div>
+    <div class="modal-body">
+      <label for="project-name" class="form-label">Nom</label>
+      <input type="text" class="form-control" id="project-name" value="Design System">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-ghost-secondary" data-ds-dismiss="modal">Annuler</button>
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </div>
+  </form>
+</dialog>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="js">
+    <h3>Ouverture en JavaScript</h3>
+    <p>Les fonctions de <code>modal.ts</code> émettent les événements <code>ds:open</code> et <code>ds:close</code>.</p>
+{% set code %}
+import { openDialog, closeDialog } from '@/interactions/components/modal';
+
+const dialog = document.querySelector('#modal-example');
+dialog.addEventListener('ds:close', () => console.log('Fermée'));
+
+openDialog(dialog, 'modal'); // ou 'dialog' pour une ouverture non bloquante
+closeDialog(dialog);
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'typescript', title: 'modal.ts' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--dialog-bg', '<code>--ds-surface-container-highest</code>', 'Fond'],
+        ['--dialog-color', '<code>--ds-color-on-surface</code>', 'Texte'],
+        ['--dialog-padding', '<code>--ds-space-6</code>', 'Padding de l\'en-tête, du corps et du pied'],
+        ['--ds-size-dialog', '<code>37.5rem</code>', 'Largeur maximale (System Token)'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes et attributs</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['dialog', 'Élément stylé (pas de classe requise)'],
+        ['.modal', 'Ferme la modale au clic sur le fond'],
+        ['.modal-header, .modal-title', 'En-tête et titre'],
+        ['.modal-body', 'Corps (défile si besoin)'],
+        ['.modal-footer', 'Actions alignées à droite'],
+        ['data-ds-toggle="modal|dialog"', 'Ouvre en modal (showModal) ou en dialog (show)'],
+        ['data-ds-dismiss="modal|dialog"', 'Ferme le dialog parent'],
+      ],
+    } only %}
+  </section>
+</div>

@@ -1,55 +1,110 @@
+{# Docs : Container — source : assets/scss/layout/_container.scss #}
+{% set widths = [
+  ['Moins de 576px', '100%', '100%', '100%', '100%', '100%', '100%'],
+  ['sm ≥ 576px', '540px', '540px', '100%', '100%', '100%', '100%'],
+  ['md ≥ 768px', '720px', '720px', '720px', '100%', '100%', '100%'],
+  ['lg ≥ 992px', '960px', '960px', '960px', '960px', '100%', '100%'],
+  ['xl ≥ 1200px', '1140px', '1140px', '1140px', '1140px', '1140px', '100%'],
+  ['xxl ≥ 1400px', '1320px', '1320px', '1320px', '1320px', '1320px', '1320px'],
+] %}
+
 <div class="component-demo">
-  <h3>🔲 Conteneurs (Containers)</h3>
-  <p class="text-muted mb-4">
-    Le conteneur est l'élément fondamental de la grille. Il encadre, centre et aligne votre contenu. 
-    Notre système utilise des conteneurs réactifs qui s'adaptent aux points de rupture (breakpoints).
+  <p class="docs-lead">
+    Les conteneurs centrent le contenu et lui donnent une gouttière latérale de 16px. Leur largeur
+    maximale suit les breakpoints.
   </p>
 
-  <div class="row g-4">
-    <div class="col-12">
-      <h5>1. Conteneur standard (<code>.container</code>)</h5>
-      <p class="small text-muted mb-2">Centre le contenu et ajuste sa largeur maximale (max-width) à chaque breakpoint.</p>
-      
-      <div class="p-3 bg-slate-100 rounded mb-4 border border-dashed">
-        <div class="container bg-primary-subtle text-primary-dark p-3 rounded text-center fw-medium">
-          .container
-        </div>
-      </div>
+  <section class="docs-section" id="standard">
+    <h3>Conteneur standard</h3>
+    <p><code>.container</code> prend une largeur maximale fixe à chaque breakpoint.</p>
+{% set code %}
+<div class="container">
+  <div class="docs-box">.container</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'surface' } only %}
+  </section>
 
-      <h5>2. Conteneur fluide (<code>.container-fluid</code>)</h5>
-      <p class="small text-muted mb-2">Occupe toujours 100% de la largeur disponible, quel que soit l'écran.</p>
-      
-      <div class="p-3 bg-slate-100 rounded mb-4 border border-dashed">
-        <div class="container-fluid bg-secondary-subtle text-secondary-dark p-3 rounded text-center fw-medium">
-          .container-fluid
-        </div>
-      </div>
-
-      <h5>3. Conteneurs responsifs (ex: <code>.container-md</code>)</h5>
-      <p class="small text-muted mb-2">Se comporte comme <code>.container-fluid</code> (100%) jusqu'à ce que le breakpoint spécifié soit atteint.</p>
-      
-      <div class="p-3 bg-slate-100 rounded mb-4 border border-dashed">
-        <div class="container-md bg-info-subtle text-info-dark p-3 rounded text-center fw-medium mb-2">
-          .container-md (100% sur mobile, max-width à partir de 768px)
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-5">
-      <h5>Code d'exemple</h5>
-      {% set codeExample = '<div class="container">
-  </div>
-
+  <section class="docs-section" id="fluide">
+    <h3>Conteneur fluide</h3>
+    <p><code>.container-fluid</code> occupe toujours toute la largeur disponible.</p>
+{% set code %}
 <div class="container-fluid">
-  </div>
+  <div class="docs-box">.container-fluid</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'surface' } only %}
+  </section>
 
-<div class="container-lg">
-  </div>' %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Containers'
-    } %}
-  </div>
+  <section class="docs-section" id="responsive">
+    <h3>Conteneurs responsives</h3>
+    <p>
+      <code>.container-{bp}</code> reste fluide jusqu'au breakpoint indiqué, puis suit les largeurs de
+      <code>.container</code>.
+    </p>
+{% set code %}
+<div class="container-sm"><div class="docs-box">.container-sm</div></div>
+<div class="container-md"><div class="docs-box">.container-md</div></div>
+<div class="container-lg"><div class="docs-box">.container-lg</div></div>
+<div class="container-xl"><div class="docs-box">.container-xl</div></div>
+<div class="container-xxl"><div class="docs-box">.container-xxl</div></div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column surface' } only %}
+  </section>
+
+  <section class="docs-section" id="largeurs">
+    <h3>Largeurs maximales</h3>
+    <div class="table-responsive docs-reference">
+      <table class="table align-middle">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Écran</th>
+            <th scope="col"><code>.container</code></th>
+            <th scope="col"><code>-sm</code></th>
+            <th scope="col"><code>-md</code></th>
+            <th scope="col"><code>-lg</code></th>
+            <th scope="col"><code>-xl</code></th>
+            <th scope="col"><code>-xxl</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in widths %}
+            <tr>
+              {% for cell in row %}
+                <td>{{ cell }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+{% set code %}
+<div class="container" style="--container-gutter: var(--ds-space-8);">
+  <div class="docs-box">Gouttière de 32px</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'surface' } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--container-gutter', '<code>--ds-space-4</code>', 'Padding latéral'],
+        ['--ds-container-{bp}', '<code>33.75rem</code> … <code>82.5rem</code>', 'Largeurs maximales (System Tokens)'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.container', 'Largeur maximale à chaque breakpoint'],
+        ['.container-fluid', 'Toujours pleine largeur'],
+        ['.container-{sm|md|lg|xl|xxl}', 'Fluide jusqu\'au breakpoint'],
+      ],
+    } only %}
+  </section>
 </div>

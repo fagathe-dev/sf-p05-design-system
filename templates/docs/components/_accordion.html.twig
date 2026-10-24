@@ -1,32 +1,143 @@
+{# Docs : Accordion — sources : assets/scss/components/_accordion.scss, _collapse.scss #}
+
 <div class="component-demo">
-  <h3>🪗 Accordéon</h3>
-  <div class="accordion" id="demoAccordion">
-    <div class="accordion-item">
-      <button class="accordion-button" data-ds-toggle="accordion" data-ds-target="#collapse1">
-        Section 1
-        <i class="ri-arrow-down-s-line accordion-icon"></i>
-      </button>
-      <div id="collapse1" class="accordion-collapse collapse">
-        <div class="accordion-body">Contenu de la section 1...</div>
-      </div>
+  <p class="docs-lead">
+    Panneaux repliables empilés dans un conteneur arrondi. Un seul panneau reste ouvert à la fois :
+    ouvrir une section referme les autres du même <code>.accordion</code>.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>
+      Le bouton porte <code>data-ds-toggle="accordion"</code> et cible son panneau avec
+      <code>data-ds-target</code>. Le JS bascule <code>.show</code> sur le panneau et
+      <code>aria-expanded</code> sur le bouton, ce qui fait pivoter l'icône.
+    </p>
+{% set code %}
+<div class="accordion">
+  <div class="accordion-item">
+    <button type="button" class="accordion-button" data-ds-toggle="accordion" data-ds-target="#accordion-1" aria-expanded="true" aria-controls="accordion-1">
+      Qu'est-ce qu'un design system ?
+      <i class="ri-arrow-down-s-line accordion-icon"></i>
+    </button>
+    <div id="accordion-1" class="accordion-collapse collapse show">
+      <div class="accordion-body">Un ensemble de tokens, de composants et de règles partagés par toutes les interfaces d'un produit.</div>
     </div>
-    <div class="accordion-item">
-      <button class="accordion-button" data-ds-toggle="accordion" data-ds-target="#collapse2">
-        Section 2
-        <i class="ri-arrow-down-s-line accordion-icon"></i>
-      </button>
-      <div id="collapse2" class="accordion-collapse collapse">
-        <div class="accordion-body">Contenu de la section 2...</div>
-      </div>
+  </div>
+  <div class="accordion-item">
+    <button type="button" class="accordion-button" data-ds-toggle="accordion" data-ds-target="#accordion-2" aria-expanded="false" aria-controls="accordion-2">
+      Comment personnaliser un composant ?
+      <i class="ri-arrow-down-s-line accordion-icon"></i>
+    </button>
+    <div id="accordion-2" class="accordion-collapse collapse">
+      <div class="accordion-body">En surchargeant ses Component Tokens (<code>--accordion-*</code>) avec des System Tokens.</div>
     </div>
-    <div class="accordion-item">
-      <button class="accordion-button" data-ds-toggle="accordion" data-ds-target="#collapse3">
-        Section 3
-        <i class="ri-arrow-down-s-line accordion-icon"></i>
-      </button>
-      <div id="collapse3" class="accordion-collapse collapse">
-        <div class="accordion-body">Contenu de la section 3...</div>
+  </div>
+  <div class="accordion-item">
+    <button type="button" class="accordion-button" data-ds-toggle="accordion" data-ds-target="#accordion-3" aria-expanded="false" aria-controls="accordion-3">
+      Le thème sombre est-il pris en charge ?
+      <i class="ri-arrow-down-s-line accordion-icon"></i>
+    </button>
+    <div id="accordion-3" class="accordion-collapse collapse">
+      <div class="accordion-body">Oui, avec l'attribut <code>data-ui-theme="dark"</code> sur un ancêtre.</div>
+    </div>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="anime">
+    <h3>Ouverture animée</h3>
+    <p>
+      Avec <code>data-ds-toggle="collapse"</code> et des panneaux <code>.collapse</code> (sans
+      <code>.accordion-collapse</code>), les sections s'ouvrent et se ferment en glissant. Le regroupement
+      reste actif : ouvrir une section referme les autres.
+    </p>
+{% set code %}
+<div class="accordion">
+  <div class="accordion-item">
+    <button type="button" class="accordion-button" data-ds-toggle="collapse" data-ds-target="#faq-1" aria-expanded="false" aria-controls="faq-1">
+      Livraison
+      <i class="ri-arrow-down-s-line accordion-icon"></i>
+    </button>
+    <div id="faq-1" class="collapse">
+      <div class="accordion-body">Expédition sous 48h ouvrées, suivi envoyé par email.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <button type="button" class="accordion-button" data-ds-toggle="collapse" data-ds-target="#faq-2" aria-expanded="false" aria-controls="faq-2">
+      Retours
+      <i class="ri-arrow-down-s-line accordion-icon"></i>
+    </button>
+    <div id="faq-2" class="collapse">
+      <div class="accordion-body">Vous disposez de 30 jours pour retourner un article.</div>
+    </div>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="contenu">
+    <h3>Contenu riche</h3>
+    <p>Le corps accepte n'importe quel contenu : texte, listes, boutons.</p>
+{% set code %}
+<div class="accordion">
+  <div class="accordion-item">
+    <button type="button" class="accordion-button" data-ds-toggle="accordion" data-ds-target="#rich-1" aria-expanded="true" aria-controls="rich-1">
+      Paramètres du compte
+      <i class="ri-arrow-down-s-line accordion-icon"></i>
+    </button>
+    <div id="rich-1" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+        <ul>
+          <li>Adresse email vérifiée</li>
+          <li>Double authentification désactivée</li>
+        </ul>
+        <button type="button" class="btn btn-soft-primary btn-sm">Activer la 2FA</button>
       </div>
     </div>
   </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="accessibilite">
+    <h3>Accessibilité</h3>
+    <ul>
+      <li>Utilisez un <code>&lt;button type="button"&gt;</code> comme déclencheur.</li>
+      <li>Initialisez <code>aria-expanded</code> selon l'état du panneau et reliez-le avec <code>aria-controls</code>.</li>
+      <li>Le focus clavier s'affiche à l'intérieur du conteneur pour ne pas être rogné par l'arrondi.</li>
+    </ul>
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--accordion-bg', '<code>--ds-surface-container</code>', 'Fond du conteneur'],
+        ['--accordion-color', '<code>--ds-color-on-surface</code>', 'Texte des boutons'],
+        ['--accordion-divider-color', '<code>--ds-color-outline-variant</code>', 'Séparateur entre items'],
+        ['--accordion-px', '<code>--ds-space-6</code>', 'Padding horizontal'],
+        ['--accordion-py', '<code>--ds-space-5</code>', 'Padding vertical'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.accordion', 'Conteneur'],
+        ['.accordion-item', 'Section (séparée de la précédente)'],
+        ['.accordion-button', 'Déclencheur pleine largeur'],
+        ['.accordion-icon', 'Icône qui pivote quand aria-expanded="true"'],
+        ['.accordion-collapse', 'Panneau masqué, affiché avec .show (bascule instantanée)'],
+        ['.accordion-body', 'Contenu du panneau'],
+      ],
+    } only %}
+  </section>
 </div>

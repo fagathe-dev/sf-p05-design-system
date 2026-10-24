@@ -28,13 +28,15 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <a href="{{ path('component_docs_category', {type: type}) }}" class="text-decoration-none">
                         <div class="box box-secondary h-100 mb-0 form-selectable-label border-0">
-                            <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="d-flex align-items-center gap-3">
                                 <div class="avatar avatar-sm bg-secondary-subtle text-secondary-dark">
                                     <i class="ri-folder-2-line"></i>
                                 </div>
-                                <h3 class="h5 mb-0 text-capitalize">{{ type }}</h3>
+                                <div>
+                                    <h3 class="h5 mb-0 text-capitalize">{{ type }}</h3>
+                                    <p class="text-muted small mb-0">{{ components|length }} composant(s) disponible(s)</p>
+                                </div>
                             </div>
-                            <p class="text-muted small mb-0">{{ components|length }} composant(s) disponible(s)</p>
                         </div>
                     </a>
                 </div>

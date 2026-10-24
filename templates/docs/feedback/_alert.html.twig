@@ -1,66 +1,134 @@
-<div class="component-demo" id="ui-docs-alert-demo">
-  <h3>⚠️ Alertes</h3>
-  <p class="text-muted mb-4">
-    Messages contextuels pour les retours utilisateurs. Le design est "borderless" (sans bordure) 
-    avec une légère ombre portée (Soft UI).
+{# Docs : Alert — source : assets/scss/feedback/_alert.scss, JS : components/Alert.ts #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
+{% set icons = {
+  primary: 'ri-star-line', secondary: 'ri-information-line', tertiary: 'ri-information-line',
+  success: 'ri-checkbox-circle-line', warning: 'ri-alert-line', info: 'ri-information-line', danger: 'ri-error-warning-line',
+} %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Messages contextuels pour informer l'utilisateur d'un résultat ou d'un risque. Deux variantes
+    pour chaque rôle : soft (conteneur) et solid (fond plein).
   </p>
 
-  <div class="mb-4">
-    <button id="btn-alert-test" class="btn btn-primary">
-      <i class="ri-add-line"></i> Créer une alerte dynamique
-    </button>
-  </div>
-
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Alertes "Soft" (Subtiles)</h5>
-        <div class="alert alert-soft-success mb-3" role="alert">
-          <i class="ri-checkbox-circle-fill alert-icon"></i>
-          <div class="alert-content"><strong>Succès :</strong> Vos modifications ont été sauvegardées.</div>
-        </div>
-        <div class="alert alert-soft-warning mb-3" role="alert">
-          <i class="ri-alert-fill alert-icon"></i>
-          <div class="alert-content"><strong>Attention :</strong> Votre abonnement expire dans 3 jours.</div>
-        </div>
-        <div class="alert alert-soft-danger mb-3" role="alert">
-          <i class="ri-error-warning-fill alert-icon"></i>
-          <div class="alert-content"><strong>Erreur :</strong> Impossible de joindre le serveur.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Alertes "Solid" & Dismissible</h5>
-        <div class="alert alert-solid-info mb-4" role="alert">
-          <i class="ri-star-fill alert-icon text-white"></i>
-          <div class="alert-content">Bienvenue sur la nouvelle version !</div>
-        </div>
-        <div class="alert alert-soft-danger alert-dismissible mb-0" role="alert">
-          <i class="ri-shield-keyhole-fill alert-icon"></i>
-          <div class="alert-content"><strong>Action requise !</strong><br><small>Veuillez configurer la 2FA.</small></div>
-          <button type="button" class="btn-close" data-ds-dismiss="alert" aria-label="Fermer"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-import { Alert } from '@components/Alert';
-new Alert('Message', 'success');
-
-<div class="alert alert-soft-success" role="alert">
-  <i class="ri-checkbox-circle-fill alert-icon"></i>
-  <div class="alert-content">Action réussie !</div>
+  <section class="docs-section" id="soft">
+    <h3>Soft</h3>
+    <p>Variante par défaut : <code>.alert-{rôle}</code> et <code>.alert-soft-{rôle}</code> sont équivalentes.</p>
+{% set code %}
+{% for role in roles %}
+<div class="alert alert-soft-{{ role }}" role="alert">
+  <i class="{{ icons[role] }} alert-icon"></i>
+  <div class="alert-content">Alerte {{ role }} : un message court et explicite.</div>
 </div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'typescript',
-      'title': 'Usage Alert'
-    } %}
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="solid">
+    <h3>Solid</h3>
+    <p>Fond plein du rôle, pour un message prioritaire.</p>
+{% set code %}
+{% for role in roles %}
+<div class="alert alert-solid-{{ role }}" role="alert">
+  <i class="{{ icons[role] }} alert-icon"></i>
+  <div class="alert-content">Alerte {{ role }} en fond plein.</div>
+</div>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="contenu">
+    <h3>Contenu riche</h3>
+    <p>Le contenu accepte un titre, plusieurs paragraphes et des liens.</p>
+{% set code %}
+<div class="alert alert-soft-warning" role="alert">
+  <i class="ri-alert-line alert-icon"></i>
+  <div class="alert-content">
+    <strong>Abonnement bientôt expiré</strong><br>
+    Votre abonnement prend fin dans 3 jours. <a href="#">Renouveler maintenant</a>
   </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="sans-icone">
+    <h3>Sans icône</h3>
+{% set code %}
+<div class="alert alert-soft-info" role="alert">
+  <div class="alert-content">Une alerte peut se passer d'icône.</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="fermable">
+    <h3>Fermable</h3>
+    <p>
+      <code>.alert-dismissible</code> réserve la place du bouton de fermeture. Avec
+      <code>data-ds-dismiss="alert"</code>, l'alerte disparaît en fondu puis est retirée du DOM.
+    </p>
+{% set code %}
+<div class="alert alert-soft-danger alert-dismissible" role="alert">
+  <i class="ri-shield-keyhole-line alert-icon"></i>
+  <div class="alert-content"><strong>Action requise :</strong> activez la double authentification.</div>
+  <button type="button" class="btn-close" data-ds-dismiss="alert" aria-label="Fermer"></button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="dynamique">
+    <h3>Alerte dynamique</h3>
+    <p>
+      La classe TypeScript <code>Alert</code> crée une alerte soft fermable avec l'icône du type
+      (<code>info</code>, <code>success</code>, <code>warning</code>, <code>danger</code>) et l'insère dans un conteneur.
+    </p>
+    <div class="docs-example">
+      <div class="docs-example-preview docs-preview-column">
+        <div class="d-flex flex-wrap gap-2">
+          {% for type in ['info', 'success', 'warning', 'danger'] %}
+            <button type="button" class="btn btn-soft-{{ type }} btn-sm" data-demo-alert="{{ type }}" data-demo-target="#alert-demo-zone">{{ type|capitalize }}</button>
+          {% endfor %}
+        </div>
+        <div id="alert-demo-zone" class="d-flex flex-column gap-2"></div>
+      </div>
+    </div>
+{% set code %}
+import { Alert } from '@components/Alert';
+
+// new Alert(contenu, type = 'info', conteneur = document.body)
+new Alert('Vos modifications ont été enregistrées.', 'success', document.querySelector('#alerts'));
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'typescript', title: 'Alert.ts' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--alert-bg', '<code>--ds-color-info-container</code>', 'Fond'],
+        ['--alert-color', '<code>--ds-color-on-info-container</code>', 'Texte et icône'],
+        ['--alert-padding-x', '<code>--ds-space-5</code>', 'Padding horizontal'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes et attributs</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.alert', 'Conteneur'],
+        ['.alert-{rôle}, .alert-soft-{rôle}', 'Variante conteneur'],
+        ['.alert-solid-{rôle}', 'Variante fond plein'],
+        ['.alert-icon, .alert-content', 'Icône et contenu'],
+        ['.alert-dismissible', 'Réserve la place du bouton de fermeture'],
+        ['.hide', 'Posée par le JS pendant la disparition'],
+        ['data-ds-dismiss="alert"', 'Ferme l\'alerte parente'],
+      ],
+    } only %}
+  </section>
 </div>

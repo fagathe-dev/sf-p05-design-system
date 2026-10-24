@@ -1,9 +1,73 @@
+{# Docs : Collapse — source : assets/scss/components/_collapse.scss, JS : interactions/events/toggle.ts #}
+
 <div class="component-demo">
-  <h3>↕️ Collapse</h3>
-  <button class="btn btn-secondary" data-ds-toggle="collapse" data-ds-target="#collapseDemo">
-    Basculer le contenu
-  </button>
-  <div class="collapse mt-3" id="collapseDemo">
-    <div class="box box-secondary">Contenu caché par défaut.</div>
-  </div>
+  <p class="docs-lead">
+    Affiche ou masque un contenu en le faisant glisser. Le déclencheur porte
+    <code>data-ds-toggle="collapse"</code> et cible le panneau <code>.collapse</code> avec
+    <code>data-ds-target</code>.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+{% set code %}
+<button type="button" class="btn btn-secondary" data-ds-toggle="collapse" data-ds-target="#collapse-example" aria-expanded="false" aria-controls="collapse-example">
+  Afficher le détail
+</button>
+<div class="collapse" id="collapse-example">
+  <div class="box box-secondary mt-3">Contenu masqué par défaut, révélé au clic.</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="lien">
+    <h3>Avec un lien</h3>
+    <p>Un lien peut servir de déclencheur : le JS annule la navigation.</p>
+{% set code %}
+<a href="#collapse-link" data-ds-toggle="collapse" data-ds-target="#collapse-link" role="button" aria-expanded="false" aria-controls="collapse-link">
+  Voir les conditions
+</a>
+<div class="collapse" id="collapse-link">
+  <p class="pt-3">Les conditions générales s'appliquent à toute commande passée sur le site.</p>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="ouvert">
+    <h3>Ouvert par défaut</h3>
+    <p>Ajoutez <code>.show</code> au panneau et <code>aria-expanded="true"</code> au déclencheur.</p>
+{% set code %}
+<button type="button" class="btn btn-soft-primary" data-ds-toggle="collapse" data-ds-target="#collapse-open" aria-expanded="true" aria-controls="collapse-open">
+  Masquer le détail
+</button>
+<div class="collapse show" id="collapse-open">
+  <div class="box box-primary mt-3">Ce panneau est ouvert au chargement.</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="fonctionnement">
+    <h3>Fonctionnement</h3>
+    <ul>
+      <li>Pendant l'animation, le panneau porte <code>.collapsing</code> et une hauteur en ligne ; il reçoit <code>.show</code> une fois ouvert.</li>
+      <li>Un panneau ouvert laisse déborder son contenu : un menu déroulant placé dedans n'est pas rogné.</li>
+      <li>Avec <code>prefers-reduced-motion: reduce</code>, l'ouverture est quasi instantanée.</li>
+      <li>Dans un <code>.accordion</code>, ouvrir un panneau referme les autres (voir la page Accordion).</li>
+    </ul>
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes et attributs</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.collapse', 'Panneau replié (hauteur 0)'],
+        ['.collapse.show', 'Panneau ouvert'],
+        ['.collapsing', 'Posée par le JS pendant l\'animation'],
+        ['data-ds-toggle="collapse"', 'Déclencheur'],
+        ['data-ds-target', 'Sélecteur du panneau ciblé'],
+      ],
+    } only %}
+  </section>
 </div>

@@ -1,0 +1,177 @@
+// ==========================================================================
+// DS Docs — styles propres à la documentation /ui/docs
+// (compilé vers public/css/ds-docs.css, chargé après ds-ui-kit.css)
+// --------------------------------------------------------------------------
+// Mise en page des pages de démo : sections, exemples (aperçu + code),
+// tableaux de référence et blocs visuels des pages d'utilitaires.
+// ==========================================================================
+
+@use 'abstracts' as *;
+
+// --------------------------------------------------------------------------
+// Page et sections
+// --------------------------------------------------------------------------
+.component-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-12);
+}
+
+.docs-lead {
+  margin: 0;
+  max-inline-size: var(--ds-size-reading);
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, lg);
+}
+
+.docs-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+  scroll-margin-block-start: calc(var(--ds-size-topbar) + var(--ds-space-4));
+}
+
+.docs-section > h3 {
+  margin: 0;
+  @include type(headline, sm);
+}
+
+.docs-section > h4 {
+  margin: var(--ds-space-4) 0 0;
+  @include type(title, lg);
+}
+
+.docs-section > p,
+.docs-section > ul {
+  margin: 0;
+  max-inline-size: var(--ds-size-reading);
+  color: var(--ds-color-on-surface-variant);
+}
+
+// --------------------------------------------------------------------------
+// Exemple : aperçu en direct puis extrait de code accolé
+// --------------------------------------------------------------------------
+.docs-example {
+  --docs-example-radius: var(--ds-radius-md);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.docs-example-preview {
+  padding: var(--ds-space-6);
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-start-start-radius: var(--docs-example-radius);
+  border-start-end-radius: var(--docs-example-radius);
+  background-color: var(--ds-surface);
+
+  &:only-child {
+    border-radius: var(--docs-example-radius);
+  }
+}
+
+.docs-example > .code-block {
+  border-block-start: 0;
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-end-start-radius: var(--docs-example-radius);
+  border-end-end-radius: var(--docs-example-radius);
+}
+
+// Mises en page de l'aperçu (paramètre `layout` de docs/_example.html.twig)
+.docs-preview-stack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+
+.docs-preview-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+
+.docs-preview-center {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+}
+
+.docs-preview-flush {
+  padding: 0;
+}
+
+// Laisse la place aux menus déroulants ouverts dans l'aperçu
+.docs-preview-tall {
+  min-block-size: calc(var(--ds-size-menu) + var(--ds-space-16));
+}
+
+.docs-preview-surface {
+  background-color: var(--ds-surface-container-low);
+}
+
+// Composants fixes (sidebar) affichés dans le flux de l'aperçu
+.docs-preview-contained .sidebar {
+  position: relative;
+  block-size: auto;
+  z-index: auto;
+}
+
+// Page complète affichée dans l'aperçu (starter packs)
+.docs-iframe {
+  display: block;
+  inline-size: 100%;
+  border: 0;
+  border-start-start-radius: var(--docs-example-radius, var(--ds-radius-md));
+  border-start-end-radius: var(--docs-example-radius, var(--ds-radius-md));
+  background-color: var(--ds-surface);
+}
+
+// Menu déroulant montré ouvert, dans le flux de l'aperçu
+.docs-preview-menu .dropdown-menu {
+  position: static;
+  display: block;
+  animation: none;
+}
+
+// --------------------------------------------------------------------------
+// Blocs visuels des pages d'utilitaires et de grille
+// --------------------------------------------------------------------------
+.docs-box {
+  padding: var(--ds-space-3);
+  border-radius: var(--ds-radius-sm);
+  background-color: var(--ds-color-primary-container);
+  color: var(--ds-color-on-primary-container);
+  text-align: center;
+  @include type(label, md);
+}
+
+.docs-area {
+  padding: var(--ds-space-3);
+  border: var(--ds-border-width) dashed var(--ds-color-outline);
+  border-radius: var(--ds-radius-sm);
+  background-color: var(--ds-surface-container-low);
+}
+
+.docs-swatch {
+  display: flex;
+  align-items: flex-end;
+  min-block-size: var(--ds-space-20);
+  padding: var(--ds-space-3);
+  border-radius: var(--ds-radius-sm);
+  @include type(label, md);
+}
+
+// --------------------------------------------------------------------------
+// Tableaux de référence (classes, tokens)
+// --------------------------------------------------------------------------
+.docs-reference td:first-child {
+  white-space: nowrap;
+}
+
+.docs-reference td {
+  @include type(body, md);
+}

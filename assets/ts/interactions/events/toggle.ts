@@ -28,6 +28,38 @@ const handleDropdown = (trigger: HTMLElement): void => {
 };
 
 // --- LOGIQUE COLLAPSE ---
+
+// Attend la fin de la transition de hauteur de l'élément (cf. _collapse.scss).
+// transitionend remonte depuis les enfants (boutons, liens…) : seule la
+// hauteur de l'élément lui-même compte. Le délai de secours couvre les cas où
+// aucune transition ne démarre (hauteur inchangée, contenu vide).
+const onHeightTransitionEnd = (
+  element: HTMLElement,
+  done: () => void,
+): void => {
+  // La durée calculée est toujours exprimée en secondes ("0.35s, 0s")
+  const durations = getComputedStyle(element)
+    .transitionDuration.split(',')
+    .map((value) => parseFloat(value) * 1000)
+    .filter(Number.isFinite);
+  const fallbackDelay = Math.max(0, ...durations) + 50;
+
+  let finished = false;
+  const finish = (): void => {
+    if (finished) return;
+    finished = true;
+    element.removeEventListener('transitionend', handler);
+    window.clearTimeout(fallback);
+    done();
+  };
+  const handler = (event: TransitionEvent): void => {
+    if (event.target === element && event.propertyName === 'height') finish();
+  };
+
+  element.addEventListener('transitionend', handler);
+  const fallback = window.setTimeout(finish, fallbackDelay);
+};
+
 const slideUp = (element: HTMLElement): void => {
   element.style.height = `${element.scrollHeight}px`;
   element.classList.remove('show');
@@ -36,15 +68,10 @@ const slideUp = (element: HTMLElement): void => {
   element.offsetHeight; // Force reflow
   element.style.height = '0px';
 
-  element.addEventListener(
-    'transitionend',
-    function handler() {
-      element.classList.remove('collapsing');
-      element.style.height = '';
-      element.removeEventListener('transitionend', handler);
-    },
-    { once: true },
-  );
+  onHeightTransitionEnd(element, () => {
+    element.classList.remove('collapsing');
+    element.style.height = '';
+  });
 };
 
 const slideDown = (element: HTMLElement): void => {
@@ -54,16 +81,11 @@ const slideDown = (element: HTMLElement): void => {
   element.offsetHeight; // Force reflow
   element.style.height = `${element.scrollHeight}px`;
 
-  element.addEventListener(
-    'transitionend',
-    function handler() {
-      element.classList.remove('collapsing');
-      element.classList.add('show');
-      element.style.height = '';
-      element.removeEventListener('transitionend', handler);
-    },
-    { once: true },
-  );
+  onHeightTransitionEnd(element, () => {
+    element.classList.remove('collapsing');
+    element.classList.add('show');
+    element.style.height = '';
+  });
 };
 
 const handleCollapse = (trigger: HTMLElement): void => {

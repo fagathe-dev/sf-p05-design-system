@@ -1,90 +1,223 @@
+{# Docs : Table — source : assets/scss/content/_table.scss #}
+{% set rows = [
+  { name: 'Alice Martin', email: 'alice@example.com', role: 'Administratrice', status: 'Actif' },
+  { name: 'Bruno Petit', email: 'bruno@example.com', role: 'Éditeur', status: 'Actif' },
+  { name: 'Chloé Durand', email: 'chloe@example.com', role: 'Lectrice', status: 'Invité' },
+] %}
+
 <div class="component-demo">
-  <h3>📊 Tableaux (Tables)</h3>
-  <p class="text-muted mb-4">
-    Styles épurés pour les données tabulaires. Supportent le survol, les bordures allégées et le défilement responsive.
+  <p class="docs-lead">
+    Tableaux de données aérés : séparateurs discrets, en-tête en petites capitales et variantes
+    survol, zébrée, bordée ou sans bordure.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12">
-      <div class="box box-secondary mb-0">
-        
-        <div class="table-responsive">
-          <table class="table table-hover align-middle mb-0">
-            <thead class="table-light">
-              <tr>
-                <th scope="col">Utilisateur</th>
-                <th scope="col">Rôle</th>
-                <th scope="col">Statut</th>
-                <th scope="col" class="text-end">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="avatar avatar-sm bg-primary-subtle text-primary-dark">JD</div>
-                    <div>
-                      <h6 class="mb-0 text-body">John Doe</h6>
-                      <small class="text-muted">john@example.com</small>
-                    </div>
-                  </div>
-                </td>
-                <td>Administrateur</td>
-                <td><span class="chip chip-success chip-pill">Actif</span></td>
-                <td class="text-end">
-                  <button class="btn btn-sm btn-ghost-secondary"><i class="ri-edit-line"></i></button>
-                  <button class="btn btn-sm btn-ghost-danger"><i class="ri-delete-bin-line"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="avatar avatar-sm bg-secondary-subtle text-secondary-dark">SM</div>
-                    <div>
-                      <h6 class="mb-0 text-body">Sophie Martin</h6>
-                      <small class="text-muted">sophie@example.com</small>
-                    </div>
-                  </div>
-                </td>
-                <td>Éditeur</td>
-                <td><span class="chip chip-warning chip-pill">En pause</span></td>
-                <td class="text-end">
-                  <button class="btn btn-sm btn-ghost-secondary"><i class="ri-edit-line"></i></button>
-                  <button class="btn btn-sm btn-ghost-danger"><i class="ri-delete-bin-line"></i></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+{% set code %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Email</th>
+      <th scope="col">Rôle</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for row in rows %}
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.email }}</td>
+      <td>{{ row.role }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="en-tete">
+    <h3>En-tête clair</h3>
+    <p><code>.table-light</code> sur le <code>&lt;thead&gt;</code> : fond relevé et intitulés en petites capitales.</p>
+{% set code %}
+<table class="table">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Rôle</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for row in rows %}
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.role }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="survol">
+    <h3>Survol</h3>
+    <p><code>.table-hover</code> ajoute un calque d'état sur la ligne survolée.</p>
+{% set code %}
+<table class="table table-hover">
+  <tbody>
+{% for row in rows %}
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.email }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="zebree">
+    <h3>Lignes zébrées</h3>
+{% set code %}
+<table class="table table-striped">
+  <tbody>
+{% for row in rows %}
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.role }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="bordures">
+    <h3>Bordures</h3>
+    <p><code>.table-bordered</code> encadre chaque cellule ; <code>.table-borderless</code> retire tous les séparateurs.</p>
+{% set code %}
+<table class="table table-bordered">
+  <tbody>
+{% for row in rows|slice(0, 2) %}
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.role }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+<table class="table table-borderless">
+  <tbody>
+{% for row in rows|slice(0, 2) %}
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.role }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="alignement">
+    <h3>Alignement vertical</h3>
+    <p>Les cellules sont alignées en haut ; <code>.align-middle</code> sur la table les centre verticalement.</p>
+{% set code %}
+<table class="table align-middle">
+  <tbody>
+{% for row in rows|slice(0, 2) %}
+    <tr>
+      <td>
+        <div class="d-flex align-items-center gap-3">
+          <div class="avatar avatar-sm">{{ row.name|first }}</div>
+          <div>
+            <div class="fw-semibold">{{ row.name }}</div>
+            <small class="text-muted">{{ row.email }}</small>
+          </div>
         </div>
+      </td>
+      <td><span class="badge badge-success">{{ row.status }}</span></td>
+      <td class="text-end">
+        <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" aria-label="Modifier"><i class="ri-edit-line"></i></button>
+        <button type="button" class="btn btn-icon btn-sm btn-ghost-danger" aria-label="Supprimer"><i class="ri-delete-bin-line"></i></button>
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
+  <section class="docs-section" id="responsive">
+    <h3>Défilement horizontal</h3>
+    <p>Enveloppez la table dans <code>.table-responsive</code> : elle défile au lieu de déborder sur petit écran.</p>
+{% set code %}
 <div class="table-responsive">
-  <table class="table table-hover align-middle">
+  <table class="table text-nowrap">
     <thead class="table-light">
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nom</th>
+{% for i in 1..10 %}
+        <th scope="col">Colonne {{ i }}</th>
+{% endfor %}
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
+{% for i in 1..10 %}
+        <td>Valeur {{ i }}</td>
+{% endfor %}
       </tr>
     </tbody>
   </table>
 </div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Tableaux'
-    } %}
-  </div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    <p>Pour une table compacte, réduisez le padding des cellules :</p>
+{% set code %}
+<table class="table" style="--table-cell-py: var(--ds-space-2); --table-cell-px: var(--ds-space-3);">
+  <tbody>
+{% for row in rows %}
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.role }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--table-color', '<code>--ds-color-on-surface</code>', 'Texte'],
+        ['--table-border-color', '<code>--ds-color-outline-variant</code>', 'Séparateurs'],
+        ['--table-cell-py', '<code>--ds-space-4</code>', 'Padding vertical des cellules'],
+        ['--table-cell-px', '<code>--ds-space-5</code>', 'Padding horizontal des cellules'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.table', 'Table de base'],
+        ['.table-light', 'En-tête ou ligne sur fond relevé'],
+        ['.table-hover', 'Calque au survol des lignes'],
+        ['.table-striped', 'Lignes impaires teintées'],
+        ['.table-bordered, .table-borderless', 'Toutes les bordures, aucune bordure'],
+        ['.align-middle', 'Cellules centrées verticalement (sur .table)'],
+        ['.table-responsive', 'Conteneur à défilement horizontal'],
+      ],
+    } only %}
+  </section>
 </div>

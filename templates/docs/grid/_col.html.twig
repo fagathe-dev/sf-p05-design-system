@@ -1,80 +1,161 @@
+{# Docs : Grid (row & col) — sources : assets/scss/layout/_row.scss, _col.scss #}
+
 <div class="component-demo">
-    <h3>📊 Système de Colonnes (Grid)</h3>
-    <p class="text-muted mb-4">
-        Un système de grille flexible basé sur Flexbox, découpé en 12 colonnes. 
-        Les colonnes doivent toujours être placées directement à l'intérieur d'une <code>.row</code>.
+  <p class="docs-lead">
+    Grille flexbox de 12 colonnes. Les colonnes se placent directement dans une <code>.row</code>,
+    dont les gouttières passent par <code>gap</code> : aucune marge négative.
+  </p>
+
+  <section class="docs-section" id="auto">
+    <h3>Largeur automatique</h3>
+    <p><code>.col</code> partage l'espace à parts égales, quel que soit le nombre de colonnes.</p>
+{% set code %}
+<div class="row">
+  <div class="col"><div class="docs-box">.col</div></div>
+  <div class="col"><div class="docs-box">.col</div></div>
+  <div class="col"><div class="docs-box">.col</div></div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="largeurs">
+    <h3>Largeurs sur 12 colonnes</h3>
+    <p><code>.col-{1-12}</code> fixe le nombre de colonnes occupées ; au-delà de 12, les colonnes passent à la ligne.</p>
+{% set code %}
+<div class="row gy-4">
+  <div class="col-8"><div class="docs-box">.col-8</div></div>
+  <div class="col-4"><div class="docs-box">.col-4</div></div>
+  <div class="col-3"><div class="docs-box">.col-3</div></div>
+  <div class="col-6"><div class="docs-box">.col-6</div></div>
+  <div class="col-3"><div class="docs-box">.col-3</div></div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="contenu">
+    <h3>Largeur du contenu</h3>
+    <p><code>.col-auto</code> prend la largeur de son contenu ; les <code>.col</code> voisines se partagent le reste.</p>
+{% set code %}
+<div class="row">
+  <div class="col-auto"><div class="docs-box">.col-auto (contenu)</div></div>
+  <div class="col"><div class="docs-box">.col</div></div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="responsive">
+    <h3>Responsive</h3>
+    <p>
+      <code>.col-{bp}-{n}</code> s'applique à partir du breakpoint (<code>sm</code> 576px, <code>md</code> 768px,
+      <code>lg</code> 992px, <code>xl</code> 1200px, <code>xxl</code> 1400px). Sans préfixe, la règle vaut pour toutes les tailles.
     </p>
-
-    <div class="row g-4">
-        <div class="col-12">
-            <h5>1. Largeur automatique (Auto-layout)</h5>
-            <p class="small text-muted mb-2">Utilisez <code>.col</code> pour que les colonnes se partagent l'espace de manière parfaitement égale.</p>
-            
-            <div class="row g-2 mb-4 text-center fw-medium">
-                <div class="col"><div class="bg-primary-subtle text-primary-dark p-3 rounded">.col</div></div>
-                <div class="col"><div class="bg-primary-subtle text-primary-dark p-3 rounded">.col</div></div>
-                <div class="col"><div class="bg-primary-subtle text-primary-dark p-3 rounded">.col</div></div>
-            </div>
-
-            <h5>2. Largeurs définies sur 12 colonnes</h5>
-            <p class="small text-muted mb-2">Précisez la largeur exacte avec <code>.col-{1-12}</code>.</p>
-            
-            <div class="row g-2 mb-4 text-center fw-medium">
-                <div class="col-8"><div class="bg-secondary-subtle text-secondary-dark p-3 rounded">.col-8</div></div>
-                <div class="col-4"><div class="bg-secondary-subtle text-secondary-dark p-3 rounded">.col-4</div></div>
-                
-                <div class="col-3"><div class="bg-secondary-subtle text-secondary-dark p-3 rounded">.col-3</div></div>
-                <div class="col-6"><div class="bg-secondary-subtle text-secondary-dark p-3 rounded">.col-6</div></div>
-                <div class="col-3"><div class="bg-secondary-subtle text-secondary-dark p-3 rounded">.col-3</div></div>
-            </div>
-
-            <h5>3. Grille Responsive</h5>
-            <p class="small text-muted mb-2">Combinez les classes pour adapter l'affichage selon l'appareil (ex: empilé sur mobile, côte à côte sur PC).</p>
-            
-            <div class="row g-2 mb-4 text-center fw-medium">
-                <div class="col-12 col-md-8"><div class="bg-success-subtle text-success-dark p-3 rounded">.col-12 .col-md-8</div></div>
-                <div class="col-12 col-md-4"><div class="bg-success-subtle text-success-dark p-3 rounded">.col-12 .col-md-4</div></div>
-                
-                <div class="col-6 col-md-4"><div class="bg-success-subtle text-success-dark p-3 rounded">.col-6 .col-md-4</div></div>
-                <div class="col-6 col-md-4"><div class="bg-success-subtle text-success-dark p-3 rounded">.col-6 .col-md-4</div></div>
-                <div class="col-12 col-md-4"><div class="bg-success-subtle text-success-dark p-3 rounded">.col-12 .col-md-4</div></div>
-            </div>
-
-            <h5>4. Décalages (Offsets)</h5>
-            <p class="small text-muted mb-2">Poussez les colonnes vers la droite en utilisant les classes <code>.offset-*</code>.</p>
-            
-            <div class="row g-2 mb-4 text-center fw-medium">
-                <div class="col-4"><div class="bg-warning-subtle text-warning-dark p-3 rounded">.col-4</div></div>
-                <div class="col-4 offset-4"><div class="bg-warning-subtle text-warning-dark p-3 rounded">.col-4 .offset-4</div></div>
-                
-                <div class="col-6 offset-3"><div class="bg-warning-subtle text-warning-dark p-3 rounded">.col-6 .offset-3</div></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-5">
-        <h5>Code d'exemple</h5>
-        {% set codeExample = '<div class="row">
-    <div class="col">1/3</div>
-    <div class="col">1/3</div>
-    <div class="col">1/3</div>
+{% set code %}
+<div class="row gy-4">
+  <div class="col-12 col-md-8"><div class="docs-box">.col-12 .col-md-8</div></div>
+  <div class="col-12 col-md-4"><div class="docs-box">.col-12 .col-md-4</div></div>
+  <div class="col-6 col-lg-3"><div class="docs-box">.col-6 .col-lg-3</div></div>
+  <div class="col-6 col-lg-3"><div class="docs-box">.col-6 .col-lg-3</div></div>
+  <div class="col-6 col-lg-3"><div class="docs-box">.col-6 .col-lg-3</div></div>
+  <div class="col-6 col-lg-3"><div class="docs-box">.col-6 .col-lg-3</div></div>
 </div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-<div class="row">
-    <div class="col-12 col-md-6 col-lg-4">
-        Prend 100% sur mobile, 50% sur tablette, 33% sur bureau.
-    </div>
+  <section class="docs-section" id="decalages">
+    <h3>Décalages</h3>
+    <p><code>.offset-{n}</code> et <code>.offset-{bp}-{n}</code> décalent la colonne ; <code>.offset-{bp}-0</code> annule un décalage.</p>
+{% set code %}
+<div class="row gy-4">
+  <div class="col-4"><div class="docs-box">.col-4</div></div>
+  <div class="col-4 offset-4"><div class="docs-box">.col-4 .offset-4</div></div>
+  <div class="col-md-6 offset-md-3"><div class="docs-box">.col-md-6 .offset-md-3</div></div>
 </div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
+  <section class="docs-section" id="ordre">
+    <h3>Ordre</h3>
+    <p>Les utilitaires <code>.order-*</code> (et <code>.order-{bp}-*</code>) réordonnent visuellement les colonnes.</p>
+{% set code %}
 <div class="row">
-    <div class="col-md-6 offset-md-3">
-        Colonne centrée (6 colonnes de large, décalée de 3)
+  <div class="col"><div class="docs-box">1er dans le HTML</div></div>
+  <div class="col order-last"><div class="docs-box">2e (.order-last)</div></div>
+  <div class="col order-first"><div class="docs-box">3e (.order-first)</div></div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="gouttieres">
+    <h3>Gouttières</h3>
+    <p>
+      La gouttière horizontale par défaut est de 24px. <code>.g-{n}</code> règle les deux axes,
+      <code>.gx-{n}</code> l'horizontale et <code>.gy-{n}</code> la verticale (n : 0, 1, 2, 3, 4, 5, 6, 8, 10, 12),
+      aussi en responsive (<code>.g-md-{n}</code>).
+    </p>
+{% set code %}
+<div class="row g-2">
+  <div class="col-6"><div class="docs-box">.g-2</div></div>
+  <div class="col-6"><div class="docs-box">.g-2</div></div>
+  <div class="col-6"><div class="docs-box">.g-2</div></div>
+  <div class="col-6"><div class="docs-box">.g-2</div></div>
+</div>
+<div class="row gx-8 gy-2 mt-6">
+  <div class="col-6"><div class="docs-box">.gx-8 .gy-2</div></div>
+  <div class="col-6"><div class="docs-box">.gx-8 .gy-2</div></div>
+  <div class="col-6"><div class="docs-box">.gx-8 .gy-2</div></div>
+  <div class="col-6"><div class="docs-box">.gx-8 .gy-2</div></div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="imbrication">
+    <h3>Imbrication</h3>
+    <p>Une colonne peut contenir sa propre <code>.row</code>, qui redécoupe sa largeur en 12.</p>
+{% set code %}
+<div class="row">
+  <div class="col-8">
+    <div class="docs-area">
+      <div class="row g-2">
+        <div class="col-6"><div class="docs-box">.col-6</div></div>
+        <div class="col-6"><div class="docs-box">.col-6</div></div>
+      </div>
     </div>
-</div>' %}
-        {% include 'fragments/components/_code-block.html.twig' with {
-            'code': codeExample,
-            'language': 'html',
-            'title': 'Structure HTML Système de Grille'
-        } %}
-    </div>
+  </div>
+  <div class="col-4"><div class="docs-box">.col-4</div></div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--row-gutter-x', '<code>--ds-space-6</code>', 'Gouttière horizontale (lue par les colonnes)'],
+        ['--row-gutter-y', '<code>0</code>', 'Gouttière verticale'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.row', 'Rangée flex qui passe à la ligne'],
+        ['.col, .col-{bp}', 'Colonne à largeur partagée'],
+        ['.col-auto, .col-{bp}-auto', 'Colonne à la largeur du contenu'],
+        ['.col-{1-12}, .col-{bp}-{1-12}', 'Colonne sur n douzièmes'],
+        ['.offset-{1-11}, .offset-{bp}-{0-11}', 'Décalage'],
+        ['.g-{n}, .gx-{n}, .gy-{n} (+ {bp})', 'Gouttières'],
+      ],
+    } only %}
+  </section>
 </div>

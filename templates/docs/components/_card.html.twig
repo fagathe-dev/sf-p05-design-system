@@ -1,38 +1,157 @@
-{% set card = ['primary', 'secondary', 'tertiary'] %}
-
+{# Docs : Card — source : assets/scss/components/_card.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
 
 <div class="component-demo">
-  <h3>🃏 Cards</h3>
-  <div class="d-flex gap-2 my-2_5">
-    <div class="card" style="width: 18rem;">
+  <p class="docs-lead">
+    Carte de contenu sur la surface <code>--ds-surface-container</code>, sans bordure ni ombre :
+    la profondeur vient de la couleur de surface. Elle s'organise en en-tête, corps et pied.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+{% set code %}
+<div class="card" style="max-inline-size: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">Titre de la carte</h5>
+    <p class="card-text">Un court texte qui décrit le contenu de la carte.</p>
+    <a href="#" class="btn btn-primary btn-sm">Voir le détail</a>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="structure">
+    <h3>En-tête et pied</h3>
+    <p><code>.card-header</code> et <code>.card-footer</code> encadrent le corps, qui s'étire pour remplir la carte.</p>
+{% set code %}
+<div class="card" style="max-inline-size: 20rem;">
+  <div class="card-header">
+    <span class="badge badge-success">Actif</span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Abonnement Pro</h5>
+    <p class="card-text">Facturation mensuelle, résiliable à tout moment.</p>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-soft-primary btn-sm">Gérer</button>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="image">
+    <h3>Image</h3>
+    <p><code>.card-img-top</code> (ou <code>.card-img</code>) occupe toute la largeur et est rognée par l'arrondi de la carte.</p>
+{% set code %}
+<div class="card" style="max-inline-size: 20rem;">
+  <img src="{{ asset('images/auth-cover.png') }}" class="card-img-top" alt="Illustration">
+  <div class="card-body">
+    <h5 class="card-title">Carte illustrée</h5>
+    <p class="card-text">L'image reste dans les coins arrondis.</p>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="elevated">
+    <h3>Carte interactive</h3>
+    <p>
+      <code>.card-elevated</code> passe sur <code>--ds-surface-container-high</code> et se soulève au survol.
+      Rendez-la focusable si toute la carte est cliquable.
+    </p>
+{% set code %}
+<a href="#" class="card card-elevated text-decoration-none" style="max-inline-size: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">Ouvrir le projet</h5>
+    <p class="card-text">Toute la carte est un lien.</p>
+  </div>
+</a>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="themes">
+    <h3>Thèmes</h3>
+    <p><code>.card-{rôle}</code> passe la carte sur le conteneur du rôle.</p>
+{% set code %}
+<div class="row g-4">
+{% for role in roles %}
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card card-{{ role }}">
       <div class="card-body">
-        <h5 class="card-title">Card simple</h5>
-        <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
-      </div>
-    </div>
-    <div class="card card-elevated" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Card élevée</h5>
-        <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="{{ asset('images/auth-cover.png') }}" alt="Image de la carte">
-      <div class="card-body">
-        <h5 class="card-title">Card avec une image</h5>
-        <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
+        <h5 class="card-title">{{ role|capitalize }}</h5>
+        <p class="card-text">Carte sur le conteneur {{ role }}.</p>
       </div>
     </div>
   </div>
-  <h3>🃏 Cards avec thème</h3>
-  <div class="d-flex gap-2">
-    {% for theme in card %}
-      <div class="card card-{{ theme }}" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card simple</h5>
-          <p class="card-text">Texte descriptif de la carte avec effet d'élévation au survol.</p>
-        </div>
-      </div>
-    {% endfor %}
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="grille">
+    <h3>Grille de cartes</h3>
+    <p>L'espacement entre cartes est porté par la grille (<code>.row</code> et <code>.g-*</code>) : les cartes n'ont aucune marge externe.</p>
+{% set code %}
+<div class="row g-4">
+  <div class="col-12 col-md-4">
+    <div class="card h-100"><div class="card-body"><h5 class="card-title">Étape 1</h5><p class="card-text">Créer un compte.</p></div></div>
   </div>
+  <div class="col-12 col-md-4">
+    <div class="card h-100"><div class="card-body"><h5 class="card-title">Étape 2</h5><p class="card-text">Configurer l'espace de travail et inviter l'équipe.</p></div></div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="card h-100"><div class="card-body"><h5 class="card-title">Étape 3</h5><p class="card-text">Publier.</p></div></div>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="liste">
+    <h3>Avec une liste</h3>
+{% set code %}
+<div class="card" style="max-inline-size: 20rem;">
+  <div class="card-header"><h5 class="card-title">Équipe</h5></div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Alice — Design</li>
+    <li class="list-group-item">Bruno — Développement</li>
+    <li class="list-group-item">Chloé — Produit</li>
+  </ul>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--card-bg', '<code>--ds-surface-container</code>', 'Fond'],
+        ['--card-color', '<code>--ds-color-on-surface</code>', 'Texte'],
+        ['--card-title-color', '<code>--ds-color-on-surface</code>', 'Titre'],
+        ['--card-radius', '<code>--ds-radius-lg</code>', 'Rayon'],
+        ['--card-padding', '<code>--ds-space-6</code>', 'Padding de l\'en-tête, du corps et du pied'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.card', 'Conteneur'],
+        ['.card-header, .card-body, .card-footer', 'Zones de la carte'],
+        ['.card-title, .card-text', 'Titre et texte'],
+        ['.card-img, .card-img-top', 'Image pleine largeur'],
+        ['.card-elevated', 'Carte interactive (survol)'],
+        ['.card-{rôle}', 'Carte teintée'],
+      ],
+    } only %}
+  </section>
 </div>

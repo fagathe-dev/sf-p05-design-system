@@ -1,67 +1,139 @@
+{# Docs : Code — sources : assets/scss/content/_code.scss, templates/fragments/components/_code-block.html.twig #}
+
 <div class="component-demo">
-  <h3>💻 Code Source</h3>
-  <p class="text-muted mb-4">
-    Affichage de code inline ou en bloc avec coloration syntaxique, numérotation et bouton de copie automatique au presse-papier.
+  <p class="docs-lead">
+    Code dans le texte et blocs de code avec en-tête, bouton de copie, repli et coloration syntaxique.
+    La zone de code reste sombre dans les deux thèmes.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12">
-      <div class="box box-secondary mb-0">
-        <h5 class="mb-4">1. Code Inline</h5>
-        <p>
-          Enveloppez du texte avec la balise <code>&lt;code&gt;</code> ou utilisez la classe explicite 
-          <span class="code-inline">.code-inline</span> pour indiquer un extrait de code au sein d'une phrase, 
-          comme par exemple la commande <code>npm run build</code>.
-        </p>
+  <section class="docs-section" id="inline">
+    <h3>Code inline</h3>
+    <p>
+      La balise <code>&lt;code&gt;</code> est teintée du rôle primaire ; <code>.code-inline</code> donne
+      une variante neutre avec bordure.
+    </p>
+{% set code %}
+<p>Lancez <code>npm run dev</code> pour compiler en continu.</p>
+<p>Le fichier de configuration est <span class="code-inline">tsconfig.json</span>.</p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-        <hr class="my-4">
-
-        <h5 class="mb-4">2. Composant Twig complet (Code Block)</h5>
-        <p class="text-muted small mb-3">
-          Le composant <code>_code-block.html.twig</code> gère le fond sombre, le header, et injecte automatiquement le bouton de copie fonctionnel.
-        </p>
-        
-        {# Exemple visuel du code block généré #}
-        {% set fakeCode %}
+  <section class="docs-section" id="bloc">
+    <h3>Bloc de code</h3>
+    <p>
+      Le fragment Twig <code>_code-block.html.twig</code> génère l'en-tête (langage, titre) et le bouton de
+      copie relié au presse-papier par <code>data-copy-target</code>. Le code est échappé automatiquement.
+    </p>
+{% set source %}
 const initApp = () => {
-  console.log("Application initialisée !");
-  // L'API Clipboard fonctionne parfaitement ici.
+  console.log('Application initialisée');
 };
-        {% endset %}
-        {% include 'fragments/components/_code-block.html.twig' with {
-          'code': fakeCode,
-          'language': 'javascript',
-          'title': 'app.js'
-        } %}
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      code: source,
+      language: 'javascript',
+      title: 'app.js',
+    } only %}
+{% set code %}
+{{ '{%' }} set source {{ '%}' }}
+const initApp = () => {
+  console.log('Application initialisée');
+};
+{{ '{%' }} endset {{ '%}' }}
 
-      </div>
-    </div>
-  </div>
+{{ '{%' }} include 'fragments/components/_code-block.html.twig' with {
+  code: source,
+  language: 'javascript',
+  title: 'app.js',
+} only {{ '%}' }}
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'twig', title: 'Utilisation' } only %}
+  </section>
 
-  <div class="mt-4">
-    <h5>Comment utiliser ce composant Twig ?</h5>
-    {% set codeExample %}
-{# 1. Définissez d'abord votre code source dans une variable #}
-{% set monCode %}
-<div class="mon-composant">
-  <p>Hello World</p>
+  <section class="docs-section" id="options">
+    <h3>Options du fragment</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Paramètre', 'Défaut', 'Rôle'],
+      rows: [
+        ['code', '—', 'Code à afficher (obligatoire)'],
+        ['language', '<code>text</code>', 'Langage affiché dans l\'en-tête'],
+        ['title', '—', 'Titre du bloc (nom de fichier…)'],
+        ['copyable', '<code>true</code>', 'Affiche le bouton de copie'],
+        ['collapsible', '<code>false</code>', 'Affiche un bouton pour replier le code'],
+        ['id', 'aléatoire', 'Identifiant du bloc (cible de la copie)'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="repliable">
+    <h3>Bloc repliable</h3>
+    <p>Avec <code>collapsible: true</code>, un bouton replie le code (même mécanisme que Collapse).</p>
+{% set source %}
+SELECT id, email
+FROM users
+WHERE active = 1
+ORDER BY created_at DESC;
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with {
+      code: source,
+      language: 'sql',
+      title: 'Requête',
+      collapsible: true,
+    } only %}
+  </section>
+
+  <section class="docs-section" id="coloration">
+    <h3>Coloration syntaxique</h3>
+    <p>
+      Pas de coloration automatique : enveloppez les fragments dans des <code>.token-*</code> (palette One Dark,
+      définie par les tokens <code>--ds-code-*</code>).
+    </p>
+{% set code %}
+<pre class="code-content rounded"><code><span class="token-comment">// Exemple</span>
+<span class="token-keyword">const</span> <span class="token-variable">theme</span> = <span class="token-string">'dark'</span>;
+<span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-string">"box"</span><span class="token-tag">&gt;</span>
+<span class="token-selector">.box</span> { <span class="token-property">padding</span>: <span class="token-value">1rem</span>; }</code></pre>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="hauteur">
+    <h3>Hauteur limitée</h3>
+    <p><code>.code-collapsed</code> limite la hauteur et ajoute un fondu en bas, pour les extraits longs.</p>
+{% set code %}
+<div class="code-collapsed rounded">
+  <pre class="code-content"><code>ligne 1
+ligne 2
+ligne 3
+ligne 4
+ligne 5
+ligne 6
+ligne 7
+ligne 8
+ligne 9
+ligne 10
+ligne 11
+ligne 12
+ligne 13
+ligne 14
+ligne 15</code></pre>
 </div>
 {% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-{# 2. Appelez l'include Twig avec les paramètres souhaités #}
-{% include 'fragments/components/_code-block.html.twig' with {
-  'code': monCode,
-  'language': 'html',
-  'title': 'Mon Fichier HTML',
-  'copyable': true,
-  'collapsible': false
-} %}
-    {% endset %}
-    
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'twig',
-      'title': 'Utilisation dans vos templates'
-    } %}
-  </div>
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.code-inline', 'Code inline neutre avec bordure'],
+        ['.code-block', 'Conteneur du bloc de code'],
+        ['.code-header, .code-title, .code-language, .code-actions', 'En-tête du bloc'],
+        ['.code-content', 'Zone de code sombre (sur un &lt;pre&gt;)'],
+        ['.code-collapsed', 'Hauteur limitée avec fondu'],
+        ['.token-tag, .token-attr, .token-string, .token-property, .token-keyword, .token-comment…', 'Coloration syntaxique'],
+      ],
+    } only %}
+  </section>
 </div>

@@ -1,0 +1,75 @@
+{# Docs : Jumbotron — source : assets/scss/components/_jumbotron.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Grand bloc d'accroche pour présenter une page ou une section. Son padding augmente à partir
+    du breakpoint <code>md</code>.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+{% set code %}
+<div class="jumbotron">
+  <h1 class="jumbotron-title">Bienvenue</h1>
+  <p class="jumbotron-lead">Tout ce qu'il faut pour démarrer un nouveau projet, au même endroit.</p>
+  <a href="#" class="btn btn-primary">Démarrer</a>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="themes">
+    <h3>Thèmes</h3>
+    <p><code>.jumbotron-{rôle}</code> passe le bloc sur le conteneur du rôle (tous les rôles sont disponibles).</p>
+{% set code %}
+{% for role in ['primary', 'secondary', 'tertiary'] %}
+<div class="jumbotron jumbotron-{{ role }}">
+  <h1 class="jumbotron-title">Jumbotron {{ role }}</h1>
+  <p class="jumbotron-lead">Le titre et le texte prennent la couleur du rôle.</p>
+</div>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="fluid">
+    <h3>Bord à bord</h3>
+    <p>
+      <code>.jumbotron-fluid</code> retire l'arrondi et étend le fond sur toute la largeur de la fenêtre,
+      même dans un <code>.container</code>, sans provoquer de défilement horizontal.
+    </p>
+{% set code %}
+<div class="jumbotron jumbotron-fluid jumbotron-secondary">
+  <h1 class="jumbotron-title">Pleine largeur</h1>
+  <p class="jumbotron-lead">Le fond déborde du conteneur jusqu'aux bords de l'écran.</p>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--jumbotron-bg', '<code>--ds-surface-container</code>', 'Fond'],
+        ['--jumbotron-color', '<code>--ds-color-on-surface</code>', 'Texte'],
+        ['--jumbotron-py', '<code>--ds-space-16</code> (<code>--ds-space-24</code> dès md)', 'Padding vertical'],
+        ['--jumbotron-px', '<code>--ds-space-8</code> (<code>--ds-space-16</code> dès md)', 'Padding horizontal'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.jumbotron', 'Bloc d\'accroche'],
+        ['.jumbotron-title', 'Titre (Display md)'],
+        ['.jumbotron-lead', 'Chapô, limité à la largeur de lecture'],
+        ['.jumbotron-fluid', 'Variante bord à bord'],
+        ['.jumbotron-{rôle}', 'Variante teintée'],
+      ],
+    } only %}
+  </section>
+</div>

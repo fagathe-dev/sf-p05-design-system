@@ -1,0 +1,192 @@
+{# Docs : Markdown Editor — sources : assets/scss/forms/_md-editor.scss, JS : interactions/components/md-editor.ts #}
+{% set sample %}
+# Notes de version
+
+Cette version apporte le **thème sombre** et un ==nouvel éditeur==.
+
+- Composant SegmentedControl
+- Raccourcis clavier
+{% endset %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Éditeur Markdown complet : bascule Écrire / Aperçu avec un SegmentedControl, boutons de mise en
+    forme, raccourcis clavier et continuation automatique des listes. L'aperçu est généré par
+    <code>convertMarkdownToHtml()</code> (core-ts).
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>
+      Le conteneur porte <code>data-ds-md-editor</code>. Le SegmentedControl <code>[data-md-mode]</code>
+      bascule entre les options <code>write</code> et <code>preview</code> ; chaque bouton de mise en forme porte
+      son action dans <code>data-md-action</code>. L'aperçu est créé s'il est absent.
+    </p>
+{% set code %}
+<div class="md-editor" data-ds-md-editor>
+  <div class="md-editor-toolbar">
+    <div class="segmented-control segmented-control-sm" role="radiogroup" aria-label="Mode de l'éditeur" data-md-mode>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="write"><i class="ri-edit-line"></i> Écrire</button>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="preview"><i class="ri-eye-line"></i> Aperçu</button>
+    </div>
+    <div class="md-editor-format-buttons" role="toolbar" aria-label="Mise en forme">
+      <button type="button" class="md-format-btn" data-md-action="heading" aria-label="Titre" title="Titre"><i class="ri-heading"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="bold" aria-label="Gras" title="Gras (Ctrl+B)"><i class="ri-bold"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="italic" aria-label="Italique" title="Italique (Ctrl+I)"><i class="ri-italic"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="strike" aria-label="Barré" title="Barré"><i class="ri-strikethrough"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="highlight" aria-label="Surligné" title="Surligné"><i class="ri-mark-pen-line"></i></button>
+      <span class="md-editor-separator" aria-hidden="true"></span>
+      <button type="button" class="md-format-btn" data-md-action="ul" aria-label="Liste à puces" title="Liste à puces"><i class="ri-list-unordered"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="ol" aria-label="Liste numérotée" title="Liste numérotée"><i class="ri-list-ordered"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="task" aria-label="Liste de tâches" title="Liste de tâches"><i class="ri-list-check-3"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="quote" aria-label="Citation" title="Citation"><i class="ri-double-quotes-l"></i></button>
+      <span class="md-editor-separator" aria-hidden="true"></span>
+      <button type="button" class="md-format-btn" data-md-action="code" aria-label="Code" title="Code (Ctrl+E)"><i class="ri-code-line"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="codeblock" aria-label="Bloc de code" title="Bloc de code"><i class="ri-code-box-line"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="link" aria-label="Lien" title="Lien (Ctrl+K)"><i class="ri-link"></i></button>
+    </div>
+  </div>
+  <textarea class="form-control" name="content" rows="8" aria-label="Contenu Markdown">{{ sample|trim }}</textarea>
+  <div class="md-editor-preview" hidden></div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="actions">
+    <h3>Actions de mise en forme</h3>
+    <p>
+      Les actions « en ligne » entourent la sélection (ou insèrent un texte d'exemple sélectionné) ; un second
+      clic retire la mise en forme. Les actions « par ligne » préfixent chaque ligne sélectionnée et remplacent
+      un titre ou un autre type de liste.
+    </p>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['data-md-action', 'Résultat', 'Type'],
+      rows: [
+        ['bold', '<code>**texte**</code> — Ctrl/⌘ + B', 'En ligne'],
+        ['italic', '<code>_texte_</code> — Ctrl/⌘ + I', 'En ligne'],
+        ['strike', '<code>~~texte~~</code>', 'En ligne'],
+        ['highlight', '<code>==texte==</code> (rendu en &lt;mark&gt;)', 'En ligne'],
+        ['code', '<code>`code`</code> — Ctrl/⌘ + E', 'En ligne'],
+        ['codeblock', 'Bloc entre <code>```</code>', 'En ligne'],
+        ['link', '<code>[texte](https://)</code> — Ctrl/⌘ + K, l\'URL est sélectionnée', 'En ligne'],
+        ['heading', '<code>## </code>', 'Par ligne'],
+        ['quote', '<code>&gt; </code>', 'Par ligne'],
+        ['ul', '<code>- </code>', 'Par ligne'],
+        ['ol', '<code>1. </code>, <code>2. </code>…', 'Par ligne'],
+        ['task', '<code>- [ ] </code>', 'Par ligne'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="listes">
+    <h3>Listes et citations</h3>
+    <ul>
+      <li>Entrée en fin d'élément de liste ou de citation : la ligne suivante reprend le préfixe (les numéros s'incrémentent, les tâches repartent décochées).</li>
+      <li>Entrée sur un élément vide : le préfixe est retiré et la liste se termine.</li>
+      <li>Maj + Entrée insère un simple retour à la ligne.</li>
+      <li>Toutes les modifications passent par l'historique du navigateur : Ctrl/⌘ + Z les annule.</li>
+    </ul>
+  </section>
+
+  <section class="docs-section" id="apercu">
+    <h3>Ouvert en aperçu</h3>
+    <p>Sélectionnez l'option <code>preview</code> dans le balisage : l'aperçu est généré au chargement.</p>
+{% set code %}
+<div class="md-editor" data-ds-md-editor>
+  <div class="md-editor-toolbar">
+    <div class="segmented-control segmented-control-sm" role="radiogroup" aria-label="Mode de l'éditeur" data-md-mode>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="write"><i class="ri-edit-line"></i> Écrire</button>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="preview"><i class="ri-eye-line"></i> Aperçu</button>
+    </div>
+  </div>
+  <textarea class="form-control" rows="6" aria-label="Contenu Markdown">{{ sample|trim }}</textarea>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="compact">
+    <h3>Version compacte</h3>
+    <p><code>.md-editor--compact</code> réduit les paddings et la hauteur minimale, pour un commentaire.</p>
+{% set code %}
+<div class="md-editor md-editor--compact" data-ds-md-editor>
+  <div class="md-editor-toolbar">
+    <div class="segmented-control segmented-control-sm" role="radiogroup" aria-label="Mode de l'éditeur" data-md-mode>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="write">Écrire</button>
+      <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="preview">Aperçu</button>
+    </div>
+    <div class="md-editor-format-buttons" role="toolbar" aria-label="Mise en forme">
+      <button type="button" class="md-format-btn" data-md-action="bold" aria-label="Gras" title="Gras (Ctrl+B)"><i class="ri-bold"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="italic" aria-label="Italique" title="Italique (Ctrl+I)"><i class="ri-italic"></i></button>
+      <button type="button" class="md-format-btn" data-md-action="link" aria-label="Lien" title="Lien (Ctrl+K)"><i class="ri-link"></i></button>
+    </div>
+  </div>
+  <textarea class="form-control" name="comment" rows="3" aria-label="Commentaire" placeholder="Votre commentaire…"></textarea>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="javascript">
+    <h3>JavaScript</h3>
+    <p>
+      <code>main.ts</code> active les éditeurs présents au chargement. Pour un éditeur ajouté plus tard,
+      appelez <code>initMarkdownEditors()</code> sur son conteneur. La saisie émet l'événement <code>input</code>
+      natif à chaque modification (sauvegarde automatique, compteur…), et le <code>&lt;textarea&gt;</code> reste
+      soumis avec le formulaire.
+    </p>
+{% set code %}
+import { initMarkdownEditors } from '@/interactions/components/md-editor';
+import { initSegmentedControls } from '@/interactions/components/segmented-control';
+
+const container = document.querySelector('#comments');
+initSegmentedControls(container);
+initMarkdownEditors(container);
+
+container.querySelector('textarea').addEventListener('input', (event) => {
+  localStorage.setItem('draft', event.target.value);
+});
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'typescript', title: 'md-editor.ts' } only %}
+    <div class="box box-warning">
+      <h5 class="box-title"><i class="ri-shield-line"></i> Sécurité</h5>
+      <p>
+        L'aperçu insère le HTML produit par <code>marked</code> sans le nettoyer. Si l'éditeur peut afficher un
+        contenu écrit par un autre utilisateur, nettoyez ce HTML (par exemple avec DOMPurify) avant de l'afficher.
+      </p>
+    </div>
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--md-editor-bg', '<code>transparent</code>', 'Fond'],
+        ['--md-editor-border-color', '<code>--ds-color-outline</code>', 'Bordure (focus ring pendant la saisie)'],
+        ['--md-editor-padding', '<code>--ds-space-3</code>', 'Padding de la saisie et de l\'aperçu'],
+        ['--md-editor-toolbar-padding', '<code>--ds-space-2</code>', 'Padding de la barre d\'outils'],
+        ['--md-editor-button-size', '<code>--ds-control-height-sm</code>', 'Taille des boutons de mise en forme'],
+        ['--md-editor-min-height', '<code>9rem</code> (<code>--ds-space-24</code> en compact)', 'Hauteur minimale'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes et attributs</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.md-editor', 'Conteneur'],
+        ['.md-editor-toolbar', 'Barre d\'outils'],
+        ['.md-editor-format-buttons, .md-format-btn', 'Boutons de mise en forme (désactivés en aperçu)'],
+        ['.md-editor-separator', 'Séparateur vertical entre groupes de boutons'],
+        ['.md-editor-preview', 'Aperçu du HTML généré'],
+        ['.md-editor--compact', 'Version compacte'],
+        ['data-ds-md-editor', 'Active le comportement'],
+        ['data-md-mode', 'SegmentedControl Écrire / Aperçu (valeurs write et preview)'],
+        ['data-md-action', 'Action de mise en forme du bouton'],
+      ],
+    } only %}
+  </section>
+</div>

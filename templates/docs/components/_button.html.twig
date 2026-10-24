@@ -1,39 +1,181 @@
+{# Docs : Button — source : assets/scss/components/_button.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
+
 <div class="component-demo">
-  <h3>🔘 Boutons solides</h3>
-  <div class="d-flex gap-3">
-    <button class="btn btn-primary">Primary</button>
-    <button class="btn btn-secondary">Secondary</button>
-    <button class="btn btn-tertiary">Tertiary</button>
-  </div>
+  <p class="docs-lead">
+    Boutons d'action en forme de pilule, déclinés en quatre variantes (solid, soft, outline, ghost)
+    pour chacun des sept rôles de couleur, en trois tailles. Le survol et l'appui utilisent un calque
+    d'état, et le bouton change de forme au clic.
+  </p>
 
-  <h3 class="mt-3">🔘 Boutons soft</h3>
-  <div class="d-flex gap-3">
-    <button class="btn btn-soft-primary">Primary</button>
-    <button class="btn btn-soft-secondary">Secondary</button>
-    <button class="btn btn-soft-tertiary">Tertiary</button>
-  </div>
+  <section class="docs-section" id="solid">
+    <h3>Solid</h3>
+    <p>
+      Variante par défaut, pour l'action principale d'une zone. <code>.btn-{rôle}</code> et
+      <code>.btn-solid-{rôle}</code> sont équivalentes. Un <code>.btn</code> sans variante prend le rôle primary.
+    </p>
+{% set code %}
+{% for role in roles %}
+<button type="button" class="btn btn-{{ role }}">{{ role|capitalize }}</button>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-  <h3 class="mt-3">🔘 Boutons outline</h3>
-  <div class="d-flex gap-3">
-    <button class="btn btn-outline-primary">Primary</button>
-    <button class="btn btn-outline-secondary">Secondary</button>
-    <button class="btn btn-outline-tertiary">Tertiary</button>
-  </div>
-  
-  <h3 class="mt-3">🔘 Boutons ghost</h3>
-  <div class="d-flex gap-3">
-    <button class="btn btn-ghost-primary">Primary</button>
-    <button class="btn btn-ghost-secondary">Secondary</button>
-    <button class="btn btn-ghost-tertiary">Tertiary</button>
-  </div>
-  
-  <h3 class="mt-3">🔘 Boutons inactifs</h3>
-  <div class="d-flex gap-3">
-    <button class="btn btn-primary" disabled>Primary</button>
-    <button class="btn btn-secondary" disabled>Secondary</button>
-    <button class="btn btn-tertiary" disabled>Tertiary</button>
-  </div>
-  
-  <h4 class="mt-4">Bouton fermeture</h4>
-  <button class="btn-close" aria-label="Fermer"></button>
+  <section class="docs-section" id="soft">
+    <h3>Soft</h3>
+    <p>Fond conteneur du rôle, pour les actions secondaires qui doivent rester visibles.</p>
+{% set code %}
+{% for role in roles %}
+<button type="button" class="btn btn-soft-{{ role }}">{{ role|capitalize }}</button>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="outline">
+    <h3>Outline</h3>
+    <p>Bordure fonctionnelle (contraste 3:1) et texte de la couleur du rôle, sur fond transparent.</p>
+{% set code %}
+{% for role in roles %}
+<button type="button" class="btn btn-outline-{{ role }}">{{ role|capitalize }}</button>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="ghost">
+    <h3>Ghost</h3>
+    <p>Sans fond ni bordure : pour les actions tertiaires, les barres d'outils et les tableaux.</p>
+{% set code %}
+{% for role in roles %}
+<button type="button" class="btn btn-ghost-{{ role }}">{{ role|capitalize }}</button>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="balises">
+    <h3>Balises</h3>
+    <p>
+      <code>.btn</code> s'applique aux <code>&lt;button&gt;</code>, aux liens <code>&lt;a&gt;</code> et aux
+      <code>&lt;input&gt;</code> de type bouton. Un lien qui déclenche une action dans la page doit porter
+      <code>role="button"</code>.
+    </p>
+{% set code %}
+<button type="button" class="btn btn-primary">Bouton</button>
+<a href="#" class="btn btn-primary" role="button">Lien</a>
+<input type="submit" class="btn btn-primary" value="Envoyer">
+<input type="reset" class="btn btn-outline-secondary" value="Réinitialiser">
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="tailles">
+    <h3>Tailles</h3>
+    <p>
+      Les hauteurs suivent les tokens de contrôle : 32px (<code>.btn-sm</code>), 40px (par défaut) et 48px
+      (<code>.btn-lg</code>). La zone cliquable de <code>.btn-sm</code> est étendue à 44px.
+    </p>
+{% set code %}
+<button type="button" class="btn btn-primary btn-sm">Petit</button>
+<button type="button" class="btn btn-primary">Par défaut</button>
+<button type="button" class="btn btn-primary btn-lg">Grand</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="icones">
+    <h3>Avec icône</h3>
+    <p>L'icône se place avant ou après le libellé : l'espacement est géré par <code>gap</code>.</p>
+{% set code %}
+<button type="button" class="btn btn-primary"><i class="ri-add-line"></i> Ajouter</button>
+<button type="button" class="btn btn-soft-secondary">Télécharger <i class="ri-download-2-line"></i></button>
+<button type="button" class="btn btn-outline-danger"><i class="ri-delete-bin-line"></i> Supprimer</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+
+    <h4>Bouton icône</h4>
+    <p>
+      <code>.btn-icon</code> rend le bouton carré, dans les trois tailles. Sans texte visible, un
+      <code>aria-label</code> est obligatoire.
+    </p>
+{% set code %}
+<button type="button" class="btn btn-icon btn-primary btn-sm" aria-label="Modifier"><i class="ri-edit-line"></i></button>
+<button type="button" class="btn btn-icon btn-soft-primary" aria-label="Modifier"><i class="ri-edit-line"></i></button>
+<button type="button" class="btn btn-icon btn-outline-primary btn-lg" aria-label="Modifier"><i class="ri-edit-line"></i></button>
+<button type="button" class="btn btn-icon btn-ghost-danger" aria-label="Supprimer"><i class="ri-delete-bin-line"></i></button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="desactive">
+    <h3>Désactivé</h3>
+    <p>
+      Attribut <code>disabled</code> sur un <code>&lt;button&gt;</code>. Un lien ne peut pas être désactivé :
+      ajoutez <code>.disabled</code>, <code>aria-disabled="true"</code> et <code>tabindex="-1"</code>.
+    </p>
+{% set code %}
+<button type="button" class="btn btn-primary" disabled>Solid</button>
+<button type="button" class="btn btn-soft-primary" disabled>Soft</button>
+<button type="button" class="btn btn-outline-primary" disabled>Outline</button>
+<a class="btn btn-primary disabled" role="button" aria-disabled="true" tabindex="-1">Lien désactivé</a>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="largeur">
+    <h3>Pleine largeur</h3>
+    <p>Combinez avec l'utilitaire <code>.w-100</code>, par exemple dans un formulaire ou sur mobile.</p>
+{% set code %}
+<button type="button" class="btn btn-primary w-100">Continuer</button>
+<button type="button" class="btn btn-ghost-secondary w-100">Annuler</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    <p>
+      Les variantes ne font que redéfinir les Component Tokens du bouton. Pour un cas particulier,
+      surchargez-les avec des System Tokens plutôt que de réécrire des propriétés CSS.
+    </p>
+{% set code %}
+<button type="button" class="btn" style="--btn-bg: var(--ds-color-tertiary-container); --btn-color: var(--ds-color-on-tertiary-container); --btn-radius: var(--ds-radius-md);">
+  Tokens surchargés
+</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--btn-bg', '<code>--ds-color-primary</code>', 'Fond'],
+        ['--btn-color', '<code>--ds-color-on-primary</code>', 'Texte et icône'],
+        ['--btn-border-color', '<code>transparent</code>', 'Bordure'],
+        ['--btn-radius', '<code>--ds-radius-full</code>', 'Rayon (pilule)'],
+        ['--btn-height', '<code>--ds-control-height-md</code>', 'Hauteur'],
+        ['--btn-px', '<code>--ds-space-5</code>', 'Padding horizontal'],
+        ['--btn-gap', '<code>--ds-space-2</code>', 'Espace entre icône et libellé'],
+        ['--btn-font-size', '<code>--ds-text-label-lg</code>', 'Taille du libellé'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.btn', 'Classe de base (rôle primary par défaut)'],
+        ['.btn-{rôle}, .btn-solid-{rôle}', 'Variante pleine'],
+        ['.btn-soft-{rôle}', 'Variante conteneur'],
+        ['.btn-outline-{rôle}', 'Variante à bordure'],
+        ['.btn-ghost-{rôle}', 'Variante sans fond'],
+        ['.btn-sm, .btn-lg', 'Tailles 32px et 48px'],
+        ['.btn-icon', 'Bouton carré pour une icône seule'],
+        ['.btn-pill', 'Conservée pour compatibilité (les boutons sont en pilule par défaut)'],
+        ['.disabled', 'État désactivé pour les liens'],
+      ],
+    } only %}
+    <p>Rôles : <code>primary</code>, <code>secondary</code>, <code>tertiary</code>, <code>success</code>, <code>warning</code>, <code>info</code>, <code>danger</code>.</p>
+  </section>
 </div>

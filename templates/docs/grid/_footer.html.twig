@@ -1,0 +1,96 @@
+{# Docs : Footer — source : assets/scss/layout/_footer.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Pied de page sur la surface <code>--ds-surface-container</code> : contenu en colonne sur mobile,
+    en ligne à partir de <code>md</code>, et une zone légale séparée par un trait discret.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>Les liens réutilisent <code>.nav</code> : <code>.footer-links</code> adapte leurs couleurs.</p>
+{% set code %}
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <a class="navbar-brand" href="#"><i class="ri-box-3-fill text-primary"></i> Base</a>
+      <ul class="nav footer-links">
+        <li><a class="nav-link" href="#">Produit</a></li>
+        <li><a class="nav-link" href="#">Tarifs</a></li>
+        <li><a class="nav-link" href="#">Documentation</a></li>
+        <li><a class="nav-link" href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>© {{ 'now'|date('Y') }} Base. Tous droits réservés.</span>
+      <a href="#">Mentions légales</a>
+    </div>
+  </div>
+</footer>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'flush' } only %}
+  </section>
+
+  <section class="docs-section" id="themes">
+    <h3>Thèmes</h3>
+    <p><code>.footer-{rôle}</code> passe le pied de page sur le conteneur d'un rôle de marque (primary, secondary, tertiary).</p>
+{% set code %}
+{% for role in ['primary', 'secondary', 'tertiary'] %}
+<footer class="footer footer-{{ role }}">
+  <div class="container">
+    <div class="footer-content">
+      <strong>Footer {{ role }}</strong>
+      <ul class="nav footer-links">
+        <li><a class="nav-link" href="#">Aide</a></li>
+        <li><a class="nav-link" href="#">Confidentialité</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'flush' } only %}
+  </section>
+
+  <section class="docs-section" id="layout">
+    <h3>Dans le layout</h3>
+    <p>
+      Dans <code>.layout-app</code>, le contenu principal s'étire et repousse le footer en bas de page,
+      même quand la page est courte.
+    </p>
+{% set code %}
+<div class="layout-app">
+  <header class="app-header">…</header>
+  <main class="app-main">…</main>
+  <footer class="footer app-footer">…</footer>
+</div>
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--footer-bg', '<code>--ds-surface-container</code>', 'Fond'],
+        ['--footer-color', '<code>--ds-color-on-surface</code>', 'Texte et liens au survol'],
+        ['--footer-muted-color', '<code>--ds-color-on-surface-variant</code>', 'Liens et zone légale'],
+        ['--footer-divider-color', '<code>--ds-color-outline-variant</code>', 'Trait de la zone légale'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.footer', 'Pied de page'],
+        ['.footer-content', 'Contenu principal (colonne puis ligne dès md)'],
+        ['.footer-links', 'Liens (sur un .nav)'],
+        ['.footer-bottom', 'Zone légale'],
+        ['.footer-{primary|secondary|tertiary}', 'Thèmes'],
+      ],
+    } only %}
+  </section>
+</div>

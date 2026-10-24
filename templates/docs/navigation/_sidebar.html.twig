@@ -1,109 +1,241 @@
+{# Docs : Sidebar — source : assets/scss/navigation/_sidebar.scss, JS : interactions/events/toggle.ts #}
+
 <div class="component-demo">
-  <h3>🗄️ Menu Latéral (Sidebar)</h3>
-  <p class="text-muted mb-4">
-    Panneau de navigation latéral fixe. Il gère un état ouvert/fermé (`.show`) sur mobile, et peut être figé en permanence sur Desktop avec `.sidebar-expand-*`.
+  <p class="docs-lead">
+    Navigation latérale : sections titrées, liens avec indicateur actif en pilule et sous-menus repliables
+    sur un niveau. Elle s'ouvre en tiroir sur mobile et peut rester affichée à partir d'un breakpoint.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 text-center py-5 box box-secondary mb-0">
-      
-      <p class="mb-4">Le menu latéral (Sidebar) est un élément structurel fixe (<code>position: fixed</code>). Pour ne pas casser l'affichage de cette page de documentation, utilisez le bouton ci-dessous pour tester son apparition.</p>
-      
-      <button class="btn btn-primary" data-ds-toggle="sidebar" data-ds-target="#demoSidebar">
-        <i class="ri-layout-left-line"></i> Ouvrir la Sidebar de démo
-      </button>
-
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<div class="dashboard-overlay" data-ds-dismiss="sidebar" data-ds-target="#mySidebar"></div>
-
-<aside class="sidebar sidebar-expand-lg" id="mySidebar">
-  
+  <section class="docs-section" id="structure">
+    <h3>Structure</h3>
+    <p>
+      En-tête (<code>.sidebar-header</code>), zone de liens qui défile (<code>.sidebar-content</code>) et pied
+      (<code>.sidebar-footer</code>). Ci-dessous, la sidebar est montrée ouverte dans le flux de la page.
+    </p>
+{% set code %}
+<aside class="sidebar show" aria-label="Navigation">
   <div class="sidebar-header">
-    <a href="#" class="sidebar-brand fw-bold fs-5">
-      <i class="ri-box-3-fill text-primary"></i> App Name
-    </a>
+    <a href="#" class="sidebar-brand fw-bold fs-5"><i class="ri-box-3-fill text-primary"></i> <strong>App</strong></a>
   </div>
-
-  <div class="sidebar-content">
-    <div class="sidebar-item">
-      <a href="#" class="sidebar-link active">
-        <i class="ri-dashboard-line"></i>
-        <span>Dashboard</span>
-      </a>
-    </div>
-    <div class="sidebar-item">
-      <a href="#" class="sidebar-link">
-        <i class="ri-user-settings-line"></i>
-        <span>Utilisateurs</span>
-        <span class="badge bg-primary-subtle text-primary-dark rounded-pill sidebar-badge">Nouveau</span>
-      </a>
-    </div>
-  </div>
-
+  <nav class="sidebar-content">
+    <a href="#" class="sidebar-link active" aria-current="page"><i class="ri-dashboard-line"></i> <span>Tableau de bord</span></a>
+    <a href="#" class="sidebar-link"><i class="ri-bar-chart-box-line"></i> <span>Analyses</span></a>
+    <a href="#" class="sidebar-link"><i class="ri-inbox-line"></i> <span>Messages</span> <span class="badge badge-solid-primary sidebar-badge">4</span></a>
+  </nav>
   <div class="sidebar-footer">
-    </div>
-
-</aside>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Sidebar'
-    } %}
+    <a href="#" class="sidebar-link"><i class="ri-logout-box-r-line"></i> <span>Déconnexion</span></a>
   </div>
+</aside>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'contained surface' } only %}
+  </section>
+
+  <section class="docs-section" id="sections">
+    <h3>Sections</h3>
+    <p>
+      <code>.sidebar-section</code> regroupe des liens sous un titre <code>.sidebar-section-title</code> ;
+      deux sections consécutives sont espacées. Reliez le groupe à son titre avec <code>aria-labelledby</code>.
+    </p>
+{% set code %}
+<aside class="sidebar show" aria-label="Navigation">
+  <nav class="sidebar-content">
+    <div class="sidebar-section" role="group" aria-labelledby="section-general">
+      <span class="sidebar-section-title" id="section-general">Général</span>
+      <a href="#" class="sidebar-link active" aria-current="page"><i class="ri-dashboard-line"></i> <span>Vue d'ensemble</span></a>
+      <a href="#" class="sidebar-link"><i class="ri-bar-chart-box-line"></i> <span>Analyses</span></a>
+    </div>
+    <div class="sidebar-section" role="group" aria-labelledby="section-system">
+      <span class="sidebar-section-title" id="section-system">Système</span>
+      <a href="#" class="sidebar-link"><i class="ri-team-line"></i> <span>Utilisateurs</span></a>
+      <a href="#" class="sidebar-link"><i class="ri-settings-4-line"></i> <span>Paramètres</span></a>
+    </div>
+  </nav>
+</aside>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'contained surface' } only %}
+  </section>
+
+  <section class="docs-section" id="sous-menu">
+    <h3>Sous-menu</h3>
+    <p>
+      Un lien parent devient un <code>&lt;button class="sidebar-link"&gt;</code> qui bascule le
+      <code>.sidebar-submenu.collapse</code> suivant (<code>data-ds-toggle="collapse"</code>) ; son
+      <code>.sidebar-chevron</code> pivote à l'ouverture. Ouvrez le sous-menu de la page courante avec
+      <code>.show</code> et <code>aria-expanded="true"</code> : son parent est alors mis en avant.
+    </p>
+    <p>
+      Un seul niveau de sous-menu est prévu : les liens d'un sous-menu (<code>.sidebar-sublink</code>) ne
+      contiennent pas d'autre sous-menu.
+    </p>
+{% set code %}
+<aside class="sidebar show" aria-label="Navigation">
+  <nav class="sidebar-content">
+    <div class="sidebar-section" role="group" aria-labelledby="section-content">
+      <span class="sidebar-section-title" id="section-content">Contenu</span>
+      <div class="sidebar-item">
+        <button type="button" class="sidebar-link" data-ds-toggle="collapse" data-ds-target="#submenu-articles" aria-expanded="true" aria-controls="submenu-articles">
+          <i class="ri-article-line"></i> <span>Articles</span>
+          <i class="ri-arrow-down-s-line sidebar-chevron"></i>
+        </button>
+        <div class="sidebar-submenu collapse show" id="submenu-articles">
+          <a href="#" class="sidebar-sublink active" aria-current="page">Tous les articles</a>
+          <a href="#" class="sidebar-sublink">Nouvel article</a>
+          <a href="#" class="sidebar-sublink">Brouillons</a>
+        </div>
+      </div>
+      <div class="sidebar-item">
+        <button type="button" class="sidebar-link" data-ds-toggle="collapse" data-ds-target="#submenu-media" aria-expanded="false" aria-controls="submenu-media">
+          <i class="ri-image-line"></i> <span>Médias</span>
+          <i class="ri-arrow-down-s-line sidebar-chevron"></i>
+        </button>
+        <div class="sidebar-submenu collapse" id="submenu-media">
+          <a href="#" class="sidebar-sublink">Bibliothèque</a>
+          <a href="#" class="sidebar-sublink">Importer</a>
+        </div>
+      </div>
+      <a href="#" class="sidebar-link"><i class="ri-folder-line"></i> <span>Catégories</span></a>
+    </div>
+  </nav>
+</aside>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'contained surface' } only %}
+  </section>
+
+  <section class="docs-section" id="tiroir">
+    <h3>Tiroir</h3>
+    <p>
+      Fermée par défaut, la sidebar s'ouvre en tiroir au-dessus du contenu : le déclencheur
+      <code>data-ds-toggle="sidebar"</code> lui ajoute <code>.is-open</code> et affiche le voile
+      <code>.dashboard-overlay</code>. Le voile et <code>data-ds-dismiss="sidebar"</code> la referment.
+      Fermée, elle sort de l'ordre de tabulation.
+    </p>
+{% set code %}
+<button type="button" class="btn btn-primary" data-ds-toggle="sidebar" data-ds-target="#sidebar-drawer" aria-expanded="false" aria-controls="sidebar-drawer">
+  <i class="ri-layout-left-line"></i> Ouvrir la sidebar
+</button>
+
+<div class="dashboard-overlay" data-ds-dismiss="sidebar" data-ds-target="#sidebar-drawer"></div>
+<aside class="sidebar" id="sidebar-drawer" aria-label="Navigation">
+  <div class="sidebar-header">
+    <a href="#" class="sidebar-brand fw-bold fs-5"><i class="ri-box-3-fill text-primary"></i> <strong>App</strong></a>
+  </div>
+  <nav class="sidebar-content">
+    <div class="sidebar-section" role="group" aria-labelledby="drawer-section">
+      <span class="sidebar-section-title" id="drawer-section">Général</span>
+      <a href="#" class="sidebar-link active" aria-current="page"><i class="ri-dashboard-line"></i> <span>Vue d'ensemble</span></a>
+      <a href="#" class="sidebar-link"><i class="ri-bar-chart-box-line"></i> <span>Analyses</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button type="button" class="btn btn-ghost-secondary w-100" data-ds-dismiss="sidebar" data-ds-target="#sidebar-drawer">Fermer</button>
+  </div>
+</aside>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="reduite">
+    <h3>Réduite</h3>
+    <p>
+      <code>.sidebar-collapsed</code> ne garde que les icônes : les libellés doivent être dans des
+      <code>&lt;span&gt;</code>, et les titres de section et sous-menus sont masqués.
+      Ajoutez un <code>title</code> aux liens pour retrouver leur nom au survol.
+    </p>
+{% set code %}
+<aside class="sidebar sidebar-collapsed" aria-label="Navigation">
+  <div class="sidebar-header">
+    <a href="#" class="sidebar-brand fs-5" aria-label="App"><i class="ri-box-3-fill text-primary"></i> <strong>App</strong></a>
+  </div>
+  <nav class="sidebar-content">
+    <div class="sidebar-section">
+      <span class="sidebar-section-title">Général</span>
+      <a href="#" class="sidebar-link active" aria-current="page" title="Vue d'ensemble"><i class="ri-dashboard-line"></i> <span>Vue d'ensemble</span></a>
+      <a href="#" class="sidebar-link" title="Analyses"><i class="ri-bar-chart-box-line"></i> <span>Analyses</span></a>
+      <a href="#" class="sidebar-link" title="Paramètres"><i class="ri-settings-4-line"></i> <span>Paramètres</span></a>
+    </div>
+  </nav>
+</aside>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'contained surface' } only %}
+  </section>
+
+  <section class="docs-section" id="expand">
+    <h3>Toujours visible</h3>
+    <p>
+      <code>.sidebar-expand-{bp}</code> affiche la sidebar en permanence à partir du breakpoint
+      (<code>sm</code> à <code>xxl</code>) : elle passe dans le flux, collante, sans ombre. En dessous, elle
+      reste un tiroir.
+    </p>
+{% set code %}
+<div class="d-flex">
+  <aside class="sidebar sidebar-expand-lg" id="app-sidebar" aria-label="Navigation">
+    …
+  </aside>
+  <main class="flex-grow-1">…</main>
 </div>
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html' } only %}
+  </section>
 
-{# --- LA SIDEBAR CACHÉE POUR LA DÉMO CI-DESSUS --- #}
+  <section class="docs-section" id="dashboard">
+    <h3>Dans le layout dashboard</h3>
+    <p>
+      <code>.dashboard-sidebar</code> réutilise les mêmes éléments (<code>.sidebar-section</code>,
+      <code>.sidebar-link</code>, <code>.sidebar-submenu</code>…) : toujours visible à partir de <code>lg</code>,
+      en tiroir en dessous.
+    </p>
+{% set code %}
+<div class="layout-dashboard">
+  <div class="dashboard-overlay" data-ds-dismiss="sidebar"></div>
+  <aside class="dashboard-sidebar">
+    <header class="sidebar-header">…</header>
+    <nav class="sidebar-body">
+      <div class="sidebar-section" role="group" aria-labelledby="menu-main">
+        <span class="sidebar-section-title" id="menu-main">Menu principal</span>
+        …
+      </div>
+    </nav>
+  </aside>
+  <div class="dashboard-main">…</div>
+</div>
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html' } only %}
+  </section>
 
-<div class="dashboard-overlay" data-ds-dismiss="sidebar" data-ds-target="#demoSidebar" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1030; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;"></div>
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--sidebar-width', '<code>0</code> fermée, <code>--ds-size-sidebar</code> ouverte', 'Largeur'],
+        ['--sidebar-padding', '<code>--ds-space-3</code>', 'Padding de l\'en-tête, des liens et du pied'],
+        ['--sidebar-header-height', '<code>--ds-size-topbar</code>', 'Hauteur de l\'en-tête'],
+        ['--sidebar-link-bg, --sidebar-link-color', '<code>transparent</code>, <code>--ds-color-on-surface-variant</code>', 'Lien (conteneur primaire quand actif)'],
+        ['--sidebar-sublink-bg, --sidebar-sublink-color', 'idem', 'Lien de sous-menu'],
+        ['--sidebar-submenu-indent', 'aligné sur l\'icône du parent', 'Retrait du sous-menu'],
+      ],
+    } only %}
+  </section>
 
-<aside class="sidebar" id="demoSidebar" style="z-index: 1040;">
-  <div class="sidebar-header">
-    <a href="#" class="sidebar-brand fw-bold fs-5">
-      <i class="ri-box-3-fill text-primary"></i> UI Kit
-    </a>
-  </div>
-
-  <div class="sidebar-content">
-    <p class="text-muted small fw-bold px-3 mb-2 mt-3">Général</p>
-    <div class="sidebar-item">
-      <a href="#" class="sidebar-link active">
-        <i class="ri-dashboard-line"></i>
-        <span>Vue d'ensemble</span>
-      </a>
-    </div>
-    <div class="sidebar-item">
-      <a href="#" class="sidebar-link">
-        <i class="ri-bar-chart-box-line"></i>
-        <span>Analyses</span>
-      </a>
-    </div>
-
-    <p class="text-muted small fw-bold px-3 mb-2 mt-4">Système</p>
-    <div class="sidebar-item">
-      <a href="#" class="sidebar-link">
-        <i class="ri-settings-4-line"></i>
-        <span>Paramètres</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="sidebar-footer">
-    <button class="btn btn-ghost-danger w-100" data-ds-dismiss="sidebar" data-ds-target="#demoSidebar">
-      Fermer la démo
-    </button>
-  </div>
-</aside>
-
-{# Petit fix inline rapide pour faire fonctionner l'overlay de démo sans toucher au CSS global #}
-<style>
-  .dashboard-overlay.is-visible {
-    opacity: 1 !important;
-    pointer-events: auto !important;
-  }
-</style>
+  <section class="docs-section" id="classes">
+    <h3>Classes et attributs</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.sidebar', 'Tiroir (fermé) ; .show ou .is-open pour l\'ouvrir'],
+        ['.sidebar-expand-{bp}', 'Toujours visible à partir du breakpoint'],
+        ['.sidebar-collapsed', 'Version réduite aux icônes'],
+        ['.sidebar-header, .sidebar-brand', 'En-tête et marque'],
+        ['.sidebar-content, .sidebar-body', 'Zone de liens qui défile'],
+        ['.sidebar-section, .sidebar-section-title', 'Section et son titre (.sidebar-group-title : ancien nom)'],
+        ['.sidebar-item', 'Conteneur d\'un lien parent et de son sous-menu'],
+        ['.sidebar-link', 'Lien (.active) ou bouton parent d\'un sous-menu'],
+        ['.sidebar-chevron', 'Chevron du parent (pivote quand aria-expanded="true")'],
+        ['.sidebar-submenu', 'Sous-menu repliable (avec .collapse), un seul niveau'],
+        ['.sidebar-sublink', 'Lien de sous-menu (.active)'],
+        ['.sidebar-badge', 'Badge aligné à droite'],
+        ['.sidebar-footer', 'Pied'],
+        ['data-ds-toggle="sidebar", data-ds-dismiss="sidebar"', 'Ouverture et fermeture du tiroir'],
+      ],
+    } only %}
+  </section>
+</div>

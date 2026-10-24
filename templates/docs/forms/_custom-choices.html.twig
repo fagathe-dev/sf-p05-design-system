@@ -1,96 +1,124 @@
+{# Docs : Custom Choices — sources : assets/scss/forms/_form-check.scss (switch), _selectable-card.scss #}
+
 <div class="component-demo">
-  <h3>🔘 Toggle & Selectable Cards</h3>
-  <p class="text-muted mb-4">
-    Des éléments de sélection enrichis visuellement pour améliorer l'expérience utilisateur sur les longs formulaires.
+  <p class="docs-lead">
+    Sélections enrichies : interrupteurs pour les réglages on/off et cartes sélectionnables pour
+    les choix qui méritent une description. Tout repose sur des inputs natifs.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-5">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Toggle Switches</h5>
-        
-        <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="switch1" checked>
-          <label class="form-check-label" for="switch1">Notifications push</label>
-        </div>
-        
-        <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="switch2">
-          <label class="form-check-label" for="switch2">Mode sombre (désactivé)</label>
-        </div>
-
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" role="switch" id="switch3" disabled>
-          <label class="form-check-label" for="switch3">Option indisponible</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-lg-7">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Selectable Cards / Items</h5>
-        
-        <div class="form-selectable-card">
-          
-          <input type="radio" name="plan" id="plan-basic" class="form-selectable-input" checked>
-          <label class="form-selectable-label" for="plan-basic">
-            <div class="d-flex align-items-center gap-3">
-              <div class="avatar avatar-sm bg-primary-subtle text-primary-dark">
-                <i class="ri-rocket-line fs-5"></i>
-              </div>
-              <div>
-                <span class="fw-bold d-block text-body">Plan Basic</span>
-                <span class="text-muted small">Idéal pour démarrer</span>
-              </div>
-            </div>
-            <i class="ri-check-line icon-check"></i>
-          </label>
-
-          <input type="radio" name="plan" id="plan-pro" class="form-selectable-input">
-          <label class="form-selectable-label" for="plan-pro">
-            <div class="d-flex align-items-center gap-3">
-              <div class="avatar avatar-sm bg-warning-subtle text-warning-dark">
-                <i class="ri-vip-crown-line fs-5"></i>
-              </div>
-              <div>
-                <span class="fw-bold d-block text-body">Plan Pro</span>
-                <span class="text-muted small">Pour les équipes avancées</span>
-              </div>
-            </div>
-            <i class="ri-check-line icon-check"></i>
-          </label>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
+  <section class="docs-section" id="switch">
+    <h3>Interrupteur</h3>
+    <p>
+      Une checkbox avec <code>role="switch"</code> dans <code>.form-check.form-switch</code>. La pastille
+      grossit quand l'interrupteur est activé.
+    </p>
+{% set code %}
 <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="toggle1">
-  <label class="form-check-label" for="toggle1">Activer l'option</label>
+  <input class="form-check-input" type="checkbox" role="switch" id="switch-1" checked>
+  <label class="form-check-label" for="switch-1">Notifications push</label>
 </div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switch-2">
+  <label class="form-check-label" for="switch-2">Mode sombre</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switch-3" disabled>
+  <label class="form-check-label" for="switch-3">Option indisponible</label>
+</div>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switch-4" checked disabled>
+  <label class="form-check-label" for="switch-4">Option imposée</label>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
 
+  <section class="docs-section" id="cartes-radio">
+    <h3>Cartes sélectionnables (choix unique)</h3>
+    <p>
+      L'input masqué précède son label <code>.form-selectable-label</code> : la carte cochée passe sur le
+      conteneur primaire, prend un liseré et change de forme. <code>.icon-check</code> n'apparaît que coché.
+    </p>
+{% set code %}
 <div class="form-selectable-card">
-  <input type="radio" name="options" id="opt1" class="form-selectable-input" checked>
-  <label class="form-selectable-label" for="opt1">
-    <span>Option 1</span>
+  <input type="radio" name="plan" id="plan-basic" class="form-selectable-input" checked>
+  <label class="form-selectable-label" for="plan-basic">
+    <span>
+      <strong class="d-block">Plan Basic</strong>
+      <span class="text-muted small">Idéal pour démarrer</span>
+    </span>
     <i class="ri-check-line icon-check"></i>
   </label>
-  
-  <input type="radio" name="options" id="opt2" class="form-selectable-input">
-  <label class="form-selectable-label" for="opt2">
-    <span>Option 2</span>
+
+  <input type="radio" name="plan" id="plan-pro" class="form-selectable-input">
+  <label class="form-selectable-label" for="plan-pro">
+    <span>
+      <strong class="d-block">Plan Pro</strong>
+      <span class="text-muted small">Pour les équipes</span>
+    </span>
+    <i class="ri-check-line icon-check"></i>
+  </label>
+
+  <input type="radio" name="plan" id="plan-enterprise" class="form-selectable-input" disabled>
+  <label class="form-selectable-label" for="plan-enterprise">
+    <span>
+      <strong class="d-block">Plan Entreprise</strong>
+      <span class="text-muted small">Sur devis (indisponible)</span>
+    </span>
     <i class="ri-check-line icon-check"></i>
   </label>
 </div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Custom Choices'
-    } %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="cartes-checkbox">
+    <h3>Cartes sélectionnables (choix multiples)</h3>
+    <p>Avec des checkboxes, et en ligne grâce à l'utilitaire <code>.flex-row</code>.</p>
+{% set code %}
+<div class="form-selectable-card flex-row flex-wrap">
+  <div class="flex-grow-1">
+    <input type="checkbox" id="tag-ts" class="form-selectable-input" checked>
+    <label class="form-selectable-label" for="tag-ts"><span><i class="ri-code-line"></i> TypeScript</span> <i class="ri-check-line icon-check"></i></label>
   </div>
+  <div class="flex-grow-1">
+    <input type="checkbox" id="tag-php" class="form-selectable-input">
+    <label class="form-selectable-label" for="tag-php"><span><i class="ri-server-line"></i> PHP</span> <i class="ri-check-line icon-check"></i></label>
+  </div>
+  <div class="flex-grow-1">
+    <input type="checkbox" id="tag-css" class="form-selectable-input" checked>
+    <label class="form-selectable-label" for="tag-css"><span><i class="ri-brush-line"></i> SCSS</span> <i class="ri-check-line icon-check"></i></label>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--switch-width, --switch-height', '<code>3.25rem</code>, <code>--ds-space-8</code>', 'Piste de l\'interrupteur'],
+        ['--switch-thumb', '<code>--ds-space-4</code> (<code>--ds-space-6</code> activé)', 'Taille de la pastille'],
+        ['--selectable-bg', '<code>--ds-surface-container</code>', 'Fond de la carte'],
+        ['--selectable-color', '<code>--ds-color-on-surface</code>', 'Texte de la carte'],
+        ['--selectable-ring', '<code>transparent</code> (<code>--ds-color-primary</code> cochée)', 'Liseré de sélection'],
+        ['--selectable-radius', '<code>--ds-radius-lg</code> (<code>--ds-radius-md</code> cochée)', 'Rayon'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.form-switch', 'Transforme le .form-check en interrupteur (input role="switch")'],
+        ['.form-selectable-card', 'Groupe de cartes (colonne espacée)'],
+        ['.form-selectable-input', 'Input masqué, placé juste avant son label'],
+        ['.form-selectable-label', 'Carte cliquable'],
+        ['.icon-check', 'Icône visible uniquement quand la carte est cochée'],
+      ],
+    } only %}
+  </section>
 </div>

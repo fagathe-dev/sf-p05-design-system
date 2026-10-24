@@ -1,0 +1,75 @@
+{# Docs : Hero — source : assets/scss/components/_hero.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Bannière d'ouverture d'une page : au moins la moitié de la hauteur de l'écran, contenu centré,
+    titre en typographie Display.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+{% set code %}
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Construisez plus vite</h1>
+    <p class="lead">Des composants accessibles, prêts pour le thème clair et le thème sombre.</p>
+    <div class="d-flex justify-content-center gap-2">
+      <a href="#" class="btn btn-primary btn-lg">Commencer</a>
+      <a href="#" class="btn btn-ghost-primary btn-lg">Documentation</a>
+    </div>
+  </div>
+</section>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="image">
+    <h3>Avec image de fond</h3>
+    <p>
+      <code>.hero-has-bg</code> ajoute un voile sombre sous le contenu pour garantir le contraste sur n'importe
+      quelle photo. Le contenu doit être dans <code>.hero-content</code> pour passer au-dessus du voile.
+    </p>
+{% set code %}
+<section class="hero hero-has-bg" style="background-image: url('{{ asset('images/auth-cover.png') }}');">
+  <div class="hero-content">
+    <h1 class="hero-title">Explorez</h1>
+    <p class="lead">Le texte reste lisible quel que soit le visuel.</p>
+    <a href="#" class="btn btn-primary btn-lg">Découvrir</a>
+  </div>
+</section>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+{% set code %}
+<section class="hero" style="--hero-bg: var(--ds-color-tertiary-container); --hero-color: var(--ds-color-on-tertiary-container); min-block-size: auto;">
+  <div class="hero-content">
+    <h1 class="hero-title">Hero tertiaire</h1>
+    <p class="lead">Hauteur libre et couleurs du rôle tertiary.</p>
+  </div>
+</section>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--hero-bg', '<code>--ds-color-primary-container</code>', 'Fond'],
+        ['--hero-color', '<code>--ds-color-on-primary-container</code> (<code>--ds-color-on-scrim</code> avec image)', 'Texte'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.hero', 'Bannière'],
+        ['.hero-has-bg', 'Variante avec image de fond et voile'],
+        ['.hero-content', 'Contenu, au-dessus du voile'],
+        ['.hero-title', 'Titre (Display lg)'],
+      ],
+    } only %}
+  </section>
+</div>

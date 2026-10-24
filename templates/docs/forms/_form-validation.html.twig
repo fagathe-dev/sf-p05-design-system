@@ -1,58 +1,104 @@
+{# Docs : Form Validation — source : assets/scss/forms/_form-validation.scss #}
+
 <div class="component-demo">
-  <h3>✅ Validation de Formulaire</h3>
-  <p class="text-muted mb-4">
-    Retours visuels (Succès, Erreurs) sur les champs de formulaire. Les couleurs sémantiques s'appliquent sur les bordures, les fonds (subtle) et le texte.
+  <p class="docs-lead">
+    États de validation des champs : <code>.is-valid</code> et <code>.is-invalid</code> redéfinissent les
+    couleurs du champ et de son anneau de focus, et affichent un message sous le champ.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary mb-0">
-        <form>
-          <div class="mb-3">
-            <label for="validationValid" class="form-label">Nom d'utilisateur</label>
-            <input type="text" class="form-control is-valid" id="validationValid" value="jimmy_dev" required>
-            <div class="valid-feedback">
-              Ce nom d'utilisateur est disponible !
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="validationInvalid" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control is-invalid" id="validationInvalid" value="123" required>
-            <div class="invalid-feedback">
-              Le mot de passe doit contenir au moins 8 caractères.
-            </div>
-          </div>
-
-          <div class="mb-0">
-            <select class="form-select is-invalid" required>
-              <option selected disabled value="">Choisissez votre pays...</option>
-              <option>France</option>
-            </select>
-            <div class="invalid-feedback">Veuillez sélectionner une option valide.</div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<div class="mb-3">
-  <input type="text" class="form-control is-valid">
-  <div class="valid-feedback">Message de succès</div>
+  <section class="docs-section" id="champs">
+    <h3>Champs texte</h3>
+    <p>Reliez le message au champ avec <code>aria-describedby</code> et signalez l'erreur avec <code>aria-invalid</code>.</p>
+{% set code %}
+<div>
+  <label for="valid-username" class="form-label">Nom d'utilisateur</label>
+  <input type="text" class="form-control is-valid" id="valid-username" value="jane_dev" aria-describedby="valid-username-feedback">
+  <div class="valid-feedback" id="valid-username-feedback">Ce nom d'utilisateur est disponible.</div>
 </div>
-
-<div class="mb-3">
-  <input type="text" class="form-control is-invalid">
-  <div class="invalid-feedback">Message d'erreur</div>
+<div>
+  <label for="invalid-password" class="form-label">Mot de passe</label>
+  <input type="password" class="form-control is-invalid" id="invalid-password" value="123" aria-invalid="true" aria-describedby="invalid-password-feedback">
+  <div class="invalid-feedback" id="invalid-password-feedback">Le mot de passe doit contenir au moins 8 caractères.</div>
 </div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Validation'
-    } %}
-  </div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="select-textarea">
+    <h3>Liste et zone de texte</h3>
+{% set code %}
+<div>
+  <label for="invalid-country" class="form-label">Pays</label>
+  <select class="form-select is-invalid" id="invalid-country" aria-invalid="true">
+    <option selected disabled value="">Choisissez un pays…</option>
+    <option>France</option>
+  </select>
+  <div class="invalid-feedback">Veuillez sélectionner un pays.</div>
+</div>
+<div>
+  <label for="valid-bio" class="form-label">Biographie</label>
+  <textarea class="form-control is-valid" id="valid-bio" rows="2">Développeuse front-end.</textarea>
+  <div class="valid-feedback">Parfait.</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="cases">
+    <h3>Cases et radios</h3>
+    <p>La case prend la couleur de l'état ; en erreur, son label aussi.</p>
+{% set code %}
+<div class="form-check">
+  <input class="form-check-input is-invalid" type="checkbox" id="invalid-terms" aria-invalid="true">
+  <label class="form-check-label" for="invalid-terms">J'accepte les conditions d'utilisation</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input is-valid" type="radio" name="valid-radio" id="valid-radio" checked>
+  <label class="form-check-label" for="valid-radio">Option validée</label>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="cartes">
+    <h3>Cartes sélectionnables</h3>
+    <p>En erreur, le liseré de la carte passe à la couleur d'erreur.</p>
+{% set code %}
+<div class="form-selectable-card">
+  <input type="radio" name="invalid-plan" id="invalid-plan-1" class="form-selectable-input is-invalid">
+  <label class="form-selectable-label" for="invalid-plan-1">Plan mensuel</label>
+  <input type="radio" name="invalid-plan" id="invalid-plan-2" class="form-selectable-input is-invalid">
+  <label class="form-selectable-label" for="invalid-plan-2">Plan annuel</label>
+</div>
+<div class="invalid-feedback">Choisissez une formule.</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="js">
+    <h3>Avec FormManager</h3>
+    <p>
+      <code>FormManager.validateData()</code> (core-ts) pose ces classes et insère les messages
+      <code>.invalid-feedback</code> à partir d'une liste d'erreurs. Voir la page FormManager.
+    </p>
+{% set code %}
+import { FormManager } from 'core-ts';
+
+const manager = new FormManager({ form: document.querySelector('#signup') });
+manager.validateData({ email: "Format d'email invalide." });
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'typescript' } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.is-valid', 'Champ, select, case ou radio valide'],
+        ['.is-invalid', 'Champ, select, case, radio ou carte sélectionnable en erreur'],
+        ['.valid-feedback', 'Message de succès'],
+        ['.invalid-feedback', 'Message d\'erreur'],
+      ],
+    } only %}
+  </section>
 </div>

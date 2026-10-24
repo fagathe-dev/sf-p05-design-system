@@ -1,69 +1,159 @@
+{# Docs : Form Inputs — sources : assets/scss/forms/_form-control.scss, _form-floating.scss #}
+
 <div class="component-demo">
-  <h3>📝 Champs de saisie (Inputs)</h3>
-  <p class="text-muted mb-4">
-    Composants de base pour la saisie de texte, mots de passe, emails et zones de texte long. 
-    Design "Soft UI" avec des bordures douces et une surbrillance au focus.
+  <p class="docs-lead">
+    Champs de saisie « outlined » : bordure fonctionnelle contrastée (3:1), rayon moyen et anneau de
+    focus. Ils couvrent les champs texte, les zones de texte et leurs variantes de taille.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary mb-0">
-        <h5 class="mb-4">Inputs Classiques</h5>
-        
-        <div class="mb-3">
-          <label for="demoEmail" class="form-label">Adresse Email</label>
-          <input type="email" class="form-control" id="demoEmail" placeholder="nom@exemple.com">
-        </div>
-        
-        <div class="mb-3">
-          <label for="demoPassword" class="form-label">Mot de passe</label>
-          <input type="password" class="form-control" id="demoPassword" value="azerty12345">
-        </div>
-
-        <div class="mb-3">
-          <label for="demoDisabled" class="form-label">Champ désactivé</label>
-          <input type="text" class="form-control" id="demoDisabled" placeholder="Non modifiable" disabled>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-lg-6">
-      <div class="box box-secondary mb-0">
-        <h5 class="mb-4">Tailles & Textarea</h5>
-        
-        <div class="mb-3">
-          <input type="text" class="form-control form-control-sm" placeholder="Petit input (.form-control-sm)">
-        </div>
-        
-        <div class="mb-3">
-          <input type="text" class="form-control form-control-lg" placeholder="Grand input (.form-control-lg)">
-        </div>
-
-        <div class="mb-3">
-          <label for="demoTextarea" class="form-label">Message (Textarea)</label>
-          <textarea class="form-control" id="demoTextarea" rows="3" placeholder="Votre message..."></textarea>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<div class="mb-3">
-  <label for="email" class="form-label">Email</label>
-  <input type="email" class="form-control" id="email" placeholder="nom@exemple.com">
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p>Associez toujours un <code>&lt;label class="form-label"&gt;</code> au champ via <code>for</code> / <code>id</code>.</p>
+{% set code %}
+<div>
+  <label for="input-email" class="form-label">Adresse email</label>
+  <input type="email" class="form-control" id="input-email" placeholder="nom@exemple.com">
 </div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-<div class="mb-3">
-  <label for="message" class="form-label">Message</label>
-  <textarea class="form-control" id="message" rows="3"></textarea>
-</div>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Inputs'
-    } %}
+  <section class="docs-section" id="types">
+    <h3>Types de champ</h3>
+    <p><code>.form-control</code> s'applique à tous les types texte natifs.</p>
+{% set code %}
+<div class="row g-4">
+  <div class="col-md-6">
+    <label for="input-text" class="form-label">Texte</label>
+    <input type="text" class="form-control" id="input-text" placeholder="Jane Doe">
   </div>
+  <div class="col-md-6">
+    <label for="input-password" class="form-label">Mot de passe</label>
+    <input type="password" class="form-control" id="input-password" value="motdepasse">
+  </div>
+  <div class="col-md-6">
+    <label for="input-number" class="form-label">Nombre</label>
+    <input type="number" class="form-control" id="input-number" value="42">
+  </div>
+  <div class="col-md-6">
+    <label for="input-date" class="form-label">Date</label>
+    <input type="date" class="form-control" id="input-date">
+  </div>
+  <div class="col-md-6">
+    <label for="input-search" class="form-label">Recherche</label>
+    <input type="search" class="form-control" id="input-search" placeholder="Rechercher…">
+  </div>
+  <div class="col-md-6">
+    <label for="input-url" class="form-label">URL</label>
+    <input type="url" class="form-control" id="input-url" placeholder="https://">
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="textarea">
+    <h3>Zone de texte</h3>
+    <p>Hauteur minimale de 6rem, redimensionnable verticalement.</p>
+{% set code %}
+<div>
+  <label for="input-message" class="form-label">Message</label>
+  <textarea class="form-control" id="input-message" rows="3" placeholder="Votre message…"></textarea>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="tailles">
+    <h3>Tailles</h3>
+    <p>32px (<code>.form-control-sm</code>), 40px (par défaut) et 48px (<code>.form-control-lg</code>), alignées sur les boutons.</p>
+{% set code %}
+<input type="text" class="form-control form-control-sm" placeholder=".form-control-sm" aria-label="Petit champ">
+<input type="text" class="form-control" placeholder="Taille par défaut" aria-label="Champ">
+<input type="text" class="form-control form-control-lg" placeholder=".form-control-lg" aria-label="Grand champ">
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="etats">
+    <h3>Désactivé et lecture seule</h3>
+{% set code %}
+<input type="text" class="form-control" placeholder="Champ désactivé" aria-label="Champ désactivé" disabled>
+<input type="text" class="form-control" value="Valeur en lecture seule" aria-label="Champ en lecture seule" readonly>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="avec-bouton">
+    <h3>Champ et bouton</h3>
+    <p>Les hauteurs communes permettent d'aligner un champ et un bouton sur une ligne flex.</p>
+{% set code %}
+<div class="d-flex gap-2">
+  <input type="email" class="form-control" placeholder="Votre email" aria-label="Votre email">
+  <button type="button" class="btn btn-primary">S'abonner</button>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="floating">
+    <h3>Labels flottants</h3>
+    <p>
+      Dans <code>.form-floating</code>, le label occupe le champ vide puis remonte au focus ou à la saisie.
+      Le champ fait 56px. Un <code>placeholder</code> (masqué) est requis pour détecter un champ vide.
+    </p>
+{% set code %}
+<div class="form-floating">
+  <input type="email" class="form-control" id="floating-email" placeholder="nom@exemple.com">
+  <label for="floating-email">Adresse email</label>
+</div>
+<div class="form-floating">
+  <select class="form-select" id="floating-select">
+    <option selected>France</option>
+    <option>Belgique</option>
+  </select>
+  <label for="floating-select">Pays</label>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+
+    <h4>Variante soulignée</h4>
+    <p><code>.form-floating-flushed</code> réduit le champ à une ligne ; au focus, le soulignement s'épaissit.</p>
+{% set code %}
+<div class="form-floating-flushed">
+  <input type="text" class="form-control" id="flushed-name" placeholder="Jane Doe">
+  <label for="flushed-name">Nom complet</label>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--input-bg', '<code>transparent</code>', 'Fond'],
+        ['--input-color', '<code>--ds-color-on-surface</code>', 'Texte'],
+        ['--input-border-color', '<code>--ds-color-outline</code>', 'Bordure (on-surface au survol, focus ring au focus)'],
+        ['--input-radius', '<code>--ds-radius-md</code>', 'Rayon'],
+        ['--input-height', '<code>--ds-control-height-md</code>', 'Hauteur minimale'],
+        ['--input-px, --input-py', '<code>--ds-space-4</code>, <code>--ds-space-2</code>', 'Padding'],
+        ['--input-font-size', '<code>--ds-text-body-lg</code>', 'Taille du texte'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.form-label', 'Label au-dessus du champ'],
+        ['.form-control', 'Champ texte ou zone de texte'],
+        ['.form-control-sm, .form-control-lg', 'Tailles 32px et 48px'],
+        ['.form-floating', 'Label flottant (champ de 56px)'],
+        ['.form-floating-flushed', 'Label flottant sur champ souligné'],
+      ],
+    } only %}
+  </section>
 </div>

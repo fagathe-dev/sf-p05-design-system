@@ -1,0 +1,34 @@
+{# Menu du compte (avatar en déclencheur). Paramètre : prefix (ids uniques) #}
+<div class="dropdown">
+  <button type="button" class="navbar-user-trigger dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false" aria-label="Menu du compte">
+    <span class="avatar avatar-sm"><img src="https://i.pravatar.cc/100?img=47" alt=""></span>
+    <span class="user-info">
+      <span class="user-name">Jane Doe</span>
+      <span class="user-role">Rédactrice</span>
+    </span>
+  </button>
+  <div class="dropdown-menu navbar-dropdown dropdown-menu-end">
+    <div class="navbar-dropdown-header">
+      <span class="avatar avatar-sm"><img src="https://i.pravatar.cc/100?img=47" alt=""></span>
+      <span class="navbar-dropdown-user">
+        <span class="navbar-dropdown-name">Jane Doe</span>
+        <span class="navbar-dropdown-meta">jane@example.com</span>
+      </span>
+    </div>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#"><i class="ri-user-line"></i> Profil</a>
+    <a class="dropdown-item" href="#"><i class="ri-article-line"></i> Mes articles</a>
+    <a class="dropdown-item" href="#"><i class="ri-settings-4-line"></i> Paramètres</a>
+    <div class="dropdown-divider"></div>
+    <div class="navbar-dropdown-section">
+      <span class="navbar-dropdown-label" id="{{ prefix }}-theme-label">Thème</span>
+      <div class="segmented-control segmented-control-sm segmented-control-full" role="radiogroup" aria-labelledby="{{ prefix }}-theme-label" data-ds-theme-switch>
+        <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="auto" aria-label="Automatique" title="Automatique"><i class="ri-computer-line"></i></button>
+        <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="light" aria-label="Clair" title="Thème clair"><i class="ri-sun-line"></i></button>
+        <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="dark" aria-label="Sombre" title="Thème sombre"><i class="ri-moon-line"></i></button>
+      </div>
+    </div>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#"><i class="ri-logout-box-r-line"></i> Déconnexion</a>
+  </div>
+</div>

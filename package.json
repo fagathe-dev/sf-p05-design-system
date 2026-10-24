@@ -1,5 +1,5 @@
 {
-  "name": "sf-p04-boilerplate",
+  "name": "sf-p05-design-system",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,13 +9,13 @@
   "scripts": {
     "build:ts": "node scripts/compile-ts.js --mode build",
     "build:scss": "node scripts/compile-scss.js --mode build",
-    "build": "npm run build:ts && npm run build:scss",
+    "build": "concurrently --kill-others-on-fail -n ts,scss -c blue,magenta \"npm:build:ts\" \"npm:build:scss\"",
     "compile:ts": "node scripts/compile-ts.js",
     "compile:scss": "node scripts/compile-scss.js",
-    "compile": "npm run compile:ts && npm run compile:scss",
+    "compile": "concurrently --kill-others-on-fail -n ts,scss -c blue,magenta \"npm:compile:ts\" \"npm:compile:scss\"",
     "dev:ts": "node scripts/compile-ts.js --watch",
     "dev:scss": "node scripts/compile-scss.js --watch",
-    "dev": "concurrently \"npm run dev:ts\" \"npm run dev:scss\""
+    "dev": "concurrently -n ts,scss -c blue,magenta \"npm:dev:ts\" \"npm:dev:scss\""
   },
   "repository": {
     "type": "git",
@@ -32,5 +32,9 @@
   },
   "dependencies": {
     "core-ts": "github:fagathe-dev/core-ts#master"
+  },
+  "allowScripts": {
+    "esbuild": true,
+    "@parcel/watcher": false
   }
 }

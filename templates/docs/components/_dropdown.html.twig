@@ -1,10 +1,161 @@
+{# Docs : Dropdown — source : assets/scss/components/_dropdown.scss, JS : interactions/events/toggle.ts #}
+
 <div class="component-demo">
-  <h3>🔽 Dropdown</h3>
+  <p class="docs-lead">
+    Menu flottant ouvert par un déclencheur <code>data-ds-toggle="dropdown"</code>. Le menu doit suivre
+    immédiatement le déclencheur, dans un conteneur <code>.dropdown</code> : un clic à l'extérieur le referme.
+  </p>
+
+  <section class="docs-section" id="exemple">
+    <h3>Exemple</h3>
+    <p><code>.dropdown-toggle</code> ajoute un chevron qui pivote quand le menu est ouvert.</p>
+{% set code %}
+<div class="dropdown">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false">
+    Actions
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Modifier</a>
+    <a class="dropdown-item" href="#">Dupliquer</a>
+    <a class="dropdown-item" href="#">Archiver</a>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack tall' } only %}
+  </section>
+
+  <section class="docs-section" id="declencheurs">
+    <h3>Déclencheurs</h3>
+    <p>N'importe quelle variante de bouton peut ouvrir un menu ; le chevron est facultatif.</p>
+{% set code %}
+<div class="dropdown">
+  <button type="button" class="btn btn-soft-secondary dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false">Soft</button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Autre action</a>
+  </div>
+</div>
+<div class="dropdown">
+  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false">Outline</button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Autre action</a>
+  </div>
+</div>
+<div class="dropdown">
+  <button type="button" class="btn btn-icon btn-ghost-secondary" data-ds-toggle="dropdown" aria-expanded="false" aria-label="Plus d'actions">
+    <i class="ri-more-2-fill"></i>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Autre action</a>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack tall' } only %}
+  </section>
+
+  <section class="docs-section" id="contenu">
+    <h3>En-têtes, séparateurs et icônes</h3>
+    <p>Une icône en tête d'item est discrète et prend la couleur primaire au survol.</p>
+{% set code %}
+<div class="dropdown">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false">
+    Mon compte
+  </button>
+  <div class="dropdown-menu">
+    <div class="dropdown-header">Connecté en tant que Jane</div>
+    <a class="dropdown-item" href="#"><i class="ri-user-line"></i> Profil</a>
+    <a class="dropdown-item" href="#"><i class="ri-settings-4-line"></i> Paramètres</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item text-danger" href="#"><i class="ri-logout-box-r-line"></i> Déconnexion</a>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack tall' } only %}
+  </section>
+
+  <section class="docs-section" id="etats">
+    <h3>Item actif et désactivé</h3>
+{% set code %}
+<div class="dropdown">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false">
+    Trier par
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item active" href="#" aria-current="true">Date</a>
+    <a class="dropdown-item" href="#">Nom</a>
+    <a class="dropdown-item disabled" aria-disabled="true">Popularité</a>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack tall' } only %}
+  </section>
+
+  <section class="docs-section" id="alignement">
+    <h3>Alignement à droite</h3>
+    <p><code>.dropdown-menu-end</code> aligne le menu sur le bord droit du déclencheur.</p>
+{% set code %}
+<div class="d-flex justify-content-end">
   <div class="dropdown">
-    <button class="btn btn-solid-primary" data-ds-toggle="dropdown">Actions</button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Action 1</a>
-      <a class="dropdown-item" href="#">Action 2</a>
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false">
+      Aligné à droite
+    </button>
+    <div class="dropdown-menu dropdown-menu-end">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Autre action</a>
     </div>
   </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'tall' } only %}
+  </section>
+
+  <section class="docs-section" id="liste">
+    <h3>Menu en liste</h3>
+    <p>Le menu peut être une liste <code>&lt;ul&gt;</code> : ses puces sont retirées.</p>
+{% set code %}
+<div class="dropdown">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false">
+    Langue
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item active" href="#">Français</a></li>
+    <li><a class="dropdown-item" href="#">English</a></li>
+    <li><a class="dropdown-item" href="#">Español</a></li>
+  </ul>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack tall' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--dropdown-bg', '<code>--ds-surface-container-high</code>', 'Fond du menu'],
+        ['--dropdown-color', '<code>--ds-color-on-surface</code>', 'Texte des items'],
+        ['--dropdown-radius', '<code>--ds-radius-md</code>', 'Rayon du menu'],
+        ['--dropdown-padding', '<code>--ds-space-2</code>', 'Padding du menu'],
+        ['--dropdown-width', '<code>--ds-size-menu</code>', 'Largeur minimale'],
+        ['--dropdown-item-radius', 'rayon du menu − padding', 'Rayon concentrique des items'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes et attributs</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.dropdown', 'Conteneur positionné (requis pour la fermeture au clic extérieur)'],
+        ['.dropdown-toggle', 'Ajoute le chevron au déclencheur'],
+        ['.dropdown-menu', 'Menu, affiché avec .show'],
+        ['.dropdown-menu-end', 'Menu aligné à droite'],
+        ['.dropdown-item', 'Item ; .active et .disabled pour les états'],
+        ['.dropdown-header, .dropdown-divider', 'Titre de groupe et séparateur'],
+        ['data-ds-toggle="dropdown"', 'Déclencheur (le menu doit le suivre immédiatement)'],
+      ],
+    } only %}
+  </section>
 </div>

@@ -1,74 +1,152 @@
+{# Docs : Choices — sources : assets/scss/forms/_form-check.scss, _form-control.scss #}
+
 <div class="component-demo">
-  <h3>☑️ Sélections Multiples & Uniques</h3>
-  <p class="text-muted mb-4">
-    Composants personnalisés en pur CSS/SVG pour les cases à cocher, boutons radio et menus déroulants natifs.
+  <p class="docs-lead">
+    Cases à cocher, boutons radio et listes déroulantes natives, redessinés en CSS. Les cases
+    s'animent à la sélection et affichent un halo au survol.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-lg-4">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Checkboxes</h5>
-        
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="check1" checked>
-          <label class="form-check-label" for="check1">Option cochée</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="check2">
-          <label class="form-check-label" for="check2">Option vide</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="check3" disabled>
-          <label class="form-check-label" for="check3">Option désactivée</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-lg-4">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Radios</h5>
-        
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="radios" id="radio1" checked>
-          <label class="form-check-label" for="radio1">Choix 1</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="radios" id="radio2">
-          <label class="form-check-label" for="radio2">Choix 2</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-lg-4">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Select Menu</h5>
-        
-        <select class="form-select mb-3" aria-label="Default select example">
-          <option selected>Sélectionnez une option</option>
-          <option value="1">Option Un</option>
-          <option value="2">Option Deux</option>
-          <option value="3">Option Trois</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
+  <section class="docs-section" id="checkbox">
+    <h3>Cases à cocher</h3>
+    <p>
+      Le label suit l'input dans <code>.form-check</code>. Les états cochée, vide et désactivée sont natifs
+      (<code>checked</code>, <code>disabled</code>).
+    </p>
+{% set code %}
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" id="checkbox1">
-  <label class="form-check-label" for="checkbox1">Texte de l'option</label>
+  <input class="form-check-input" type="checkbox" id="check-1" checked>
+  <label class="form-check-label" for="check-1">Option cochée</label>
 </div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="check-2">
+  <label class="form-check-label" for="check-2">Option non cochée</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="check-3" disabled>
+  <label class="form-check-label" for="check-3">Option désactivée</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="check-4" checked disabled>
+  <label class="form-check-label" for="check-4">Option cochée et désactivée</label>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
 
-<select class="form-select">
-  <option value="1">Choix 1</option>
-</select>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Choices'
-    } %}
+  <section class="docs-section" id="radio">
+    <h3>Boutons radio</h3>
+{% set code %}
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="radio-demo" id="radio-1" checked>
+  <label class="form-check-label" for="radio-1">Livraison standard</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="radio-demo" id="radio-2">
+  <label class="form-check-label" for="radio-2">Livraison express</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="radio-demo" id="radio-3" disabled>
+  <label class="form-check-label" for="radio-3">Retrait en magasin (indisponible)</label>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="description">
+    <h3>Avec description</h3>
+    <p>Un <code>.text-muted</code> dans le label s'affiche en sous-texte, sous l'intitulé.</p>
+{% set code %}
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="check-notify" checked>
+  <label class="form-check-label" for="check-notify">
+    Notifications par email
+    <span class="text-muted">Recevez un récapitulatif chaque lundi matin.</span>
+  </label>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="inline">
+    <h3>En ligne</h3>
+    <p>Placez les <code>.form-check</code> dans un conteneur flex : l'espacement passe par <code>gap</code>.</p>
+{% set code %}
+<div class="d-flex flex-wrap gap-4">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="inline-1" checked>
+    <label class="form-check-label" for="inline-1">HTML</label>
   </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="inline-2">
+    <label class="form-check-label" for="inline-2">CSS</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="inline-3">
+    <label class="form-check-label" for="inline-3">TypeScript</label>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="select">
+    <h3>Liste déroulante</h3>
+    <p><code>.form-select</code> remplace la flèche native par un chevron qui suit la couleur du thème.</p>
+{% set code %}
+<div>
+  <label for="select-country" class="form-label">Pays</label>
+  <select class="form-select" id="select-country">
+    <option selected>Choisissez un pays…</option>
+    <option value="fr">France</option>
+    <option value="be">Belgique</option>
+    <option value="ch">Suisse</option>
+  </select>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+
+    <h4>Tailles et état désactivé</h4>
+{% set code %}
+<select class="form-select form-select-sm" aria-label="Petite liste">
+  <option>.form-select-sm</option>
+</select>
+<select class="form-select" aria-label="Liste">
+  <option>Taille par défaut</option>
+</select>
+<select class="form-select form-select-lg" aria-label="Grande liste">
+  <option>.form-select-lg</option>
+</select>
+<select class="form-select" aria-label="Liste désactivée" disabled>
+  <option>Liste désactivée</option>
+</select>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="personnalisation">
+    <h3>Personnalisation</h3>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Token', 'Défaut', 'Rôle'],
+      rows: [
+        ['--check-size', '<code>1.25em</code>', 'Taille de la case'],
+        ['--check-bg', '<code>transparent</code> (<code>--ds-color-primary</code> cochée)', 'Fond'],
+        ['--check-border-color', '<code>--ds-color-outline</code>', 'Bordure'],
+        ['--check-mark-color', '<code>--ds-color-on-primary</code>', 'Coche et point'],
+        ['--select-indicator-color', '<code>--ds-color-on-surface-variant</code>', 'Chevron du select'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.form-check', 'Ligne input + label'],
+        ['.form-check-input', 'Case à cocher ou radio'],
+        ['.form-check-label', 'Label (sous-texte avec .text-muted)'],
+        ['.form-select', 'Liste déroulante'],
+        ['.form-select-sm, .form-select-lg', 'Tailles 32px et 48px'],
+      ],
+    } only %}
+  </section>
 </div>

@@ -1,48 +1,72 @@
+{# Docs : Images & Figures — sources : assets/scss/content/_image.scss, _figure.scss #}
+{% set photo = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80' %}
+
 <div class="component-demo">
-  <h3>📸 Images & Figures</h3>
-  <p class="text-muted mb-4">
-    Styles responsives pour les images (Thumbnails) et balises sémantiques <code>&lt;figure&gt;</code> pour intégrer des légendes propres.
+  <p class="docs-lead">
+    Images responsives, vignettes et figures légendées. Les images gardent leur ratio et ne
+    dépassent jamais leur conteneur.
   </p>
 
-  <div class="row g-4 mb-5">
-    <div class="col-12 col-md-6">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Image Thumbnail</h5>
-        <p class="small text-muted mb-3">La classe <code>.img-thumbnail</code> ajoute un padding, un fond de carte et une ombre douce.</p>
-        
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" class="img-thumbnail" alt="Espace de travail">
-      </div>
-    </div>
+  <section class="docs-section" id="fluide">
+    <h3>Image fluide</h3>
+    <p><code>.img-fluid</code> limite l'image à la largeur de son parent et garde son ratio.</p>
+{% set code %}
+<img src="{{ photo }}" class="img-fluid" alt="Poste de travail">
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-    <div class="col-12 col-md-6">
-      <div class="box box-secondary h-100 mb-0">
-        <h5 class="mb-4">Composant Figure</h5>
-        <p class="small text-muted mb-3">Associe une image et sa légende avec une typographie adaptée.</p>
-        
-        <figure class="figure mb-0">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" class="figure-img img-fluid rounded" alt="Équipe">
-          <figcaption class="figure-caption text-end mt-2">
-            <i class="ri-camera-lens-line"></i> Crédit : Unsplash Photography
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </div>
+  <section class="docs-section" id="vignette">
+    <h3>Vignette</h3>
+    <p><code>.img-thumbnail</code> encadre l'image d'une surface arrondie, sans ombre.</p>
+{% set code %}
+<img src="{{ photo }}" class="img-thumbnail" alt="Poste de travail" style="max-inline-size: 16rem;">
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-  <div class="mt-4">
-    <h5>Code d'exemple</h5>
-    {% set codeExample %}
-<img src="photo.jpg" class="img-thumbnail img-fluid" alt="...">
+  <section class="docs-section" id="arrondis">
+    <h3>Arrondis</h3>
+    <p>Les utilitaires <code>.rounded-*</code> s'appliquent aux images.</p>
+{% set code %}
+<img src="https://i.pravatar.cc/120?img=15" class="rounded-sm" alt="Arrondi sm" width="96" height="96">
+<img src="https://i.pravatar.cc/120?img=15" class="rounded-lg" alt="Arrondi lg" width="96" height="96">
+<img src="https://i.pravatar.cc/120?img=15" class="rounded-circle" alt="Cercle" width="96" height="96">
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
 
-<figure class="figure">
-  <img src="photo.jpg" class="figure-img img-fluid rounded" alt="...">
-  <figcaption class="figure-caption">Légende de l'image</figcaption>
+  <section class="docs-section" id="figure">
+    <h3>Figure</h3>
+    <p><code>.figure</code> empile l'image et sa légende ; la légende est en texte secondaire.</p>
+{% set code %}
+<figure class="figure" style="max-inline-size: 20rem;">
+  <img src="{{ photo }}" class="figure-img img-fluid rounded" alt="Poste de travail">
+  <figcaption class="figure-caption">Un poste de travail en télétravail.</figcaption>
 </figure>
-    {% endset %}
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': codeExample,
-      'language': 'html',
-      'title': 'Structure HTML Images'
-    } %}
-  </div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+
+    <h4>Alignement de la légende</h4>
+{% set code %}
+<figure class="figure" style="max-inline-size: 20rem;">
+  <img src="{{ photo }}" class="figure-img img-fluid rounded" alt="Poste de travail">
+  <figcaption class="figure-caption text-end"><i class="ri-camera-lens-line"></i> Crédit : Unsplash</figcaption>
+</figure>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h3>Classes</h3>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.img-fluid', 'Image responsive'],
+        ['.img-thumbnail', 'Vignette encadrée'],
+        ['.figure', 'Image + légende empilées'],
+        ['.figure-img', 'Image de la figure'],
+        ['.figure-caption', 'Légende'],
+      ],
+    } only %}
+  </section>
 </div>
