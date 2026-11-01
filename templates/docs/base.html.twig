@@ -1,0 +1,20 @@
+{# Coquille du site de documentation (accueil et pages de doc) : barre du haut + pied de page #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title is defined ? page_title ~ ' · ' }}Base UI{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/ds-docs.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="layout-app docs-site">
+  {% include 'docs/_header.html.twig' %}
+  {% block docs_body %}{% endblock %}
+  {% include 'docs/_footer.html.twig' %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+  <script type="module" src="{{ asset('js/pages/docs.js') }}"></script>
+{% endblock %}

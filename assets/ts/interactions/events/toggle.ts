@@ -124,12 +124,23 @@ const handleCollapse = (trigger: HTMLElement): void => {
 };
 
 // --- LOGIQUE SIDEBAR ---
+// Plusieurs tiroirs possibles sur une page : chacun a le voile qui le cible
+export const findSidebarOverlay = (selector: string): HTMLElement | null => {
+  const overlays = document.querySelectorAll<HTMLElement>('.dashboard-overlay');
+  const list = Array.from(overlays);
+  return (
+    list.find((overlay) => overlay.getAttribute('data-ds-target') === selector) ??
+    list.find((overlay) => !overlay.hasAttribute('data-ds-target')) ??
+    null
+  );
+};
+
 const handleSidebar = (trigger: HTMLElement): void => {
   // Par défaut, on cible la sidebar principale si aucun target n'est défini
   const targetSelector =
     trigger.getAttribute('data-ds-target') || '.dashboard-sidebar';
   const sidebar = document.querySelector<HTMLElement>(targetSelector);
-  const overlay = document.querySelector<HTMLElement>('.dashboard-overlay');
+  const overlay = findSidebarOverlay(targetSelector);
 
   if (sidebar) {
     const isOpen = sidebar.classList.toggle('is-open');

@@ -17,7 +17,7 @@
   inline-size: 100%;
   padding: var(--ds-space-2);
   border: none;
-  border-radius: var(--ds-radius-lg);
+  border-radius: var(--ds-radius-md);
   background-color: transparent;
   color: var(--ds-color-on-surface);
   cursor: pointer;
@@ -38,7 +38,7 @@
   @include media-up(lg) {
     inline-size: auto;
     padding: var(--ds-space-1);
-    border-radius: var(--ds-radius-full);
+    border-radius: var(--ds-radius-md);
   }
 }
 
@@ -83,7 +83,6 @@
 // Menu du compte : surcharge des Component Tokens de .dropdown-menu
 // --------------------------------------------------------------------------
 .auth-dropdown-menu {
-  --dropdown-radius: var(--ds-radius-lg);
   --dropdown-width: var(--ds-size-menu-lg);
   --dropdown-caret-size: var(--ds-space-3);
 
@@ -111,7 +110,6 @@
 // --------------------------------------------------------------------------
 .navbar-dropdown {
   --dropdown-width: var(--ds-size-menu-lg);
-  --dropdown-radius: var(--ds-radius-lg);
   --dropdown-item-font-size: var(--ds-text-body-md);
   --dropdown-item-font-weight: var(--ds-font-weight-regular);
 
@@ -185,7 +183,7 @@
   justify-content: center;
   inline-size: var(--ds-control-height-md);
   block-size: var(--ds-control-height-md);
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-md);
   color: var(--ds-color-on-surface-variant);
   @include touch-target;
   transition: effects(background-color, color);

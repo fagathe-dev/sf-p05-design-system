@@ -1,0 +1,45 @@
+{# Barre du haut. `page` n'existe que sur les pages de doc : elles seules ont une sidebar #}
+{% set starters_url = path('component_docs_show', {type: 'getting-started', component: 'starter-packs'}) %}
+{% set in_docs = page is defined %}
+{% set on_starters = in_docs and page.url == starters_url %}
+
+<header class="app-header docs-header">
+  <nav class="navbar navbar-expand-lg" aria-label="Navigation du site">
+    <div class="docs-container docs-header-inner">
+      {% if in_docs %}
+        <button class="navbar-toggler" type="button" data-ds-toggle="sidebar" data-ds-target="#docs-sidebar" aria-expanded="false" aria-controls="docs-sidebar" aria-label="Ouvrir le sommaire de la documentation">
+          <i class="ri-menu-line"></i>
+        </button>
+      {% endif %}
+
+      <a class="navbar-brand" href="{{ path('app_home_index') }}">
+        <i class="ri-box-3-fill text-primary"></i> Base UI
+        {% if in_docs %}<span class="docs-brand-section"><span aria-hidden="true">/</span> Docs</span>{% endif %}
+      </a>
+
+      <div class="collapse navbar-collapse" id="docs-header-links">
+        <ul class="navbar-nav">
+          <li><a class="nav-link{{ not in_docs ? ' active' }}" href="{{ path('app_home_index') }}"{{ not in_docs ? ' aria-current="page"' }}>Accueil</a></li>
+          <li><a class="nav-link{{ in_docs and not on_starters ? ' active' }}" href="{{ path('component_docs_index') }}">Documentation</a></li>
+          <li><a class="nav-link{{ on_starters ? ' active' }}" href="{{ starters_url }}">Starter packs</a></li>
+        </ul>
+      </div>
+
+      <div class="navbar-end">
+        <span class="badge badge-secondary d-none d-md-inline-flex">v{{ docs_site.version }}</span>
+        <a class="btn btn-icon btn-sm btn-ghost-secondary d-none d-sm-inline-flex" href="https://github.com/fagathe-dev/sf-p05-design-system" aria-label="Code source sur GitHub" title="Code source sur GitHub">
+          <i class="ri-github-fill"></i>
+        </a>
+        <div class="segmented-control segmented-control-sm" role="radiogroup" aria-label="Thème" data-ds-theme-switch>
+          <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="auto" aria-label="Automatique" title="Automatique (suit le réglage de l'appareil)"><i class="ri-computer-line"></i></button>
+          <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="light" aria-label="Clair" title="Thème clair"><i class="ri-sun-line"></i></button>
+          <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="dark" aria-label="Sombre" title="Thème sombre"><i class="ri-moon-line"></i></button>
+        </div>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-ds-toggle="collapse" data-ds-target="#docs-header-links" aria-expanded="false" aria-controls="docs-header-links" aria-label="Afficher les liens du site">
+        <i class="ri-more-2-fill"></i>
+      </button>
+    </div>
+  </nav>
+</header>

@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
     <p>Associez toujours un <code>&lt;label class="form-label"&gt;</code> au champ via <code>for</code> / <code>id</code>.</p>
 {% set code %}
 <div>
@@ -19,7 +19,7 @@
   </section>
 
   <section class="docs-section" id="types">
-    <h3>Types de champ</h3>
+    <h2>Types de champ</h2>
     <p><code>.form-control</code> s'applique à tous les types texte natifs.</p>
 {% set code %}
 <div class="row g-4">
@@ -53,7 +53,7 @@
   </section>
 
   <section class="docs-section" id="textarea">
-    <h3>Zone de texte</h3>
+    <h2>Zone de texte</h2>
     <p>Hauteur minimale de 6rem, redimensionnable verticalement.</p>
 {% set code %}
 <div>
@@ -65,7 +65,7 @@
   </section>
 
   <section class="docs-section" id="tailles">
-    <h3>Tailles</h3>
+    <h2>Tailles</h2>
     <p>32px (<code>.form-control-sm</code>), 40px (par défaut) et 48px (<code>.form-control-lg</code>), alignées sur les boutons.</p>
 {% set code %}
 <input type="text" class="form-control form-control-sm" placeholder=".form-control-sm" aria-label="Petit champ">
@@ -76,7 +76,7 @@
   </section>
 
   <section class="docs-section" id="etats">
-    <h3>Désactivé et lecture seule</h3>
+    <h2>Désactivé et lecture seule</h2>
 {% set code %}
 <input type="text" class="form-control" placeholder="Champ désactivé" aria-label="Champ désactivé" disabled>
 <input type="text" class="form-control" value="Valeur en lecture seule" aria-label="Champ en lecture seule" readonly>
@@ -85,7 +85,7 @@
   </section>
 
   <section class="docs-section" id="avec-bouton">
-    <h3>Champ et bouton</h3>
+    <h2>Champ et bouton</h2>
     <p>Les hauteurs communes permettent d'aligner un champ et un bouton sur une ligne flex.</p>
 {% set code %}
 <div class="d-flex gap-2">
@@ -97,7 +97,7 @@
   </section>
 
   <section class="docs-section" id="floating">
-    <h3>Labels flottants</h3>
+    <h2>Labels flottants</h2>
     <p>
       Dans <code>.form-floating</code>, le label occupe le champ vide puis remonte au focus ou à la saisie.
       Le champ fait 56px. Un <code>placeholder</code> (masqué) est requis pour détecter un champ vide.
@@ -117,7 +117,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
 
-    <h4>Variante soulignée</h4>
+    <h3>Variante soulignée</h3>
     <p><code>.form-floating-flushed</code> réduit le champ à une ligne ; au focus, le soulignement s'épaissit.</p>
 {% set code %}
 <div class="form-floating-flushed">
@@ -129,23 +129,24 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
-        ['--input-bg', '<code>transparent</code>', 'Fond'],
+        ['--input-bg', '<code>--ds-surface-container-low</code>', 'Fond'],
+        ['--input-shadow', '<code>--ds-shadow-xs</code>', 'Ombre'],
         ['--input-color', '<code>--ds-color-on-surface</code>', 'Texte'],
         ['--input-border-color', '<code>--ds-color-outline</code>', 'Bordure (on-surface au survol, focus ring au focus)'],
         ['--input-radius', '<code>--ds-radius-md</code>', 'Rayon'],
         ['--input-height', '<code>--ds-control-height-md</code>', 'Hauteur minimale'],
-        ['--input-px, --input-py', '<code>--ds-space-4</code>, <code>--ds-space-2</code>', 'Padding'],
-        ['--input-font-size', '<code>--ds-text-body-lg</code>', 'Taille du texte'],
+        ['--input-px, --input-py', '<code>--ds-space-3</code>, <code>--ds-space-2</code>', 'Padding'],
+        ['--input-font-size', '<code>--ds-text-body-md</code>', 'Taille du texte'],
       ],
     } only %}
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.form-label', 'Label au-dessus du champ'],

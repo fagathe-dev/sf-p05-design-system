@@ -1,0 +1,72 @@
+{# Docs : Link — source : assets/scss/utilities/_link.scss, style de base : foundation/_reset.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Couleur et soulignement des liens. Sans classe, un lien prend la couleur primaire et n'est souligné qu'au survol.
+  </p>
+
+  <section class="docs-section" id="couleurs">
+    <h2>Couleurs</h2>
+    <p><code>.link-{rôle}</code> colore le lien et prend la couleur du texte de son conteneur au survol et au focus.</p>
+{% set code %}
+{% for role in roles %}
+<a href="#" class="link-{{ role }}">.link-{{ role }}</a>
+{% endfor %}
+<a href="#" class="link-body-emphasis">.link-body-emphasis</a>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="surface-inversee">
+    <h2>Sur une surface inversée</h2>
+    <p><code>.link-light</code> est lisible sur <code>.bg-dark</code>, et <code>.link-dark</code> sur une surface qui a la couleur de <code>.text-light</code>.</p>
+{% set code %}
+<div class="bg-dark p-4 rounded">
+  <a href="#" class="link-light">.link-light</a>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="soulignement">
+    <h2>Soulignement</h2>
+    <p>
+      <code>.link-underline</code> souligne le lien en permanence, et <code>.link-underline-opacity-{10|25|50|75|100}</code>
+      atténue le trait. Un lien au milieu d'un texte doit rester identifiable sans dépendre de sa couleur : gardez-le souligné.
+    </p>
+{% set code %}
+<p><a href="#" class="link-underline">.link-underline</a></p>
+{% for opacity in [10, 25, 50, 75, 100] %}
+<p><a href="#" class="link-underline-opacity-{{ opacity }}">.link-underline-opacity-{{ opacity }}</a></p>
+{% endfor %}
+<p class="mb-0"><a href="#" class="link-underline link-underline-opacity-0">.link-underline-opacity-0</a></p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="survol">
+    <h2>Au survol</h2>
+    <p>Chaque opacité a une variante <code>-hover</code> qui ne s'applique qu'au survol.</p>
+{% set code %}
+<p><a href="#" class="link-underline-opacity-25 link-underline-opacity-100-hover">Trait léger, plein au survol</a></p>
+<p class="mb-0"><a href="#" class="link-underline link-underline-opacity-0-hover">Souligné, sans trait au survol</a></p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.link-{rôle}', 'Couleur du rôle'],
+        ['.link-light, .link-dark', 'Couleurs de la surface inversée'],
+        ['.link-body-emphasis', 'Couleur du texte principal'],
+        ['.link-underline', 'Toujours souligné'],
+        ['.link-underline-opacity-0', 'Sans soulignement'],
+        ['.link-underline-opacity-{10|25|50|75|100}', 'Opacité du trait'],
+        ['.link-underline-opacity-{0|10|25|50|75|100}-hover', 'Idem, au survol seulement'],
+      ],
+    } only %}
+  </section>
+</div>

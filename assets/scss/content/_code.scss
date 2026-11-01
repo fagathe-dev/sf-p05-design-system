@@ -80,7 +80,7 @@ code:not(.code-content code) {
   min-block-size: var(--ds-control-height-sm);
   padding-inline: var(--ds-space-2);
   border: none;
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-sm);
   background-color: transparent;
   color: var(--ds-color-on-surface-variant);
   @include type(label, lg);

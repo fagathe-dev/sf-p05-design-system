@@ -1,0 +1,30 @@
+{# Pied de page du site de documentation : marque puis colonnes de liens #}
+{% set navigation = docs_site.navigation %}
+{% set columns = [
+  { title: 'Démarrer', categories: ['getting-started', 'grid'] },
+  { title: 'Interface', categories: ['content', 'forms', 'components'] },
+  { title: 'Interactions', categories: ['navigation', 'feedback'] },
+  { title: 'Outils', categories: ['utilities', 'features'] },
+] %}
+
+<footer class="footer app-footer docs-footer">
+  <div class="docs-container docs-footer-grid">
+    <div class="docs-footer-brand">
+      <a class="navbar-brand" href="{{ path('app_home_index') }}"><i class="ri-box-3-fill text-primary"></i> Base UI</a>
+      <p class="small text-muted mb-0">Le design system de vos applications Symfony : tokens, composants et interactions.</p>
+      <p class="small text-muted mb-0">Version {{ docs_site.version }}.</p>
+    </div>
+    {% for column in columns %}
+      <nav aria-labelledby="docs-footer-{{ loop.index }}">
+        <h2 class="docs-footer-title" id="docs-footer-{{ loop.index }}">{{ column.title }}</h2>
+        <ul class="list-unstyled docs-footer-links">
+          {% for type in column.categories %}
+            {% if navigation[type] is defined %}
+              <li><a href="{{ path('component_docs_category', {type: type}) }}">{{ navigation[type].label }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endfor %}
+  </div>
+</footer>

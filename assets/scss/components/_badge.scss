@@ -11,7 +11,7 @@
   // 1. Component Tokens
   --badge-bg: var(--ds-color-secondary-container);
   --badge-color: var(--ds-color-on-secondary-container);
-  --badge-radius: var(--ds-radius-full);
+  --badge-radius: var(--ds-radius-xs);
 
   // 2. Box Model
   display: inline-flex;
@@ -19,7 +19,7 @@
   justify-content: center;
   gap: var(--ds-space-1);
   padding-block: var(--ds-space-1);
-  padding-inline: var(--ds-space-2);
+  padding-inline: var(--ds-space-1_5);
   border-radius: var(--badge-radius);
 
   // 3. Typographie & Couleurs
@@ -28,9 +28,16 @@
   @include type(label, md);
   line-height: 1;
   white-space: nowrap;
+
+  &:is(a) {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
-// Les badges sont en pilule par défaut : classe conservée pour compatibilité
+// Forme pilule, par exemple pour un compteur
 .badge-pill {
   --badge-radius: var(--ds-radius-full);
 }

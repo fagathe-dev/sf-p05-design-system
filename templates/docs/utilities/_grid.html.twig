@@ -1,24 +1,85 @@
+{# Docs : CSS Grid — source : assets/scss/utilities/_grid.scss #}
+
 <div class="component-demo">
-    <h3>🏗️ Layout & Display</h3>
-    <p class="text-muted mb-4">Classes utilitaires pour contrôler le rendu des éléments (<code>display</code>, <code>flexbox</code>, <code>grid</code>).</p>
+  <p class="docs-lead">
+    Grilles CSS natives, déclarées sur le conteneur : on choisit le nombre de colonnes, et chaque enfant trouve sa
+    place. Pour une grille de page en <code>.row</code> et <code>.col-*</code>, voir la
+    <a href="{{ path('component_docs_show', {type: 'grid', component: 'col'}) }}">page Grid</a>.
+  </p>
 
-    <div class="box box-secondary mb-4">
-        <h5>Display & Flexbox</h5>
-        <div class="d-flex flex-wrap gap-2">
-            <div class="d-block p-2 bg-primary-subtle rounded">Block</div>
-            <div class="d-inline-block p-2 bg-primary-subtle rounded">Inline-Block</div>
-            <div class="d-flex align-items-center gap-2 p-2 bg-info-subtle rounded">
-                <i class="ri-check-line"></i> Flex container
-            </div>
-        </div>
-    </div>
+  <section class="docs-section" id="base">
+    <h2>Base</h2>
+    <p><code>.grid</code> active la grille avec un espacement de <code>--ds-space-4</code>, et <code>.grid-cols-{n}</code> fixe le nombre de colonnes égales, de 1 à 12.</p>
+{% set code %}
+<div class="grid grid-cols-3">
+{% for i in 1..6 %}
+  <div class="docs-box">{{ i }}</div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
 
-    <div class="box box-secondary">
-        <h5>Grid System (CSS Grid)</h5>
-        <div class="d-grid grid-cols-3 gap-2">
-            <div class="bg-secondary-subtle p-2 rounded">Grid 1</div>
-            <div class="bg-secondary-subtle p-2 rounded">Grid 2</div>
-            <div class="bg-secondary-subtle p-2 rounded">Grid 3</div>
-        </div>
-    </div>
+  <section class="docs-section" id="span">
+    <h2>Largeur d'un élément</h2>
+    <p><code>.col-span-{n}</code> étend un enfant sur plusieurs colonnes, et <code>.col-span-full</code> sur toute la largeur.</p>
+{% set code %}
+<div class="grid grid-cols-4">
+  <div class="docs-box col-span-full">.col-span-full</div>
+  <div class="docs-box col-span-3">.col-span-3</div>
+  <div class="docs-box">1</div>
+  <div class="docs-box col-span-2">.col-span-2</div>
+  <div class="docs-box col-span-2">.col-span-2</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="responsive">
+    <h2>Responsive</h2>
+    <p><code>.grid-cols-{bp}-{n}</code> et <code>.col-span-{bp}-{n}</code> s'appliquent à partir du point de rupture.</p>
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-2 grid-cols-xl-4">
+  <div class="docs-box col-span-md-full col-span-xl-2">Mise en avant</div>
+  <div class="docs-box">2</div>
+  <div class="docs-box">3</div>
+  <div class="docs-box">4</div>
+  <div class="docs-box">5</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="espacement">
+    <h2>Espacement</h2>
+    <p>
+      Les <a href="{{ path('component_docs_show', {type: 'utilities', component: 'gap'}) }}">utilitaires de gap</a> remplacent
+      l'espacement par défaut. Avec <code>.d-grid</code> à la place de <code>.grid</code>, il n'y a aucun espacement par défaut.
+    </p>
+{% set code %}
+<div class="grid grid-cols-3 gap-1">
+  <div class="docs-box">.gap-1</div>
+  <div class="docs-box">.gap-1</div>
+  <div class="docs-box">.gap-1</div>
+</div>
+<div class="d-grid grid-cols-3 mt-4">
+  <div class="docs-box">.d-grid</div>
+  <div class="docs-box">.d-grid</div>
+  <div class="docs-box">.d-grid</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.grid', 'display: grid et gap de --ds-space-4'],
+        ['.grid-cols-{1…12}, .grid-cols-{bp}-{1…12}', 'Nombre de colonnes égales'],
+        ['.col-span-{1…12}, .col-span-{bp}-{1…12}', 'Largeur de l\'élément en colonnes'],
+        ['.col-span-full, .col-span-{bp}-full', 'Toute la largeur de la grille'],
+      ],
+    } only %}
+  </section>
 </div>

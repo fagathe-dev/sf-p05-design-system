@@ -8,7 +8,7 @@
   </p>
 
   <section class="docs-section" id="fluide">
-    <h3>Image fluide</h3>
+    <h2>Image fluide</h2>
     <p><code>.img-fluid</code> limite l'image à la largeur de son parent et garde son ratio.</p>
 {% set code %}
 <img src="{{ photo }}" class="img-fluid" alt="Poste de travail">
@@ -17,7 +17,7 @@
   </section>
 
   <section class="docs-section" id="vignette">
-    <h3>Vignette</h3>
+    <h2>Vignette</h2>
     <p><code>.img-thumbnail</code> encadre l'image d'une surface arrondie, sans ombre.</p>
 {% set code %}
 <img src="{{ photo }}" class="img-thumbnail" alt="Poste de travail" style="max-inline-size: 16rem;">
@@ -26,7 +26,7 @@
   </section>
 
   <section class="docs-section" id="arrondis">
-    <h3>Arrondis</h3>
+    <h2>Arrondis</h2>
     <p>Les utilitaires <code>.rounded-*</code> s'appliquent aux images.</p>
 {% set code %}
 <img src="https://i.pravatar.cc/120?img=15" class="rounded-sm" alt="Arrondi sm" width="96" height="96">
@@ -37,7 +37,7 @@
   </section>
 
   <section class="docs-section" id="figure">
-    <h3>Figure</h3>
+    <h2>Figure</h2>
     <p><code>.figure</code> empile l'image et sa légende ; la légende est en texte secondaire.</p>
 {% set code %}
 <figure class="figure" style="max-inline-size: 20rem;">
@@ -47,7 +47,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code } only %}
 
-    <h4>Alignement de la légende</h4>
+    <h3>Alignement de la légende</h3>
 {% set code %}
 <figure class="figure" style="max-inline-size: 20rem;">
   <img src="{{ photo }}" class="figure-img img-fluid rounded" alt="Poste de travail">
@@ -58,7 +58,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.img-fluid', 'Image responsive'],

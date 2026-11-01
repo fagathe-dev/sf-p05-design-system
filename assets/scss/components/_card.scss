@@ -1,54 +1,49 @@
 // ==========================================================================
 // Component: Card (components/_card.scss)
 // --------------------------------------------------------------------------
-// Carte standard sur --ds-surface-container, sans bordure ni ombre.
-// La variante .card-elevated passe en container-high au survol.
+// Carte sur la surface de la page, avec une bordure fine et une ombre douce.
+// La variante .card-elevated réagit au survol : surface relevée, ombre plus marquée.
 // ==========================================================================
 
 @use '../abstracts' as *;
 
 .card {
   // 1. Component Tokens
-  --card-bg: var(--ds-surface-container);
+  --card-bg: var(--ds-surface);
+  --card-border-color: var(--ds-color-outline-variant);
   --card-color: var(--ds-color-on-surface);
   --card-title-color: var(--ds-color-on-surface);
-  --card-radius: var(--ds-radius-lg);
+  --card-radius: var(--ds-radius-md);
   --card-padding: var(--ds-space-6);
+  --card-shadow: var(--ds-shadow-sm);
 
   // 2. Box Model
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  border: var(--ds-border-width) solid var(--card-border-color);
   border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
 
   // 3. Couleurs
   background-color: var(--card-bg);
   color: var(--card-color);
 
   // 4. Motion
-  transition:
-    effects(background-color),
-    spatial(transform);
+  transition: effects(background-color, box-shadow);
 }
 
-// Carte interactive : surface plus haute et léger soulèvement au survol
+// Carte interactive : surface relevée et ombre plus marquée au survol
 .card-elevated {
   cursor: pointer;
 
   &:hover {
-    --card-bg: var(--ds-surface-container-high);
-
-    transform: translateY(calc(var(--ds-space-1) * -1));
+    --card-bg: var(--ds-surface-container-low);
+    --card-shadow: var(--ds-shadow-md);
   }
 
   &:focus-visible {
     @include focus-ring;
-  }
-
-  @include reduced-motion {
-    &:hover {
-      transform: none;
-    }
   }
 }
 
@@ -92,6 +87,7 @@
 @each $role, $token in $roles {
   .card-#{$role} {
     --card-bg: #{role-color($role, 'container')};
+    --card-border-color: transparent;
     --card-color: #{role-color($role, 'on-container')};
     --card-title-color: #{role-color($role, 'on-container')};
   }

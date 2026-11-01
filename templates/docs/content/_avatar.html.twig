@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="image">
-    <h3>Image</h3>
+    <h2>Image</h2>
     <p>L'image est recadrée pour remplir le cercle. Renseignez toujours le <code>alt</code>.</p>
 {% set code %}
 <div class="avatar"><img src="https://i.pravatar.cc/100?img=12" alt="Jane Doe"></div>
@@ -17,7 +17,7 @@
   </section>
 
   <section class="docs-section" id="initiales">
-    <h3>Initiales et icône</h3>
+    <h2>Initiales et icône</h2>
     <p>Sans image, l'avatar affiche du texte ou une icône sur le conteneur primaire.</p>
 {% set code %}
 <div class="avatar">JD</div>
@@ -29,7 +29,7 @@
   </section>
 
   <section class="docs-section" id="tailles">
-    <h3>Tailles</h3>
+    <h2>Tailles</h2>
     <p>32px (<code>.avatar-sm</code>), 40px (par défaut) et 56px (<code>.avatar-lg</code>).</p>
 {% set code %}
 <div class="avatar avatar-sm"><img src="https://i.pravatar.cc/100?img=5" alt="Avatar petit"></div>
@@ -43,7 +43,7 @@
   </section>
 
   <section class="docs-section" id="pile">
-    <h3>Pile d'avatars</h3>
+    <h2>Pile d'avatars</h2>
     <p>
       <code>.avatar-stack</code> fait se chevaucher les avatars. Chacun est entouré d'un anneau de la couleur
       du fond et se soulève au survol. <code>.avatar-count</code> affiche le nombre restant.
@@ -58,7 +58,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code } only %}
 
-    <h4>Tailles de pile</h4>
+    <h3>Tailles de pile</h3>
     <p>Le chevauchement s'adapte avec <code>.avatar-stack-sm</code> et <code>.avatar-stack-lg</code>.</p>
 {% set code %}
 <div class="avatar-stack avatar-stack-sm">
@@ -76,7 +76,7 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
@@ -91,7 +91,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.avatar', 'Avatar 40px'],

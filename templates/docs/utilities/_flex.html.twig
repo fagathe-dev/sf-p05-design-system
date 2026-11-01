@@ -1,0 +1,158 @@
+{# Docs : Flex — source : assets/scss/utilities/_flex.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Direction, retour à la ligne, alignement, taille et ordre des éléments d'un conteneur <code>.d-flex</code>.
+    Toutes les classes existent avec un infixe de point de rupture.
+  </p>
+
+  <section class="docs-section" id="direction">
+    <h2>Direction</h2>
+    <p><code>.flex-row</code>, <code>.flex-row-reverse</code>, <code>.flex-column</code> et <code>.flex-column-reverse</code>.</p>
+{% set code %}
+<div class="d-flex flex-row gap-2 mb-4">
+  <div class="docs-box">1</div>
+  <div class="docs-box">2</div>
+  <div class="docs-box">3</div>
+</div>
+<div class="d-flex flex-row-reverse gap-2 mb-4">
+  <div class="docs-box">1</div>
+  <div class="docs-box">2</div>
+  <div class="docs-box">3</div>
+</div>
+<div class="d-flex flex-column flex-md-row gap-2">
+  <div class="docs-box">Colonne</div>
+  <div class="docs-box">puis ligne</div>
+  <div class="docs-box">à partir de md</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="wrap">
+    <h2>Retour à la ligne</h2>
+    <p><code>.flex-wrap</code>, <code>.flex-nowrap</code> et <code>.flex-wrap-reverse</code>.</p>
+{% set code %}
+<div class="d-flex flex-wrap gap-2">
+{% for i in 1..12 %}
+  <div class="docs-box">Élément {{ i }}</div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="justify">
+    <h2>Axe principal</h2>
+    <p><code>.justify-content-{valeur}</code> répartit les éléments le long de l'axe principal.</p>
+{% set code %}
+{% for value in ['start', 'end', 'center', 'between', 'around', 'evenly'] %}
+<div class="docs-area d-flex justify-content-{{ value }} mb-2">
+  <div class="docs-box">.justify-content-{{ value }}</div>
+  <div class="docs-box">2</div>
+</div>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="align-items">
+    <h2>Axe secondaire</h2>
+    <p><code>.align-items-{valeur}</code> aligne tous les éléments ; le conteneur doit être plus grand qu'eux.</p>
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-2 grid-cols-xl-3">
+{% for value in ['start', 'end', 'center', 'baseline', 'stretch'] %}
+  <div class="docs-frame d-flex align-items-{{ value }} gap-2 p-2">
+    <div class="docs-box">.align-items-{{ value }}</div>
+    <div class="docs-box">2</div>
+  </div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="align-self">
+    <h2>Alignement d'un élément</h2>
+    <p><code>.align-self-{valeur}</code> remplace l'alignement du conteneur pour un seul élément. S'y ajoute la valeur <code>auto</code>.</p>
+{% set code %}
+<div class="docs-frame d-flex gap-2 p-2">
+{% for value in ['start', 'center', 'end', 'stretch'] %}
+  <div class="docs-box align-self-{{ value }}">.align-self-{{ value }}</div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="align-content">
+    <h2>Lignes multiples</h2>
+    <p>
+      <code>.align-content-{valeur}</code> répartit les lignes d'un conteneur <code>.flex-wrap</code>, avec
+      <code>start</code>, <code>end</code>, <code>center</code>, <code>between</code>, <code>around</code> et
+      <code>stretch</code>. Sans retour à la ligne, la classe n'a aucun effet.
+    </p>
+{% set code %}
+<div class="docs-frame d-flex flex-wrap align-content-between gap-2 p-2">
+{% for i in 1..14 %}
+  <div class="docs-box">Élément {{ i }}</div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="taille">
+    <h2>Taille des éléments</h2>
+    <p>
+      <code>.flex-fill</code> partage l'espace libre, <code>.flex-grow-1</code> absorbe ce qui reste et
+      <code>.flex-shrink-0</code> empêche un élément de rétrécir.
+    </p>
+{% set code %}
+<div class="d-flex gap-2 mb-4">
+  <div class="docs-box flex-fill">.flex-fill</div>
+  <div class="docs-box flex-fill">.flex-fill, plus long</div>
+</div>
+<div class="d-flex gap-2">
+  <div class="docs-box flex-shrink-0">.flex-shrink-0</div>
+  <div class="docs-box flex-grow-1">.flex-grow-1</div>
+  <div class="docs-box">Élément</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="ordre">
+    <h2>Ordre</h2>
+    <p>
+      <code>.order-first</code> (-1), <code>.order-0</code> à <code>.order-5</code> et <code>.order-last</code> (6).
+      L'ordre change seulement l'affichage : le clavier et les lecteurs d'écran suivent toujours l'ordre du HTML.
+    </p>
+{% set code %}
+<div class="d-flex gap-2">
+  <div class="docs-box order-last">Premier dans le HTML (.order-last)</div>
+  <div class="docs-box order-2">Deuxième (.order-2)</div>
+  <div class="docs-box order-first">Troisième (.order-first)</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    <p>Toutes existent avec un infixe de point de rupture : <code>.justify-content-md-between</code>.</p>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.flex-{row|row-reverse|column|column-reverse}', 'flex-direction'],
+        ['.flex-{wrap|nowrap|wrap-reverse}', 'flex-wrap'],
+        ['.flex-fill', 'flex: 1 1 auto'],
+        ['.flex-grow-{0|1}, .flex-shrink-{0|1}', 'flex-grow, flex-shrink'],
+        ['.justify-content-{start|end|center|between|around|evenly}', 'justify-content'],
+        ['.align-items-{start|end|center|baseline|stretch}', 'align-items'],
+        ['.align-content-{start|end|center|between|around|stretch}', 'align-content'],
+        ['.align-self-{auto|start|end|center|baseline|stretch}', 'align-self'],
+        ['.order-{first|0…5|last}', 'order'],
+      ],
+    } only %}
+  </section>
+</div>

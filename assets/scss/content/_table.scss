@@ -33,6 +33,10 @@
   vertical-align: bottom;
 }
 
+.table th {
+  text-align: start;
+}
+
 .table > tbody {
   vertical-align: inherit;
 }
@@ -47,16 +51,15 @@
 
 // En-tête ou ligne sur surface légèrement relevée
 .table-light > * > * {
-  background-color: var(--ds-surface-container-high);
+  background-color: var(--ds-surface-container-low);
   color: var(--ds-color-on-surface);
 }
 
-// Petits sur-titres de colonnes
+// Titres de colonnes
 .table-light th {
-  color: var(--ds-color-on-surface-variant);
-  text-transform: uppercase;
-  @include type(label, md);
-  letter-spacing: var(--ds-letter-spacing-caps);
+  color: var(--ds-color-on-surface);
+  @include type(label, lg);
+  font-weight: var(--ds-font-weight-medium);
 }
 
 .table-hover > tbody > tr > * {
@@ -89,7 +92,15 @@
 // --------------------------------------------------------------------------
 // Défilement horizontal
 // --------------------------------------------------------------------------
+// Le conteneur encadre le tableau : bordure, rayon de base et ombre légère
 .table-responsive {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-radius: var(--ds-radius-md);
+  box-shadow: var(--ds-shadow-xs);
+}
+
+.table-responsive > .table > :last-child > :last-child > * {
+  border-block-end-width: 0;
 }

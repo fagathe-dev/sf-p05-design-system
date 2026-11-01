@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
     <p><code>.dropdown-toggle</code> ajoute un chevron qui pivote quand le menu est ouvert.</p>
 {% set code %}
 <div class="dropdown">
@@ -25,7 +25,7 @@
   </section>
 
   <section class="docs-section" id="declencheurs">
-    <h3>Déclencheurs</h3>
+    <h2>Déclencheurs</h2>
     <p>N'importe quelle variante de bouton peut ouvrir un menu ; le chevron est facultatif.</p>
 {% set code %}
 <div class="dropdown">
@@ -56,7 +56,7 @@
   </section>
 
   <section class="docs-section" id="contenu">
-    <h3>En-têtes, séparateurs et icônes</h3>
+    <h2>En-têtes, séparateurs et icônes</h2>
     <p>Une icône en tête d'item est discrète et prend la couleur primaire au survol.</p>
 {% set code %}
 <div class="dropdown">
@@ -76,7 +76,7 @@
   </section>
 
   <section class="docs-section" id="etats">
-    <h3>Item actif et désactivé</h3>
+    <h2>Item actif et désactivé</h2>
 {% set code %}
 <div class="dropdown">
   <button type="button" class="btn btn-secondary dropdown-toggle" data-ds-toggle="dropdown" aria-expanded="false">
@@ -93,7 +93,7 @@
   </section>
 
   <section class="docs-section" id="alignement">
-    <h3>Alignement à droite</h3>
+    <h2>Alignement à droite</h2>
     <p><code>.dropdown-menu-end</code> aligne le menu sur le bord droit du déclencheur.</p>
 {% set code %}
 <div class="d-flex justify-content-end">
@@ -112,7 +112,7 @@
   </section>
 
   <section class="docs-section" id="liste">
-    <h3>Menu en liste</h3>
+    <h2>Menu en liste</h2>
     <p>Le menu peut être une liste <code>&lt;ul&gt;</code> : ses puces sont retirées.</p>
 {% set code %}
 <div class="dropdown">
@@ -130,11 +130,11 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
-        ['--dropdown-bg', '<code>--ds-surface-container-high</code>', 'Fond du menu'],
+        ['--dropdown-bg', '<code>--ds-surface</code>', 'Fond du menu'],
         ['--dropdown-color', '<code>--ds-color-on-surface</code>', 'Texte des items'],
         ['--dropdown-radius', '<code>--ds-radius-md</code>', 'Rayon du menu'],
         ['--dropdown-padding', '<code>--ds-space-2</code>', 'Padding du menu'],
@@ -145,7 +145,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes et attributs</h3>
+    <h2>Classes et attributs</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.dropdown', 'Conteneur positionné (requis pour la fermeture au clic extérieur)'],

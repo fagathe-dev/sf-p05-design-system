@@ -3,11 +3,11 @@
 <div class="component-demo">
   <p class="docs-lead">
     Cases à cocher, boutons radio et listes déroulantes natives, redessinés en CSS. Les cases
-    s'animent à la sélection et affichent un halo au survol.
+    s'animent à la sélection.
   </p>
 
   <section class="docs-section" id="checkbox">
-    <h3>Cases à cocher</h3>
+    <h2>Cases à cocher</h2>
     <p>
       Le label suit l'input dans <code>.form-check</code>. Les états cochée, vide et désactivée sont natifs
       (<code>checked</code>, <code>disabled</code>).
@@ -34,7 +34,7 @@
   </section>
 
   <section class="docs-section" id="radio">
-    <h3>Boutons radio</h3>
+    <h2>Boutons radio</h2>
 {% set code %}
 <div class="form-check">
   <input class="form-check-input" type="radio" name="radio-demo" id="radio-1" checked>
@@ -53,7 +53,7 @@
   </section>
 
   <section class="docs-section" id="description">
-    <h3>Avec description</h3>
+    <h2>Avec description</h2>
     <p>Un <code>.text-muted</code> dans le label s'affiche en sous-texte, sous l'intitulé.</p>
 {% set code %}
 <div class="form-check">
@@ -68,7 +68,7 @@
   </section>
 
   <section class="docs-section" id="inline">
-    <h3>En ligne</h3>
+    <h2>En ligne</h2>
     <p>Placez les <code>.form-check</code> dans un conteneur flex : l'espacement passe par <code>gap</code>.</p>
 {% set code %}
 <div class="d-flex flex-wrap gap-4">
@@ -90,7 +90,7 @@
   </section>
 
   <section class="docs-section" id="select">
-    <h3>Liste déroulante</h3>
+    <h2>Liste déroulante</h2>
     <p><code>.form-select</code> remplace la flèche native par un chevron qui suit la couleur du thème.</p>
 {% set code %}
 <div>
@@ -105,7 +105,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code } only %}
 
-    <h4>Tailles et état désactivé</h4>
+    <h3>Tailles et état désactivé</h3>
 {% set code %}
 <select class="form-select form-select-sm" aria-label="Petite liste">
   <option>.form-select-sm</option>
@@ -124,7 +124,7 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
@@ -138,7 +138,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.form-check', 'Ligne input + label'],

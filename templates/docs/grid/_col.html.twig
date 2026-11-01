@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="auto">
-    <h3>Largeur automatique</h3>
+    <h2>Largeur automatique</h2>
     <p><code>.col</code> partage l'espace à parts égales, quel que soit le nombre de colonnes.</p>
 {% set code %}
 <div class="row">
@@ -20,7 +20,7 @@
   </section>
 
   <section class="docs-section" id="largeurs">
-    <h3>Largeurs sur 12 colonnes</h3>
+    <h2>Largeurs sur 12 colonnes</h2>
     <p><code>.col-{1-12}</code> fixe le nombre de colonnes occupées ; au-delà de 12, les colonnes passent à la ligne.</p>
 {% set code %}
 <div class="row gy-4">
@@ -35,7 +35,7 @@
   </section>
 
   <section class="docs-section" id="contenu">
-    <h3>Largeur du contenu</h3>
+    <h2>Largeur du contenu</h2>
     <p><code>.col-auto</code> prend la largeur de son contenu ; les <code>.col</code> voisines se partagent le reste.</p>
 {% set code %}
 <div class="row">
@@ -47,7 +47,7 @@
   </section>
 
   <section class="docs-section" id="responsive">
-    <h3>Responsive</h3>
+    <h2>Responsive</h2>
     <p>
       <code>.col-{bp}-{n}</code> s'applique à partir du breakpoint (<code>sm</code> 576px, <code>md</code> 768px,
       <code>lg</code> 992px, <code>xl</code> 1200px, <code>xxl</code> 1400px). Sans préfixe, la règle vaut pour toutes les tailles.
@@ -66,7 +66,7 @@
   </section>
 
   <section class="docs-section" id="decalages">
-    <h3>Décalages</h3>
+    <h2>Décalages</h2>
     <p><code>.offset-{n}</code> et <code>.offset-{bp}-{n}</code> décalent la colonne ; <code>.offset-{bp}-0</code> annule un décalage.</p>
 {% set code %}
 <div class="row gy-4">
@@ -79,7 +79,7 @@
   </section>
 
   <section class="docs-section" id="ordre">
-    <h3>Ordre</h3>
+    <h2>Ordre</h2>
     <p>Les utilitaires <code>.order-*</code> (et <code>.order-{bp}-*</code>) réordonnent visuellement les colonnes.</p>
 {% set code %}
 <div class="row">
@@ -92,7 +92,7 @@
   </section>
 
   <section class="docs-section" id="gouttieres">
-    <h3>Gouttières</h3>
+    <h2>Gouttières</h2>
     <p>
       La gouttière horizontale par défaut est de 24px. <code>.g-{n}</code> règle les deux axes,
       <code>.gx-{n}</code> l'horizontale et <code>.gy-{n}</code> la verticale (n : 0, 1, 2, 3, 4, 5, 6, 8, 10, 12),
@@ -116,7 +116,7 @@
   </section>
 
   <section class="docs-section" id="imbrication">
-    <h3>Imbrication</h3>
+    <h2>Imbrication</h2>
     <p>Une colonne peut contenir sa propre <code>.row</code>, qui redécoupe sa largeur en 12.</p>
 {% set code %}
 <div class="row">
@@ -135,7 +135,7 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
@@ -146,7 +146,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.row', 'Rangée flex qui passe à la ligne'],

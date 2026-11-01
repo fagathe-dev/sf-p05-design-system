@@ -16,7 +16,7 @@ Cette version apporte le **thème sombre** et un ==nouvel éditeur==.
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
     <p>
       Le conteneur porte <code>data-ds-md-editor</code>. Le SegmentedControl <code>[data-md-mode]</code>
       bascule entre les options <code>write</code> et <code>preview</code> ; chaque bouton de mise en forme porte
@@ -54,7 +54,7 @@ Cette version apporte le **thème sombre** et un ==nouvel éditeur==.
   </section>
 
   <section class="docs-section" id="actions">
-    <h3>Actions de mise en forme</h3>
+    <h2>Actions de mise en forme</h2>
     <p>
       Les actions « en ligne » entourent la sélection (ou insèrent un texte d'exemple sélectionné) ; un second
       clic retire la mise en forme. Les actions « par ligne » préfixent chaque ligne sélectionnée et remplacent
@@ -80,7 +80,7 @@ Cette version apporte le **thème sombre** et un ==nouvel éditeur==.
   </section>
 
   <section class="docs-section" id="listes">
-    <h3>Listes et citations</h3>
+    <h2>Listes et citations</h2>
     <ul>
       <li>Entrée en fin d'élément de liste ou de citation : la ligne suivante reprend le préfixe (les numéros s'incrémentent, les tâches repartent décochées).</li>
       <li>Entrée sur un élément vide : le préfixe est retiré et la liste se termine.</li>
@@ -90,7 +90,7 @@ Cette version apporte le **thème sombre** et un ==nouvel éditeur==.
   </section>
 
   <section class="docs-section" id="apercu">
-    <h3>Ouvert en aperçu</h3>
+    <h2>Ouvert en aperçu</h2>
     <p>Sélectionnez l'option <code>preview</code> dans le balisage : l'aperçu est généré au chargement.</p>
 {% set code %}
 <div class="md-editor" data-ds-md-editor>
@@ -107,7 +107,7 @@ Cette version apporte le **thème sombre** et un ==nouvel éditeur==.
   </section>
 
   <section class="docs-section" id="compact">
-    <h3>Version compacte</h3>
+    <h2>Version compacte</h2>
     <p><code>.md-editor--compact</code> réduit les paddings et la hauteur minimale, pour un commentaire.</p>
 {% set code %}
 <div class="md-editor md-editor--compact" data-ds-md-editor>
@@ -129,7 +129,7 @@ Cette version apporte le **thème sombre** et un ==nouvel éditeur==.
   </section>
 
   <section class="docs-section" id="javascript">
-    <h3>JavaScript</h3>
+    <h2>JavaScript</h2>
     <p>
       <code>main.ts</code> active les éditeurs présents au chargement. Pour un éditeur ajouté plus tard,
       appelez <code>initMarkdownEditors()</code> sur son conteneur. La saisie émet l'événement <code>input</code>
@@ -159,7 +159,7 @@ container.querySelector('textarea').addEventListener('input', (event) => {
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
@@ -174,7 +174,7 @@ container.querySelector('textarea').addEventListener('input', (event) => {
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes et attributs</h3>
+    <h2>Classes et attributs</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.md-editor', 'Conteneur'],

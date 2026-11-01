@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
 {% set code %}
 <ul class="list-group">
   <li class="list-group-item">Tableau de bord</li>
@@ -19,7 +19,7 @@
   </section>
 
   <section class="docs-section" id="interactifs">
-    <h3>Liens et boutons</h3>
+    <h2>Liens et boutons</h2>
     <p>Les items <code>&lt;a&gt;</code> et <code>&lt;button&gt;</code> reçoivent un calque au survol et l'anneau de focus.</p>
 {% set code %}
 <div class="list-group">
@@ -33,7 +33,7 @@
   </section>
 
   <section class="docs-section" id="icones">
-    <h3>Icônes et badges</h3>
+    <h2>Icônes et badges</h2>
     <p>L'item est en flex : poussez un badge à droite avec <code>.ms-auto</code>.</p>
 {% set code %}
 <div class="list-group">
@@ -46,7 +46,7 @@
   </section>
 
   <section class="docs-section" id="numerotee">
-    <h3>Liste numérotée</h3>
+    <h2>Liste numérotée</h2>
 {% set code %}
 <ol class="list-group list-group-numbered">
   <li class="list-group-item">Créer le compte</li>
@@ -58,7 +58,7 @@
   </section>
 
   <section class="docs-section" id="flush">
-    <h3>Affleurante</h3>
+    <h2>Affleurante</h2>
     <p><code>.list-group-flush</code> retire le fond et l'arrondi, pour une liste intégrée à une carte ou à un panneau.</p>
 {% set code %}
 <div class="card" style="max-inline-size: 22rem;">
@@ -73,20 +73,20 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
-        ['--list-group-bg', '<code>--ds-surface-container</code>', 'Fond'],
+        ['--list-group-bg', '<code>--ds-surface</code>', 'Fond'],
         ['--list-group-color', '<code>--ds-color-on-surface</code>', 'Texte'],
         ['--list-group-divider-color', '<code>--ds-color-outline-variant</code>', 'Séparateur'],
-        ['--list-group-radius', '<code>--ds-radius-lg</code>', 'Rayon'],
+        ['--list-group-radius', '<code>--ds-radius-md</code>', 'Rayon'],
       ],
     } only %}
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.list-group', 'Conteneur'],

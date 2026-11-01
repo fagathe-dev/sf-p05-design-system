@@ -13,7 +13,7 @@
   </p>
 
   <section class="docs-section" id="dynamique">
-    <h3>Toast dynamique</h3>
+    <h2>Toast dynamique</h2>
     <p>
       La classe TypeScript <code>Toast</code> crée le conteneur <code>#toast-container</code> au besoin,
       affiche le toast puis le retire après sa durée (3 s par défaut).
@@ -36,10 +36,10 @@ new Toast('Connexion perdue.', 'error', 5000);
   </section>
 
   <section class="docs-section" id="types">
-    <h3>Types</h3>
+    <h2>Types</h2>
     <p>
-      Sans type, le toast utilise la surface inversée (snackbar M3). <code>.toast-{type}</code> passe sur le
-      conteneur du rôle. Un toast statique doit porter <code>.show</code> pour être visible.
+      Le toast est posé sur la surface de la page, avec une bordure fine. <code>.toast-{type}</code> colore son
+      icône avec le rôle. Un toast statique doit porter <code>.show</code> pour être visible.
     </p>
 {% set code %}
 <div class="toast show" role="status">
@@ -58,7 +58,7 @@ new Toast('Connexion perdue.', 'error', 5000);
   </section>
 
   <section class="docs-section" id="conteneur">
-    <h3>Conteneur</h3>
+    <h2>Conteneur</h2>
     <p>
       Les toasts sont empilés dans <code>#toast-container</code> (fixe, en bas à droite, espacés par
       <code>gap</code>). Vous pouvez le placer vous-même dans le layout pour maîtriser son emplacement dans le DOM.
@@ -70,7 +70,7 @@ new Toast('Connexion perdue.', 'error', 5000);
   </section>
 
   <section class="docs-section" id="accessibilite">
-    <h3>Accessibilité</h3>
+    <h2>Accessibilité</h2>
     <ul>
       <li>Utilisez <code>role="status"</code> pour une information et <code>role="alert"</code> pour une erreur.</li>
       <li>Un toast disparaît seul : n'y placez pas d'action indispensable.</li>
@@ -79,19 +79,20 @@ new Toast('Connexion perdue.', 'error', 5000);
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
-        ['--toast-bg', '<code>--ds-color-inverse-surface</code>', 'Fond'],
-        ['--toast-color', '<code>--ds-color-inverse-on-surface</code>', 'Texte'],
+        ['--toast-bg', '<code>--ds-surface</code>', 'Fond'],
+        ['--toast-color', '<code>--ds-color-on-surface</code>', 'Texte'],
+        ['--toast-icon-color', '<code>--ds-color-on-surface-variant</code> (couleur du rôle avec un type)', 'Icône'],
         ['--ds-size-toast', '<code>31.25rem</code>', 'Largeur maximale du conteneur (System Token)'],
       ],
     } only %}
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes et attributs</h3>
+    <h2>Classes et attributs</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['#toast-container', 'Pile de toasts fixe'],

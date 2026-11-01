@@ -11,7 +11,7 @@
   // 1. Component Tokens
   --alert-bg: var(--ds-color-info-container);
   --alert-color: var(--ds-color-on-info-container);
-  --alert-padding-x: var(--ds-space-5);
+  --alert-padding-x: var(--ds-space-4);
 
   // 2. Box Model
   position: relative;
@@ -26,8 +26,7 @@
   // 3. Typographie & Couleurs
   background-color: var(--alert-bg);
   color: var(--alert-color);
-  @include type(body, lg);
-  font-weight: var(--ds-font-weight-medium);
+  @include type(body, md);
 
   // 4. Motion
   transition: effects(opacity);

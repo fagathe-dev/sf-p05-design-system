@@ -12,7 +12,7 @@
   </p>
 
   <section class="docs-section" id="soft">
-    <h3>Soft</h3>
+    <h2>Soft</h2>
     <p>Variante par défaut : <code>.alert-{rôle}</code> et <code>.alert-soft-{rôle}</code> sont équivalentes.</p>
 {% set code %}
 {% for role in roles %}
@@ -26,7 +26,7 @@
   </section>
 
   <section class="docs-section" id="solid">
-    <h3>Solid</h3>
+    <h2>Solid</h2>
     <p>Fond plein du rôle, pour un message prioritaire.</p>
 {% set code %}
 {% for role in roles %}
@@ -40,7 +40,7 @@
   </section>
 
   <section class="docs-section" id="contenu">
-    <h3>Contenu riche</h3>
+    <h2>Contenu riche</h2>
     <p>Le contenu accepte un titre, plusieurs paragraphes et des liens.</p>
 {% set code %}
 <div class="alert alert-soft-warning" role="alert">
@@ -55,7 +55,7 @@
   </section>
 
   <section class="docs-section" id="sans-icone">
-    <h3>Sans icône</h3>
+    <h2>Sans icône</h2>
 {% set code %}
 <div class="alert alert-soft-info" role="alert">
   <div class="alert-content">Une alerte peut se passer d'icône.</div>
@@ -65,7 +65,7 @@
   </section>
 
   <section class="docs-section" id="fermable">
-    <h3>Fermable</h3>
+    <h2>Fermable</h2>
     <p>
       <code>.alert-dismissible</code> réserve la place du bouton de fermeture. Avec
       <code>data-ds-dismiss="alert"</code>, l'alerte disparaît en fondu puis est retirée du DOM.
@@ -81,7 +81,7 @@
   </section>
 
   <section class="docs-section" id="dynamique">
-    <h3>Alerte dynamique</h3>
+    <h2>Alerte dynamique</h2>
     <p>
       La classe TypeScript <code>Alert</code> crée une alerte soft fermable avec l'icône du type
       (<code>info</code>, <code>success</code>, <code>warning</code>, <code>danger</code>) et l'insère dans un conteneur.
@@ -106,7 +106,7 @@ new Alert('Vos modifications ont été enregistrées.', 'success', document.quer
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
@@ -118,7 +118,7 @@ new Alert('Vos modifications ont été enregistrées.', 'success', document.quer
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes et attributs</h3>
+    <h2>Classes et attributs</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.alert', 'Conteneur'],

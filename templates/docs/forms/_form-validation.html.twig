@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="champs">
-    <h3>Champs texte</h3>
+    <h2>Champs texte</h2>
     <p>Reliez le message au champ avec <code>aria-describedby</code> et signalez l'erreur avec <code>aria-invalid</code>.</p>
 {% set code %}
 <div>
@@ -25,7 +25,7 @@
   </section>
 
   <section class="docs-section" id="select-textarea">
-    <h3>Liste et zone de texte</h3>
+    <h2>Liste et zone de texte</h2>
 {% set code %}
 <div>
   <label for="invalid-country" class="form-label">Pays</label>
@@ -45,7 +45,7 @@
   </section>
 
   <section class="docs-section" id="cases">
-    <h3>Cases et radios</h3>
+    <h2>Cases et radios</h2>
     <p>La case prend la couleur de l'état ; en erreur, son label aussi.</p>
 {% set code %}
 <div class="form-check">
@@ -61,7 +61,7 @@
   </section>
 
   <section class="docs-section" id="cartes">
-    <h3>Cartes sélectionnables</h3>
+    <h2>Cartes sélectionnables</h2>
     <p>En erreur, le liseré de la carte passe à la couleur d'erreur.</p>
 {% set code %}
 <div class="form-selectable-card">
@@ -76,7 +76,7 @@
   </section>
 
   <section class="docs-section" id="js">
-    <h3>Avec FormManager</h3>
+    <h2>Avec FormManager</h2>
     <p>
       <code>FormManager.validateData()</code> (core-ts) pose ces classes et insère les messages
       <code>.invalid-feedback</code> à partir d'une liste d'erreurs. Voir la page FormManager.
@@ -91,7 +91,7 @@ manager.validateData({ email: "Format d'email invalide." });
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.is-valid', 'Champ, select, case ou radio valide'],

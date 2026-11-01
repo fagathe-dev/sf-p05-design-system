@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
 {% set code %}
 <div>
   <label for="file-single" class="form-label">Document</label>
@@ -18,7 +18,7 @@
   </section>
 
   <section class="docs-section" id="variantes">
-    <h3>Plusieurs fichiers, types acceptés, désactivé</h3>
+    <h2>Plusieurs fichiers, types acceptés, désactivé</h2>
 {% set code %}
 <div>
   <label for="file-multiple" class="form-label">Photos (plusieurs)</label>
@@ -37,7 +37,7 @@
   </section>
 
   <section class="docs-section" id="apercu">
-    <h3>Vignettes d'aperçu</h3>
+    <h2>Vignettes d'aperçu</h2>
     <p>
       <code>.file-previewer</code> aligne des vignettes de 100px : image recadrée ou icône, nom du fichier en
       surimpression et bouton de suppression visible au survol, au focus et sur écran tactile. Le balisage est
@@ -64,7 +64,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code } only %}
 
-    <h4>Grand format</h4>
+    <h3>Grand format</h3>
     <p><code>.file-previewer-item-lg</code> occupe toute la largeur pour un PDF ou une vidéo, avec un en-tête et une iframe.</p>
 {% set code %}
 <div class="file-previewer">
@@ -81,7 +81,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['input[type=file].form-control', 'Champ fichier avec bouton intégré'],

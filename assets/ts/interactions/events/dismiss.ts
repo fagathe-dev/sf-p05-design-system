@@ -1,5 +1,5 @@
 import { closeDialog } from '@/interactions/components/modal';
-import { closeAllDropdowns } from '@/interactions/events/toggle';
+import { closeAllDropdowns, findSidebarOverlay } from '@/interactions/events/toggle';
 import { $ } from 'core-ts';
 
 export const handleDismiss = (trigger: HTMLElement): void => {
@@ -24,7 +24,7 @@ export const handleDismiss = (trigger: HTMLElement): void => {
     const selector =
       trigger.getAttribute('data-ds-target') || '.dashboard-sidebar';
     const sidebar = $(selector) as HTMLElement | null;
-    const overlay = $('.dashboard-overlay') as HTMLElement | null;
+    const overlay = findSidebarOverlay(selector);
 
     if (sidebar) sidebar.classList.remove('is-open');
     if (overlay) overlay.classList.remove('is-visible');

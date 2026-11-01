@@ -8,7 +8,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
     <p>
       Chaque option porte sa valeur dans <code>data-value</code> et son état dans <code>aria-checked</code>.
       Le groupe doit avoir un nom accessible (<code>aria-label</code>).
@@ -24,7 +24,7 @@
   </section>
 
   <section class="docs-section" id="icones">
-    <h3>Avec icônes</h3>
+    <h2>Avec icônes</h2>
     <p>L'icône se place avant le libellé, dans une balise <code>&lt;i&gt;</code>.</p>
 {% set code %}
 <div class="segmented-control" role="radiogroup" aria-label="Affichage">
@@ -37,7 +37,7 @@
   </section>
 
   <section class="docs-section" id="icones-seules">
-    <h3>Icônes seules</h3>
+    <h2>Icônes seules</h2>
     <p>
       Sans libellé visible, chaque option a besoin d'un <code>aria-label</code> ; un <code>title</code> précise
       son comportement au survol. Exemple : le sélecteur de thème. Avec <code>data-ds-theme-switch</code>, il est
@@ -54,7 +54,7 @@
   </section>
 
   <section class="docs-section" id="tailles">
-    <h3>Tailles</h3>
+    <h2>Tailles</h2>
     <p>
       Le groupe fait 40px de haut, comme les boutons et les champs. <code>.segmented-control-sm</code> le
       ramène à 32px, pour une barre d'outils.
@@ -75,7 +75,7 @@
   </section>
 
   <section class="docs-section" id="pleine-largeur">
-    <h3>Pleine largeur</h3>
+    <h2>Pleine largeur</h2>
     <p><code>.segmented-control-full</code> occupe toute la largeur du parent, avec des segments de largeur égale.</p>
 {% set code %}
 <div class="segmented-control segmented-control-full" role="radiogroup" aria-label="Facturation">
@@ -87,7 +87,7 @@
   </section>
 
   <section class="docs-section" id="coche">
-    <h3>Coche de sélection</h3>
+    <h2>Coche de sélection</h2>
     <p>
       <code>.segmented-control-check</code> affiche une coche sur le segment sélectionné, s'il n'a pas déjà
       sa propre icône.
@@ -104,7 +104,7 @@
   </section>
 
   <section class="docs-section" id="desactive">
-    <h3>Option désactivée</h3>
+    <h2>Option désactivée</h2>
     <p>Une option <code>disabled</code> est ignorée au clic et sautée par la navigation clavier.</p>
 {% set code %}
 <div class="segmented-control" role="radiogroup" aria-label="Livraison">
@@ -117,7 +117,7 @@
   </section>
 
   <section class="docs-section" id="javascript">
-    <h3>JavaScript</h3>
+    <h2>JavaScript</h2>
     <p>
       <code>main.ts</code> active tous les contrôles au chargement (<code>initSegmentedControls()</code>) ; les
       listeners sont délégués, un contrôle ajouté ensuite fonctionne aussi. Écoutez <code>ds:change</code> pour
@@ -141,7 +141,7 @@ selectSegment(control, 'map', { silent: true }); // sans émettre d'événement
   </section>
 
   <section class="docs-section" id="accessibilite">
-    <h3>Accessibilité</h3>
+    <h2>Accessibilité</h2>
     <ul>
       <li>Le groupe porte <code>role="radiogroup"</code> et un <code>aria-label</code> ; chaque option, <code>role="radio"</code> et <code>aria-checked</code>.</li>
       <li>Seule l'option sélectionnée est atteignable avec Tab ; les flèches, Début et Fin déplacent la sélection.</li>
@@ -151,13 +151,13 @@ selectSegment(control, 'map', { silent: true }); // sans émettre d'événement
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
         ['--segmented-height', '<code>--ds-control-height-md</code>', 'Hauteur totale du groupe'],
         ['--segmented-padding', '<code>--ds-space-1</code>', 'Espace autour des segments'],
-        ['--segmented-radius', '<code>--ds-radius-lg</code>', 'Rayon du groupe (segments concentriques)'],
+        ['--segmented-radius', '<code>--ds-radius-md</code>', 'Rayon du groupe (segments concentriques)'],
         ['--segmented-bg', '<code>--ds-surface-container-low</code>', 'Fond du groupe'],
         ['--segmented-border-color', '<code>--ds-color-outline-variant</code>', 'Bordure du groupe'],
         ['--segmented-selected-bg', '<code>--ds-color-primary-container</code>', 'Fond du segment sélectionné'],
@@ -170,7 +170,7 @@ selectSegment(control, 'map', { silent: true }); // sans émettre d'événement
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes et attributs</h3>
+    <h2>Classes et attributs</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.segmented-control', 'Groupe (role="radiogroup")'],

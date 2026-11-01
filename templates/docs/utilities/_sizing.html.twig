@@ -1,0 +1,90 @@
+{# Docs : Sizing & Position — source : assets/scss/utilities/_sizing.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Largeur et hauteur en pourcentage du parent, position et décalages. Les classes utilisent des propriétés logiques.
+  </p>
+
+  <section class="docs-section" id="largeur">
+    <h2>Largeur</h2>
+    <p><code>.w-25</code>, <code>.w-50</code>, <code>.w-75</code>, <code>.w-100</code> et <code>.w-auto</code>.</p>
+{% set code %}
+{% for value in [25, 50, 75, 100] %}
+<div class="docs-box w-{{ value }} mb-2">.w-{{ value }}</div>
+{% endfor %}
+<div class="docs-box w-auto d-inline-block">.w-auto</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="hauteur">
+    <h2>Hauteur</h2>
+    <p><code>.h-25</code>, <code>.h-50</code>, <code>.h-75</code>, <code>.h-100</code> et <code>.h-auto</code>. Le pourcentage ne s'applique que si le parent a lui-même une hauteur définie.</p>
+{% set code %}
+<div class="docs-frame d-flex gap-2 p-2">
+{% for value in [25, 50, 75, 100] %}
+  <div class="docs-box h-{{ value }} flex-fill">.h-{{ value }}</div>
+{% endfor %}
+  <div class="docs-box h-auto align-self-start flex-fill">.h-auto</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="max">
+    <h2>Taille maximale</h2>
+    <p><code>.mw-100</code> et <code>.mh-100</code> empêchent un élément de dépasser de son parent.</p>
+{% set code %}
+<div class="docs-frame p-2 d-flex">
+  <div class="docs-box mh-100 w-100 overflow-auto" tabindex="0">
+    <p>.mh-100 : la hauteur s'arrête à celle du parent et le contenu défile.</p>
+    <p>Deuxième paragraphe.</p>
+    <p>Troisième paragraphe.</p>
+    <p class="mb-0">Quatrième paragraphe.</p>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="position">
+    <h2>Position</h2>
+    <p>
+      <code>.position-static</code>, <code>.position-relative</code>, <code>.position-absolute</code>,
+      <code>.position-fixed</code> et <code>.position-sticky</code>.
+    </p>
+  </section>
+
+  <section class="docs-section" id="decalages">
+    <h2>Décalages</h2>
+    <p>
+      <code>.top-*</code>, <code>.bottom-*</code>, <code>.start-*</code> et <code>.end-*</code>, avec 0, 50 ou 100 %.
+      Il n'existe pas d'utilitaire de translation : <code>.top-50 .start-50</code> place le coin de l'élément au centre,
+      pas son milieu.
+    </p>
+{% set code %}
+<div class="docs-frame position-relative">
+  <span class="badge badge-solid-primary position-absolute top-0 start-0">.top-0 .start-0</span>
+  <span class="badge badge-solid-primary position-absolute top-0 end-0">.top-0 .end-0</span>
+  <span class="badge badge-solid-primary position-absolute top-50 start-50">.top-50 .start-50</span>
+  <span class="badge badge-solid-primary position-absolute bottom-0 start-0">.bottom-0 .start-0</span>
+  <span class="badge badge-solid-primary position-absolute bottom-0 end-0">.bottom-0 .end-0</span>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.w-{25|50|75|100|auto}', 'inline-size'],
+        ['.h-{25|50|75|100|auto}', 'block-size'],
+        ['.mw-100, .mh-100', 'max-inline-size, max-block-size'],
+        ['.position-{static|relative|absolute|fixed|sticky}', 'position'],
+        ['.top-{0|50|100}, .bottom-{0|50|100}', 'inset-block-start, inset-block-end'],
+        ['.start-{0|50|100}, .end-{0|50|100}', 'inset-inline-start, inset-inline-end'],
+      ],
+    } only %}
+  </section>
+</div>

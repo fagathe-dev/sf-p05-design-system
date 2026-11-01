@@ -4,123 +4,66 @@ namespace App\Controller;
 
 use App\Service\ComponentDocumentationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Twig\Environment;
 
 #[Route('/ui/docs', name: 'component_docs_')]
 class ComponentDocumentationController extends AbstractController
 {
     public function __construct(
-        private readonly Environment $twig,
         private readonly ComponentDocumentationService $service,
     ) {
     }
 
     /**
-     * Scanne dynamiquement les dossiers et retourne la structure complète
-     */
-    private function getDocumentationStructure(): array
-    {
-        $baseDir = $this->getParameter('kernel.project_dir') . '/templates/docs';
-        $documentation = [];
-
-        if (is_dir($baseDir)) {
-            $iterator = new \DirectoryIterator($baseDir);
-            foreach ($iterator as $folder) {
-                if ($folder->isDir() && !$folder->isDot()) {
-                    $type = $folder->getFilename();
-                    $documentation[$type] = [];
-
-                    $files = scandir($folder->getPathname());
-                    foreach ($files as $file) {
-                        if (preg_match('/^_([a-zA-Z0-9_-]+)\.html\.twig$/', $file, $matches)) {
-                            $componentName = $matches[1];
-                            $documentation[$type][] = [
-                                'name' => $componentName,
-                                'title' => ucwords(str_replace(['_', '-'], ' ', $componentName)),
-                                'url' => $this->generateUrl('component_docs_show', [
-                                    'type' => $type,
-                                    'component' => $componentName
-                                ])
-                            ];
-                        }
-                    }
-
-                    if (empty($documentation[$type])) {
-                        unset($documentation[$type]);
-                    }
-                }
-            }
-        }
-
-        ksort($documentation);
-        return $documentation;
-    }
-
-    /**
-     * NIVEAU 1 : Liste toutes les catégories de composants (ex: forms, grid, components)
+     * L'entrée de la documentation est sa première page
      */
     #[Route('', name: 'index', methods: ['GET'])]
-    public function index(): Response
+    public function index(): RedirectResponse
     {
-        $documentation = $this->getDocumentationStructure();
+        $navigation = $this->service->getNavigation();
+        $firstCategory = reset($navigation);
 
-        return $this->render('docs/index.html.twig', [
-            'documentation' => $documentation,
-            'page_title' => 'Base UI - Documentation'
-        ]);
+        if (!$firstCategory) {
+            throw $this->createNotFoundException('Aucune page de documentation.');
+        }
+
+        return $this->redirect($firstCategory['pages'][0]['url']);
     }
 
     /**
-     * NIVEAU 2 : Liste les composants appartenant à un type/catégorie spécifique
+     * Une catégorie n'a pas de page propre : on ouvre sa première page
      */
     #[Route('/{type}', name: 'category', methods: ['GET'])]
-    public function category(string $type): Response
+    public function category(string $type): RedirectResponse
     {
-        $documentation = $this->getDocumentationStructure();
+        $category = $this->service->getNavigation()[$type] ?? null;
 
-        if (!isset($documentation[$type])) {
+        if (!$category) {
             throw $this->createNotFoundException("Catégorie de composants '{$type}' introuvable.");
         }
 
-        return $this->render('docs/category.html.twig', [
-            'type' => $type,
-            'components' => $documentation[$type],
-            'page_title' => 'Composants - ' . ucfirst($type)
-        ]);
+        return $this->redirect($category['pages'][0]['url']);
     }
 
     /**
-     * NIVEAU 3 : Affiche la démonstration d'un composant spécifique
+     * Affiche une page de documentation
      */
     #[Route('/{type}/{component}', name: 'show', methods: ['GET'])]
     public function show(string $type, string $component): Response
     {
-        $componentTemplate = "docs/{$type}/_{$component}.html.twig";
+        $entry = $this->service->findPage($type, $component);
 
-        try {
-            $this->twig->getLoader()->getSourceContext($componentTemplate);
-        } catch (\Twig\Error\LoaderError $e) {
-            return $this->render('docs/show.html.twig', [
-                'error' => true,
-                'type' => $type,
-                'component_name' => $component,
-                'component_title' => ucwords(str_replace(['_', '-'], ' ', $component)),
-                'page_title' => 'Composant non trouvé'
-            ]);
+        if (!$entry) {
+            throw $this->createNotFoundException("Page de documentation '{$type}/{$component}' introuvable.");
         }
 
-        $data = $this->service->getData($component);
-
         return $this->render('docs/show.html.twig', [
-            'error' => false,
-            'type' => $type,
-            'component_name' => $component,
-            'component_title' => ucwords(str_replace(['_', '-'], ' ', $component)),
-            'component_template' => $componentTemplate,
-            'page_title' => 'Démo - ' . ucfirst($component),
-            ...$data
+            ...$entry,
+            'component_template' => "docs/{$type}/_{$component}.html.twig",
+            'page_title' => $entry['page']['title'],
+            ...$this->service->getData($component),
         ]);
     }
 }

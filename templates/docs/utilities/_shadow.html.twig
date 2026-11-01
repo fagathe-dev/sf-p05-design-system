@@ -1,0 +1,48 @@
+{# Docs : Shadow — source : assets/scss/utilities/_shadow.scss #}
+{% set tile = 'd-flex align-items-center justify-content-center p-6 small bg-surface-container-low rounded-md' %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Ombres pour les éléments flottants. Les cartes ont déjà une ombre douce ; ailleurs, un élément dans le flux de la page
+    se détache par sa surface (<code>.bg-surface-container-*</code>), pas par une ombre.
+  </p>
+
+  <section class="docs-section" id="tailles">
+    <h2>Tailles</h2>
+    <p><code>.shadow</code> est un alias de <code>.shadow-md</code>, et <code>.shadow-elevated</code> de <code>.shadow-lg</code>.</p>
+{% set code %}
+<div class="grid grid-cols-2 grid-cols-xl-4 gap-6">
+  <div class="{{ tile }} shadow-none">.shadow-none</div>
+  <div class="{{ tile }} shadow-sm">.shadow-sm</div>
+  <div class="{{ tile }} shadow-md">.shadow-md</div>
+  <div class="{{ tile }} shadow-lg">.shadow-lg</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="inset">
+    <h2>Ombre interne</h2>
+    <p><code>.shadow-inset</code> creuse l'élément, et <code>.shadow-inset-hover</code> n'applique l'effet qu'au survol.</p>
+{% set code %}
+<div class="grid grid-cols-2 gap-6">
+  <div class="{{ tile }} shadow-inset">.shadow-inset</div>
+  <div class="{{ tile }} shadow-inset-hover">.shadow-inset-hover</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.shadow-none', 'Aucune ombre'],
+        ['.shadow-sm', '<code>--ds-shadow-sm</code>'],
+        ['.shadow, .shadow-md', '<code>--ds-shadow-md</code>'],
+        ['.shadow-lg, .shadow-elevated', '<code>--ds-shadow-lg</code>'],
+        ['.shadow-inset, .shadow-inset-hover', '<code>--ds-shadow-inset</code> (au survol pour la seconde)'],
+      ],
+    } only %}
+  </section>
+</div>

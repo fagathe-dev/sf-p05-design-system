@@ -14,7 +14,7 @@
   </p>
 
   <section class="docs-section" id="titres">
-    <h3>Titres</h3>
+    <h2>Titres</h2>
     <p>Les balises <code>h1</code> à <code>h6</code> suivent l'échelle : display sm, headline lg/md/sm, title lg/md.</p>
 {% set code %}
 <h1>h1. Titre de niveau 1</h1>
@@ -26,7 +26,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code } only %}
 
-    <h4>Classes de titre</h4>
+    <h3>Classes de titre</h3>
     <p><code>.h1</code> à <code>.h6</code> appliquent le style d'un titre sans changer la structure du document.</p>
 {% set code %}
 <p class="h3">Paragraphe au style h3</p>
@@ -36,7 +36,7 @@
   </section>
 
   <section class="docs-section" id="display">
-    <h3>Display</h3>
+    <h2>Display</h2>
     <p>Titres fluides (<code>clamp()</code>) pour les bannières : <code>.display-1</code> à <code>.display-6</code>, par paires sur les tailles lg, md et sm.</p>
 {% set code %}
 <p class="display-1">Display 1</p>
@@ -47,7 +47,7 @@
   </section>
 
   <section class="docs-section" id="roles">
-    <h3>Rôles typographiques</h3>
+    <h2>Rôles typographiques</h2>
     <p>
       Chaque rôle existe en <code>lg</code>, <code>md</code> et <code>sm</code> via <code>.text-{rôle}-{taille}</code>
       (taille, graisse, interlignage et approche). Dans le SCSS, utilisez le mixin <code>@include type(rôle, taille)</code>.
@@ -63,7 +63,7 @@
   </section>
 
   <section class="docs-section" id="chapo">
-    <h3>Chapô</h3>
+    <h2>Chapô</h2>
 {% set code %}
 <p class="lead">Un paragraphe d'introduction, plus grand que le texte courant, en graisse régulière.</p>
 {% endset %}
@@ -71,7 +71,7 @@
   </section>
 
   <section class="docs-section" id="inline">
-    <h3>Éléments de texte</h3>
+    <h2>Éléments de texte</h2>
 {% set code %}
 <p>Vous pouvez <mark>surligner</mark> un passage.</p>
 <p><del>Ce texte est supprimé.</del> <ins>Celui-ci est ajouté.</ins></p>
@@ -84,7 +84,7 @@
   </section>
 
   <section class="docs-section" id="citations">
-    <h3>Citations</h3>
+    <h2>Citations</h2>
     <p><code>.blockquote</code> est limitée à la largeur de lecture ; la source va dans <code>.blockquote-footer</code>.</p>
 {% set code %}
 <figure>
@@ -98,7 +98,7 @@
   </section>
 
   <section class="docs-section" id="listes">
-    <h3>Listes</h3>
+    <h2>Listes</h2>
     <p><code>.list-unstyled</code> retire les puces ; <code>.list-inline</code> met les items en ligne.</p>
 {% set code %}
 <ul class="list-unstyled">
@@ -113,7 +113,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code } only %}
 
-    <h4>Liste de définitions horizontale</h4>
+    <h3>Liste de définitions horizontale</h3>
     <p>À partir du breakpoint <code>sm</code>, <code>.dl-horizontal</code> aligne les termes à gauche de leur définition.</p>
 {% set code %}
 <dl class="dl-horizontal">
@@ -127,7 +127,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.h1 … .h6', 'Style de titre'],

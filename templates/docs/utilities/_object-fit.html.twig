@@ -1,0 +1,47 @@
+{# Docs : Object Fit — source : assets/scss/utilities/_object-fit.scss #}
+{% set image = asset('images/auth-cover.png') %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Manière dont une image ou une vidéo remplit son cadre lorsque leurs proportions diffèrent.
+  </p>
+
+  <section class="docs-section" id="valeurs">
+    <h2>Valeurs</h2>
+    <p>L'image a besoin d'une taille fixée : ici, <code>.w-100 .h-100</code> dans un cadre de hauteur définie.</p>
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-2 grid-cols-xl-3">
+{% for value in ['contain', 'cover', 'fill', 'scale', 'none'] %}
+  <div>
+    <div class="docs-frame">
+      <img src="{{ image }}" class="object-fit-{{ value }} w-100 h-100" alt="">
+    </div>
+    <code>.object-fit-{{ value }}</code>
+  </div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Classe', 'Valeur CSS', 'Effet'],
+      rows: [
+        ['.object-fit-contain', '<code>contain</code>', 'Image entière, avec des marges si besoin'],
+        ['.object-fit-cover', '<code>cover</code>', 'Remplit le cadre, quitte à recadrer l\'image'],
+        ['.object-fit-fill', '<code>fill</code>', 'Remplit le cadre, quitte à déformer l\'image'],
+        ['.object-fit-scale', '<code>scale-down</code>', 'Comme contain, sans jamais agrandir'],
+        ['.object-fit-none', '<code>none</code>', 'Taille d\'origine, recadrée par le cadre'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="responsive">
+    <h2>Responsive</h2>
+    <p><code>.object-fit-{bp}-{valeur}</code> s'applique à partir du point de rupture.</p>
+{% set code %}
+<div class="docs-frame">
+  <img src="{{ image }}" class="object-fit-contain object-fit-md-cover w-100 h-100" alt="">
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+</div>

@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
     <p>Les liens réutilisent <code>.nav</code> : <code>.footer-links</code> adapte leurs couleurs.</p>
 {% set code %}
 <footer class="footer">
@@ -32,7 +32,7 @@
   </section>
 
   <section class="docs-section" id="themes">
-    <h3>Thèmes</h3>
+    <h2>Thèmes</h2>
     <p><code>.footer-{rôle}</code> passe le pied de page sur le conteneur d'un rôle de marque (primary, secondary, tertiary).</p>
 {% set code %}
 {% for role in ['primary', 'secondary', 'tertiary'] %}
@@ -53,7 +53,7 @@
   </section>
 
   <section class="docs-section" id="layout">
-    <h3>Dans le layout</h3>
+    <h2>Dans le layout</h2>
     <p>
       Dans <code>.layout-app</code>, le contenu principal s'étire et repousse le footer en bas de page,
       même quand la page est courte.
@@ -69,7 +69,7 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
@@ -82,7 +82,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.footer', 'Pied de page'],

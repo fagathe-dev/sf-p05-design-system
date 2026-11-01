@@ -3,13 +3,13 @@
 
 <div class="component-demo">
   <p class="docs-lead">
-    Boutons d'action en forme de pilule, déclinés en quatre variantes (solid, soft, outline, ghost)
+    Boutons d'action aux coins arrondis, déclinés en quatre variantes (solid, soft, outline, ghost)
     pour chacun des sept rôles de couleur, en trois tailles. Le survol et l'appui utilisent un calque
-    d'état, et le bouton change de forme au clic.
+    d'état.
   </p>
 
   <section class="docs-section" id="solid">
-    <h3>Solid</h3>
+    <h2>Solid</h2>
     <p>
       Variante par défaut, pour l'action principale d'une zone. <code>.btn-{rôle}</code> et
       <code>.btn-solid-{rôle}</code> sont équivalentes. Un <code>.btn</code> sans variante prend le rôle primary.
@@ -23,7 +23,7 @@
   </section>
 
   <section class="docs-section" id="soft">
-    <h3>Soft</h3>
+    <h2>Soft</h2>
     <p>Fond conteneur du rôle, pour les actions secondaires qui doivent rester visibles.</p>
 {% set code %}
 {% for role in roles %}
@@ -34,7 +34,7 @@
   </section>
 
   <section class="docs-section" id="outline">
-    <h3>Outline</h3>
+    <h2>Outline</h2>
     <p>Bordure fonctionnelle (contraste 3:1) et texte de la couleur du rôle, sur fond transparent.</p>
 {% set code %}
 {% for role in roles %}
@@ -45,7 +45,7 @@
   </section>
 
   <section class="docs-section" id="ghost">
-    <h3>Ghost</h3>
+    <h2>Ghost</h2>
     <p>Sans fond ni bordure : pour les actions tertiaires, les barres d'outils et les tableaux.</p>
 {% set code %}
 {% for role in roles %}
@@ -56,7 +56,7 @@
   </section>
 
   <section class="docs-section" id="balises">
-    <h3>Balises</h3>
+    <h2>Balises</h2>
     <p>
       <code>.btn</code> s'applique aux <code>&lt;button&gt;</code>, aux liens <code>&lt;a&gt;</code> et aux
       <code>&lt;input&gt;</code> de type bouton. Un lien qui déclenche une action dans la page doit porter
@@ -72,7 +72,7 @@
   </section>
 
   <section class="docs-section" id="tailles">
-    <h3>Tailles</h3>
+    <h2>Tailles</h2>
     <p>
       Les hauteurs suivent les tokens de contrôle : 32px (<code>.btn-sm</code>), 40px (par défaut) et 48px
       (<code>.btn-lg</code>). La zone cliquable de <code>.btn-sm</code> est étendue à 44px.
@@ -85,8 +85,19 @@
     {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
   </section>
 
+  <section class="docs-section" id="pilule">
+    <h2>Pilule</h2>
+    <p><code>.btn-pill</code> arrondit complètement le bouton, pour un appel à l'action qui doit ressortir.</p>
+{% set code %}
+<button type="button" class="btn btn-primary btn-pill">Primary</button>
+<button type="button" class="btn btn-soft-primary btn-pill">Soft</button>
+<button type="button" class="btn btn-outline-primary btn-pill">Outline</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
   <section class="docs-section" id="icones">
-    <h3>Avec icône</h3>
+    <h2>Avec icône</h2>
     <p>L'icône se place avant ou après le libellé : l'espacement est géré par <code>gap</code>.</p>
 {% set code %}
 <button type="button" class="btn btn-primary"><i class="ri-add-line"></i> Ajouter</button>
@@ -95,7 +106,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
 
-    <h4>Bouton icône</h4>
+    <h3>Bouton icône</h3>
     <p>
       <code>.btn-icon</code> rend le bouton carré, dans les trois tailles. Sans texte visible, un
       <code>aria-label</code> est obligatoire.
@@ -110,7 +121,7 @@
   </section>
 
   <section class="docs-section" id="desactive">
-    <h3>Désactivé</h3>
+    <h2>Désactivé</h2>
     <p>
       Attribut <code>disabled</code> sur un <code>&lt;button&gt;</code>. Un lien ne peut pas être désactivé :
       ajoutez <code>.disabled</code>, <code>aria-disabled="true"</code> et <code>tabindex="-1"</code>.
@@ -125,7 +136,7 @@
   </section>
 
   <section class="docs-section" id="largeur">
-    <h3>Pleine largeur</h3>
+    <h2>Pleine largeur</h2>
     <p>Combinez avec l'utilitaire <code>.w-100</code>, par exemple dans un formulaire ou sur mobile.</p>
 {% set code %}
 <button type="button" class="btn btn-primary w-100">Continuer</button>
@@ -135,7 +146,7 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     <p>
       Les variantes ne font que redéfinir les Component Tokens du bouton. Pour un cas particulier,
       surchargez-les avec des System Tokens plutôt que de réécrire des propriétés CSS.
@@ -152,7 +163,8 @@
         ['--btn-bg', '<code>--ds-color-primary</code>', 'Fond'],
         ['--btn-color', '<code>--ds-color-on-primary</code>', 'Texte et icône'],
         ['--btn-border-color', '<code>transparent</code>', 'Bordure'],
-        ['--btn-radius', '<code>--ds-radius-full</code>', 'Rayon (pilule)'],
+        ['--btn-radius', '<code>--ds-radius-md</code> (<code>--ds-radius-sm</code> pour <code>.btn-sm</code>)', 'Rayon'],
+        ['--btn-shadow', '<code>--ds-shadow-xs</code> (aucune pour ghost)', 'Ombre'],
         ['--btn-height', '<code>--ds-control-height-md</code>', 'Hauteur'],
         ['--btn-px', '<code>--ds-space-5</code>', 'Padding horizontal'],
         ['--btn-gap', '<code>--ds-space-2</code>', 'Espace entre icône et libellé'],
@@ -162,7 +174,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.btn', 'Classe de base (rôle primary par défaut)'],
@@ -172,7 +184,7 @@
         ['.btn-ghost-{rôle}', 'Variante sans fond'],
         ['.btn-sm, .btn-lg', 'Tailles 32px et 48px'],
         ['.btn-icon', 'Bouton carré pour une icône seule'],
-        ['.btn-pill', 'Conservée pour compatibilité (les boutons sont en pilule par défaut)'],
+        ['.btn-pill', 'Forme pilule'],
         ['.disabled', 'État désactivé pour les liens'],
       ],
     } only %}

@@ -9,21 +9,23 @@
 
 .accordion {
   // 1. Component Tokens
-  --accordion-bg: var(--ds-surface-container);
+  --accordion-bg: var(--ds-surface);
   --accordion-color: var(--ds-color-on-surface);
   --accordion-divider-color: var(--ds-color-outline-variant);
-  --accordion-px: var(--ds-space-6);
-  --accordion-py: var(--ds-space-5);
+  --accordion-px: var(--ds-space-5);
+  --accordion-py: var(--ds-space-4);
 
   // 2. Box Model
   display: flex;
   flex-direction: column;
   overflow: hidden; // Garde les enfants dans l'arrondi
-  border-radius: var(--ds-radius-lg);
+  border: var(--ds-border-width) solid var(--accordion-divider-color);
+  border-radius: var(--ds-radius-md);
 
   // 3. Couleurs
   background-color: var(--accordion-bg);
   color: var(--accordion-color);
+  box-shadow: var(--ds-shadow-xs);
 }
 
 .accordion-item + .accordion-item {
@@ -42,7 +44,8 @@
   background-color: transparent;
   color: var(--accordion-color);
   text-align: start;
-  @include type(title, md);
+  @include type(label, lg);
+  font-weight: var(--ds-font-weight-medium);
   cursor: pointer;
   transition: effects(background-color);
 
@@ -87,5 +90,5 @@
   padding-block: 0 var(--accordion-py);
   padding-inline: var(--accordion-px);
   color: var(--ds-color-on-surface-variant);
-  @include type(body, lg);
+  @include type(body, md);
 }

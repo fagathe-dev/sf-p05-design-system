@@ -22,8 +22,10 @@
   inline-size: 100%;
   max-inline-size: var(--ds-size-auth-card);
   overflow: hidden;
-  border-radius: var(--ds-radius-xl);
-  background-color: var(--ds-surface-container);
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-radius: var(--ds-radius-md);
+  background-color: var(--ds-surface);
+  box-shadow: var(--ds-shadow-sm);
 }
 
 .auth-header {
@@ -38,7 +40,7 @@
   display: inline-flex;
   gap: var(--ds-space-1);
   padding: var(--ds-space-1);
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-md);
   background-color: var(--ds-surface-container-highest);
 }
 
@@ -50,7 +52,7 @@
   align-items: center;
   min-block-size: var(--ds-control-height-sm);
   padding-inline: var(--ds-space-4);
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-sm);
   background-color: var(--auth-tab-bg);
   color: var(--auth-tab-color);
   text-decoration: none;

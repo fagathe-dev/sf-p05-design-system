@@ -1,110 +1,100 @@
+{# Docs : Installation — scripts/compile-*.js, templates/base.html.twig #}
+{% set host = app.request.schemeAndHttpHost %}
+
 <div class="component-demo">
-  <h3>🚀 Getting Started</h3>
-  <p class="text-muted mb-4">
-    Découvrez comment intégrer facilement le Design System dans vos projets via nos liens CDN.
+  <p class="docs-lead">
+    Ajoutez Base UI à une page en incluant ses fichiers compilés, ou intégrez ses sources à votre projet
+    Symfony pour le personnaliser.
   </p>
 
-  {# --- SECTION 1 : CDN LINKS --- #}
-  <div class="row g-4 mb-5">
-    {# CDN CSS #}
-    <div class="col-12">
-      <div class="box box-secondary h-100 mb-0 d-flex flex-column justify-content-between">
-        <div>
-          <h5 class="mb-2"><i class="ri-css3-line text-primary"></i> 1. UI Kit CSS</h5>
-          <p class="small text-muted">Contient l'ensemble des composants, thèmes, variables CSS et utilitaires.</p>
-          <code class="d-block p-2 bg-surface-hover border rounded text-break mb-3" id="cdn-css-text">
-            &lt;link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/css/ds-ui-kit.css"&gt;
-          </code>
-        </div>
-        <button class="btn btn-primary btn-sm w-100" data-copy-target="cdn-css-text">
-          <i class="ri-clipboard-line"></i> Copier le CSS CDN
-        </button>
-      </div>
-    </div>
+  <section class="docs-section" id="liens">
+    <h2>Fichiers compilés</h2>
+    <p>Trois balises suffisent pour utiliser tous les composants, les utilitaires et leurs interactions.</p>
 
-    {# CDN ICONS #}
-    <div class="col-12">
-      <div class="box box-secondary h-100 mb-0 d-flex flex-column justify-content-between">
-        <div>
-          <h5 class="mb-2"><i class="ri-remixicon-line text-primary"></i> 2. Icônes</h5>
-          <p class="small text-muted">Charge la bibliothèque d'icônes requise pour les composants du Design System.</p>
-          <code class="d-block p-2 bg-surface-hover border rounded text-break mb-3" id="cdn-icons-text">
-            &lt;link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/assets/ds-icons.css"&gt;
-          </code>
-        </div>
-        <button class="btn btn-primary btn-sm w-100" data-copy-target="cdn-icons-text">
-          <i class="ri-clipboard-line"></i> Copier les Icônes CDN
-        </button>
-      </div>
-    </div>
+    <h3>Styles du design system</h3>
+    <p>Composants, thèmes, variables CSS et utilitaires.</p>
+{% set code %}
+<link rel="stylesheet" href="{{ host }}/css/ds-ui-kit.css">
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html' } only %}
 
-    {# CDN JS #}
-    <div class="col-12">
-      <div class="box box-secondary h-100 mb-0 d-flex flex-column justify-content-between">
-        <div>
-          <h5 class="mb-2"><i class="ri-javascript-line text-primary"></i> 3. JavaScript</h5>
-          <p class="small text-muted">Inclus la logique d'interaction (dropdowns, modales, toasts, etc.).</p>
-          <code class="d-block p-2 bg-surface-hover border rounded text-break mb-3" id="cdn-js-text">
-            &lt;script src="{{ app.request.schemeAndHttpHost }}/js/main.js" defer&gt;&lt;/script&gt;
-          </code>
-        </div>
-        <button class="btn btn-primary btn-sm w-100" data-copy-target="cdn-js-text">
-          <i class="ri-clipboard-line"></i> Copier le JS CDN
-        </button>
-      </div>
-    </div>
-  </div>
+    <h3>Icônes</h3>
+    <p>La bibliothèque d'icônes utilisée par les composants (Remix Icon, MDI, Boxicons, Line Awesome).</p>
+{% set code %}
+<link rel="stylesheet" href="{{ host }}/assets/ds-icons.css">
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html' } only %}
 
-  {# --- SECTION 2 : STARTER TEMPLATE --- #}
-  <div class="mt-5">
-    <h5 class="mb-3">📄 Template Starter HTML</h5>
-    <p class="text-muted mb-3">
-      Copiez-collez ce squelette HTML basique dans un fichier <code>index.html</code> pour démarrer immédiatement votre projet avec le Design System préconfiguré.
+    <h3>JavaScript</h3>
+    <p>Les interactions : menus déroulants, modales, repli, sélecteur de thème… Le fichier est un module ES.</p>
+{% set code %}
+<script type="module" src="{{ host }}/js/main.js"></script>
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html' } only %}
+  </section>
+
+  <section class="docs-section" id="template">
+    <h2>Page de départ</h2>
+    <p>
+      Copiez ce squelette dans un fichier <code>index.html</code>. Le script en tête de page applique le thème
+      mémorisé avant le premier rendu : il évite un flash clair avant le passage en sombre.
     </p>
-
-    {% set starterCode %}
+{% set code %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Base UI Starter</title>
+  <title>Base UI</title>
 
-  <!-- 1. Bibliothèque d'icônes -->
-  <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/assets/ds-icons.css">
+  <script>
+    (function () {
+      var mode = 'auto';
+      try { mode = localStorage.getItem('ds-theme') || 'auto'; } catch (e) {}
+      var dark = mode === 'dark' || (mode !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-ui-theme', dark ? 'dark' : 'light');
+    })();
+  </script>
 
-  <!-- 2. Styles du Design System -->
-  <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost }}/css/ds-ui-kit.css">
-
-  <!-- 3. Scripts JavaScript du Design System -->
-  <script src="{{ app.request.schemeAndHttpHost }}/js/main.js" defer></script>
+  <link rel="stylesheet" href="{{ host }}/assets/ds-icons.css">
+  <link rel="stylesheet" href="{{ host }}/css/ds-ui-kit.css">
+  <script type="module" src="{{ host }}/js/main.js"></script>
 </head>
-<body class="p-4">
-
-  <main class="container">
-    <div class="box box-primary text-center my-5">
-      <h1 class="display-5 fw-bold mb-3">Hello, Design System! 🚀</h1>
-      <p class="lead mb-4">Votre environnement est correctement configuré et prêt à l'emploi.</p>
-      
-      <div class="d-flex justify-content-center gap-2">
-        <button class="btn btn-primary">
-          <i class="ri-check-line"></i> Bouton Principal
-        </button>
-        <button class="btn btn-outline-primary">
-          En savoir plus
-        </button>
-      </div>
-    </div>
+<body>
+  <main class="container py-8">
+    <h1>Bonjour !</h1>
+    <p class="lead">Votre page utilise Base UI.</p>
+    <button type="button" class="btn btn-primary"><i class="ri-check-line"></i> Commencer</button>
   </main>
-
 </body>
 </html>
-    {% endset %}
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'html', title: 'index.html' } only %}
+    <p>
+      Pour une page complète (navbar, tableau de bord, authentification), partez d'un
+      <a href="{{ path('component_docs_show', {type: 'getting-started', component: 'starter-packs'}) }}">starter pack</a>.
+    </p>
+  </section>
 
-    {% include 'fragments/components/_code-block.html.twig' with {
-      'code': starterCode,
-      'language': 'html',
-      'title': 'index.html - Starter Kit'
-    } %}
-  </div>
+  <section class="docs-section" id="sources">
+    <h2>Depuis les sources</h2>
+    <p>
+      Pour personnaliser le design system dans un projet Symfony, copiez <code>assets/scss</code>,
+      <code>assets/ts</code> et <code>scripts/compile-*.js</code>, puis compilez-les vers <code>public/</code>.
+    </p>
+{% set code %}
+npm install
+npm run dev     # compile et surveille les fichiers
+npm run build   # compile pour la production
+{% endset %}
+    {% include 'fragments/components/_code-block.html.twig' with { code: code, language: 'bash' } only %}
+  </section>
+
+  <section class="docs-section" id="agents">
+    <h2>Pour les agents IA</h2>
+    <p>
+      Le guide <code>docs/design-system-agent-guide.md</code> décrit l'intégration complète dans un projet
+      Symfony : fichiers à copier, layouts Twig, classes, comportements JavaScript et formulaires.
+    </p>
+  </section>
 </div>

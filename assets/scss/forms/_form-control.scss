@@ -17,14 +17,15 @@
 .form-control,
 .form-select {
   // 1. Component Tokens
-  --input-bg: transparent;
+  --input-bg: var(--ds-surface-container-low);
   --input-color: var(--ds-color-on-surface);
   --input-border-color: var(--ds-color-outline);
   --input-radius: var(--ds-radius-md);
   --input-height: var(--ds-control-height-md);
-  --input-px: var(--ds-space-4);
+  --input-px: var(--ds-space-3);
   --input-py: var(--ds-space-2);
-  --input-font-size: var(--ds-text-body-lg);
+  --input-font-size: var(--ds-text-body-md);
+  --input-shadow: var(--ds-shadow-xs);
 
   // 2. Box Model
   display: block;
@@ -40,6 +41,7 @@
   // 3. Typographie & Couleurs
   background-color: var(--input-bg);
   color: var(--input-color);
+  box-shadow: var(--input-shadow);
   font-family: inherit;
   font-size: var(--input-font-size);
   font-weight: var(--ds-font-weight-regular);
@@ -70,6 +72,7 @@
     --input-bg: #{disabled-container()};
     --input-color: #{disabled-content()};
     --input-border-color: #{disabled-content()};
+    --input-shadow: none;
 
     cursor: not-allowed;
   }
@@ -97,7 +100,7 @@ textarea.form-control {
   --input-height: var(--ds-control-height-lg);
   --input-px: var(--ds-space-5);
   --input-py: var(--ds-space-3);
-  --input-radius: var(--ds-radius-lg);
+  --input-font-size: var(--ds-text-body-lg);
 }
 
 // --------------------------------------------------------------------------

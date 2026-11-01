@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
     <p>
       Le bouton porte <code>data-ds-toggle="accordion"</code> et cible son panneau avec
       <code>data-ds-target</code>. Le JS bascule <code>.show</code> sur le panneau et
@@ -48,7 +48,7 @@
   </section>
 
   <section class="docs-section" id="anime">
-    <h3>Ouverture animée</h3>
+    <h2>Ouverture animée</h2>
     <p>
       Avec <code>data-ds-toggle="collapse"</code> et des panneaux <code>.collapse</code> (sans
       <code>.accordion-collapse</code>), les sections s'ouvrent et se ferment en glissant. Le regroupement
@@ -80,7 +80,7 @@
   </section>
 
   <section class="docs-section" id="contenu">
-    <h3>Contenu riche</h3>
+    <h2>Contenu riche</h2>
     <p>Le corps accepte n'importe quel contenu : texte, listes, boutons.</p>
 {% set code %}
 <div class="accordion">
@@ -105,7 +105,7 @@
   </section>
 
   <section class="docs-section" id="accessibilite">
-    <h3>Accessibilité</h3>
+    <h2>Accessibilité</h2>
     <ul>
       <li>Utilisez un <code>&lt;button type="button"&gt;</code> comme déclencheur.</li>
       <li>Initialisez <code>aria-expanded</code> selon l'état du panneau et reliez-le avec <code>aria-controls</code>.</li>
@@ -114,21 +114,21 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
-        ['--accordion-bg', '<code>--ds-surface-container</code>', 'Fond du conteneur'],
+        ['--accordion-bg', '<code>--ds-surface</code>', 'Fond du conteneur'],
         ['--accordion-color', '<code>--ds-color-on-surface</code>', 'Texte des boutons'],
         ['--accordion-divider-color', '<code>--ds-color-outline-variant</code>', 'Séparateur entre items'],
-        ['--accordion-px', '<code>--ds-space-6</code>', 'Padding horizontal'],
-        ['--accordion-py', '<code>--ds-space-5</code>', 'Padding vertical'],
+        ['--accordion-px', '<code>--ds-space-5</code>', 'Padding horizontal'],
+        ['--accordion-py', '<code>--ds-space-4</code>', 'Padding vertical'],
       ],
     } only %}
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.accordion', 'Conteneur'],

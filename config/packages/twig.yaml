@@ -5,6 +5,7 @@ twig:
         logo_path: '%env(LOGO_PATH)%'
         logo_png_path: '%env(LOGO_PNG_PATH)%'
         favicon_path: '%env(FAVICON_PATH)%'
+        docs_site: '@App\Service\ComponentDocumentationService'
 
 
 when@test:

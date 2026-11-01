@@ -1,0 +1,99 @@
+{# Docs : Icons — source : assets/scss/utilities/_icons.scss, polices : public/assets/ds-icons.css #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Quatre polices d'icônes harmonisées : les icônes sont centrées, proportionnelles au texte parent et prennent sa couleur.
+  </p>
+
+  <section class="docs-section" id="bibliotheques">
+    <h2>Bibliothèques</h2>
+    <p>Les quatre sont fournies par <code>assets/ds-icons.css</code>. Remix Icon est celle que les composants du design system utilisent.</p>
+{% set code %}
+<i class="ri-home-line" aria-hidden="true"></i>
+<i class="mdi mdi-home" aria-hidden="true"></i>
+<i class="bx bx-home" aria-hidden="true"></i>
+<i class="las la-home" aria-hidden="true"></i>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Classe', 'Bibliothèque'],
+      rows: [
+        ['ri-{nom}', 'Remix Icon, sans classe de base'],
+        ['mdi mdi-{nom}', 'Material Design Icons'],
+        ['bx bx-{nom}', 'Boxicons'],
+        ['las la-{nom}, lar la-{nom}, lab la-{marque}', 'Line Awesome (plein, normal, marques)'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="tailles">
+    <h2>Tailles</h2>
+    <p>Par défaut, une icône mesure 1,15 fois la taille du texte parent. <code>.icon-{taille}</code> fixe une taille indépendante du texte.</p>
+{% set code %}
+<i class="ri-star-line icon-xs" aria-hidden="true"></i>
+<i class="ri-star-line icon-sm" aria-hidden="true"></i>
+<i class="ri-star-line icon-md" aria-hidden="true"></i>
+<i class="ri-star-line icon-lg" aria-hidden="true"></i>
+<i class="ri-star-line icon-xl" aria-hidden="true"></i>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Classe', 'Taille', 'Token'],
+      rows: [
+        ['.icon-xs', '0.75rem', '<code>--ds-icon-size-xs</code>'],
+        ['.icon-sm', '0.875rem', '<code>--ds-icon-size-sm</code>'],
+        ['.icon-md', '1.25rem', '<code>--ds-icon-size-md</code>'],
+        ['.icon-lg', '1.5rem', '<code>--ds-icon-size-lg</code>'],
+        ['.icon-xl', '2rem', '<code>--ds-icon-size-xl</code>'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="couleurs">
+    <h2>Couleurs</h2>
+    <p>L'icône hérite de la couleur du texte : les classes <code>.text-*</code> s'appliquent directement.</p>
+{% set code %}
+<i class="ri-checkbox-circle-fill icon-lg text-success" aria-hidden="true"></i>
+<i class="ri-alert-fill icon-lg text-warning" aria-hidden="true"></i>
+<i class="ri-close-circle-fill icon-lg text-danger" aria-hidden="true"></i>
+<span class="text-primary"><i class="ri-information-line" aria-hidden="true"></i> Hérite du parent</span>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="animation">
+    <h2>Animation</h2>
+    <p><code>.icon-spin</code> fait tourner l'icône en continu. L'animation s'arrête si l'utilisateur a demandé à réduire les animations.</p>
+{% set code %}
+<i class="ri-loader-4-line icon-spin icon-lg" aria-hidden="true"></i>
+<button type="button" class="btn btn-primary" disabled>
+  <i class="ri-loader-4-line icon-spin" aria-hidden="true"></i> Enregistrement…
+</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
+  </section>
+
+  <section class="docs-section" id="accessibilite">
+    <h2>Accessibilité</h2>
+    <ul>
+      <li>Une icône décorative, à côté d'un texte, porte <code>aria-hidden="true"</code>.</li>
+      <li>Un bouton ou un lien qui n'affiche qu'une icône a besoin d'un nom : <code>aria-label</code> ou texte en <code>.visually-hidden</code>.</li>
+    </ul>
+{% set code %}
+<button type="button" class="btn btn-icon btn-ghost-secondary" aria-label="Paramètres">
+  <i class="ri-settings-3-line" aria-hidden="true"></i>
+</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.icon-{xs|sm|md|lg|xl}', 'Taille'],
+        ['.icon-spin', 'Rotation continue'],
+      ],
+    } only %}
+  </section>
+</div>

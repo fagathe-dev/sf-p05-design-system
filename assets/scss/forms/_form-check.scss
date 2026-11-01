@@ -2,8 +2,6 @@
 // Component: Form Check (forms/_form-check.scss)
 // --------------------------------------------------------------------------
 // Checkbox, radio et interrupteur (input[role="switch"] dans .form-switch).
-// Le calque d'état M3 est un halo autour du contrôle (box-shadow), pas une
-// ombre de profondeur.
 // ==========================================================================
 
 @use '../abstracts' as *;
@@ -23,7 +21,6 @@ $_radio: '.form-check-input[type="radio"]';
   --check-bg: transparent;
   --check-border-color: var(--ds-color-outline);
   --check-mark-color: var(--ds-color-on-primary);
-  --check-halo: transparent;
 
   // 2. Box Model
   position: relative;
@@ -34,29 +31,20 @@ $_radio: '.form-check-input[type="radio"]';
   block-size: var(--check-size);
   margin: 0;
   margin-block-start: 0.125em; // Aligne sur la première ligne du label
-  border: var(--ds-border-width-thick) solid var(--check-border-color);
+  border: var(--ds-border-width) solid var(--check-border-color);
   appearance: none;
 
   // 3. Couleurs
   background-color: var(--check-bg);
-  box-shadow: 0 0 0 var(--ds-space-2) var(--check-halo);
   cursor: pointer;
 
   // 4. Motion
-  transition: effects(background-color, border-color, box-shadow);
+  transition: effects(background-color, border-color);
 
   // 5. États interactifs
-  &:hover:not(:disabled) {
-    --check-halo: #{state-layer(transparent, var(--ds-color-on-surface))};
-  }
-
   &:checked {
     --check-bg: var(--ds-color-primary);
     --check-border-color: var(--ds-color-primary);
-  }
-
-  &:checked:hover:not(:disabled) {
-    --check-halo: #{state-layer(transparent, var(--ds-color-primary))};
   }
 
   &:focus-visible {
@@ -124,18 +112,18 @@ $_radio: '.form-check-input[type="radio"]';
 }
 
 // --------------------------------------------------------------------------
-// Interrupteur M3 : piste 52×32, la pastille grossit quand il est activé
+// Interrupteur : piste 44×24, pastille de 16px
 // --------------------------------------------------------------------------
 .form-switch {
   align-items: center;
 }
 
 .form-switch .form-check-input {
-  --switch-width: calc(var(--ds-space-12) + var(--ds-space-1));
-  --switch-height: var(--ds-space-8);
+  --switch-width: calc(var(--ds-space-10) + var(--ds-space-1));
+  --switch-height: var(--ds-space-6);
   --switch-thumb: var(--ds-space-4);
   --switch-thumb-color: var(--ds-color-outline);
-  --switch-inner: calc(var(--switch-height) - 2 * var(--ds-border-width-thick));
+  --switch-inner: calc(var(--switch-height) - 2 * var(--ds-border-width));
   --switch-offset: calc((var(--switch-inner) - var(--switch-thumb)) / 2);
 
   --check-bg: var(--ds-surface-container-highest);
@@ -160,12 +148,12 @@ $_radio: '.form-check-input[type="radio"]';
   }
 
   &:checked {
-    --switch-thumb: var(--ds-space-6);
+    --check-bg: var(--ds-color-primary);
     --switch-thumb-color: var(--ds-color-on-primary);
   }
 
   &:checked::after {
-    inset-inline-start: calc(var(--switch-width) - 2 * var(--ds-border-width-thick) - var(--switch-thumb) - var(--switch-offset));
+    inset-inline-start: calc(var(--switch-width) - 2 * var(--ds-border-width) - var(--switch-thumb) - var(--switch-offset));
   }
 
   @include reduced-motion {

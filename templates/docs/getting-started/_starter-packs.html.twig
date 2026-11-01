@@ -42,7 +42,7 @@
   </p>
 
   <section class="docs-section" id="utilisation">
-    <h3>Utilisation</h3>
+    <h2>Utilisation</h2>
     <ul>
       <li>Copiez le code d'un starter dans un fichier <code>.html</code> (ou un template Twig) et remplacez les contenus d'exemple.</li>
       <li>Les ressources pointent vers <code>{{ host }}</code> : adaptez ces URLs si vous hébergez les fichiers vous-même.</li>
@@ -52,7 +52,7 @@
 
   {% for starter in starters %}
     <section class="docs-section" id="{{ starter.id }}">
-      <h3>{{ starter.title }}</h3>
+      <h2>{{ starter.title }}</h2>
       <p>{{ starter.description }}</p>
       {% set code %}{% include starter.template with starter.options|merge({ host: host }) only %}{% endset %}
       {% set preview %}<iframe class="docs-iframe" style="block-size: {{ starter.height }};" title="Aperçu : {{ starter.title }}" loading="lazy" srcdoc="{{ code|e('html_attr') }}"></iframe>{% endset %}

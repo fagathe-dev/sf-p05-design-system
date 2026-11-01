@@ -45,7 +45,7 @@
 // --------------------------------------------------------------------------
 .dropdown-menu {
   // 1. Component Tokens
-  --dropdown-bg: var(--ds-surface-container-high);
+  --dropdown-bg: var(--ds-surface);
   --dropdown-color: var(--ds-color-on-surface);
   --dropdown-radius: var(--ds-radius-md);
   --dropdown-padding: var(--ds-space-2);
@@ -66,13 +66,13 @@
   overflow-x: hidden;
   overflow-y: auto;
   list-style: none;
-  border: none;
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
   border-radius: var(--dropdown-radius);
 
   // 3. Couleurs
   background-color: var(--dropdown-bg);
   color: var(--dropdown-color);
-  box-shadow: var(--ds-shadow-md);
+  box-shadow: var(--ds-shadow-lg);
 
   &.show {
     display: block;
@@ -107,13 +107,13 @@
   align-items: center;
   gap: var(--ds-space-3);
   min-block-size: var(--ds-control-height-md);
-  padding-inline: var(--ds-space-4);
+  padding-inline: var(--ds-space-3);
   border-radius: var(--dropdown-item-radius, var(--ds-radius-xs));
 
   // 3. Typographie & Couleurs
   background-color: var(--dropdown-item-bg);
   color: var(--dropdown-item-color);
-  font-size: var(--dropdown-item-font-size, var(--ds-text-body-lg));
+  font-size: var(--dropdown-item-font-size, var(--ds-text-body-md));
   font-weight: var(--dropdown-item-font-weight, var(--ds-font-weight-medium));
   text-decoration: none;
   transition: effects(background-color, color);

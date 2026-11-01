@@ -51,7 +51,7 @@ Séparer strictement les responsabilités : outils sans sortie CSS, fondation, p
 | `components/`, `content/`, `forms/`, `navigation/`, `feedback/` | Composants, chacun avec son `_index.scss` qui fait les `@forward`. |
 | `utilities/` | Classes utilitaires (en `!important`), chargées en dernier. |
 | `ds-ui-kit.scss` | Point d'entrée du design system, compilé vers `public/css/ds-ui-kit.css`. |
-| `ds-docs.scss` | Styles propres à la documentation (`.docs-section`, `.docs-example`, `.docs-box`…), compilé vers `public/css/ds-docs.css` et chargé par `docs/show.html.twig` uniquement. |
+| `ds-docs.scss` | Styles propres au site de documentation (coquille `.docs-layout`, `.docs-sidebar`, `.docs-toc`, page d'accueil `.home-*`, `.docs-section`, `.docs-example`…), compilé vers `public/css/ds-docs.css` et chargé par `docs/base.html.twig` uniquement. |
 
 Tout fichier `assets/scss/ds-*.scss` est un point d'entrée compilé automatiquement (§11).
 
@@ -127,19 +127,19 @@ Interdiction d'utiliser du gris clair sur fond blanc, ou d'abaisser l'opacité d
 
 ## 3. Bordures, formes et rayons (Shape System)
 
-M3 Expressive utilise la diversité des formes et le contraste des rayons pour créer une tension visuelle dynamique.
+Les formes, les bordures et la densité des composants s'inspirent de [Flowbite](https://flowbite.com/docs/getting-started/introduction/) (Tailwind) : un rayon de base unique, des bordures fines, des ombres discrètes et un texte en `body-md`. Les couleurs et les tokens restent ceux du design system. Avant de créer ou de modifier un composant, regarder sa page Flowbite.
 
 ### 3.1 Échelle des rayons
 
 | Token | Valeur | Usage |
 |---|---|---|
 | `--ds-radius-none` | `0px` | — |
-| `--ds-radius-xs` | `0.25rem` (4px) | Petits badges techniques, tooltips. |
-| `--ds-radius-sm` | `0.5rem` (8px) | Inputs compacts, sous-conteneurs internes. |
-| `--ds-radius-md` | `0.75rem` (12px) | Champs de saisie standards, menus déroulants, petites cartes. |
-| `--ds-radius-lg` | `1rem` (16px) | Cartes standards, panneaux de contenu. |
-| `--ds-radius-xl` | `1.5rem` à `1.75rem` (24–28px) | Modales, conteneurs majeurs, cartes Hero. |
-| `--ds-radius-full` | `9999px` | Forme pilule, **obligatoire par défaut** pour les boutons, chips, badges et indicateurs de navigation actifs. |
+| `--ds-radius-xs` | `0.25rem` (4px) | Badges, cases à cocher, items de menu. |
+| `--ds-radius-sm` | `0.5rem` (8px) | Variantes `-sm` (bouton, champ, segmented), chips, liens de navigation, boutons icône internes. |
+| `--ds-radius-md` | `0.75rem` (12px) | **Rayon de base** (`rounded-base` de Flowbite) : boutons, champs, cartes, menus, alertes, toasts, modales, accordéons, tableaux, pagination. |
+| `--ds-radius-lg` | `1rem` (16px) | Hero, jumbotron. |
+| `--ds-radius-xl` | `1.5rem` à `1.75rem` (24–28px) | Conteneurs décoratifs majeurs. |
+| `--ds-radius-full` | `9999px` | Avatars, interrupteurs, et pilules optionnelles : `.btn-pill`, `.badge-pill`, `.chip-pill`. |
 
 ### 3.2 Principes expressifs
 
@@ -148,7 +148,6 @@ M3 Expressive utilise la diversité des formes et le contraste des rayons pour c
   - décorative / séparateur : `1px solid var(--ds-color-outline-variant)` (subtile) ;
   - fonctionnelle (input, bouton outlined) : `1px solid var(--ds-color-outline)` (contraste 3:1).
 - **Rayons imbriqués (concentric radius)** : si un parent a un rayon `R` et un padding `P`, l'enfant proche du bord prend un rayon `r = max(0px, R - P)` pour des courbes harmonieuses.
-- **Shape morphing** : un composant interactif (bouton, chip, carte sélectionnable) peut changer de `border-radius` sur `:active` ou `.is-selected` (par ex. de `--ds-radius-full` à `--ds-radius-md`) pour un retour physique expressif.
 - **Anneau de focus** (`:focus-visible`) : toujours `outline: 2px solid var(--ds-color-primary); outline-offset: 2px;`. Ne jamais écrire `outline: none` sans remplacement visible.
 
 ---
@@ -194,7 +193,7 @@ Les composants partagent des hauteurs cohérentes pour s'aligner parfaitement su
 ### 5.2 Règles
 
 - **Cible tactile minimale** : tout élément cliquable offre une zone de clic de `2.75rem` (44px) à `3rem` (48px). Si un bouton icône mesure visuellement 32px, étendre sa zone avec un pseudo-élément `::after` ou du padding.
-- **Ratio padding / hauteur (boutons pilules)** : `padding-inline` ≈ 50 % de la hauteur (hauteur 40px → `padding-inline: 20px`).
+- **Ratio padding / hauteur (boutons)** : `padding-inline` ≈ 50 % de la hauteur (hauteur 40px → `padding-inline: 20px`).
 - **Largeur de lecture** : limiter les blocs de texte courant à `max-inline-size: 65ch`.
 
 ---
@@ -259,7 +258,7 @@ Lors de la génération d'un composant SCSS, suivre ce patron :
   --btn-bg: var(--ds-color-primary);
   --btn-color: var(--ds-color-on-primary);
   --btn-border-color: transparent;
-  --btn-radius: var(--ds-radius-full);
+  --btn-radius: var(--ds-radius-md);
   --btn-height: var(--ds-control-height-md);
   --btn-px: var(--ds-space-5);
   --btn-font-size: var(--ds-text-label-lg);
@@ -282,20 +281,16 @@ Lors de la génération d'un composant SCSS, suivre ce patron :
   line-height: 1;
   cursor: pointer;
 
-  // 4. Motion (effets + spatial)
-  transition:
-    effects(background-color, color, border-color),
-    spatial(border-radius, transform);
+  // 4. Motion
+  transition: effects(background-color, color, border-color);
 
-  // 5. États interactifs (calques d'état et shape morphing)
+  // 5. États interactifs (calques d'état)
   &:hover:not(:disabled) {
     background-color: state-layer(var(--btn-bg), var(--btn-color));
   }
 
   &:active:not(:disabled) {
     background-color: state-layer(var(--btn-bg), var(--btn-color), 'pressed');
-    border-radius: var(--ds-radius-md);
-    transform: scale(0.98);
   }
 
   &:focus-visible {
@@ -342,12 +337,12 @@ Chaque composant doit avoir une page de démonstration dans l'application, servi
 
 ### 9.1 Fonctionnement
 
-- `ComponentDocumentationController` (`src/Controller/`) scanne **dynamiquement** les sous-dossiers de `templates/docs/`. Chaque sous-dossier est une catégorie, et chaque fichier `_{nom}.html.twig` qu'il contient est une page.
-- Les fichiers sont détectés avec le motif `^_([a-zA-Z0-9_-]+)\.html\.twig$`. Le nom extrait (`_avatar.html.twig` → `avatar`) donne :
-  - l'URL : `/ui/docs/{categorie}/{nom}` (route `component_docs_show`) ;
-  - le titre affiché : `ucwords` du nom, tirets et underscores remplacés par des espaces (`list-group` → « List Group »).
-- Il n'y a aucune route ni aucun menu à déclarer : créer le fichier suffit. Une catégorie vide n'apparaît pas.
-- La page est incluse dans `templates/docs/show.html.twig`, qui ajoute le titre, le fil d'Ariane, le chemin du fichier source et charge `js/pages/demo-ui.js`.
+- La documentation suit le modèle de Bootstrap : barre du haut, sommaire à gauche, contenu, sommaire de page « Sur cette page » à droite, pages précédente et suivante. `/ui/docs` et `/ui/docs/{categorie}` redirigent vers la première page concernée.
+- `ComponentDocumentationService` (`src/Service/`) scanne **dynamiquement** les sous-dossiers de `templates/docs/`. Chaque sous-dossier est une catégorie, et chaque fichier `_{nom}.html.twig` qu'il contient est une page.
+- Les fichiers sont détectés avec le motif `^_([a-zA-Z0-9_-]+)\.html\.twig$`. Le nom extrait (`_avatar.html.twig` → `avatar`) donne l'URL : `/ui/docs/{categorie}/{nom}` (route `component_docs_show`).
+- Ordre, titres, libellés et icônes sont déclarés dans `ComponentDocumentationService::CATEGORIES`. Créer le fichier suffit pour que la page apparaisse (à la fin de sa catégorie, titre déduit du nom) ; l'ajouter à `CATEGORIES` pour fixer sa place et son titre. Une catégorie vide n'apparaît pas.
+- La page est incluse dans `templates/docs/show.html.twig`, qui ajoute le titre, le lien vers la source, le sommaire et les pages voisines, et charge `js/pages/demo-ui.js`. La coquille commune à l'accueil et à la doc est `docs/base.html.twig` (`_header`, `_footer`, `js/pages/docs.js`) ; le service est exposé aux templates par la globale Twig `docs_site`.
+- Le sommaire de page est construit par `assets/ts/pages/docs.ts` à partir des `.docs-section > h2` et `> h3` : ne pas l'écrire à la main.
 - Données de démo : `ComponentDocumentationService::getData($nom)` reçoit **uniquement le nom** du composant, jamais la catégorie. Le service est donc indépendant de l'arborescence : déplacer une page d'une catégorie à une autre ne demande aucune modification du service.
 
 ### 9.2 Catégories (rangement par intention d'utilisation)
@@ -363,12 +358,11 @@ Ranger chaque page selon l'**intention d'utilisation** du composant, comme le fo
 | `feedback/` | Retours visuels et surcouches | `_alert` (→ `feedback/_alert.scss`) · `_toast` (→ `feedback/_toast.scss`) · `_modal` (→ `feedback/_dialog.scss`) |
 | `components/` | Blocs UI autonomes | `_accordion` · `_badge` · `_box` · `_btn-close` · `_button` · `_card` · `_collapse` · `_dropdown` · `_hero` · `_jumbotron` · `_list-group` (→ `components/_{nom}.scss`) |
 | `content/` | Éléments statiques | `_avatar` · `_code` · `_gallery` · `_images-figures` (→ `content/_image.scss`, `content/_figure.scss`) · `_table` (→ `content/_{nom}.scss`) · `_typography` (→ `foundation/_typography.scss`) |
-| `utilities/` | Ajustements cosmétiques | `_background` · `_grid` · `_icons` · `_spacing` · `_text` (→ `utilities/_{nom}.scss`) |
+| `utilities/` | Ajustements cosmétiques | `_background` · `_border` · `_columns` · `_display` · `_flex` · `_gap` · `_grid` · `_icons` · `_link` · `_object-fit` · `_shadow` · `_sizing` · `_spacing` · `_text` (→ `utilities/_{nom}.scss`) |
 | `features/` | Fonctionnalités JavaScript | `_clipboard` · `_form-manager` · `_markdown` · `_theme` (→ `assets/ts/services/theme.ts`, `interactions/components/theme-switch.ts`) |
 
-Pages prévues mais pas encore créées ou pas encore au nouveau format :
+Pages pas encore au nouveau format :
 
-- `utilities/` : `_border`, `_columns`, `_display`, `_flex`, `_gap`, `_link`, `_object-fit`, `_shadow`, `_sizing` (à créer) ; `_background`, `_grid`, `_icons`, `_spacing`, `_text` (à réécrire) ;
 - `navigation/` : `_breadcrumb`, `_nav-tabs`, `_pagination` (à réécrire) ;
 - `features/` : `_clipboard`, `_form-manager`, `_markdown` (à réécrire).
 
@@ -378,7 +372,7 @@ Le previewer de fichiers (`forms/_previewer.scss`) est documenté dans `_file-up
 
 1. Choisir la catégorie selon l'intention d'utilisation (tableau ci-dessus). Ne créer une nouvelle catégorie que si aucune ne convient.
 2. Créer `templates/docs/{categorie}/_{nom}.html.twig`, avec un nom en kebab-case **unique dans toutes les catégories**.
-3. Structure : un commentaire de sources, un `.component-demo` avec un chapô `.docs-lead`, puis une `<section class="docs-section" id="…">` par variante (`<h3>`, un court `<p>`, l'exemple). Finir par « Personnalisation » (tableau des Component Tokens) et « Classes ».
+3. Structure : un commentaire de sources, un `.component-demo` avec un chapô `.docs-lead`, puis une `<section class="docs-section" id="…">` par variante (`<h2>`, sous-titres en `<h3>`, un court `<p>`, l'exemple ; le `<h1>` vient de `show.html.twig`). Finir par « Personnalisation » (tableau des Component Tokens) et « Classes ».
 4. Chaque exemple passe par `docs/_example.html.twig` : le même balisage sert d'aperçu en direct **et** d'extrait de code, ils ne peuvent pas diverger. Écrire le balisage à la colonne 0 dans le `{% set %}` et générer les variantes par boucle Twig.
 5. Tableaux de référence (classes, tokens, options) : `docs/_reference.html.twig` (`rows`, `headers`).
 6. Code TypeScript ou extrait sans aperçu : inclure directement `fragments/components/_code-block.html.twig`.
@@ -390,10 +384,10 @@ Le previewer de fichiers (`forms/_previewer.scss`) est documenté dans `_file-up
 {% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
 
 <div class="component-demo">
-  <p class="docs-lead">Petites étiquettes en pilule pour un statut ou un compteur.</p>
+  <p class="docs-lead">Petites étiquettes pour un statut ou un compteur.</p>
 
   <section class="docs-section" id="solid">
-    <h3>Solid</h3>
+    <h2>Solid</h2>
     <p>Fond plein du rôle.</p>
 {% set code %}
 {% for role in roles %}
@@ -415,7 +409,7 @@ Paramètres de `_example.html.twig` : `code` (obligatoire), `preview` (rendu dif
 
 - **Un nom = une page** : comme le service ne reçoit que le nom, deux fichiers portant le même nom dans deux catégories différentes recevraient les mêmes données. Garder les noms uniques.
 - **Pas de doublon de page** : un composant n'est documenté que dans une seule catégorie (par ex. `_alert` dans `feedback/`, pas aussi dans `components/`).
-- **Pages placées à la racine** de `templates/docs/` : elles ne sont pas scannées. Les réserver aux partials techniques de la doc (fil d'Ariane, layout).
+- **Pages placées à la racine** de `templates/docs/` : elles ne sont pas scannées. Les réserver aux partials techniques de la doc (coquille, barre du haut, sommaire).
 - **Nommer la page d'après l'usage** quand elle regroupe plusieurs fichiers SCSS (`_images-figures`, `_custom-choices`), et d'après le fichier SCSS sinon.
 
 ---
@@ -472,7 +466,7 @@ Alias : `@/…` → `assets/ts/…`, `@components/…`. Librairie utilitaire : `
 |---|---|
 | **Valeurs en dur (magic numbers)** : couleurs hexadécimales (`#...`), px arbitraires (`padding: 13px`), `border-radius: 7px` dans un composant. | Tout passe par un token `--ds-*`. |
 | **Marges sur les composants** : `margin-bottom` ou `margin-top` sur un composant atomique ou moléculaire. | Utiliser `gap` sur le parent. |
-| **Abus de `box-shadow`** pour créer de la profondeur. | Gérer la profondeur par la couleur de surface (`--ds-surface-container-*`). Réserver les ombres aux éléments flottants au-dessus du flux (modales, popovers, FAB). |
+| **Abus de `box-shadow`** pour créer de la profondeur. | Gérer la profondeur par la couleur de surface (`--ds-surface-container-*`). Réserver les ombres aux contrôles (`--ds-shadow-xs`), aux cartes (`--ds-shadow-sm`) et aux éléments flottants (`-md`, `-lg`). |
 | **`transition: all 0.3s ease`** | Cibler explicitement les propriétés (`background-color`, `border-radius`, `transform`) avec la bonne courbe (spatiale ou d'effet). |
 | **Imbrication SCSS excessive** : `.card { .card-header { .card-title { span { ... } } } }`, qui génère un CSS lourd et difficile à surcharger. | Rester à 2 niveaux (3 pour les pseudo-états) avec des classes BEM plates. |
 | **`outline: none`** sur un élément focusable. | Anneau de focus `outline: 2px solid var(--ds-color-primary); outline-offset: 2px;`. |

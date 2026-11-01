@@ -8,7 +8,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
 {% set code %}
 <button type="button" class="btn btn-secondary" data-ds-toggle="collapse" data-ds-target="#collapse-example" aria-expanded="false" aria-controls="collapse-example">
   Afficher le détail
@@ -21,7 +21,7 @@
   </section>
 
   <section class="docs-section" id="lien">
-    <h3>Avec un lien</h3>
+    <h2>Avec un lien</h2>
     <p>Un lien peut servir de déclencheur : le JS annule la navigation.</p>
 {% set code %}
 <a href="#collapse-link" data-ds-toggle="collapse" data-ds-target="#collapse-link" role="button" aria-expanded="false" aria-controls="collapse-link">
@@ -35,7 +35,7 @@
   </section>
 
   <section class="docs-section" id="ouvert">
-    <h3>Ouvert par défaut</h3>
+    <h2>Ouvert par défaut</h2>
     <p>Ajoutez <code>.show</code> au panneau et <code>aria-expanded="true"</code> au déclencheur.</p>
 {% set code %}
 <button type="button" class="btn btn-soft-primary" data-ds-toggle="collapse" data-ds-target="#collapse-open" aria-expanded="true" aria-controls="collapse-open">
@@ -49,7 +49,7 @@
   </section>
 
   <section class="docs-section" id="fonctionnement">
-    <h3>Fonctionnement</h3>
+    <h2>Fonctionnement</h2>
     <ul>
       <li>Pendant l'animation, le panneau porte <code>.collapsing</code> et une hauteur en ligne ; il reçoit <code>.show</code> une fois ouvert.</li>
       <li>Un panneau ouvert laisse déborder son contenu : un menu déroulant placé dedans n'est pas rogné.</li>
@@ -59,7 +59,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes et attributs</h3>
+    <h2>Classes et attributs</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.collapse', 'Panneau replié (hauteur 0)'],

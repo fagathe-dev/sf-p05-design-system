@@ -64,6 +64,8 @@
   --input-height: var(--ds-control-height-lg);
   --input-px: 0;
   --input-radius: 0;
+  --input-bg: transparent;
+  --input-shadow: none;
 
   block-size: var(--input-height);
   padding-block: var(--ds-space-4) var(--ds-space-1);

@@ -1,13 +1,201 @@
-<div class="component-demo">
-    <h3>🖋️ Texte & Liens</h3>
-    <div class="mb-3">
-        <p class="text-center text-uppercase fw-bold">Texte centré uppercase</p>
-        <p class="text-decoration-underline">Texte souligné</p>
-    </div>
+{# Docs : Text — source : assets/scss/utilities/_text.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
 
-    <div class="box box-secondary">
-        <h5>Liens</h5>
-        <a href="#" class="link-primary">Lien Primary</a> | 
-        <a href="#" class="link-danger">Lien Danger</a>
-    </div>
+<div class="component-demo">
+  <p class="docs-lead">
+    Alignement, retour à la ligne, graisse, taille, interlignage et couleur du texte, ainsi que quelques utilitaires
+    d'interaction et de listes.
+  </p>
+
+  <section class="docs-section" id="alignement">
+    <h2>Alignement</h2>
+    <p>
+      <code>.text-start</code>, <code>.text-center</code> et <code>.text-end</code> existent avec un infixe de point de
+      rupture et suivent le sens d'écriture. <code>.text-justify</code> n'a pas de variante responsive.
+    </p>
+{% set code %}
+<p class="text-start">.text-start</p>
+<p class="text-center">.text-center</p>
+<p class="text-end">.text-end</p>
+<p class="text-center text-md-end mb-0">.text-center .text-md-end</p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="retour-ligne">
+    <h2>Retour à la ligne</h2>
+    <p>
+      <code>.text-wrap</code> et <code>.text-nowrap</code> autorisent ou interdisent le retour à la ligne.
+      <code>.text-break</code> coupe un mot trop long plutôt que de le laisser déborder.
+    </p>
+{% set code %}
+<div class="docs-box text-nowrap w-50 overflow-hidden mb-2">.text-nowrap : ce texte reste sur une seule ligne, même trop long</div>
+<div class="docs-box text-break w-25">.text-break unmotbeaucouptroplongpourtenirdanssoncadre</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="casse">
+    <h2>Casse et décoration</h2>
+{% set code %}
+<p class="text-lowercase">Texte en .TEXT-LOWERCASE</p>
+<p class="text-uppercase">Texte en .text-uppercase</p>
+<p class="text-capitalize">texte en .text-capitalize</p>
+<p class="text-decoration-underline">.text-decoration-underline</p>
+<p class="text-decoration-line-through">.text-decoration-line-through</p>
+<a href="#" class="text-decoration-none">.text-decoration-none</a>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="graisse">
+    <h2>Graisse, style et famille</h2>
+    <p>
+      La police Inter est chargée avec les graisses 400 à 700 : <code>.fw-light</code> (300) s'affiche donc comme
+      <code>.fw-normal</code>. <code>.fw-lighter</code> et <code>.fw-bolder</code> sont relatives au parent.
+    </p>
+{% set code %}
+{% for weight in ['light', 'lighter', 'normal', 'medium', 'semibold', 'bold', 'bolder'] %}
+<p class="fw-{{ weight }}">.fw-{{ weight }}</p>
+{% endfor %}
+<p class="fst-italic">.fst-italic</p>
+<p class="fst-normal">.fst-normal</p>
+<p class="font-monospace mb-0">.font-monospace (alias .text-monospace)</p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="taille">
+    <h2>Taille</h2>
+    <p><code>.fs-1</code> à <code>.fs-6</code> reprennent la taille des titres <code>h1</code> à <code>h6</code> sans changer le niveau de titre ni la graisse.</p>
+{% set code %}
+{% for size in 1..6 %}
+<p class="fs-{{ size }}">.fs-{{ size }}</p>
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="roles">
+    <h2>Rôles typographiques</h2>
+    <p>
+      <code>.text-{rôle}-{taille}</code> applique tout un style de l'échelle M3 : taille, graisse, interlignage et
+      espacement des lettres. Attention, <code>.text-body</code> seul est une couleur, alors que <code>.text-body-md</code>
+      est un rôle typographique.
+    </p>
+{% set code %}
+{% for role in ['display', 'headline', 'title', 'body', 'label'] %}
+{% for size in ['lg', 'md', 'sm'] %}
+<p class="text-{{ role }}-{{ size }}">.text-{{ role }}-{{ size }}</p>
+{% endfor %}
+{% endfor %}
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="interligne">
+    <h2>Interlignage</h2>
+{% set sample = "Un paragraphe sur plusieurs lignes pour comparer l'espace entre les lignes selon la classe utilisée." %}
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-2">
+{% for size in ['1', 'sm', 'base', 'lg'] %}
+  <p class="lh-{{ size }} mb-0"><strong>.lh-{{ size }}</strong> {{ sample|raw }}</p>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="couleurs">
+    <h2>Couleurs</h2>
+    <p><code>.text-{rôle}</code> colore le texte. Sur un fond <code>.bg-{rôle}-subtle</code>, utilisez <code>.text-{rôle}-emphasis</code> (alias <code>.text-{rôle}-dark</code>), qui garantit le contraste.</p>
+{% set code %}
+{% for role in roles %}
+<p class="text-{{ role }}">.text-{{ role }}</p>
+{% endfor %}
+<p class="text-body">.text-body</p>
+<p class="text-muted">.text-muted</p>
+{% for role in roles %}
+<p class="bg-{{ role }}-subtle text-{{ role }}-emphasis p-2 rounded">.bg-{{ role }}-subtle .text-{{ role }}-emphasis</p>
+{% endfor %}
+<p class="bg-dark text-light p-2 rounded mb-0">.bg-dark .text-light</p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+    <p>
+      Le texte secondaire utilise <code>.text-muted</code>, jamais une opacité réduite. <code>.text-white</code>,
+      <code>.text-white-50</code> et <code>.text-black-50</code> ne changent pas avec le thème : réservez-les à un fond
+      lui aussi fixe, comme une photo. <code>.text-reset</code> hérite de la couleur du parent.
+    </p>
+  </section>
+
+  <section class="docs-section" id="lecture">
+    <h2>Largeur de lecture</h2>
+    <p><code>.text-reading</code> limite la largeur à <code>--ds-size-reading</code> (65 caractères) pour garder un texte long confortable.</p>
+{% set code %}
+<p class="text-reading mb-0">
+  Ce paragraphe ne dépasse pas la largeur de lecture recommandée, même si son conteneur est beaucoup plus large.
+  Les lignes trop longues fatiguent les yeux et rendent le retour à la ligne suivante plus difficile.
+</p>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="interaction">
+    <h2>Interaction</h2>
+    <p>
+      <code>.user-select-{all|auto|none}</code> règle la sélection du texte. <code>.pe-none</code> et <code>.pe-auto</code>
+      règlent les événements de pointeur : ne les confondez pas avec <code>.pe-{clé}</code>, le padding de fin. Un lien en
+      <code>.pe-none</code> reste atteignable au clavier.
+    </p>
+{% set code %}
+<p class="user-select-all">.user-select-all : un clic sélectionne tout le texte</p>
+<p class="user-select-none">.user-select-none : ce texte n'est pas sélectionnable</p>
+<a href="#" class="pe-none" tabindex="-1" aria-disabled="true">.pe-none : ce lien ne réagit pas au pointeur</a>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="listes">
+    <h2>Listes</h2>
+    <p><code>.list-unstyled</code> retire les puces et le retrait. <code>.list-inline</code> dispose les éléments en ligne, avec <code>.list-inline-item</code> sur chacun d'eux.</p>
+{% set code %}
+<ul class="list-unstyled">
+  <li>.list-unstyled</li>
+  <li>Sans puce ni retrait</li>
+</ul>
+<ul class="list-inline mb-0">
+  <li class="list-inline-item">.list-inline</li>
+  <li class="list-inline-item">Élément</li>
+  <li class="list-inline-item">Élément</li>
+</ul>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.text-{start|center|end}, .text-{bp}-{start|center|end}', 'Alignement'],
+        ['.text-justify', 'Texte justifié'],
+        ['.text-{wrap|nowrap|break}', 'Retour à la ligne'],
+        ['.text-{lowercase|uppercase|capitalize}', 'Casse'],
+        ['.text-decoration-{none|underline|line-through}', 'Décoration'],
+        ['.fw-{light|lighter|normal|medium|semibold|bold|bolder}', 'Graisse'],
+        ['.fst-{normal|italic}', 'Style'],
+        ['.font-monospace, .text-monospace', 'Police à chasse fixe'],
+        ['.fs-{1…6}', 'Taille'],
+        ['.text-{display|headline|title|body|label}-{lg|md|sm}', 'Rôle typographique complet'],
+        ['.lh-{1|sm|base|lg}', 'Interlignage'],
+        ['.text-{rôle}', 'Couleur du rôle'],
+        ['.text-{rôle}-emphasis, .text-{rôle}-dark', 'Couleur sur le conteneur du rôle'],
+        ['.text-{body|muted|light|dark|reset}', 'Couleurs de texte selon le thème'],
+        ['.text-{white|white-50|black-50}', 'Couleurs fixes'],
+        ['.text-reading', 'Largeur de lecture'],
+        ['.user-select-{all|auto|none}', 'Sélection du texte'],
+        ['.pe-{none|auto}', 'Événements de pointeur'],
+        ['.list-unstyled, .list-inline, .list-inline-item', 'Listes'],
+      ],
+    } only %}
+  </section>
 </div>

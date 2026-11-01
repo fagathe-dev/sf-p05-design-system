@@ -170,7 +170,7 @@
   border-block-start: var(--ds-border-width) solid var(--ds-color-outline-variant);
 }
 
-// Lien de navigation : indicateur actif en pilule
+// Lien de navigation : indicateur actif au rayon de base
 .sidebar-link {
   // 1. Component Tokens
   --sidebar-link-bg: transparent;
@@ -180,9 +180,9 @@
   display: flex;
   align-items: center;
   gap: var(--ds-space-3);
-  min-block-size: var(--ds-control-height-lg);
-  padding-inline: var(--ds-space-4);
-  border-radius: var(--ds-radius-full);
+  min-block-size: var(--ds-control-height-md);
+  padding-inline: var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
 
   // 3. Typographie & Couleurs
   background-color: var(--sidebar-link-bg);
@@ -285,7 +285,7 @@ button.sidebar-link {
   gap: var(--ds-space-2);
   min-block-size: var(--ds-control-height-md);
   padding-inline: var(--ds-space-3);
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-sm);
 
   // 3. Typographie & Couleurs
   background-color: var(--sidebar-sublink-bg);

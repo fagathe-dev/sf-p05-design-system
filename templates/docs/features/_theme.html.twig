@@ -8,7 +8,7 @@
   </p>
 
   <section class="docs-section" id="selecteur">
-    <h3>Sélecteur de thème</h3>
+    <h2>Sélecteur de thème</h2>
     <p>
       Tout SegmentedControl qui porte <code>data-ds-theme-switch</code>, avec les options <code>auto</code>,
       <code>light</code> et <code>dark</code>, est relié au service. Essayez : toute la page change de thème, et le
@@ -23,7 +23,7 @@
 {% endset %}
     {% include 'docs/_example.html.twig' with { code: code, layout: 'stack' } only %}
 
-    <h4>Avec libellés</h4>
+    <h3>Avec libellés</h3>
 {% set code %}
 <div class="segmented-control segmented-control-full" role="radiogroup" aria-label="Mode d'affichage" data-ds-theme-switch>
   <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="auto"><i class="ri-computer-line"></i> Automatique</button>
@@ -35,7 +35,7 @@
   </section>
 
   <section class="docs-section" id="service">
-    <h3>Service</h3>
+    <h2>Service</h2>
     <p>
       <code>themeService</code> est une instance unique : tous les scripts de la page partagent le même état.
       Chaque changement émet aussi l'événement <code>ds:theme-change</code> sur <code>document</code>.
@@ -71,7 +71,7 @@ document.addEventListener('ds:theme-change', (event) => {
   </section>
 
   <section class="docs-section" id="fonctionnement">
-    <h3>Fonctionnement</h3>
+    <h2>Fonctionnement</h2>
     <ul>
       <li>La préférence est stockée sous la clé <code>ds-theme</code> ; une valeur absente ou invalide vaut <code>auto</code>.</li>
       <li>En <code>auto</code>, le thème suit <code>prefers-color-scheme</code>, y compris quand le réglage de l'appareil change.</li>
@@ -81,7 +81,7 @@ document.addEventListener('ds:theme-change', (event) => {
   </section>
 
   <section class="docs-section" id="premier-rendu">
-    <h3>Avant le premier rendu</h3>
+    <h2>Avant le premier rendu</h2>
     <p>
       Le JS est chargé en fin de page : pour éviter un flash du thème clair, <code>base.html.twig</code> applique le
       thème mémorisé dès le <code>&lt;head&gt;</code>. Gardez la même clé et les mêmes valeurs que le service.
@@ -100,7 +100,7 @@ document.addEventListener('ds:theme-change', (event) => {
   </section>
 
   <section class="docs-section" id="zone-sombre">
-    <h3>Zone toujours sombre</h3>
+    <h2>Zone toujours sombre</h2>
     <p>
       Les tokens sombres s'appliquent à tout élément qui porte <code>data-ui-theme="dark"</code> : une zone de la
       page peut rester sombre quel que soit le thème choisi. Redonnez-lui sa couleur de texte

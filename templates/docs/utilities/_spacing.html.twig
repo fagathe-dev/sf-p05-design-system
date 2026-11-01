@@ -1,17 +1,111 @@
-<div class="component-demo">
-  <h3>📏 Espacement & Gaps</h3>
-  <p class="text-muted mb-4">Utilise <code>.p-{n}</code>, <code>.m-{n}</code> ou <code>.gap-{n}</code> (de 0 à 10).</p>
+{# Docs : Spacing — source : assets/scss/utilities/_spacing.scss #}
+{% set scale = [
+  ['0', '0'], ['0_5', '0.125rem (2px)'], ['1', '0.25rem (4px)'], ['1_5', '0.375rem (6px)'], ['2', '0.5rem (8px)'],
+  ['2_5', '0.625rem (10px)'], ['3', '0.75rem (12px)'], ['3_5', '0.875rem (14px)'], ['4', '1rem (16px)'], ['5', '1.25rem (20px)'],
+  ['6', '1.5rem (24px)'], ['7', '1.75rem (28px)'], ['8', '2rem (32px)'], ['9', '2.25rem (36px)'], ['10', '2.5rem (40px)'],
+  ['12', '3rem (48px)'], ['16', '4rem (64px)'], ['20', '5rem (80px)'], ['24', '6rem (96px)'],
+] %}
 
-  <div class="box box-secondary">
-    <h5>Exemple de Gap (Flex)</h5>
-    <div class="d-flex gap-4 p-3 bg-slate-100 rounded">
-      <div class="bg-primary text-white p-2 rounded">Gap 4</div>
-      <div class="bg-primary text-white p-2 rounded">Gap 4</div>
-    </div>
-    
-    <h5 class="mt-4">Exemple de Padding (p-4)</h5>
-    <div class="p-4 bg-success-subtle rounded text-success-dark">
-      Contenu avec padding-4
-    </div>
-  </div>
+<div class="component-demo">
+  <p class="docs-lead">
+    Marges et paddings sur l'échelle d'espacement du design system. Les classes utilisent des propriétés
+    logiques : <code>s</code> et <code>e</code> suivent le sens d'écriture.
+  </p>
+
+  <section class="docs-section" id="notation">
+    <h2>Notation</h2>
+    <p>
+      Le format est <code>.{propriété}{côté}-{clé}</code>, ou <code>.{propriété}{côté}-{bp}-{clé}</code> à partir
+      d'un point de rupture : <code>.mt-4</code>, <code>.px-2_5</code>, <code>.p-md-6</code>.
+    </p>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Côté', 'Marge', 'Padding'],
+      rows: [
+        ['(aucun)', '<code>margin</code>', '<code>padding</code>'],
+        ['t', '<code>margin-block-start</code>', '<code>padding-block-start</code>'],
+        ['b', '<code>margin-block-end</code>', '<code>padding-block-end</code>'],
+        ['s', '<code>margin-inline-start</code>', '<code>padding-inline-start</code>'],
+        ['e', '<code>margin-inline-end</code>', '<code>padding-inline-end</code>'],
+        ['x', '<code>margin-inline</code>', '<code>padding-inline</code>'],
+        ['y', '<code>margin-block</code>', '<code>padding-block</code>'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="echelle">
+    <h2>Échelle</h2>
+    <p>
+      Chaque clé correspond au token <code>--ds-space-{clé}</code>. Il n'existe pas de clé 11, 13, 14 ou 15, ni de
+      marge négative.
+    </p>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Clé', 'Valeur'],
+      rows: scale,
+    } only %}
+  </section>
+
+  <section class="docs-section" id="marges">
+    <h2>Marges</h2>
+{% set code %}
+<div class="docs-area">
+  <div class="docs-box mb-4">.mb-4</div>
+  <div class="docs-box mx-6 mb-4">.mx-6 .mb-4</div>
+  <div class="docs-box ms-12">.ms-12</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="paddings">
+    <h2>Paddings</h2>
+{% set code %}
+<div class="docs-box p-0">.p-0</div>
+<div class="docs-box p-4">.p-4</div>
+<div class="docs-box px-8 py-2">.px-8 .py-2</div>
+<div class="docs-box ps-12">.ps-12</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code, layout: 'column' } only %}
+  </section>
+
+  <section class="docs-section" id="auto">
+    <h2>Marges automatiques</h2>
+    <p>
+      <code>.m*-auto</code> absorbe l'espace libre. <code>.ms-auto</code> pousse un élément au bout d'une ligne flex,
+      <code>.mx-auto</code> centre un bloc qui a une largeur. Les paddings n'ont pas de valeur <code>auto</code>.
+    </p>
+{% set code %}
+<div class="docs-area d-flex gap-2 mb-4">
+  <div class="docs-box">Élément</div>
+  <div class="docs-box">Élément</div>
+  <div class="docs-box ms-auto">.ms-auto</div>
+</div>
+<div class="docs-area">
+  <div class="docs-box w-50 mx-auto">.w-50 .mx-auto</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="responsive">
+    <h2>Responsive</h2>
+    <p>
+      Toutes les classes existent avec un infixe <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> ou
+      <code>xxl</code>, et s'appliquent à partir de ce point de rupture.
+    </p>
+{% set code %}
+<div class="docs-box p-2 p-md-6 p-xl-12">.p-2 .p-md-6 .p-xl-12</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.m{côté}-{clé}, .m{côté}-{bp}-{clé}', 'Marge'],
+        ['.m{côté}-auto, .m{côté}-{bp}-auto', 'Marge automatique'],
+        ['.p{côté}-{clé}, .p{côté}-{bp}-{clé}', 'Padding'],
+      ],
+    } only %}
+  </section>
 </div>

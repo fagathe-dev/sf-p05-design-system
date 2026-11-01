@@ -15,7 +15,7 @@
   </p>
 
   <section class="docs-section" id="standard">
-    <h3>Conteneur standard</h3>
+    <h2>Conteneur standard</h2>
     <p><code>.container</code> prend une largeur maximale fixe à chaque breakpoint.</p>
 {% set code %}
 <div class="container">
@@ -26,7 +26,7 @@
   </section>
 
   <section class="docs-section" id="fluide">
-    <h3>Conteneur fluide</h3>
+    <h2>Conteneur fluide</h2>
     <p><code>.container-fluid</code> occupe toujours toute la largeur disponible.</p>
 {% set code %}
 <div class="container-fluid">
@@ -37,7 +37,7 @@
   </section>
 
   <section class="docs-section" id="responsive">
-    <h3>Conteneurs responsives</h3>
+    <h2>Conteneurs responsives</h2>
     <p>
       <code>.container-{bp}</code> reste fluide jusqu'au breakpoint indiqué, puis suit les largeurs de
       <code>.container</code>.
@@ -53,7 +53,7 @@
   </section>
 
   <section class="docs-section" id="largeurs">
-    <h3>Largeurs maximales</h3>
+    <h2>Largeurs maximales</h2>
     <div class="table-responsive docs-reference">
       <table class="table align-middle">
         <thead class="table-light">
@@ -81,7 +81,7 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
 {% set code %}
 <div class="container" style="--container-gutter: var(--ds-space-8);">
   <div class="docs-box">Gouttière de 32px</div>
@@ -98,7 +98,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.container', 'Largeur maximale à chaque breakpoint'],

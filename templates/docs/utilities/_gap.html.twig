@@ -1,0 +1,66 @@
+{# Docs : Gap — source : assets/scss/utilities/_gap.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Espace entre les enfants d'un conteneur flex ou grid, sur la même échelle que les marges et les paddings.
+  </p>
+
+  <section class="docs-section" id="gap">
+    <h2>Gap</h2>
+    <p>
+      <code>.gap-{clé}</code> règle les deux axes. Les clés sont celles de la
+      <a href="{{ path('component_docs_show', {type: 'utilities', component: 'spacing'}) }}">page Spacing</a>.
+    </p>
+{% set code %}
+<div class="d-flex flex-wrap gap-4">
+  <div class="docs-box">.gap-4</div>
+  <div class="docs-box">.gap-4</div>
+  <div class="docs-box">.gap-4</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="axes">
+    <h2>Par axe</h2>
+    <p>
+      <code>.row-gap-{clé}</code> sépare les lignes et <code>.column-gap-{clé}</code> les colonnes.
+      <code>.gap-y-{clé}</code> et <code>.gap-x-{clé}</code> en sont des alias.
+    </p>
+{% set code %}
+<div class="grid grid-cols-3 row-gap-6 column-gap-2">
+  <div class="docs-box">1</div>
+  <div class="docs-box">2</div>
+  <div class="docs-box">3</div>
+  <div class="docs-box">4</div>
+  <div class="docs-box">5</div>
+  <div class="docs-box">6</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="responsive">
+    <h2>Responsive</h2>
+{% set code %}
+<div class="d-flex flex-wrap gap-2 gap-md-6 gap-xl-12">
+  <div class="docs-box">.gap-2</div>
+  <div class="docs-box">.gap-md-6</div>
+  <div class="docs-box">.gap-xl-12</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    <p>Toutes existent avec un infixe de point de rupture : <code>.row-gap-md-4</code>.</p>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.gap-{clé}', 'gap'],
+        ['.row-gap-{clé}, .gap-y-{clé}', 'row-gap'],
+        ['.column-gap-{clé}, .gap-x-{clé}', 'column-gap'],
+      ],
+    } only %}
+  </section>
+</div>

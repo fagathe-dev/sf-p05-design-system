@@ -7,10 +7,9 @@
   </p>
 
   <section class="docs-section" id="switch">
-    <h3>Interrupteur</h3>
+    <h2>Interrupteur</h2>
     <p>
-      Une checkbox avec <code>role="switch"</code> dans <code>.form-check.form-switch</code>. La pastille
-      grossit quand l'interrupteur est activé.
+      Une checkbox avec <code>role="switch"</code> dans <code>.form-check.form-switch</code>.
     </p>
 {% set code %}
 <div class="form-check form-switch">
@@ -34,10 +33,10 @@
   </section>
 
   <section class="docs-section" id="cartes-radio">
-    <h3>Cartes sélectionnables (choix unique)</h3>
+    <h2>Cartes sélectionnables (choix unique)</h2>
     <p>
       L'input masqué précède son label <code>.form-selectable-label</code> : la carte cochée passe sur le
-      conteneur primaire, prend un liseré et change de forme. <code>.icon-check</code> n'apparaît que coché.
+      conteneur primaire, et prend un liseré. <code>.icon-check</code> n'apparaît que coché.
     </p>
 {% set code %}
 <div class="form-selectable-card">
@@ -73,7 +72,7 @@
   </section>
 
   <section class="docs-section" id="cartes-checkbox">
-    <h3>Cartes sélectionnables (choix multiples)</h3>
+    <h2>Cartes sélectionnables (choix multiples)</h2>
     <p>Avec des checkboxes, et en ligne grâce à l'utilitaire <code>.flex-row</code>.</p>
 {% set code %}
 <div class="form-selectable-card flex-row flex-wrap">
@@ -95,7 +94,7 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
@@ -110,7 +109,7 @@
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.form-switch', 'Transforme le .form-check en interrupteur (input role="switch")'],

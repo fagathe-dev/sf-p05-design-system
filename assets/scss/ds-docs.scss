@@ -9,6 +9,652 @@
 @use 'abstracts' as *;
 
 // --------------------------------------------------------------------------
+// Coquille du site : barre du haut, conteneur commun
+// --------------------------------------------------------------------------
+.docs-site {
+  --docs-header-height: calc(var(--ds-control-height-lg) + var(--ds-space-4));
+  --docs-sidebar-width: var(--ds-size-menu-lg);
+  --docs-toc-width: var(--ds-size-menu-lg);
+  --docs-gutter: var(--ds-space-4);
+
+  @include media-up(md) {
+    --docs-gutter: var(--ds-space-6);
+  }
+}
+
+.docs-container {
+  inline-size: 100%;
+  max-inline-size: calc(var(--ds-container-xxl) + 2 * var(--docs-gutter));
+  margin-inline: auto;
+  padding-inline: var(--docs-gutter);
+}
+
+.docs-header .navbar {
+  --navbar-py: var(--ds-space-2);
+  --navbar-px: 0;
+
+  min-block-size: var(--docs-header-height);
+}
+
+.docs-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--ds-space-2);
+}
+
+// Petits écrans : tout doit tenir sur la ligne (menu, marque, thème, liens)
+@include media-down(sm) {
+  .docs-header-inner {
+    column-gap: var(--ds-space-1);
+  }
+
+  .docs-header .navbar-toggler {
+    inline-size: var(--ds-control-height-md);
+    block-size: var(--ds-control-height-md);
+  }
+
+  .docs-header .segmented-control {
+    --segmented-option-px: var(--ds-space-1_5);
+  }
+}
+
+.docs-header .navbar-nav {
+  --nav-link-height: var(--ds-control-height-sm);
+}
+
+@include media-down(lg) {
+  .docs-header .navbar-nav {
+    padding-block: var(--ds-space-2);
+  }
+}
+
+.docs-brand-section {
+  color: var(--ds-color-on-surface-variant);
+  font-weight: var(--ds-font-weight-medium);
+
+  @include media-down(sm) {
+    display: none;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Grille des pages : sommaire | contenu | sommaire de page
+// --------------------------------------------------------------------------
+.docs-layout {
+  display: grid;
+  flex: 1 0 auto;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: var(--ds-space-8);
+
+  @include media-up(lg) {
+    grid-template-columns: var(--docs-sidebar-width) minmax(0, 1fr);
+  }
+}
+
+// Le voile du tiroir ne sert plus quand le sommaire est dans la page
+.docs-overlay {
+  @include media-up(lg) {
+    display: none !important;
+  }
+}
+
+.docs-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: var(--ds-space-6);
+  padding-block: var(--ds-space-8) var(--ds-space-12);
+
+  @include media-up(xl) {
+    grid-template-areas:
+      'header toc'
+      'content toc'
+      'pager toc';
+    grid-template-columns: minmax(0, 1fr) var(--docs-toc-width);
+    grid-template-rows: auto 1fr auto;
+    column-gap: var(--ds-space-8);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Sommaire de la documentation (surcharge du composant .sidebar)
+// --------------------------------------------------------------------------
+.sidebar.docs-sidebar {
+  --sidebar-padding: var(--ds-space-2);
+  --sidebar-header-height: auto;
+
+  background-color: var(--ds-surface);
+
+  @include media-up(lg) {
+    --sidebar-width: var(--docs-sidebar-width);
+
+    // Dans la page, elle repasse sous la barre du haut (z-index de tiroir sinon)
+    z-index: auto;
+    inset-block: var(--docs-header-height) auto;
+    align-self: start;
+    block-size: calc(100vh - var(--docs-header-height));
+    block-size: calc(100dvh - var(--docs-header-height));
+    border-inline-end-width: 0;
+  }
+}
+
+.docs-sidebar .sidebar-header {
+  gap: var(--ds-space-2);
+  padding-block: var(--ds-space-4) var(--ds-space-3);
+}
+
+.docs-sidebar .sidebar-section + .sidebar-section {
+  padding-block-start: var(--ds-space-5);
+}
+
+.docs-sidebar .sidebar-section > .sidebar-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin-block-end: var(--ds-space-1);
+  padding-inline: var(--ds-space-3);
+  color: var(--ds-color-on-surface);
+  text-transform: none;
+  @include type(label, lg);
+  font-weight: var(--ds-font-weight-bold);
+  letter-spacing: normal;
+}
+
+.docs-sidebar .sidebar-section-title > i {
+  color: var(--ds-color-primary);
+  font-size: var(--ds-icon-size-sm);
+}
+
+.docs-sidebar .sidebar-link {
+  min-block-size: var(--ds-control-height-sm);
+  padding-inline: var(--ds-space-3) var(--ds-space-2);
+  padding-inline-start: calc(var(--ds-space-3) + var(--ds-icon-size-sm) + var(--ds-space-2));
+  border-radius: var(--ds-radius-sm);
+  @include type(body, md);
+
+  &.active {
+    font-weight: var(--ds-font-weight-semibold);
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// Champ de recherche : icône et raccourci posés sur l'input
+.docs-search {
+  position: relative;
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.docs-search > i {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--ds-space-3);
+  color: var(--ds-color-on-surface-variant);
+  font-size: var(--ds-icon-size-sm);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.docs-search .form-control {
+  padding-inline: calc(var(--ds-space-3) + var(--ds-icon-size-sm) + var(--ds-space-2)) var(--ds-space-3);
+}
+
+.docs-search-hint {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: var(--ds-space-2);
+  padding-inline: var(--ds-space-1_5);
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-radius: var(--ds-radius-xs);
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-sans);
+  @include type(label, sm);
+  pointer-events: none;
+  transform: translateY(-50%);
+
+  @include media-down(lg) {
+    display: none;
+  }
+}
+
+.docs-search .form-control:not(:placeholder-shown) ~ .docs-search-hint {
+  display: none;
+}
+
+// --------------------------------------------------------------------------
+// En-tête de page
+// --------------------------------------------------------------------------
+.docs-page-header {
+  grid-area: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+
+  @include media-up(xl) {
+    grid-area: header;
+  }
+}
+
+.docs-page-category {
+  margin: 0;
+  color: var(--ds-color-primary);
+  @include type(label, lg);
+}
+
+.docs-page-title {
+  margin: 0;
+  @include type(display, sm);
+}
+
+.docs-page-source {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: var(--ds-space-1);
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, sm);
+}
+
+// --------------------------------------------------------------------------
+// Sommaire de page : bouton repliable, puis colonne collante à partir de xl
+// --------------------------------------------------------------------------
+.docs-toc {
+  @include media-up(xl) {
+    position: sticky;
+    inset-block-start: calc(var(--docs-header-height) + var(--ds-space-8));
+    grid-area: toc;
+    align-self: start;
+    max-block-size: calc(100dvh - var(--docs-header-height) - 2 * var(--ds-space-8));
+    overflow-y: auto;
+    padding-inline-start: var(--ds-space-4);
+    border-inline-start: var(--ds-border-width) solid var(--ds-color-outline-variant);
+    scrollbar-width: thin;
+  }
+}
+
+.docs-toc-title {
+  display: none;
+  margin: 0 0 var(--ds-space-2);
+  @include type(label, lg);
+  font-weight: var(--ds-font-weight-bold);
+
+  @include media-up(xl) {
+    display: block;
+  }
+}
+
+.docs-toc-toggle {
+  @include media-up(xl) {
+    display: none;
+  }
+}
+
+.docs-toc-toggle > i {
+  transition: spatial(transform);
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+.docs-toc-toggle[aria-expanded='true'] > i {
+  transform: rotate(180deg);
+}
+
+// Toujours déplié dans la colonne : écrase la hauteur posée par le collapse
+.docs-toc .collapse {
+  @include media-up(xl) {
+    height: auto !important;
+    overflow: visible;
+  }
+}
+
+.docs-toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-0_5);
+  margin: 0;
+  padding: var(--ds-space-2) 0 0;
+  list-style: none;
+
+  @include media-up(xl) {
+    padding-block-start: 0;
+  }
+}
+
+.docs-toc-link {
+  display: block;
+  padding-block: var(--ds-space-1);
+  border-radius: var(--ds-radius-xs);
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, sm);
+  text-decoration: none;
+  transition: effects(color);
+
+  &:hover {
+    color: var(--ds-color-on-surface);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &.active {
+    color: var(--ds-color-primary);
+    font-weight: var(--ds-font-weight-semibold);
+  }
+}
+
+.docs-toc-sublink {
+  padding-inline-start: var(--ds-space-3);
+}
+
+// Lien d'ancre d'un titre, révélé au survol
+.docs-anchor {
+  color: var(--ds-color-on-surface-variant);
+  font-weight: var(--ds-font-weight-regular);
+  text-decoration: none;
+  opacity: 0;
+  transition: effects(opacity);
+
+  :is(h2, h3, h5):hover > &,
+  &:focus-visible {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--ds-color-primary);
+    text-decoration: none;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Pages voisines
+// --------------------------------------------------------------------------
+.docs-content {
+  min-inline-size: 0;
+
+  @include media-up(xl) {
+    grid-area: content;
+  }
+}
+
+.docs-content .component-demo h5 {
+  scroll-margin-block-start: calc(var(--docs-header-height) + var(--ds-space-4));
+}
+
+.docs-pager {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ds-size-menu-lg)), 1fr));
+  gap: var(--ds-space-4);
+  margin-block-start: var(--ds-space-6);
+
+  @include media-up(xl) {
+    grid-area: pager;
+  }
+}
+
+.docs-pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-0_5);
+  padding: var(--ds-space-4);
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-color-on-surface);
+  text-decoration: none;
+  transition: effects(background-color, border-color);
+
+  &:hover {
+    border-color: var(--ds-color-outline);
+    background-color: var(--ds-surface-container-low);
+    color: var(--ds-color-on-surface);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.docs-pager-next {
+  grid-column: -2;
+  text-align: end;
+}
+
+.docs-pager-label {
+  color: var(--ds-color-on-surface-variant);
+  @include type(label, md);
+}
+
+.docs-pager-title {
+  color: var(--ds-color-primary);
+  @include type(title, md);
+}
+
+.docs-pager-category {
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, sm);
+}
+
+// --------------------------------------------------------------------------
+// Pied de page du site
+// --------------------------------------------------------------------------
+.docs-footer {
+  border-block-start: var(--ds-border-width) solid var(--ds-color-outline-variant);
+}
+
+.docs-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-8);
+  padding-block: var(--ds-space-8);
+
+  @include media-up(lg) {
+    grid-template-columns: 2fr repeat(4, minmax(0, 1fr));
+  }
+}
+
+.docs-footer-brand {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / -1;
+  gap: var(--ds-space-2);
+
+  @include media-up(lg) {
+    grid-column: auto;
+  }
+}
+
+.docs-footer-title {
+  margin: 0 0 var(--ds-space-2);
+  @include type(label, lg);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+.docs-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  margin: 0;
+  @include type(body, md);
+}
+
+// --------------------------------------------------------------------------
+// Page d'accueil
+// --------------------------------------------------------------------------
+.docs-home {
+  padding-block: 0;
+}
+
+.home-hero {
+  padding-block: var(--ds-space-20);
+  border-block-end: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  background-image:
+    radial-gradient(
+      ellipse at top,
+      var(--ds-color-primary-container),
+      transparent 70%
+    );
+}
+
+.home-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-6);
+  text-align: center;
+}
+
+.home-hero-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--ds-space-20);
+  block-size: var(--ds-space-20);
+  border-radius: var(--ds-radius-xl);
+  background-color: var(--ds-color-primary);
+  color: var(--ds-color-on-primary);
+  font-size: var(--ds-space-10);
+}
+
+.home-hero-title {
+  max-inline-size: 20ch;
+  margin: 0;
+  @include type(display, lg);
+}
+
+.home-hero-lead {
+  max-inline-size: var(--ds-size-reading);
+  margin: 0;
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, lg);
+}
+
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-space-3);
+}
+
+.home-install {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  max-inline-size: 100%;
+  padding-block: var(--ds-space-1);
+  padding-inline: var(--ds-space-4) var(--ds-space-1);
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-radius: var(--ds-radius-md);
+  background-color: var(--ds-surface);
+}
+
+.home-install > code {
+  padding: 0;
+  background: none;
+  color: var(--ds-color-on-surface);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.home-status {
+  margin: 0;
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, sm);
+}
+
+.home-section {
+  padding-block: var(--ds-space-16);
+}
+
+.home-section-tinted {
+  background-color: var(--ds-surface-container-low);
+}
+
+.home-section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-2);
+  margin-block-end: var(--ds-space-8);
+}
+
+.home-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: var(--ds-space-10);
+
+  @include media-up(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.home-split-reverse > .home-code {
+  @include media-up(lg) {
+    order: -1;
+  }
+}
+
+.home-section-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+}
+
+.home-section-text > p {
+  margin: 0;
+  max-inline-size: var(--ds-size-reading);
+  color: var(--ds-color-on-surface-variant);
+}
+
+.home-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  color: var(--ds-color-primary);
+  @include type(label, lg);
+}
+
+.home-section-title {
+  margin: 0;
+  @include type(headline, lg);
+}
+
+.home-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+  min-inline-size: 0;
+}
+
+.home-code {
+  min-inline-size: 0;
+}
+
+.home-category {
+  color: var(--ds-color-on-surface);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--ds-color-on-surface);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// --------------------------------------------------------------------------
 // Page et sections
 // --------------------------------------------------------------------------
 .component-demo {
@@ -28,17 +674,19 @@
   display: flex;
   flex-direction: column;
   gap: var(--ds-space-4);
-  scroll-margin-block-start: calc(var(--ds-size-topbar) + var(--ds-space-4));
+  scroll-margin-block-start: calc(var(--docs-header-height) + var(--ds-space-4));
+}
+
+.docs-section > h2 {
+  margin: 0;
+  @include type(headline, sm);
+  scroll-margin-block-start: calc(var(--docs-header-height) + var(--ds-space-4));
 }
 
 .docs-section > h3 {
-  margin: 0;
-  @include type(headline, sm);
-}
-
-.docs-section > h4 {
   margin: var(--ds-space-4) 0 0;
   @include type(title, lg);
+  scroll-margin-block-start: calc(var(--docs-header-height) + var(--ds-space-4));
 }
 
 .docs-section > p,
@@ -151,6 +799,14 @@
 
 .docs-area {
   padding: var(--ds-space-3);
+  border: var(--ds-border-width) dashed var(--ds-color-outline);
+  border-radius: var(--ds-radius-sm);
+  background-color: var(--ds-surface-container-low);
+}
+
+// Cadre de hauteur fixe : démos d'alignement, de hauteur, de débordement et d'images
+.docs-frame {
+  block-size: calc(var(--ds-space-24) + var(--ds-space-8));
   border: var(--ds-border-width) dashed var(--ds-color-outline);
   border-radius: var(--ds-radius-sm);
   background-color: var(--ds-surface-container-low);

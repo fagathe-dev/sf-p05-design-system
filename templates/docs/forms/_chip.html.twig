@@ -3,12 +3,12 @@
 
 <div class="component-demo">
   <p class="docs-lead">
-    Chips de filtre et de tag : pilules de 32px (zone cliquable de 44px) qui passent en fond plein
-    et changent de forme quand elles sont sélectionnées.
+    Chips de filtre et de tag de 32px (zone cliquable de 44px) qui passent en fond plein
+    quand elles sont sélectionnées.
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
     <p>Utilisez un <code>&lt;button&gt;</code> pour une chip interactive ; sans variante, elle prend le rôle primary.</p>
 {% set code %}
 <button type="button" class="chip">Design</button>
@@ -19,7 +19,7 @@
   </section>
 
   <section class="docs-section" id="roles">
-    <h3>Rôles</h3>
+    <h2>Rôles</h2>
     <p><code>.chip-{rôle}</code> : conteneur du rôle et bordure fonctionnelle.</p>
 {% set code %}
 {% for role in roles %}
@@ -30,7 +30,7 @@
   </section>
 
   <section class="docs-section" id="selection">
-    <h3>Sélection</h3>
+    <h2>Sélection</h2>
     <p>
       Ajoutez <code>.is-selected</code> ou <code>aria-selected="true"</code> (ou <code>aria-pressed</code> géré
       par votre script) : la chip passe en fond plein et son rayon se resserre. La bascule de l'état est à la
@@ -45,7 +45,7 @@
   </section>
 
   <section class="docs-section" id="icones">
-    <h3>Avec icône</h3>
+    <h2>Avec icône</h2>
 {% set code %}
 <button type="button" class="chip chip-primary"><i class="ri-code-line"></i> TypeScript</button>
 <button type="button" class="chip chip-secondary is-selected"><i class="ri-check-line"></i> SCSS</button>
@@ -55,7 +55,7 @@
   </section>
 
   <section class="docs-section" id="desactive">
-    <h3>Désactivé</h3>
+    <h2>Désactivé</h2>
 {% set code %}
 <button type="button" class="chip chip-primary" disabled>Indisponible</button>
 <span class="chip chip-secondary" aria-disabled="true">Archivé</span>
@@ -64,7 +64,7 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
@@ -73,19 +73,19 @@
         ['--chip-selected-bg', '<code>--ds-color-primary</code>', 'Fond sélectionné'],
         ['--chip-selected-color', '<code>--ds-color-on-primary</code>', 'Texte sélectionné'],
         ['--chip-border-color', '<code>transparent</code> (<code>--ds-color-outline</code> avec un rôle)', 'Bordure'],
-        ['--chip-radius', '<code>--ds-radius-full</code> (<code>--ds-radius-md</code> sélectionnée)', 'Rayon'],
+        ['--chip-radius', '<code>--ds-radius-sm</code> (toujours, y compris sélectionnée)', 'Rayon'],
       ],
     } only %}
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.chip', 'Chip (rôle primary par défaut)'],
         ['.chip-{rôle}', 'Variante de rôle'],
         ['.is-selected, [aria-selected="true"]', 'État sélectionné'],
-        ['.chip-pill', 'Conservée pour compatibilité (pilule par défaut)'],
+        ['.chip-pill', 'Forme pilule'],
       ],
     } only %}
   </section>

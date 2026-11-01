@@ -1,67 +1,154 @@
-{% extends 'layouts/app.html.twig' %}
+{% extends 'docs/base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% set host = app.request.schemeAndHttpHost %}
 
-{% block content %}
-<div class="py-5">
-    {# Section Hero de bienvenue #}
-    <section class="hero mb-5">
-        <div class="hero-content">
-            <h1 class="hero-title display-3">Bienvenue sur {{ app_name }}</h1>
-            <p class="lead text-muted">
-                Votre nouvelle interface basée sur un système de composants Vanilla robuste et modulaire.
-            </p>
-            <div class="d-flex gap-3 justify-content-center mt-4">
-                <a href="{{ path('component_docs_index') }}" class="btn btn-solid-primary btn-lg">
-                    <i class="ri-book-2-line"></i> Accéder à la Documentation
-                </a>
-            </div>
-        </div>
-    </section>
+{% block docs_body %}
+<main class="app-main docs-home">
 
-    {# Section d'introduction #}
-    <div class="row g-4">
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="box box-secondary h-100">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="avatar bg-primary-subtle text-primary-dark">
-                        <i class="ri-cpu-line fs-4"></i>
-                    </div>
-                    <h4 class="box-title mb-0">Architecture Vanilla</h4>
-                </div>
-                <p class="text-muted">
-                    Zéro dépendance lourde, performance maximale et contrôle total sur le rendu CSS et les interactions JS.
-                </p>
-            </div>
-        </div>
+  {# --- Hero --- #}
+  <section class="home-hero">
+    <div class="docs-container home-hero-content">
+      <span class="home-hero-logo" aria-hidden="true"><i class="ri-box-3-fill"></i></span>
+      <h1 class="home-hero-title">Le design system de vos applications Symfony</h1>
+      <p class="home-hero-lead">
+        Des tokens, des composants accessibles et un thème clair et sombre, sans framework JavaScript :
+        incluez ses fichiers compilés, puis composez vos templates Twig avec des classes.
+      </p>
 
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="box box-secondary h-100">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="avatar bg-success-subtle text-success-dark">
-                        <i class="ri-palette-line fs-4"></i>
-                    </div>
-                    <h4 class="box-title mb-0">Design System</h4>
-                </div>
-                <p class="text-muted">
-                    Une bibliothèque de composants cohérente (Soft UI) pour garantir une expérience utilisateur fluide.
-                </p>
-            </div>
-        </div>
+      <div class="home-hero-actions">
+        <a href="{{ path('component_docs_index') }}" class="btn btn-primary btn-lg"><i class="ri-book-2-line"></i> Lire la documentation</a>
+        <a href="{{ path('component_docs_show', {type: 'getting-started', component: 'starter-packs'}) }}" class="btn btn-soft-primary btn-lg">Voir les starter packs</a>
+      </div>
 
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="box box-secondary h-100">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="avatar bg-info-subtle text-info-dark">
-                        <i class="ri-layout-grid-line fs-4"></i>
-                    </div>
-                    <h4 class="box-title mb-0">Documentation</h4>
-                </div>
-                <p class="text-muted">
-                    Chaque composant est documenté avec exemples interactifs et copier-coller du code source.
-                </p>
-            </div>
-        </div>
+      <div class="home-install">
+        <code id="home-install-code">&lt;link rel="stylesheet" href="{{ host }}/css/ds-ui-kit.css"&gt;</code>
+        <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" data-copy-target="home-install-code" aria-label="Copier la balise" title="Copier la balise">
+          <i class="ri-clipboard-line"></i>
+        </button>
+      </div>
+
+      <p class="home-status">
+        Version {{ docs_site.version }} · {{ docs_site.pageCount }} pages de documentation · Twig, SCSS et TypeScript
+      </p>
     </div>
-</div>
+  </section>
+
+  {# --- Composants --- #}
+  <section class="home-section">
+    <div class="docs-container home-split">
+      <div class="home-section-text">
+        <span class="home-eyebrow"><i class="ri-shapes-line" aria-hidden="true"></i> Composants</span>
+        <h2 class="home-section-title">Tout ce qu'il faut pour une interface complète</h2>
+        <p>
+          Navigation, formulaires, feedback, contenu : chaque composant est documenté avec toutes ses variantes
+          et un extrait de code à copier. Le clavier et les lecteurs d'écran sont pris en charge.
+        </p>
+        <a href="{{ path('component_docs_category', {type: 'components'}) }}" class="btn btn-ghost-primary">Parcourir les composants <i class="ri-arrow-right-line"></i></a>
+      </div>
+
+      <div class="home-showcase">
+        <div class="card">
+          <div class="card-body d-flex flex-column gap-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div class="d-flex align-items-center gap-3">
+                <span class="avatar bg-primary-subtle text-primary-dark" aria-hidden="true">JD</span>
+                <div>
+                  <p class="fw-bold mb-0">Jane Doe</p>
+                  <p class="small text-muted mb-0">Administratrice</p>
+                </div>
+              </div>
+              <span class="badge badge-success">Active</span>
+            </div>
+            <div>
+              <label for="home-email" class="form-label">Adresse email</label>
+              <input type="email" class="form-control" id="home-email" value="jane@example.com">
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="home-notifications" checked>
+              <label class="form-check-label" for="home-notifications">Recevoir les notifications</label>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-primary">Enregistrer</button>
+              <button type="button" class="btn btn-ghost-secondary">Annuler</button>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-soft-success mb-0" role="status">
+          <i class="ri-checkbox-circle-line alert-icon"></i>
+          <div class="alert-content">Vos modifications ont été enregistrées.</div>
+        </div>
+        <div class="d-flex flex-wrap align-items-center gap-2">
+          <div class="segmented-control segmented-control-sm" role="radiogroup" aria-label="Affichage">
+            <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="list"><i class="ri-list-check"></i> Liste</button>
+            <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="grid"><i class="ri-layout-grid-line"></i> Grille</button>
+          </div>
+          <button type="button" class="chip is-selected">Design</button>
+          <button type="button" class="chip">Front-end</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# --- Personnalisation --- #}
+  <section class="home-section home-section-tinted">
+    <div class="docs-container home-split home-split-reverse">
+      <div class="home-section-text">
+        <span class="home-eyebrow"><i class="ri-palette-line" aria-hidden="true"></i> Personnalisation</span>
+        <h2 class="home-section-title">Votre marque, en quelques variables CSS</h2>
+        <p>
+          Les couleurs, les espacements et les formes passent par des tokens <code>--ds-*</code>.
+          Redéfinissez-les pour toute l'application, ou les tokens d'un seul composant pour une zone précise.
+        </p>
+        <p id="home-theme-label" class="fw-semibold mb-2">Essayez le thème :</p>
+        <div class="segmented-control" role="radiogroup" aria-labelledby="home-theme-label" data-ds-theme-switch>
+          <button type="button" class="segmented-control-option" role="radio" aria-checked="true" data-value="auto"><i class="ri-computer-line"></i> Auto</button>
+          <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="light"><i class="ri-sun-line"></i> Clair</button>
+          <button type="button" class="segmented-control-option" role="radio" aria-checked="false" data-value="dark"><i class="ri-moon-line"></i> Sombre</button>
+        </div>
+      </div>
+
+      <div class="home-code">
+{% set tokens_code %}
+:root {
+  --ds-color-primary: #3d5afe;
+  --ds-color-on-primary: #fff;
+  --ds-radius-md: 0.5rem;
+}
+
+/* Un seul composant, dans une seule zone */
+.checkout .btn {
+  --btn-radius: var(--ds-radius-sm);
+}
+{% endset %}
+        {% include 'fragments/components/_code-block.html.twig' with { code: tokens_code, language: 'css', title: 'app.css' } only %}
+      </div>
+    </div>
+  </section>
+
+  {# --- Sommaire de la documentation --- #}
+  <section class="home-section">
+    <div class="docs-container">
+      <div class="home-section-header">
+        <span class="home-eyebrow"><i class="ri-book-2-line" aria-hidden="true"></i> Documentation</span>
+        <h2 class="home-section-title">Explorer par thème</h2>
+      </div>
+      <div class="row g-4">
+        {% for item in docs_site.navigation %}
+          <div class="col-12 col-md-6 col-xl-4">
+            <a class="card card-elevated h-100 home-category" href="{{ path('component_docs_category', {type: item.type}) }}">
+              <div class="card-body d-flex gap-4">
+                <span class="avatar bg-primary-subtle text-primary-dark flex-shrink-0" aria-hidden="true"><i class="{{ item.icon }}"></i></span>
+                <div>
+                  <h3 class="card-title mb-1">{{ item.label }}</h3>
+                  <p class="card-text small text-muted mb-1">{{ item.description }}</p>
+                  <p class="small text-muted mb-0">{{ item.pages|length }} page{{ item.pages|length > 1 ? 's' }}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
 {% endblock %}

@@ -1,65 +1,56 @@
-{% extends 'layouts/app.html.twig' %}
+{% extends 'docs/base.html.twig' %}
 
-{% block title %}{{ page_title }}{% endblock %}
+{% block docs_body %}
+<div class="dashboard-overlay docs-overlay" data-ds-dismiss="sidebar" data-ds-target="#docs-sidebar"></div>
 
-{% block stylesheets %}
-    {# Mise en page des démos (sections, exemples, tableaux de référence) #}
-    <link rel="stylesheet" href="{{ asset('css/ds-docs.css') }}">
-{% endblock %}
+<div class="docs-container docs-layout">
+  {% include 'docs/_sidebar.html.twig' %}
 
-{% block content %}
-<div class="py-4">
-    <header class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-        <h1 class="h2 mb-0 fw-bold">{{ component_title }}</h1>
-        
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item">
-                    <a href="{{ path('component_docs_index') }}"><i class="ri-book-2-line"></i> Docs</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ path('component_docs_category', {type: type}) }}" class="text-capitalize">{{ type }}</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">{{ component_title }}</li>
-            </ol>
-        </nav>
+  <main class="docs-main">
+    <header class="docs-page-header">
+      <p class="docs-page-category">{{ category.label }}</p>
+      <h1 class="docs-page-title">{{ page.title }}</h1>
+      <a class="docs-page-source" href="https://github.com/fagathe-dev/sf-p05-design-system/blob/master/templates/{{ component_template }}">
+        <i class="ri-github-fill" aria-hidden="true"></i> Voir la source de cette page
+      </a>
     </header>
 
-    {% if error %}
-        <div class="alert alert-solid-danger mb-4" role="alert">
-            <i class="ri-error-warning-line alert-icon"></i>
-            <div class="alert-content">
-                <strong>Composant introuvable</strong><br>
-                Le fichier <code>templates/docs/{{ type }}/_{{ component_name }}.html.twig</code> n'existe pas.
-            </div>
-        </div>
-        
-        <div class="box box-secondary mt-4">
-            <h5 class="box-title">Créer ce composant</h5>
-            <p class="mb-2">Créez le fichier <code>templates/docs/{{ type }}/_{{ component_name }}.html.twig</code>.</p>
-        </div>
-    {% else %}
-        
-        {# Intégration du composant visuel #}
-        <div class="component-demo-container my-4">
-            {% include component_template %}
-        </div>
+    {# Sommaire de la page, construit par assets/ts/pages/docs.ts à partir des titres #}
+    <aside class="docs-toc" data-docs-toc hidden>
+      <button type="button" class="btn btn-outline-secondary btn-sm docs-toc-toggle" data-ds-toggle="collapse" data-ds-target="#docs-toc-links" aria-expanded="false" aria-controls="docs-toc-links">
+        Sur cette page <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+      </button>
+      <p class="docs-toc-title" id="docs-toc-title">Sur cette page</p>
+      <nav class="collapse" id="docs-toc-links" aria-labelledby="docs-toc-title">
+        <ul class="docs-toc-list" data-docs-toc-list></ul>
+      </nav>
+    </aside>
 
-        {# Affichage du chemin source en bas de page #}
-        <div class="box box-secondary mt-5">
-            <div class="d-flex align-items-center gap-2 mb-2">
-                <i class="ri-folder-info-line text-muted fs-5"></i>
-                <h6 class="mb-0">Fichier source</h6>
-            </div>
-            <code class="text-secondary-dark bg-secondary-subtle px-3 py-2 rounded-lg d-inline-block">
-                templates/{{ component_template }}
-            </code>
-        </div>
-        
-    {% endif %}
+    <div class="docs-content" data-docs-content>
+      {% include component_template %}
+    </div>
+
+    <nav class="docs-pager" aria-label="Pages voisines">
+      {% if previous %}
+        <a class="docs-pager-link" href="{{ previous.page.url }}" rel="prev">
+          <span class="docs-pager-label"><i class="ri-arrow-left-line" aria-hidden="true"></i> Précédent</span>
+          <span class="docs-pager-title">{{ previous.page.title }}</span>
+          <span class="docs-pager-category">{{ previous.category.label }}</span>
+        </a>
+      {% endif %}
+      {% if next %}
+        <a class="docs-pager-link docs-pager-next" href="{{ next.page.url }}" rel="next">
+          <span class="docs-pager-label">Suivant <i class="ri-arrow-right-line" aria-hidden="true"></i></span>
+          <span class="docs-pager-title">{{ next.page.title }}</span>
+          <span class="docs-pager-category">{{ next.category.label }}</span>
+        </a>
+      {% endif %}
+    </nav>
+  </main>
 </div>
 {% endblock %}
 
 {% block javascripts %}
-    <script type="module" src="{{ asset('js/pages/demo-ui.js') }}"></script>
+  {{ parent() }}
+  <script type="module" src="{{ asset('js/pages/demo-ui.js') }}"></script>
 {% endblock %}

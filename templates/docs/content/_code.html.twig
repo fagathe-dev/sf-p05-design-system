@@ -7,7 +7,7 @@
   </p>
 
   <section class="docs-section" id="inline">
-    <h3>Code inline</h3>
+    <h2>Code inline</h2>
     <p>
       La balise <code>&lt;code&gt;</code> est teintée du rôle primaire ; <code>.code-inline</code> donne
       une variante neutre avec bordure.
@@ -20,7 +20,7 @@
   </section>
 
   <section class="docs-section" id="bloc">
-    <h3>Bloc de code</h3>
+    <h2>Bloc de code</h2>
     <p>
       Le fragment Twig <code>_code-block.html.twig</code> génère l'en-tête (langage, titre) et le bouton de
       copie relié au presse-papier par <code>data-copy-target</code>. Le code est échappé automatiquement.
@@ -52,7 +52,7 @@ const initApp = () => {
   </section>
 
   <section class="docs-section" id="options">
-    <h3>Options du fragment</h3>
+    <h2>Options du fragment</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Paramètre', 'Défaut', 'Rôle'],
       rows: [
@@ -67,7 +67,7 @@ const initApp = () => {
   </section>
 
   <section class="docs-section" id="repliable">
-    <h3>Bloc repliable</h3>
+    <h2>Bloc repliable</h2>
     <p>Avec <code>collapsible: true</code>, un bouton replie le code (même mécanisme que Collapse).</p>
 {% set source %}
 SELECT id, email
@@ -84,7 +84,7 @@ ORDER BY created_at DESC;
   </section>
 
   <section class="docs-section" id="coloration">
-    <h3>Coloration syntaxique</h3>
+    <h2>Coloration syntaxique</h2>
     <p>
       Pas de coloration automatique : enveloppez les fragments dans des <code>.token-*</code> (palette One Dark,
       définie par les tokens <code>--ds-code-*</code>).
@@ -99,7 +99,7 @@ ORDER BY created_at DESC;
   </section>
 
   <section class="docs-section" id="hauteur">
-    <h3>Hauteur limitée</h3>
+    <h2>Hauteur limitée</h2>
     <p><code>.code-collapsed</code> limite la hauteur et ajoute un fondu en bas, pour les extraits longs.</p>
 {% set code %}
 <div class="code-collapsed rounded">
@@ -124,7 +124,7 @@ ligne 15</code></pre>
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.code-inline', 'Code inline neutre avec bordure'],

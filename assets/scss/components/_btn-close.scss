@@ -22,7 +22,7 @@
   block-size: var(--btn-close-size);
   padding: 0.25em;
   border: 0;
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-sm);
   @include touch-target;
 
   // 3. Couleurs

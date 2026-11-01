@@ -1,0 +1,125 @@
+{# Docs : Columns — source : assets/scss/utilities/_columns.scss #}
+{% set text = "Le texte passe d'une colonne à la suivante comme dans un journal, sans balisage supplémentaire. Le navigateur équilibre la hauteur des colonnes et s'adapte à la longueur du contenu, ce qui convient bien à de longs textes et aux mosaïques de cartes de hauteurs différentes." %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Colonnes de texte CSS : le contenu s'écoule d'une colonne à l'autre, à la différence d'une
+    <a href="{{ path('component_docs_show', {type: 'utilities', component: 'grid'}) }}">grille</a>, où chaque enfant occupe sa propre case.
+  </p>
+
+  <section class="docs-section" id="nombre">
+    <h2>Nombre de colonnes</h2>
+    <p><code>.columns-{1…6}</code> et <code>.columns-auto</code> fixent le nombre de colonnes, avec une variante <code>.columns-{bp}-{n}</code>.</p>
+{% set code %}
+<div class="columns-1 columns-md-2 columns-xl-3 gap-x-8">
+  <p>{{ text|raw }}</p>
+  <p class="mb-0">{{ text|raw }}</p>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="largeur">
+    <h2>Largeur de colonne</h2>
+    <p>
+      <code>.columns-{taille}</code> donne une largeur idéale : le navigateur crée autant de colonnes que l'espace le
+      permet. Ces classes n'ont pas de variante responsive. Ne confondez pas <code>.columns-md</code> (une largeur) et
+      <code>.columns-md-2</code> (2 colonnes à partir de md).
+    </p>
+{% set code %}
+<div class="columns-3xs gap-x-8">
+  <p>{{ text|raw }}</p>
+  <p class="mb-0">{{ text|raw }}</p>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Classe', 'Largeur'],
+      rows: [
+        ['.columns-3xs', '16rem'], ['.columns-2xs', '18rem'], ['.columns-xs', '20rem'],
+        ['.columns-sm', '24rem'], ['.columns-md', '28rem'], ['.columns-lg', '32rem'],
+        ['.columns-xl', '36rem'], ['.columns-2xl', '42rem'], ['.columns-3xl', '48rem'],
+      ],
+    } only %}
+  </section>
+
+  <section class="docs-section" id="espacement">
+    <h2>Espacement</h2>
+    <p>
+      <code>.gap-x-{clé}</code> ou <code>.column-gap-{clé}</code> règle l'espace entre les colonnes (voir la
+      <a href="{{ path('component_docs_show', {type: 'utilities', component: 'gap'}) }}">page Gap</a>) ;
+      <code>.column-gap-normal</code> rétablit celui du navigateur.
+    </p>
+{% set code %}
+<div class="columns-2 column-gap-16">
+  <p class="mb-0">{{ text|raw }}</p>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="span">
+    <h2>Élément sur toute la largeur</h2>
+    <p><code>.column-span-all</code> place un élément, comme un titre, au-dessus de toutes les colonnes ; <code>.column-span-none</code> annule cet effet.</p>
+{% set code %}
+<div class="columns-2 gap-x-8">
+  <p>{{ text|raw }}</p>
+  <h3 class="column-span-all">.column-span-all</h3>
+  <p class="mb-0">{{ text|raw }}</p>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="coupures">
+    <h2>Coupures</h2>
+    <p>
+      <code>.break-inside-avoid</code> garde un élément entier dans sa colonne, ce qu'il faut pour des cartes.
+      <code>.break-before-*</code> et <code>.break-after-*</code> forcent ou empêchent une coupure, par exemple
+      <code>.break-before-column</code>, ou <code>.break-before-page</code> à l'impression.
+    </p>
+{% set code %}
+<div class="columns-2 gap-x-4">
+{% for i in 1..4 %}
+  <div class="card break-inside-avoid mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Carte {{ i }}</h3>
+      <p class="card-text">{{ i is odd ? 'Un contenu court.' : text|raw }}</p>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="remplissage">
+    <h2>Remplissage</h2>
+    <p>
+      Par défaut, <code>.column-fill-balance</code> équilibre les colonnes. <code>.column-fill-auto</code> remplit chaque
+      colonne l'une après l'autre : il lui faut un conteneur de hauteur fixée.
+    </p>
+{% set code %}
+<div class="docs-frame p-3 columns-2 gap-x-8 column-fill-auto overflow-hidden">
+  {{ text|raw }}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.columns-{1…6|auto}, .columns-{bp}-{1…6|auto}', 'column-count'],
+        ['.columns-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl}', 'column-width'],
+        ['.column-gap-normal', 'column-gap du navigateur'],
+        ['.column-fill-{auto|balance}', 'column-fill'],
+        ['.column-span-{none|all}', 'column-span'],
+        ['.break-inside-{auto|avoid|avoid-page|avoid-column}', 'break-inside'],
+        ['.break-before-{auto|avoid|all|avoid-page|page|left|right|column}', 'break-before'],
+        ['.break-after-{auto|avoid|all|avoid-page|page|left|right|column}', 'break-after'],
+      ],
+    } only %}
+  </section>
+</div>

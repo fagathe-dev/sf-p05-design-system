@@ -1,0 +1,106 @@
+{# Docs : Border — source : assets/scss/utilities/_border.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
+{% set tile = 'd-flex align-items-center justify-content-center p-4 small' %}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Bordures, couleurs de bordure et rayons. Les côtés utilisent des propriétés logiques.
+  </p>
+
+  <section class="docs-section" id="ajouter">
+    <h2>Ajouter une bordure</h2>
+    <p>La couleur par défaut, <code>--ds-color-outline-variant</code>, convient aux séparateurs décoratifs.</p>
+{% set code %}
+<div class="grid grid-cols-2 grid-cols-md-5">
+  <div class="{{ tile }} border">.border</div>
+  <div class="{{ tile }} border-top">.border-top</div>
+  <div class="{{ tile }} border-end">.border-end</div>
+  <div class="{{ tile }} border-bottom">.border-bottom</div>
+  <div class="{{ tile }} border-start">.border-start</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="retirer">
+    <h2>Retirer une bordure</h2>
+{% set code %}
+<div class="grid grid-cols-2 grid-cols-md-5">
+  <div class="{{ tile }} border border-0">.border-0</div>
+  <div class="{{ tile }} border border-top-0">.border-top-0</div>
+  <div class="{{ tile }} border border-end-0">.border-end-0</div>
+  <div class="{{ tile }} border border-bottom-0">.border-bottom-0</div>
+  <div class="{{ tile }} border border-start-0">.border-start-0</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="couleurs">
+    <h2>Couleurs</h2>
+    <p>
+      Ces classes ne changent que la couleur : ajoutez aussi <code>.border</code>. Utilisez
+      <code>.border-outline</code> lorsque la bordure doit se distinguer de façon fonctionnelle (contraste d'au moins 3:1),
+      par exemple autour d'un champ.
+    </p>
+{% set code %}
+<div class="grid grid-cols-2 grid-cols-md-4">
+  <div class="{{ tile }} border border-outline">.border-outline</div>
+{% for role in roles %}
+  <div class="{{ tile }} border border-{{ role }}">.border-{{ role }}</div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="style">
+    <h2>Épaisseur et style</h2>
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-3">
+  <div class="{{ tile }} border border-2">.border-2</div>
+  <div class="{{ tile }} border border-dashed">.border-dashed</div>
+  <div class="{{ tile }} border border-2 border-dashed border-primary">.border-2 .border-dashed .border-primary</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="rayons">
+    <h2>Rayons</h2>
+    <p>
+      <code>.rounded-{taille}</code> suit les tokens <code>--ds-radius-*</code>. <code>.rounded</code> vaut
+      <code>sm</code>, <code>.rounded-0</code> vaut <code>none</code>, et <code>.rounded-pill</code> et
+      <code>.rounded-circle</code> valent <code>full</code>.
+    </p>
+{% set code %}
+<div class="grid grid-cols-2 grid-cols-md-4">
+{% for radius in ['none', 'xs', 'sm', 'md', 'lg', 'xl', 'full'] %}
+  <div class="{{ tile }} bg-surface-container-highest rounded-{{ radius }}">.rounded-{{ radius }}</div>
+{% endfor %}
+  <div class="{{ tile }} bg-surface-container-highest rounded">.rounded</div>
+  <div class="{{ tile }} bg-surface-container-highest rounded-0">.rounded-0</div>
+  <div class="{{ tile }} bg-surface-container-highest rounded-pill">.rounded-pill</div>
+</div>
+<span class="avatar bg-primary-subtle text-primary-emphasis rounded-circle mt-4" aria-hidden="true">JD</span>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.border', 'Bordure sur tous les côtés'],
+        ['.border-{top|end|bottom|start}', 'Bordure d\'un seul côté'],
+        ['.border-0, .border-{top|end|bottom|start}-0', 'Retire la bordure'],
+        ['.border-2', 'Épaisseur <code>--ds-border-width-thick</code>'],
+        ['.border-dashed', 'Trait pointillé'],
+        ['.border-outline', 'Couleur <code>--ds-color-outline</code>'],
+        ['.border-{rôle}', 'Couleur du rôle'],
+        ['.rounded-{none|xs|sm|md|lg|xl|full}', 'Rayon'],
+        ['.rounded, .rounded-0, .rounded-pill, .rounded-circle', 'Alias de rayons'],
+      ],
+    } only %}
+  </section>
+</div>

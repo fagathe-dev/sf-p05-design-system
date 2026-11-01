@@ -1,12 +1,136 @@
-  <div class="component-demo">
-    <h3>🎨 Backgrounds & Object-Fit</h3>
-    <div class="d-flex flex-wrap gap-3 mb-4">
-        <div class="bg-primary text-white p-3 rounded">Background Primary</div>
-        <div class="bg-danger-subtle text-danger p-3 rounded">Background Danger Subtle</div>
-    </div>
+{# Docs : Background — source : assets/scss/utilities/_background.scss #}
+{% set roles = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'info', 'danger'] %}
 
-    <h5>Object Fit (Images)</h5>
-    <div style="width: 200px; height: 100px; border: 2px solid var(--ds-border-color)">
-        <img src="..." class="object-fit-cover w-100 h-100" alt="Cover">
-    </div>
+<div class="component-demo">
+  <p class="docs-lead">
+    Couleurs de fond par rôle, surfaces et dégradés. Ces classes ne changent que le fond : la couleur du texte reste à
+    choisir, avec un contraste suffisant.
+  </p>
+
+  <section class="docs-section" id="roles">
+    <h2>Rôles</h2>
+    <p>
+      <code>.bg-{rôle}</code> applique la couleur pleine du rôle. Il n'existe pas d'utilitaire pour le texte posé
+      dessus : pour du texte sur une couleur pleine, préférez un composant (bouton ou badge solid), qui gère ce contraste.
+    </p>
+{% set code %}
+<div class="grid grid-cols-2 grid-cols-md-4">
+{% for role in roles %}
+  <div>
+    <div class="docs-swatch bg-{{ role }}"></div>
+    <code>.bg-{{ role }}</code>
+  </div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="subtle">
+    <h2>Conteneurs</h2>
+    <p>
+      <code>.bg-{rôle}-subtle</code> utilise le conteneur du rôle, à associer à <code>.text-{rôle}-emphasis</code> :
+      cette paire reste lisible dans les deux thèmes. <code>.bg-primary-dark</code> est la couleur du texte de ce même
+      conteneur, utilisée comme fond.
+    </p>
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-2 grid-cols-xl-3">
+{% for role in roles %}
+  <div class="docs-swatch bg-{{ role }}-subtle text-{{ role }}-emphasis">.bg-{{ role }}-subtle</div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="degrades">
+    <h2>Dégradés</h2>
+    <p><code>.bg-gradient-{rôle}</code> va de la couleur du rôle à celle du texte de son conteneur. Le contraste varie le long du dégradé : réservez-le aux aplats décoratifs.</p>
+{% set code %}
+<div class="grid grid-cols-2 grid-cols-md-4">
+{% for role in roles %}
+  <div>
+    <div class="docs-swatch bg-gradient-{{ role }}"></div>
+    <code>.bg-gradient-{{ role }}</code>
+  </div>
+{% endfor %}
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="surfaces">
+    <h2>Surfaces</h2>
+    <p>
+      La hiérarchie des surfaces M3 donne de la profondeur sans ombre. Le texte reste lisible avec sa couleur par défaut,
+      sauf sur <code>.bg-inverse-surface</code>, qui demande <code>.text-light</code>.
+    </p>
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-2 grid-cols-xl-3">
+{% for surface in ['surface', 'surface-container-low', 'surface-container', 'surface-container-high', 'surface-container-highest'] %}
+  <div class="docs-swatch bg-{{ surface }} border">.bg-{{ surface }}</div>
+{% endfor %}
+  <div class="docs-swatch bg-inverse-surface text-light">.bg-inverse-surface</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="clair-sombre">
+    <h2>Clair et sombre</h2>
+    <p>
+      Ces alias suivent le thème : <code>.bg-light</code> et <code>.bg-light-subtle</code> sont
+      <code>--ds-surface-container-low</code>, <code>.bg-dark</code> est la surface inversée et
+      <code>.bg-dark-subtle</code> <code>--ds-surface-container-highest</code>.
+    </p>
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-2 grid-cols-xl-4">
+  <div class="docs-swatch bg-light border">.bg-light</div>
+  <div class="docs-swatch bg-light-subtle border">.bg-light-subtle</div>
+  <div class="docs-swatch bg-dark text-light">.bg-dark</div>
+  <div class="docs-swatch bg-dark-subtle">.bg-dark-subtle</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="statiques">
+    <h2>Couleurs fixes</h2>
+    <p><code>.bg-white</code> et <code>.bg-black</code> restent identiques dans les deux thèmes : le texte par défaut, lui, change et peut devenir illisible. <code>.bg-transparent</code> retire le fond.</p>
+{% set code %}
+<div class="grid grid-cols-3">
+  <div>
+    <div class="docs-swatch bg-white border"></div>
+    <code>.bg-white</code>
+  </div>
+  <div>
+    <div class="docs-swatch bg-black text-white">Texte .text-white</div>
+    <code>.bg-black</code>
+  </div>
+  <div>
+    <div class="docs-swatch bg-transparent border"></div>
+    <code>.bg-transparent</code>
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.bg-{rôle}', 'Couleur du rôle'],
+        ['.bg-{rôle}-subtle', 'Conteneur du rôle'],
+        ['.bg-gradient-{rôle}', 'Dégradé du rôle'],
+        ['.bg-primary-dark', '<code>--ds-color-on-primary-container</code>'],
+        ['.bg-surface', 'Surface de la page'],
+        ['.bg-surface-container-{low|high|highest}, .bg-surface-container', 'Surfaces de conteneur'],
+        ['.bg-inverse-surface', 'Surface inversée'],
+        ['.bg-light, .bg-light-subtle, .bg-dark, .bg-dark-subtle', 'Alias de surfaces'],
+        ['.bg-white, .bg-black', 'Couleurs fixes'],
+        ['.bg-transparent', 'Sans fond'],
+      ],
+    } only %}
+  </section>
 </div>

@@ -8,7 +8,7 @@
   </p>
 
   <section class="docs-section" id="exemple">
-    <h3>Exemple</h3>
+    <h2>Exemple</h2>
     <p>
       Le bouton hamburger porte <code>data-ds-toggle="collapse"</code> et cible le <code>.navbar-collapse</code>.
       Réduisez la fenêtre pour voir la version mobile.
@@ -36,7 +36,7 @@
   </section>
 
   <section class="docs-section" id="breakpoints">
-    <h3>Point de rupture</h3>
+    <h2>Point de rupture</h2>
     <p>
       <code>.navbar-expand-{bp}</code> choisit la largeur à partir de laquelle la barre passe en ligne :
       <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> ou <code>xxl</code>. Sans cette classe,
@@ -60,7 +60,7 @@
   </section>
 
   <section class="docs-section" id="compte">
-    <h3>Avec le menu du compte</h3>
+    <h2>Avec le menu du compte</h2>
     <p>
       Le hamburger se place à gauche, la marque juste après, et <code>.navbar-end</code> garde à droite les
       éléments toujours visibles : cloche de notification et déclencheur du menu du compte
@@ -114,7 +114,7 @@
   </section>
 
   <section class="docs-section" id="navbar-dropdown">
-    <h3>Menu du compte complet</h3>
+    <h2>Menu du compte complet</h2>
     <p>
       <code>.navbar-dropdown</code> s'ajoute à un <code>.dropdown-menu</code> : en-tête utilisateur avec une action
       secondaire, groupes d'items séparés, badge aligné à droite et bloc de réglage. Le sélecteur de thème
@@ -159,7 +159,7 @@
   </section>
 
   <section class="docs-section" id="accessibilite">
-    <h3>Accessibilité</h3>
+    <h2>Accessibilité</h2>
     <ul>
       <li>Le hamburger et le déclencheur du menu sans texte visible portent un <code>aria-label</code>.</li>
       <li>Le JS tient <code>aria-expanded</code> à jour ; Échap ou un clic à l'extérieur ferme le menu, et Échap rend le focus au déclencheur.</li>
@@ -168,20 +168,20 @@
   </section>
 
   <section class="docs-section" id="personnalisation">
-    <h3>Personnalisation</h3>
+    <h2>Personnalisation</h2>
     {% include 'docs/_reference.html.twig' with {
       headers: ['Token', 'Défaut', 'Rôle'],
       rows: [
-        ['--navbar-bg', '<code>--ds-surface-container</code>', 'Fond'],
+        ['--navbar-bg', '<code>--ds-surface</code>', 'Fond'],
         ['--navbar-color', '<code>--ds-color-on-surface</code>', 'Texte de la marque et du hamburger'],
-        ['--navbar-py, --navbar-px', '<code>--ds-space-4</code>, <code>--ds-space-6</code>', 'Padding'],
+        ['--navbar-py, --navbar-px', '<code>--ds-space-3</code>, <code>--ds-space-6</code>', 'Padding'],
         ['--nav-link-height', '<code>--ds-control-height-lg</code> (mobile), <code>-md</code> (desktop)', 'Hauteur des liens (sur .navbar-nav)'],
       ],
     } only %}
   </section>
 
   <section class="docs-section" id="classes">
-    <h3>Classes</h3>
+    <h2>Classes</h2>
     {% include 'docs/_reference.html.twig' with {
       rows: [
         ['.navbar', 'Barre de navigation'],

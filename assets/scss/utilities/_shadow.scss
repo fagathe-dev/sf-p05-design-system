@@ -1,8 +1,9 @@
 // ==========================================================================
 // Utilities : Shadow (utilities/_shadow.scss)
 // --------------------------------------------------------------------------
-// À réserver aux éléments flottants : en M3 Expressive, la profondeur d'un
-// élément dans le flux passe par sa surface (.bg-surface-container-*).
+// À réserver aux cartes (déjà dotées d'une ombre douce) et aux éléments
+// flottants : ailleurs, la profondeur d'un élément dans le flux passe par sa
+// surface (.bg-surface-container-*).
 // ==========================================================================
 
 .shadow-sm {

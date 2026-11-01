@@ -1,8 +1,8 @@
 // ==========================================================================
 // Component: Chip (forms/_chip.scss)
 // --------------------------------------------------------------------------
-// Chip de filtre : pilule de 32px (zone cliquable étendue à 44px). Sélection
-// via .is-selected ou aria-selected="true", avec shape morphing.
+// Chip de filtre : de 32px (zone cliquable étendue à 44px). Sélection
+// via .is-selected ou aria-selected="true",.
 // ==========================================================================
 
 @use '../abstracts' as *;
@@ -14,7 +14,7 @@
   --chip-selected-bg: var(--ds-color-primary);
   --chip-selected-color: var(--ds-color-on-primary);
   --chip-border-color: transparent;
-  --chip-radius: var(--ds-radius-full);
+  --chip-radius: var(--ds-radius-sm);
 
   // 2. Box Model
   display: inline-flex;
@@ -35,9 +35,7 @@
   user-select: none;
 
   // 4. Motion
-  transition:
-    effects(background-color, color, border-color),
-    spatial(border-radius);
+  transition: effects(background-color, color, border-color);
 
   // 5. États interactifs
   &:hover {
@@ -56,7 +54,6 @@
   &[aria-selected='true'] {
     --chip-bg: var(--chip-selected-bg);
     --chip-color: var(--chip-selected-color);
-    --chip-radius: var(--ds-radius-md); // Shape morphing à la sélection
   }
 
   &:disabled,
@@ -66,12 +63,16 @@
     pointer-events: none;
   }
 
-  @include reduced-motion {
-    transition: effects(background-color, color, border-color);
+
+  &:is(a) {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
-// Les chips sont en pilule par défaut : classe conservée pour compatibilité
+// Forme pilule
 .chip-pill {
   --chip-radius: var(--ds-radius-full);
 }

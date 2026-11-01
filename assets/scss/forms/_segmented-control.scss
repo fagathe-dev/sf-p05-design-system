@@ -13,7 +13,7 @@
   // 1. Component Tokens
   --segmented-height: var(--ds-control-height-md);
   --segmented-padding: var(--ds-space-1);
-  --segmented-radius: var(--ds-radius-lg);
+  --segmented-radius: var(--ds-radius-md);
   --segmented-bg: var(--ds-surface-container-low);
   --segmented-border-color: var(--ds-color-outline-variant);
   --segmented-option-px: var(--ds-space-3_5);
@@ -105,7 +105,7 @@
 .segmented-control-sm {
   --segmented-height: var(--ds-control-height-sm);
   --segmented-padding: var(--ds-space-0_5);
-  --segmented-radius: var(--ds-radius-md);
+  --segmented-radius: var(--ds-radius-sm);
   --segmented-option-px: var(--ds-space-3);
   --segmented-option-font-size: var(--ds-text-label-md);
   --segmented-option-icon-size: var(--ds-icon-size-sm);

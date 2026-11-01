@@ -1,0 +1,114 @@
+{# Docs : Display — source : assets/scss/utilities/_display.scss #}
+
+<div class="component-demo">
+  <p class="docs-lead">
+    Type d'affichage, masquage selon la largeur d'écran ou à l'impression, visibilité et débordement.
+  </p>
+
+  <section class="docs-section" id="display">
+    <h2>Display</h2>
+    <p>
+      <code>.d-{valeur}</code> ou <code>.d-{bp}-{valeur}</code>, avec <code>none</code>, <code>inline</code>,
+      <code>inline-block</code>, <code>block</code>, <code>grid</code>, <code>inline-grid</code>, <code>table</code>,
+      <code>table-row</code>, <code>table-cell</code>, <code>flex</code> et <code>inline-flex</code>.
+    </p>
+{% set code %}
+<div class="docs-box d-inline-block">.d-inline-block</div>
+<div class="docs-box d-inline-block">.d-inline-block</div>
+<div class="docs-box d-block mt-2">.d-block</div>
+<div class="d-flex gap-2 mt-2">
+  <div class="docs-box">Dans un .d-flex</div>
+  <div class="docs-box">Dans un .d-flex</div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="masquer">
+    <h2>Masquer selon l'écran</h2>
+    <p>
+      Combinez <code>.d-none</code> et une classe responsive. Une classe <code>.d-{bp}-*</code> s'applique à partir de son
+      point de rupture : redimensionnez la fenêtre pour voir les blocs changer.
+    </p>
+    {% include 'docs/_reference.html.twig' with {
+      headers: ['Classes', 'Résultat'],
+      rows: [
+        ['.d-none', 'Masqué partout'],
+        ['.d-md-none', 'Visible sous md, masqué à partir de md'],
+        ['.d-none .d-md-block', 'Masqué sous md, visible à partir de md'],
+        ['.d-md-none .d-xl-block', 'Masqué seulement de md à xl'],
+      ],
+    } only %}
+{% set code %}
+<div class="docs-box d-md-none">Visible sous md</div>
+<div class="docs-box d-none d-md-block">Visible à partir de md</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="impression">
+    <h2>Impression</h2>
+    <p><code>.d-print-{valeur}</code> ne s'applique qu'à l'impression, avec les mêmes valeurs.</p>
+{% set code %}
+<div class="docs-box d-print-none">Masqué à l'impression</div>
+<div class="docs-box d-none d-print-block">Visible seulement à l'impression</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="visibilite">
+    <h2>Visibilité</h2>
+    <p>
+      <code>.invisible</code> masque l'élément en conservant sa place, et le retire aussi du clavier et des lecteurs
+      d'écran. <code>.visually-hidden</code> fait l'inverse : le contenu reste lu par les lecteurs d'écran mais n'apparaît
+      pas à l'écran, ce qui convient au libellé d'un bouton qui n'affiche qu'une icône.
+    </p>
+{% set code %}
+<div class="d-flex gap-2">
+  <div class="docs-box">Visible</div>
+  <div class="docs-box invisible">.invisible</div>
+  <div class="docs-box visible">.visible</div>
+</div>
+<button type="button" class="btn btn-icon btn-primary mt-2">
+  <i class="ri-delete-bin-line" aria-hidden="true"></i>
+  <span class="visually-hidden">Supprimer</span>
+</button>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+  </section>
+
+  <section class="docs-section" id="overflow">
+    <h2>Débordement</h2>
+    <p>
+      <code>.overflow-{valeur}</code>, <code>.overflow-x-{valeur}</code> et <code>.overflow-y-{valeur}</code>, avec
+      <code>auto</code>, <code>hidden</code>, <code>visible</code> et <code>scroll</code>.
+    </p>
+{% set text = "Un texte assez long pour dépasser de son cadre : il faut plusieurs lignes pour qu'on voie la différence entre les valeurs. Il continue encore sur quelques lignes, puis encore quelques autres, pour dépasser à coup sûr de la hauteur du cadre qui le contient." %}
+{% set code %}
+<div class="grid grid-cols-1 grid-cols-md-2">
+  <div class="docs-frame p-3 overflow-auto" tabindex="0">
+    <strong>.overflow-auto</strong> {{ text|raw }}
+  </div>
+  <div class="docs-frame p-3 overflow-hidden">
+    <strong>.overflow-hidden</strong> {{ text|raw }}
+  </div>
+</div>
+{% endset %}
+    {% include 'docs/_example.html.twig' with { code: code } only %}
+    <p>Une zone qui défile au clavier doit pouvoir recevoir le focus : ajoutez <code>tabindex="0"</code>.</p>
+  </section>
+
+  <section class="docs-section" id="classes">
+    <h2>Classes</h2>
+    {% include 'docs/_reference.html.twig' with {
+      rows: [
+        ['.d-{valeur}, .d-{bp}-{valeur}', 'display'],
+        ['.d-print-{valeur}', 'display à l\'impression'],
+        ['.visible, .invisible', 'visibility'],
+        ['.visually-hidden', 'Masqué à l\'écran, lu par les lecteurs d\'écran'],
+        ['.overflow-{valeur}', 'overflow'],
+        ['.overflow-x-{valeur}, .overflow-y-{valeur}', 'overflow-x, overflow-y'],
+      ],
+    } only %}
+  </section>
+</div>

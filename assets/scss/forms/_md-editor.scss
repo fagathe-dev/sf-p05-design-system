@@ -74,7 +74,7 @@
   block-size: var(--md-editor-button-size);
   padding: 0;
   border: var(--ds-border-width) solid transparent;
-  border-radius: var(--ds-radius-full);
+  border-radius: var(--ds-radius-sm);
   background-color: var(--md-btn-bg);
   color: var(--md-btn-color);
   font-size: var(--ds-icon-size-sm);
@@ -118,6 +118,7 @@
   padding: var(--md-editor-padding);
   border: none !important;
   border-radius: 0 !important;
+  box-shadow: none;
   outline: none !important;
   background-color: transparent;
   font-family: var(--ds-font-mono);

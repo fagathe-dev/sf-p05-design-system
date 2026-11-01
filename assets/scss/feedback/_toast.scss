@@ -21,9 +21,10 @@
 }
 
 .toast {
-  // 1. Component Tokens (snackbar M3 : surface inversée par défaut)
-  --toast-bg: var(--ds-color-inverse-surface);
-  --toast-color: var(--ds-color-inverse-on-surface);
+  // 1. Component Tokens
+  --toast-bg: var(--ds-surface);
+  --toast-color: var(--ds-color-on-surface);
+  --toast-icon-color: var(--ds-color-on-surface-variant);
 
   // 2. Box Model
   display: flex;
@@ -31,7 +32,8 @@
   gap: var(--ds-space-3);
   padding-block: var(--ds-space-4);
   padding-inline: var(--ds-space-4) var(--ds-space-2);
-  border-radius: var(--ds-radius-sm);
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-radius: var(--ds-radius-md);
 
   // 3. Couleurs : flotte au-dessus du contenu, d'où l'ombre
   background-color: var(--toast-bg);
@@ -66,7 +68,7 @@
   }
 }
 
-// Types (surcharge uniquement des Component Tokens)
+// Types : seule l'icône prend la couleur du rôle
 $_toast-types: (
   'success': 'success',
   'error': 'danger',
@@ -76,13 +78,13 @@ $_toast-types: (
 
 @each $type, $role in $_toast-types {
   .toast-#{$type} {
-    --toast-bg: #{role-color($role, 'container')};
-    --toast-color: #{role-color($role, 'on-container')};
+    --toast-icon-color: #{role-color($role)};
   }
 }
 
 .toast-icon {
   flex-shrink: 0;
+  color: var(--toast-icon-color);
   font-size: var(--ds-icon-size-md);
 }
 
