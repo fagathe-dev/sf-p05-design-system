@@ -25,7 +25,8 @@
     inline-size: 1.25em;
     block-size: 1.25em;
     background-color: currentColor;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z'/%3E%3C/svg%3E")
+      center / contain no-repeat;
     transition: spatial(transform);
   }
 
@@ -51,7 +52,10 @@
   --dropdown-padding: var(--ds-space-2);
   --dropdown-width: var(--ds-size-menu);
   // Rayon concentrique : rayon du menu moins son padding
-  --dropdown-item-radius: max(0px, calc(var(--dropdown-radius) - var(--dropdown-padding)));
+  --dropdown-item-radius: max(
+    0px,
+    calc(var(--dropdown-radius) - var(--dropdown-padding))
+  );
 
   // 2. Box Model
   position: absolute;
@@ -109,6 +113,9 @@
   min-block-size: var(--ds-control-height-md);
   padding-inline: var(--ds-space-3);
   border-radius: var(--dropdown-item-radius, var(--ds-radius-xs));
+  outline: 0;
+  border: none;
+  width: -webkit-fill-available;
 
   // 3. Typographie & Couleurs
   background-color: var(--dropdown-item-bg);
@@ -119,13 +126,21 @@
   transition: effects(background-color, color);
 
   &:hover {
-    background-color: state-layer(var(--dropdown-item-bg), var(--dropdown-item-color));
+    background-color: state-layer(
+      var(--dropdown-item-bg),
+      var(--dropdown-item-color)
+    );
     color: var(--dropdown-item-color);
     text-decoration: none;
+    cursor: pointer;
   }
 
   &:active {
-    background-color: state-layer(var(--dropdown-item-bg), var(--dropdown-item-color), 'pressed');
+    background-color: state-layer(
+      var(--dropdown-item-bg),
+      var(--dropdown-item-color),
+      'pressed'
+    );
   }
 
   &:focus-visible {
@@ -162,7 +177,8 @@
   margin-block: var(--ds-space-2);
   overflow: hidden;
   border: 0;
-  border-block-start: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-block-start: var(--ds-border-width) solid
+    var(--ds-color-outline-variant);
 }
 
 @keyframes ds-dropdown-in {

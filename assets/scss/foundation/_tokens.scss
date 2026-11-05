@@ -16,8 +16,8 @@
 // Rôles de couleur → palette
 // --------------------------------------------------------------------------
 $color-roles: (
-  'primary': 'olive',
-  'secondary': 'taupe',
+  'primary': 'indigo',
+  'secondary': 'neutral',
   'tertiary': 'slate',
   'success': 'green',
   'warning': 'amber',
@@ -143,7 +143,8 @@ $neutral: 'slate';
   --ds-code-keyword: #{map.get($syntax, 'purple')};
 
   // --- Ombres : contrôles (xs), cartes (sm) et éléments flottants (md, lg)
-  --ds-shadow-xs: 0 1px 2px color-mix(in srgb, var(--ds-color-shadow) 5%, transparent);
+  --ds-shadow-xs: 0 1px 2px
+    color-mix(in srgb, var(--ds-color-shadow) 5%, transparent);
   --ds-shadow-sm:
     0 1px 2px color-mix(in srgb, var(--ds-color-shadow) 8%, transparent),
     0 1px 3px 1px color-mix(in srgb, var(--ds-color-shadow) 4%, transparent);
@@ -153,7 +154,8 @@ $neutral: 'slate';
   --ds-shadow-lg:
     0 8px 12px 6px color-mix(in srgb, var(--ds-color-shadow) 8%, transparent),
     0 4px 4px color-mix(in srgb, var(--ds-color-shadow) 10%, transparent);
-  --ds-shadow-inset: inset 0 2px 4px color-mix(in srgb, var(--ds-color-shadow) 6%, transparent);
+  --ds-shadow-inset: inset 0 2px 4px
+    color-mix(in srgb, var(--ds-color-shadow) 6%, transparent);
 
   // --- Typographie
   @each $name, $value in $font-families {
@@ -266,7 +268,8 @@ $neutral: 'slate';
 
   // Une ombre noire disparaît sur fond quasi noir : on ajoute un liseré
   // clair très translucide qui détache l'élément flottant
-  --ds-shadow-xs: 0 1px 2px color-mix(in srgb, var(--ds-color-shadow) 40%, transparent);
+  --ds-shadow-xs: 0 1px 2px
+    color-mix(in srgb, var(--ds-color-shadow) 40%, transparent);
   --ds-shadow-sm:
     0 1px 3px color-mix(in srgb, var(--ds-color-shadow) 50%, transparent),
     0 0 0 1px color-mix(in srgb, var(--ds-color-on-surface) 4%, transparent);
@@ -276,5 +279,6 @@ $neutral: 'slate';
   --ds-shadow-lg:
     0 12px 24px color-mix(in srgb, var(--ds-color-shadow) 65%, transparent),
     0 0 0 1px color-mix(in srgb, var(--ds-color-on-surface) 8%, transparent);
-  --ds-shadow-inset: inset 0 2px 4px color-mix(in srgb, var(--ds-color-shadow) 40%, transparent);
+  --ds-shadow-inset: inset 0 2px 4px
+    color-mix(in srgb, var(--ds-color-shadow) 40%, transparent);
 }
