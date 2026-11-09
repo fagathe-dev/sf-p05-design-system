@@ -25,6 +25,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@hotwired/turbo": "^7.1.0 || ^8.0",
+    "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
     "concurrently": "^9.2.1",
     "esbuild": "^0.28.0",
     "sass": "^1.99.0",
