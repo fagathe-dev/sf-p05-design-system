@@ -33,6 +33,15 @@ dialog {
     animation: ds-dialog-in var(--ds-duration-spatial-slow) var(--ds-ease-spatial);
   }
 
+  // Modale (showModal) : rétablit le `position: fixed` du navigateur, écrasé par le
+  // `relative` ci-dessus. Sinon, un élément du top layer non fixe est rendu en absolu
+  // par rapport au haut du document : la modale s'ouvre en haut de page et le focus
+  // posé par showModal() fait défiler la page jusqu'à elle. `fixed` reste un bloc
+  // conteneur pour le .btn-close positionné en absolu.
+  &:modal {
+    position: fixed;
+  }
+
   // Voile : les variables CSS n'atteignent ::backdrop que dans les
   // navigateurs récents, d'où la valeur de repli
   &::backdrop {
@@ -51,6 +60,15 @@ dialog {
       animation: none;
     }
   }
+}
+
+// Modale ouverte (showModal) : la page ne défile plus, seul le contenu de la
+// modale défile. Pur CSS : suit aussi les fermetures natives (Échap, form
+// method="dialog") sans écouteur. La gouttière stable garde la place de la
+// barre de défilement pour éviter un saut horizontal de la page.
+:root:has(dialog:modal) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
 }
 
 dialog .btn-close {
@@ -80,6 +98,8 @@ dialog .btn-close {
   flex: 1 1 auto;
   min-block-size: 0; // Autorise le corps à rétrécir pour défiler dans la modale
   overflow-y: auto;
+  // Arrivé en butée, le défilement ne se propage pas à la page (tactile, trackpad)
+  overscroll-behavior: contain;
   padding-block: var(--dialog-padding);
   padding-inline: var(--dialog-padding);
   color: var(--ds-color-on-surface-variant);

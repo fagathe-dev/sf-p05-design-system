@@ -23,9 +23,13 @@
   --segmented-selected-color: var(--ds-color-on-primary-container);
 
   // 2. Box Model
+  // Largeur intrinsèque : une taille explicite empêche l'étirement par un
+  // parent flex en colonne ou une grille (ex. .navbar-actions sur mobile).
+  // Pour occuper toute la largeur : .segmented-control-full
   display: inline-flex;
   align-items: center;
   gap: var(--ds-space-1);
+  inline-size: fit-content;
   max-inline-size: 100%;
   min-block-size: var(--segmented-height);
   padding: var(--segmented-padding);
